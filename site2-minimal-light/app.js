@@ -176,6 +176,39 @@ function initConverterTool() {
     });
 }
 
+function formatReviewCount(count) {
+    const n = Number.isFinite(count) ? count : 0;
+    if (getLang() === 'es') {
+        return `(${n} ${n === 1 ? 'reseña' : 'reseñas'})`;
+    }
+    return `(${n} ${n === 1 ? 'review' : 'reviews'})`;
+}
+
+function initReviewCounts() {
+    const reviewsSection = document.getElementById('reviews');
+    if (!reviewsSection) return;
+
+    const update = () => {
+        reviewsSection.querySelectorAll('.review-block').forEach((block) => {
+            const items = block.querySelectorAll('.review-item');
+            const countEl = block.querySelector('.review-count');
+            if (!countEl) return;
+            const n = items.length;
+            const en = `(${n} ${n === 1 ? 'review' : 'reviews'})`;
+            const es = `(${n} ${n === 1 ? 'reseña' : 'reseñas'})`;
+            countEl.setAttribute('data-en', en);
+            countEl.setAttribute('data-es', es);
+            countEl.textContent = getLang() === 'es' ? es : en;
+        });
+    };
+
+    update();
+
+    // Update when language changes (toggle changes localStorage + button text).
+    const langToggle = document.getElementById('langToggle');
+    langToggle?.addEventListener('click', () => setTimeout(update, 0));
+}
+
 function normalizeList(text) {
     return String(text || '')
         .split(',')
@@ -604,5 +637,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initPipValueTool();
     initConverterTool();
     initComparisonTool();
+    initReviewCounts();
 });
 

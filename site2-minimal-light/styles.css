@@ -374,6 +374,20 @@ button.btn-inline {
     padding: 3rem 0;
 }
 
+.broker-table th,
+.broker-table td {
+    vertical-align: middle;
+}
+
+.broker-table td:first-child {
+    vertical-align: top;
+}
+
+.broker-table th:last-child,
+.broker-table td:last-child {
+    width: 210px;
+}
+
 .table-wrapper {
     overflow-x: auto;
     border: 1px solid var(--border-color);
@@ -454,9 +468,9 @@ button.btn-link {
 /* Comparison tool */
 .action-cell {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
 }
 
 .compare-toggle {
@@ -469,6 +483,7 @@ button.btn-link {
     background: white;
     color: var(--text-primary);
     user-select: none;
+    line-height: 1;
 }
 
 .compare-toggle input {
@@ -718,6 +733,11 @@ button.btn-link {
         padding: 1.5rem;
     }
 
+    .broker-table th:last-child,
+    .broker-table td:last-child {
+        width: auto;
+    }
+
     .tool-row {
         grid-template-columns: 1fr;
     }
@@ -730,6 +750,27 @@ button.btn-link {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+}
+
+/* Align Trading Tools cards */
+#tools .grid-4 {
+    align-items: stretch;
+}
+
+#tools .grid-4 .card {
+    display: flex;
+    flex-direction: column;
+}
+
+#tools .grid-4 .tool-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#tools .grid-4 .tool-actions,
+#tools .grid-4 .link-row {
+    margin-top: auto;
 }
 
 @media (max-width: 480px) {
