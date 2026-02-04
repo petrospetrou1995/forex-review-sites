@@ -127,7 +127,7 @@ body {
 
 .tool-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
 }
 
@@ -159,8 +159,12 @@ body {
 .tool-actions {
     display: flex;
     gap: 0.75rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
+}
+
+.tool-actions .btn-inline {
+    white-space: nowrap;
 }
 
 .tool-result {
@@ -376,7 +380,7 @@ button.btn-inline {
 
 .broker-table th,
 .broker-table td {
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .broker-table th:last-child,
@@ -394,6 +398,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: var(--bg-color);
+    table-layout: fixed;
 }
 
 thead {
@@ -409,6 +414,7 @@ th {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
 }
 
 td {
@@ -467,6 +473,7 @@ button.btn-link {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    justify-content: center;
 }
 
 .compare-toggle {
@@ -735,7 +742,7 @@ button.btn-link {
     }
 
     .tool-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .comparison-tool__filters {
@@ -757,9 +764,16 @@ button.btn-link {
     display: flex;
     flex-direction: column;
     height: 100%;
+    align-self: stretch;
 }
 
 #tools .grid-4 .tool-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#tools .grid-4 .tool-form--simple {
     flex: 1;
     display: flex;
     flex-direction: column;
