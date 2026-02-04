@@ -208,6 +208,10 @@ body {
     gap: 2rem;
 }
 
+.tools-grid {
+    margin-top: 2.5rem;
+}
+
 .spotlight-card {
     background: var(--bg-white);
     padding: 2rem;

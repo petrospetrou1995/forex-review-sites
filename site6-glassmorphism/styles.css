@@ -311,6 +311,25 @@ body {
     transform: scale(1.02);
 }
 
+/* Tools section */
+a.btn-glass {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.tools-grid {
+    margin-top: 3rem;
+}
+
+.tools-desc {
+    color: var(--text-light);
+    opacity: 0.9;
+    margin-top: 0.75rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
 /* Stats Section */
 .stats-section {
     padding: 4rem 0;
