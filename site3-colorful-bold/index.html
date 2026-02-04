@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeVault - Bold Broker Reviews &amp; Market Insights</title>
+    <title>BrokerPulse - Bold Broker Reviews &amp; Market Insights</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
         <div class="container">
             <div class="header-inner">
                 <div class="logo">
-                    <span class="logo-text">TradeVault</span>
+                    <span class="logo-text">BrokerPulse</span>
                 </div>
                 <nav class="nav">
                     <a href="#brokers" data-en="Brokers" data-es="Brokers">Brokers</a>
@@ -25,7 +25,7 @@
                     <a href="#strategies" data-en="Strategies" data-es="Estrategias">Strategies</a>
                 </nav>
                 <div class="header-actions">
-                    <button class="lang-switch" id="langToggle">ES</button>
+                    <button class="lang-switch" id="langToggle" type="button">ES</button>
                 </div>
             </div>
         </div>
@@ -41,8 +41,8 @@
                     Get expert insights, compare brokers, and make smarter trading decisions
                 </p>
                 <div class="hero-buttons">
-                    <button class="btn-cta-primary" data-en="Browse Brokers" data-es="Explorar Brokers">Browse Brokers</button>
-                    <button class="btn-cta-secondary" data-en="Compare Now" data-es="Comparar Ahora">Compare Now</button>
+                    <a class="btn-cta-primary" href="#brokers" data-en="Browse Brokers" data-es="Explorar Brokers">Browse Brokers</a>
+                    <a class="btn-cta-secondary" href="#ratings" data-en="Compare Now" data-es="Comparar Ahora">Compare Now</a>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
                             <li data-en="Leverage up to 1:888" data-es="Apalancamiento hasta 1:888">Leverage up to 1:888</li>
                             <li data-en="24/7 customer support" data-es="Soporte al cliente 24/7">24/7 customer support</li>
                         </ul>
-                        <button class="card-button" onclick="window.open('https://www.xm.com', '_blank')" data-en="View Details" data-es="Ver Detalles">View Details</button>
+                        <a class="card-button" href="https://www.xm.com" target="_blank" rel="noopener noreferrer" data-en="View Details" data-es="Ver Detalles">View Details</a>
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@
                             <li data-en="User-friendly platform" data-es="Plataforma fácil de usar">User-friendly platform</li>
                             <li data-en="CySEC regulated" data-es="Regulado por CySEC">CySEC regulated</li>
                         </ul>
-                        <button class="card-button" onclick="window.open('https://www.libertex.com', '_blank')" data-en="Visit Libertex" data-es="Visitar Libertex">Visit Libertex</button>
+                        <a class="card-button" href="https://www.libertex.com" target="_blank" rel="noopener noreferrer" data-en="Visit Libertex" data-es="Visitar Libertex">Visit Libertex</a>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
                             <li data-en="Advanced trading tools" data-es="Herramientas avanzadas de trading">Advanced trading tools</li>
                             <li data-en="ECN execution" data-es="Ejecución ECN">ECN execution</li>
                         </ul>
-                        <button class="card-button" onclick="window.open('https://www.pepperstone.com', '_blank')" data-en="View Details" data-es="Ver Detalles">View Details</button>
+                        <a class="card-button" href="https://www.pepperstone.com" target="_blank" rel="noopener noreferrer" data-en="View Details" data-es="Ver Detalles">View Details</a>
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@
                             <li data-en="Leverage up to 1:2000" data-es="Apalancamiento hasta 1:2000">Leverage up to 1:2000</li>
                             <li data-en="Instant withdrawals" data-es="Retiros instantáneos">Instant withdrawals</li>
                         </ul>
-                        <button class="card-button" onclick="window.open('https://www.exness.com', '_blank')" data-en="View Details" data-es="Ver Detalles">View Details</button>
+                        <a class="card-button" href="https://www.exness.com" target="_blank" rel="noopener noreferrer" data-en="View Details" data-es="Ver Detalles">View Details</a>
                     </div>
                 </div>
             </div>
@@ -231,29 +231,6 @@
                 </div>
             </div>
 
-            <div class="review-block" data-broker="libertex-2" style="padding: 2rem; background: var(--bg-light); border-radius: 16px; border: 2px solid var(--color-accent);">
-                <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--text-dark);">Libertex <span class="review-count" style="color: var(--text-gray); font-size: 1rem; font-weight: normal;" data-en="(2 reviews)" data-es="(2 reseñas)">(2 reviews)</span></h3>
-                <div class="review-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 12px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                        <span style="font-weight: 600; color: var(--text-dark);">Anna B.</span>
-                        <span style="color: #fbbf24;">★★★★☆</span>
-                    </div>
-                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive." data-es="Plataforma fácil de usar perfecta para principiantes. La interfaz es intuitiva y fácil de navegar. Los spreads son competitivos.">
-                        User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive.
-                    </p>
-                    <span style="color: var(--text-gray); font-size: 0.85rem;">1 week ago</span>
-                </div>
-                <div class="review-item" style="padding: 1.5rem; background: white; border-radius: 12px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                        <span style="font-weight: 600; color: var(--text-dark);">Carlos M.</span>
-                        <span style="color: #fbbf24;">★★★★★</span>
-                    </div>
-                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive." data-es="Excelente broker con una plataforma limpia y moderna. La interfaz basada en web funciona muy bien en cualquier dispositivo. El servicio al cliente es receptivo.">
-                        Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive.
-                    </p>
-                    <span style="color: var(--text-gray); font-size: 0.85rem;">2 weeks ago</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -263,6 +240,29 @@
             <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;" data-en="Proven trading strategies used by professional traders." data-es="Estrategias de trading probadas utilizadas por traders profesionales.">
                 Proven trading strategies used by professional traders.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Scalping" data-es="Scalping">Scalping</h3>
+                    <p data-en="Fast setups focused on small price moves and tight risk control." data-es="Estrategias rápidas para movimientos pequeños con control de riesgo estricto.">
+                        Fast setups focused on small price moves and tight risk control.
+                    </p>
+                    <a class="section-link" href="#education" data-en="Learn the basics →" data-es="Aprende lo básico →">Learn the basics →</a>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Day Trading" data-es="Day Trading">Day Trading</h3>
+                    <p data-en="Intraday plans that focus on momentum and key session levels." data-es="Planes intradía centrados en momentum y niveles clave de sesión.">
+                        Intraday plans that focus on momentum and key session levels.
+                    </p>
+                    <a class="section-link" href="#guides" data-en="Read the guide →" data-es="Leer la guía →">Read the guide →</a>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Swing Trading" data-es="Swing Trading">Swing Trading</h3>
+                    <p data-en="Capture medium-term trends with fewer trades and wider targets." data-es="Captura tendencias a mediano plazo con menos operaciones y objetivos más amplios.">
+                        Capture medium-term trends with fewer trades and wider targets.
+                    </p>
+                    <a class="section-link" href="#tutorials" data-en="Watch tutorials →" data-es="Ver tutoriales →">Watch tutorials →</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -272,6 +272,38 @@
             <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;" data-en="Comprehensive ratings based on multiple factors including regulation, spreads, customer service, and user reviews." data-es="Calificaciones completas basadas en múltiples factores incluyendo regulación, spreads, servicio al cliente y reseñas de usuarios.">
                 Comprehensive ratings based on multiple factors including regulation, spreads, customer service, and user reviews.
             </p>
+            <div class="ratings-grid">
+                <div class="rating-card">
+                    <div class="rating-head">
+                        <h3>XM Group</h3>
+                        <span class="rating-score">4.8</span>
+                    </div>
+                    <p data-en="Strong regulation, reliable execution, and consistent support." data-es="Regulación sólida, ejecución confiable y soporte consistente.">
+                        Strong regulation, reliable execution, and consistent support.
+                    </p>
+                    <a class="section-link" href="#reviews" data-en="Read reviews →" data-es="Leer reseñas →">Read reviews →</a>
+                </div>
+                <div class="rating-card">
+                    <div class="rating-head">
+                        <h3>Libertex</h3>
+                        <span class="rating-score">4.9</span>
+                    </div>
+                    <p data-en="User-friendly platform with competitive pricing on majors." data-es="Plataforma amigable con precios competitivos en pares principales.">
+                        User-friendly platform with competitive pricing on majors.
+                    </p>
+                    <a class="section-link" href="#reviews" data-en="Read reviews →" data-es="Leer reseñas →">Read reviews →</a>
+                </div>
+                <div class="rating-card">
+                    <div class="rating-head">
+                        <h3>Pepperstone</h3>
+                        <span class="rating-score">4.7</span>
+                    </div>
+                    <p data-en="Pro-grade tools and low spreads for active traders." data-es="Herramientas profesionales y spreads bajos para traders activos.">
+                        Pro-grade tools and low spreads for active traders.
+                    </p>
+                    <a class="section-link" href="#reviews" data-en="Read reviews →" data-es="Leer reseñas →">Read reviews →</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -313,15 +345,58 @@
             <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;" data-en="Learn the fundamentals and advanced strategies of forex trading." data-es="Aprende los fundamentos y estrategias avanzadas del trading de forex.">
                 Learn the fundamentals and advanced strategies of forex trading.
             </p>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3 data-en="Forex Basics" data-es="Fundamentos de Forex">Forex Basics</h3>
+                    <p data-en="Understand currency pairs, pips, leverage, and how the FX market works." data-es="Comprende pares de divisas, pips, apalancamiento y cómo funciona el mercado FX.">
+                        Understand currency pairs, pips, leverage, and how the FX market works.
+                    </p>
+                    <a class="education-link" href="#guides" data-en="Start learning →" data-es="Empezar a aprender →">Start learning →</a>
+                </div>
+                <div class="education-card">
+                    <h3 data-en="Risk Management" data-es="Gestión de Riesgo">Risk Management</h3>
+                    <p data-en="Size positions, set stop-loss levels, and protect your account capital." data-es="Dimensiona posiciones, define stop-loss y protege tu capital.">
+                        Size positions, set stop-loss levels, and protect your account capital.
+                    </p>
+                    <a class="education-link" href="#strategies" data-en="View strategies →" data-es="Ver estrategias →">View strategies →</a>
+                </div>
+                <div class="education-card">
+                    <h3 data-en="Trading Psychology" data-es="Psicología del Trading">Trading Psychology</h3>
+                    <p data-en="Build discipline, manage emotions, and follow a repeatable plan." data-es="Desarrolla disciplina, gestiona emociones y sigue un plan consistente.">
+                        Build discipline, manage emotions, and follow a repeatable plan.
+                    </p>
+                    <a class="education-link" href="#tutorials" data-en="Watch tutorials →" data-es="Ver tutoriales →">Watch tutorials →</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="about" style="padding: 5rem 0; background: var(--bg-light);">
         <div class="container">
-            <h2 class="section-heading" data-en="About TradeVault" data-es="Acerca de TradeVault">About TradeVault</h2>
-            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="TradeVault provides bold and comprehensive broker reviews to help traders make informed decisions." data-es="TradeVault proporciona reseñas de brokers audaces y completas para ayudar a los traders a tomar decisiones informadas.">
-                TradeVault provides bold and comprehensive broker reviews to help traders make informed decisions.
+            <h2 class="section-heading" data-en="About BrokerPulse" data-es="Acerca de BrokerPulse">About BrokerPulse</h2>
+            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="BrokerPulse delivers bold, data-backed broker reviews to help traders make confident decisions." data-es="BrokerPulse ofrece reseñas de brokers audaces y basadas en datos para ayudar a los traders a tomar decisiones con confianza.">
+                BrokerPulse delivers bold, data-backed broker reviews to help traders make confident decisions.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Our Mission" data-es="Nuestra Misión">Our Mission</h3>
+                    <p data-en="Provide transparent broker insights and practical guidance for everyday traders." data-es="Ofrecer información transparente de brokers y guía práctica para traders.">
+                        Provide transparent broker insights and practical guidance for everyday traders.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="How We Rank" data-es="Cómo Clasificamos">How We Rank</h3>
+                    <p data-en="Scores combine regulation, pricing, platforms, and real user feedback." data-es="Las puntuaciones combinan regulación, precios, plataformas y feedback real.">
+                        Scores combine regulation, pricing, platforms, and real user feedback.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Editorial Promise" data-es="Compromiso Editorial">Editorial Promise</h3>
+                    <p data-en="We keep reviews independent and update them regularly." data-es="Mantenemos reseñas independientes y las actualizamos con frecuencia.">
+                        We keep reviews independent and update them regularly.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -331,14 +406,34 @@
             <p style="text-align: center; color: var(--text-gray);" data-en="Experienced traders and analysts dedicated to providing accurate broker information." data-es="Traders y analistas experimentados dedicados a proporcionar información precisa de brokers.">
                 Experienced traders and analysts dedicated to providing accurate broker information.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Market Analysts" data-es="Analistas de Mercado">Market Analysts</h3>
+                    <p data-en="Daily research on spreads, fees, and market conditions." data-es="Investigación diaria de spreads, comisiones y condiciones de mercado.">
+                        Daily research on spreads, fees, and market conditions.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Broker Reviewers" data-es="Revisores de Brokers">Broker Reviewers</h3>
+                    <p data-en="Hands-on testing of platforms, support, and withdrawals." data-es="Pruebas prácticas de plataformas, soporte y retiros.">
+                        Hands-on testing of platforms, support, and withdrawals.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Education Team" data-es="Equipo Educativo">Education Team</h3>
+                    <p data-en="Clear guides to help traders build repeatable habits." data-es="Guías claras para crear hábitos de trading consistentes.">
+                        Clear guides to help traders build repeatable habits.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="contact" style="padding: 5rem 0; background: var(--bg-light);">
         <div class="container">
             <h2 class="section-heading" data-en="Contact Us" data-es="Contáctanos">Contact Us</h2>
-            <p style="text-align: center; color: var(--text-gray);" data-en="Email: contact@tradevault.com" data-es="Email: contact@tradevault.com">
-                Email: contact@tradevault.com
+            <p style="text-align: center; color: var(--text-gray);" data-en="Email: contact@brokerpulse.com" data-es="Email: contact@brokerpulse.com">
+                Email: <a class="inline-link" href="mailto:contact@brokerpulse.com">contact@brokerpulse.com</a>
             </p>
         </div>
     </section>
@@ -349,6 +444,29 @@
             <p style="text-align: center; color: var(--text-gray);" data-en="Comprehensive guides covering all aspects of forex trading." data-es="Guías completas que cubren todos los aspectos del trading de forex.">
                 Comprehensive guides covering all aspects of forex trading.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Getting Started" data-es="Cómo Empezar">Getting Started</h3>
+                    <p data-en="Learn market hours, order types, and the structure of FX pairs." data-es="Aprende horarios de mercado, tipos de órdenes y la estructura de pares FX.">
+                        Learn market hours, order types, and the structure of FX pairs.
+                    </p>
+                    <a class="section-link" href="#education" data-en="Start here →" data-es="Empieza aquí →">Start here →</a>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Risk Rules" data-es="Reglas de Riesgo">Risk Rules</h3>
+                    <p data-en="Define risk per trade, position size, and realistic targets." data-es="Define riesgo por operación, tamaño de posición y objetivos realistas.">
+                        Define risk per trade, position size, and realistic targets.
+                    </p>
+                    <a class="section-link" href="#education" data-en="See risk tips →" data-es="Ver consejos →">See risk tips →</a>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Trading Plans" data-es="Planes de Trading">Trading Plans</h3>
+                    <p data-en="Build a repeatable process for entries, exits, and reviews." data-es="Crea un proceso repetible para entradas, salidas y revisiones.">
+                        Build a repeatable process for entries, exits, and reviews.
+                    </p>
+                    <a class="section-link" href="#strategies" data-en="Explore strategies →" data-es="Explorar estrategias →">Explore strategies →</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -358,17 +476,32 @@
             <p style="text-align: center; color: var(--text-gray);" data-en="Step-by-step tutorials to help you master forex trading." data-es="Tutoriales paso a paso para ayudarte a dominar el trading de forex.">
                 Step-by-step tutorials to help you master forex trading.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Chart Reading" data-es="Lectura de Gráficos">Chart Reading</h3>
+                    <p data-en="Identify trends, support, and resistance with clean charts." data-es="Identifica tendencias, soporte y resistencia con gráficos claros.">
+                        Identify trends, support, and resistance with clean charts.
+                    </p>
+                    <a class="section-link" href="#analysis" data-en="See examples →" data-es="Ver ejemplos →">See examples →</a>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Order Types" data-es="Tipos de Órdenes">Order Types</h3>
+                    <p data-en="Use market, limit, and stop orders with confidence." data-es="Usa órdenes de mercado, límite y stop con confianza.">
+                        Use market, limit, and stop orders with confidence.
+                    </p>
+                    <a class="section-link" href="#guides" data-en="Learn more →" data-es="Aprender más →">Learn more →</a>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Trade Journaling" data-es="Diario de Trading">Trade Journaling</h3>
+                    <p data-en="Track performance and improve decisions over time." data-es="Registra tu rendimiento y mejora decisiones con el tiempo.">
+                        Track performance and improve decisions over time.
+                    </p>
+                    <a class="section-link" href="#education" data-en="Get the template →" data-es="Ver plantilla →">Get the template →</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="webinars" style="padding: 5rem 0; background: var(--bg-white);">
-        <div class="container">
-            <h2 class="section-heading" data-en="Webinars" data-es="Webinars">Webinars</h2>
-            <p style="text-align: center; color: var(--text-gray);" data-en="Join our live webinars with trading experts." data-es="Únete a nuestros webinars en vivo con expertos en trading.">
-                Join our live webinars with trading experts.
-            </p>
-        </div>
-    </section>
 
     <section id="privacy" style="padding: 5rem 0; background: var(--bg-light);">
         <div class="container">
@@ -376,6 +509,26 @@
             <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="We are committed to protecting your privacy and personal information." data-es="Estamos comprometidos a proteger tu privacidad e información personal.">
                 We are committed to protecting your privacy and personal information.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Data Use" data-es="Uso de Datos">Data Use</h3>
+                    <p data-en="We only collect essential analytics to improve the experience." data-es="Solo recopilamos analíticas esenciales para mejorar la experiencia.">
+                        We only collect essential analytics to improve the experience.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Cookie Control" data-es="Control de Cookies">Cookie Control</h3>
+                    <p data-en="You can manage cookies in your browser at any time." data-es="Puedes gestionar cookies en tu navegador cuando quieras.">
+                        You can manage cookies in your browser at any time.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Contact for Privacy" data-es="Contacto de Privacidad">Contact for Privacy</h3>
+                    <p data-en="Email us for data requests or deletion inquiries." data-es="Escríbenos para solicitudes de datos o eliminación.">
+                        Email us for data requests or deletion inquiries.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -385,6 +538,26 @@
             <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="By using our website, you agree to our terms of service." data-es="Al usar nuestro sitio web, aceptas nuestros términos de servicio.">
                 By using our website, you agree to our terms of service.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Use of Content" data-es="Uso del Contenido">Use of Content</h3>
+                    <p data-en="Content is for educational purposes and may not be redistributed." data-es="El contenido es educativo y no debe redistribuirse.">
+                        Content is for educational purposes and may not be redistributed.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Third-Party Links" data-es="Enlaces de Terceros">Third-Party Links</h3>
+                    <p data-en="External links are provided for convenience only." data-es="Los enlaces externos son solo por conveniencia.">
+                        External links are provided for convenience only.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Updates" data-es="Actualizaciones">Updates</h3>
+                    <p data-en="Terms may change as we improve the platform." data-es="Los términos pueden cambiar con mejoras de la plataforma.">
+                        Terms may change as we improve the platform.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -394,6 +567,26 @@
             <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="Trading forex involves substantial risk. The information provided is for educational purposes only." data-es="El trading de forex implica un riesgo sustancial. La información proporcionada es solo para fines educativos.">
                 Trading forex involves substantial risk. The information provided is for educational purposes only.
             </p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 data-en="Risk Warning" data-es="Advertencia de Riesgo">Risk Warning</h3>
+                    <p data-en="You can lose more than your initial deposit. Trade responsibly." data-es="Puedes perder más que tu depósito inicial. Opera con responsabilidad.">
+                        You can lose more than your initial deposit. Trade responsibly.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="No Financial Advice" data-es="Sin Asesoría Financiera">No Financial Advice</h3>
+                    <p data-en="We do not provide investment or financial advice." data-es="No proporcionamos asesoría financiera ni de inversión.">
+                        We do not provide investment or financial advice.
+                    </p>
+                </div>
+                <div class="section-card">
+                    <h3 data-en="Independent Reviews" data-es="Reseñas Independientes">Independent Reviews</h3>
+                    <p data-en="Reviews are based on research and user feedback." data-es="Las reseñas se basan en investigación y opiniones de usuarios.">
+                        Reviews are based on research and user feedback.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -413,7 +606,6 @@
                     <ul>
                         <li><a href="#guides" data-en="Guides" data-es="Guías">Guides</a></li>
                         <li><a href="#tutorials" data-en="Tutorials" data-es="Tutoriales">Tutorials</a></li>
-                        <li><a href="#webinars" data-en="Webinars" data-es="Webinars">Webinars</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -426,7 +618,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 TradeVault. All rights reserved.</p>
+                <p>&copy; 2025 BrokerPulse. All rights reserved.</p>
             </div>
         </div>
     </footer>

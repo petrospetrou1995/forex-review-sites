@@ -172,6 +172,8 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: transform 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-cta-primary:hover {
@@ -189,6 +191,8 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-cta-secondary:hover {
@@ -326,6 +330,9 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: transform 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
 .card-button:hover {
@@ -342,6 +349,123 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
+}
+
+/* Education */
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.education-card {
+    background: var(--bg-light);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.education-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+}
+
+.education-card p {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.education-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.education-link:hover {
+    text-decoration: underline;
+}
+
+/* Generic section cards */
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.section-card {
+    background: var(--bg-light);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.section-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+}
+
+.section-card p {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.section-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.section-link:hover {
+    text-decoration: underline;
+}
+
+.inline-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.inline-link:hover {
+    text-decoration: underline;
+}
+
+/* Ratings */
+.ratings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.rating-card {
+    background: var(--bg-light);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.rating-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.rating-score {
+    background: var(--color-yellow);
+    color: var(--text-dark);
+    font-weight: 800;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
 }
 
 .update-card {

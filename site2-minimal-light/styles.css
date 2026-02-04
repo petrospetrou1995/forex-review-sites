@@ -187,6 +187,16 @@ button.btn-inline {
     margin-bottom: 1rem;
 }
 
+.learn-list {
+    margin: 0.75rem 0 0;
+    padding-left: 1.1rem;
+    line-height: 1.6;
+}
+
+.learn-list li {
+    margin-bottom: 0.35rem;
+}
+
 /* Reviews */
 .review-block {
     margin-bottom: 3rem;

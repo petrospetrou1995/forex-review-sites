@@ -281,6 +281,18 @@
     line-height: 1.7;
 }
 
+.card-list {
+    color: var(--text-secondary);
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.card-list li {
+    margin-bottom: 0.35rem;
+}
+
 .broker-card a {
     color: var(--primary-color);
     text-decoration: none;
