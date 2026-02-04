@@ -124,6 +124,34 @@
     display: block;
 }
 
+.reviews-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.btn-more {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-more:hover {
+    background: rgba(241, 245, 249, 0.06);
+    border-color: rgba(34, 211, 238, 0.65);
+    transform: translateY(-1px);
+}
+
+.btn-more:focus-visible {
+    outline: 2px solid rgba(34, 211, 238, 0.35);
+    outline-offset: 2px;
+}
+
 .mt-5 {
     margin-top: 5rem;
 }

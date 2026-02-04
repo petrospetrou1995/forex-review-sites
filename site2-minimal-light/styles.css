@@ -768,8 +768,12 @@ button.btn-link {
     flex-direction: column;
 }
 
-#tools .grid-4 .tool-actions,
-#tools .grid-4 .link-row {
+#tools .grid-4 .tool-result {
+    order: 2;
+}
+
+#tools .grid-4 .tool-actions {
+    order: 3;
     margin-top: auto;
 }
 

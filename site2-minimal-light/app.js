@@ -414,14 +414,6 @@ function initComparisonTool() {
     const syncSelectionUI = () => {
         const selected = selectionSet();
 
-        // Sync checkboxes in the broker table.
-        document.querySelectorAll('.compare-checkbox[data-broker-id]').forEach((el) => {
-            if (!(el instanceof HTMLInputElement)) return;
-            const id = el.dataset.brokerId;
-            if (!id) return;
-            el.checked = selected.has(id);
-        });
-
         // Sync picklist checkboxes (if already rendered).
         picklist.querySelectorAll('input.pick-checkbox[data-broker-id]').forEach((el) => {
             if (!(el instanceof HTMLInputElement)) return;
@@ -598,16 +590,6 @@ function initComparisonTool() {
         const id = target.dataset.brokerId;
         if (!id) return;
         tryToggle(id, target.checked);
-    });
-
-    // Table checkbox interactions.
-    document.querySelectorAll('.compare-checkbox[data-broker-id]').forEach((el) => {
-        if (!(el instanceof HTMLInputElement)) return;
-        el.addEventListener('change', () => {
-            const id = el.dataset.brokerId;
-            if (!id) return;
-            tryToggle(id, el.checked);
-        });
     });
 
     // Remove buttons in the comparison table.
