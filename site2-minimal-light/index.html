@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brokercompare - Simple &amp; Transparent Broker Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a class="logo" href="index.html">Brokercompare</a>
+                <ul class="nav-links" id="primaryNav">
+                    <li><a href="#brokers" data-en="Brokers" data-es="Brokers">Brokers</a></li>
+                    <li><a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                    <li><a href="#comparison" data-en="Compare" data-es="Comparar">Compare</a></li>
+                    <li><a href="#strategies" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                    <li><a href="#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                    <li><a href="#learn" data-en="Learn" data-es="Aprender">Learn</a></li>
+                    <li><a href="#news" data-en="News" data-es="Noticias">News</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
+                    <button class="lang-btn" id="langToggle" type="button">ES</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="container">
+                <h1 class="intro-title" data-en="Compare Forex Brokers Side by Side" data-es="Compara Brokers de Forex Lado a Lado">
+                    Compare Forex Brokers Side by Side
+                </h1>
+                <p class="intro-text" data-en="Unbiased reviews and comprehensive comparisons to help you choose the right broker for your trading needs." data-es="Reseñas imparciales y comparaciones completas para ayudarte a elegir el broker adecuado para tus necesidades de trading.">
+                    Unbiased reviews and comprehensive comparisons to help you choose the right broker for your trading needs.
+                </p>
+            </div>
+        </section>
+
+        <section id="brokers" class="broker-table">
+            <div class="container">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-en="Broker" data-es="Broker">Broker</th>
+                                <th data-en="Rating" data-es="Calificación">Rating</th>
+                                <th data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</th>
+                                <th data-en="Spreads" data-es="Spreads">Spreads</th>
+                                <th data-en="Platform" data-es="Plataforma">Platform</th>
+                                <th data-en="Action" data-es="Acción">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="broker-name">XM Group</div>
+                                    <div class="broker-reg" data-en="CySEC, ASIC" data-es="CySEC, ASIC">CySEC, ASIC</div>
+                                </td>
+                                <td><span class="rating">4.8</span></td>
+                                <td>$5</td>
+                                <td>0.6 pips</td>
+                                <td>MT4, MT5</td>
+                                <td class="action-cell">
+                                    <a href="brokers/xm-group.html" class="btn-link" data-en="Review" data-es="Reseña">Review</a>
+                                    <label class="compare-toggle">
+                                        <input type="checkbox" class="compare-checkbox" data-broker-id="xm-group">
+                                        <span data-en="Compare" data-es="Comparar">Compare</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name">Exness</div>
+                                    <div class="broker-reg" data-en="FCA, CySEC" data-es="FCA, CySEC">FCA, CySEC</div>
+                                </td>
+                                <td><span class="rating">4.7</span></td>
+                                <td>$10</td>
+                                <td>0.1 pips</td>
+                                <td>MT4, MT5</td>
+                                <td class="action-cell">
+                                    <a href="brokers/exness.html" class="btn-link" data-en="Review" data-es="Reseña">Review</a>
+                                    <label class="compare-toggle">
+                                        <input type="checkbox" class="compare-checkbox" data-broker-id="exness">
+                                        <span data-en="Compare" data-es="Comparar">Compare</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name">Libertex</div>
+                                    <div class="broker-reg" data-en="CySEC" data-es="CySEC">CySEC</div>
+                                </td>
+                                <td><span class="rating">4.9</span></td>
+                                <td>$100</td>
+                                <td>From 0.0 pips</td>
+                                <td>Web, Mobile</td>
+                                <td class="action-cell">
+                                    <a href="brokers/libertex.html" class="btn-link" data-en="Review" data-es="Reseña">Review</a>
+                                    <label class="compare-toggle">
+                                        <input type="checkbox" class="compare-checkbox" data-broker-id="libertex">
+                                        <span data-en="Compare" data-es="Comparar">Compare</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name">Pepperstone</div>
+                                    <div class="broker-reg" data-en="ASIC, FCA" data-es="ASIC, FCA">ASIC, FCA</div>
+                                </td>
+                                <td><span class="rating">4.6</span></td>
+                                <td>$200</td>
+                                <td>0.0 pips</td>
+                                <td>MT4, MT5, cTrader</td>
+                                <td class="action-cell">
+                                    <a href="brokers/pepperstone.html" class="btn-link" data-en="Review" data-es="Reseña">Review</a>
+                                    <label class="compare-toggle">
+                                        <input type="checkbox" class="compare-checkbox" data-broker-id="pepperstone">
+                                        <span data-en="Compare" data-es="Comparar">Compare</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name">IC Markets</div>
+                                    <div class="broker-reg" data-en="ASIC, CySEC" data-es="ASIC, CySEC">ASIC, CySEC</div>
+                                </td>
+                                <td><span class="rating">4.5</span></td>
+                                <td>$200</td>
+                                <td>0.0 pips</td>
+                                <td>MT4, MT5, cTrader</td>
+                                <td class="action-cell">
+                                    <a href="brokers/ic-markets.html" class="btn-link" data-en="Review" data-es="Reseña">Review</a>
+                                    <label class="compare-toggle">
+                                        <input type="checkbox" class="compare-checkbox" data-broker-id="ic-markets">
+                                        <span data-en="Compare" data-es="Comparar">Compare</span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="section">
+            <div class="container">
+                <h2 class="section-heading" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</h2>
+                <p class="section-lead" data-en="Read detailed reviews from verified traders. Real experiences and honest feedback about each broker." data-es="Lee reseñas detalladas de traders verificados. Experiencias reales y comentarios honestos sobre cada broker.">
+                    Read detailed reviews from verified traders. Real experiences and honest feedback about each broker.
+                </p>
+
+                <div class="card card-pad review-block" data-broker="libertex">
+                    <h3 class="review-title">Libertex <span class="review-count">(1,650 reviews)</span></h3>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Anna B.</span>
+                            <span title="4 out of 5 stars">★★★★☆</span>
+                        </div>
+                        <p class="review-text" data-en="User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive and the educational materials are very helpful." data-es="Plataforma fácil de usar perfecta para principiantes. La interfaz es intuitiva y fácil de navegar. Los spreads son competitivos y los materiales educativos son muy útiles.">
+                            User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive and the educational materials are very helpful.
+                        </p>
+                        <span class="review-date">1 week ago</span>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Carlos M.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive and helpful." data-es="Excelente broker con una plataforma limpia y moderna. La interfaz basada en web funciona muy bien en cualquier dispositivo. El servicio al cliente es receptivo y útil.">
+                            Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive and helpful.
+                        </p>
+                        <span class="review-date">2 weeks ago</span>
+                    </div>
+                    <div class="link-row">
+                        <a class="btn-inline" href="brokers/libertex.html" data-en="Read full review" data-es="Leer reseña completa">Read full review</a>
+                        <a class="btn-inline" href="https://www.libertex.com" target="_blank" rel="noopener noreferrer" data-en="Visit broker" data-es="Visitar broker">Visit broker</a>
+                    </div>
+                </div>
+
+                <div class="card card-pad review-block" data-broker="xm-group">
+                    <h3 class="review-title">XM Group <span class="review-count">(2,450 reviews)</span></h3>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">John M.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Excellent broker! The spreads are competitive and execution is fast. Customer support is available 24/7 and they're very helpful. I've been trading with XM for over 2 years and never had any issues with withdrawals." data-es="¡Excelente broker! Los spreads son competitivos y la ejecución es rápida. El soporte al cliente está disponible 24/7 y son muy útiles. He estado operando con XM durante más de 2 años y nunca tuve problemas con los retiros.">
+                            Excellent broker! The spreads are competitive and execution is fast. Customer support is available 24/7 and they're very helpful. I've been trading with XM for over 2 years and never had any issues with withdrawals.
+                        </p>
+                        <span class="review-date">2 weeks ago</span>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Sarah K.</span>
+                            <span title="4 out of 5 stars">★★★★☆</span>
+                        </div>
+                        <p class="review-text" data-en="Good broker overall. The platform is stable and spreads are reasonable. The only downside is that some exotic pairs have wider spreads. Customer service responds quickly to inquiries." data-es="Buen broker en general. La plataforma es estable y los spreads son razonables. El único inconveniente es que algunos pares exóticos tienen spreads más amplios. El servicio al cliente responde rápidamente a las consultas.">
+                            Good broker overall. The platform is stable and spreads are reasonable. The only downside is that some exotic pairs have wider spreads. Customer service responds quickly to inquiries.
+                        </p>
+                        <span class="review-date">1 month ago</span>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Michael R.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Low minimum deposit, plenty of account types, and fast support. I’d like a bit more depth on exotic pairs, but majors have been solid." data-es="Depósito mínimo bajo, varios tipos de cuenta y soporte rápido. Me gustaría más profundidad en pares exóticos, pero los pares principales han sido sólidos.">
+                            Low minimum deposit, plenty of account types, and fast support. I’d like a bit more depth on exotic pairs, but majors have been solid.
+                        </p>
+                        <span class="review-date">3 weeks ago</span>
+                    </div>
+                    <div class="link-row">
+                        <a class="btn-inline" href="brokers/xm-group.html" data-en="Read full review" data-es="Leer reseña completa">Read full review</a>
+                        <a class="btn-inline" href="https://www.xm.com" target="_blank" rel="noopener noreferrer" data-en="Visit broker" data-es="Visitar broker">Visit broker</a>
+                    </div>
+                </div>
+
+                <div class="card card-pad review-block" data-broker="exness">
+                    <h3 class="review-title">Exness <span class="review-count">(3,120 reviews)</span></h3>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">David L.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Ultra-low spreads and instant withdrawals make Exness my top choice. The platform is user-friendly and the mobile app works perfectly. I've never experienced any slippage issues." data-es="Los spreads ultra bajos y los retiros instantáneos hacen de Exness mi primera opción. La plataforma es fácil de usar y la aplicación móvil funciona perfectamente. Nunca he experimentado problemas de deslizamiento.">
+                            Ultra-low spreads and instant withdrawals make Exness my top choice. The platform is user-friendly and the mobile app works perfectly. I've never experienced any slippage issues.
+                        </p>
+                        <span class="review-date">1 week ago</span>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Emma T.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Amazing broker! The spreads are the lowest I've seen, especially on major pairs. Withdrawals are truly instant - money appears in my account within minutes. Highly professional service." data-es="¡Broker increíble! Los spreads son los más bajos que he visto, especialmente en pares principales. Los retiros son verdaderamente instantáneos: el dinero aparece en mi cuenta en minutos. Servicio muy profesional.">
+                            Amazing broker! The spreads are the lowest I've seen, especially on major pairs. Withdrawals are truly instant - money appears in my account within minutes. Highly professional service.
+                        </p>
+                        <span class="review-date">5 days ago</span>
+                    </div>
+                    <div class="link-row">
+                        <a class="btn-inline" href="brokers/exness.html" data-en="Read full review" data-es="Leer reseña completa">Read full review</a>
+                        <a class="btn-inline" href="https://www.exness.com" target="_blank" rel="noopener noreferrer" data-en="Visit broker" data-es="Visitar broker">Visit broker</a>
+                    </div>
+                </div>
+
+                <div class="card card-pad review-block" data-broker="pepperstone">
+                    <h3 class="review-title">Pepperstone <span class="review-count">(1,890 reviews)</span></h3>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">James W.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Great execution and tight pricing on major pairs. The platform selection is excellent and support has been responsive." data-es="Gran ejecución y buen precio en pares principales. La selección de plataformas es excelente y el soporte ha sido rápido.">
+                            Great execution and tight pricing on major pairs. The platform selection is excellent and support has been responsive.
+                        </p>
+                        <span class="review-date">1 week ago</span>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Lisa H.</span>
+                            <span title="4 out of 5 stars">★★★★☆</span>
+                        </div>
+                        <p class="review-text" data-en="Solid broker for active traders. I’d like more education for beginners, but the trading conditions are strong." data-es="Buen broker para traders activos. Me gustaría más educación para principiantes, pero las condiciones de trading son fuertes.">
+                            Solid broker for active traders. I’d like more education for beginners, but the trading conditions are strong.
+                        </p>
+                        <span class="review-date">3 weeks ago</span>
+                    </div>
+                    <div class="link-row">
+                        <a class="btn-inline" href="brokers/pepperstone.html" data-en="Read full review" data-es="Leer reseña completa">Read full review</a>
+                        <a class="btn-inline" href="https://www.pepperstone.com" target="_blank" rel="noopener noreferrer" data-en="Visit broker" data-es="Visitar broker">Visit broker</a>
+                    </div>
+                </div>
+
+                <div class="card card-pad review-block" data-broker="ic-markets">
+                    <h3 class="review-title">IC Markets <span class="review-count">(2,110 reviews)</span></h3>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Oliver P.</span>
+                            <span title="5 out of 5 stars">★★★★★</span>
+                        </div>
+                        <p class="review-text" data-en="Very competitive spreads and good execution. The overall experience is consistent for day trading." data-es="Spreads muy competitivos y buena ejecución. La experiencia es consistente para day trading.">
+                            Very competitive spreads and good execution. The overall experience is consistent for day trading.
+                        </p>
+                        <span class="review-date">2 weeks ago</span>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-head">
+                            <span class="review-name">Nadia S.</span>
+                            <span title="4 out of 5 stars">★★★★☆</span>
+                        </div>
+                        <p class="review-text" data-en="Fast onboarding and reliable platform options. I’d like clearer fee breakdowns in one place." data-es="Registro rápido y buenas opciones de plataforma. Me gustaría un desglose de comisiones más claro en un solo lugar.">
+                            Fast onboarding and reliable platform options. I’d like clearer fee breakdowns in one place.
+                        </p>
+                        <span class="review-date">1 month ago</span>
+                    </div>
+                    <div class="link-row">
+                        <a class="btn-inline" href="brokers/ic-markets.html" data-en="Read full review" data-es="Leer reseña completa">Read full review</a>
+                        <a class="btn-inline" href="https://www.icmarkets.com" target="_blank" rel="noopener noreferrer" data-en="Visit broker" data-es="Visitar broker">Visit broker</a>
+                    </div>
+                </div>
+
+                <div class="features-grid mt-3">
+                    <div class="feature-box">
+                        <div class="feature-icon">✓</div>
+                        <h3 data-en="Verified Reviews" data-es="Reseñas Verificadas">Verified Reviews</h3>
+                        <p data-en="All reviews are verified by real traders" data-es="Todas las reseñas están verificadas por traders reales">
+                            All reviews are verified by real traders
+                        </p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">📊</div>
+                        <h3 data-en="Real-Time Data" data-es="Datos en Tiempo Real">Real-Time Data</h3>
+                        <p data-en="Up-to-date spreads and commission information" data-es="Información actualizada de spreads y comisiones">
+                            Up-to-date spreads and commission information
+                        </p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">🔒</div>
+                        <h3 data-en="Secure &amp; Trusted" data-es="Seguro y Confiable">Secure &amp; Trusted</h3>
+                        <p data-en="Only regulated brokers featured" data-es="Solo brokers regulados destacados">
+                            Only regulated brokers featured
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Broker Comparison" data-es="Comparación de Brokers">Broker Comparison</h2>
+                <p class="section-lead" data-en="Compare brokers side by side using our comprehensive comparison tool. Filter by spreads, leverage, regulation, and more to find the perfect broker for your needs." data-es="Compara brokers lado a lado usando nuestra herramienta de comparación completa. Filtra por spreads, apalancamiento, regulación y más para encontrar el broker perfecto para tus necesidades.">
+                    Compare brokers side by side using our comprehensive comparison tool. Filter by spreads, leverage, regulation, and more to find the perfect broker for your needs.
+                </p>
+                <div class="card card-pad">
+                    <h3 class="card-title" data-en="Comparison Features" data-es="Características de Comparación">Comparison Features</h3>
+                    <div class="grid grid-4-tight">
+                        <div>
+                            <h4 class="label" data-en="Spreads" data-es="Spreads">Spreads</h4>
+                            <p class="muted small" data-en="Compare trading costs" data-es="Compara costos de trading">Compare trading costs</p>
+                        </div>
+                        <div>
+                            <h4 class="label" data-en="Leverage" data-es="Apalancamiento">Leverage</h4>
+                            <p class="muted small" data-en="Evaluate leverage options" data-es="Evalúa opciones de apalancamiento">Evaluate leverage options</p>
+                        </div>
+                        <div>
+                            <h4 class="label" data-en="Regulation" data-es="Regulación">Regulation</h4>
+                            <p class="muted small" data-en="Check regulatory status" data-es="Verifica estado regulatorio">Check regulatory status</p>
+                        </div>
+                        <div>
+                            <h4 class="label" data-en="Platforms" data-es="Plataformas">Platforms</h4>
+                            <p class="muted small" data-en="Compare trading platforms" data-es="Compara plataformas de trading">Compare trading platforms</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-pad mt-3 comparison-tool" id="comparisonTool">
+                    <div class="comparison-tool__top">
+                        <div>
+                            <h3 class="card-title" data-en="Compare brokers" data-es="Comparar brokers">Compare brokers</h3>
+                            <p class="muted small" data-en="Select up to 3 brokers, then compare key stats side by side." data-es="Selecciona hasta 3 brokers y compara estadísticas clave lado a lado.">
+                                Select up to 3 brokers, then compare key stats side by side.
+                            </p>
+                        </div>
+                        <button class="btn-inline" type="button" id="compareClearBtn" data-en="Clear selection" data-es="Limpiar selección">Clear selection</button>
+                    </div>
+
+                    <div class="comparison-tool__filters">
+                        <div class="tool-field">
+                            <label for="compareSearch" data-en="Search" data-es="Buscar">Search</label>
+                            <input id="compareSearch" type="text" inputmode="search" data-en-placeholder="Search brokers…" data-es-placeholder="Buscar brokers…" placeholder="Search brokers…">
+                        </div>
+                        <div class="tool-field">
+                            <label for="comparePlatform" data-en="Platform" data-es="Plataforma">Platform</label>
+                            <select id="comparePlatform">
+                                <option value="" data-en="All platforms" data-es="Todas las plataformas">All platforms</option>
+                            </select>
+                        </div>
+                        <div class="tool-field">
+                            <label for="compareRegulation" data-en="Regulation" data-es="Regulación">Regulation</label>
+                            <select id="compareRegulation">
+                                <option value="" data-en="All regulators" data-es="Todos los reguladores">All regulators</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="comparison-tool__picklist" id="comparePicklist"></div>
+
+                    <div class="comparison-tool__result">
+                        <p class="muted" id="compareStatus" role="status" aria-live="polite" data-en="Select at least 2 brokers to compare." data-es="Selecciona al menos 2 brokers para comparar.">
+                            Select at least 2 brokers to compare.
+                        </p>
+                        <div class="table-wrapper" id="compareTableWrap" hidden></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategies" class="section">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Trading Strategies" data-es="Estrategias de Trading">Trading Strategies</h2>
+                <p class="section-lead" data-en="Learn proven trading strategies used by professional traders. From scalping to swing trading, find the strategy that fits your trading style." data-es="Aprende estrategias de trading probadas utilizadas por traders profesionales. Desde scalping hasta swing trading, encuentra la estrategia que se ajusta a tu estilo de trading.">
+                    Learn proven trading strategies used by professional traders. From scalping to swing trading, find the strategy that fits your trading style.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Scalping" data-es="Scalping">Scalping</h3>
+                        <p class="muted" data-en="Profit from small price movements with quick trades. Requires discipline and low spreads." data-es="Obtén ganancias de pequeños movimientos de precios con operaciones rápidas. Requiere disciplina y spreads bajos.">
+                            Profit from small price movements with quick trades. Requires discipline and low spreads.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Day Trading" data-es="Day Trading">Day Trading</h3>
+                        <p class="muted" data-en="Open and close positions within the same day. Ideal for active traders who can monitor markets." data-es="Abre y cierra posiciones dentro del mismo día. Ideal para traders activos que pueden monitorear los mercados.">
+                            Open and close positions within the same day. Ideal for active traders who can monitor markets.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Swing Trading" data-es="Swing Trading">Swing Trading</h3>
+                        <p class="muted" data-en="Hold positions for several days or weeks to capture medium-term trends. Perfect for part-time traders." data-es="Mantén posiciones durante varios días o semanas para capturar tendencias a mediano plazo. Perfecto para traders a tiempo parcial.">
+                            Hold positions for several days or weeks to capture medium-term trends. Perfect for part-time traders.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Trading Tools" data-es="Herramientas de Trading">Trading Tools</h2>
+                <p class="section-lead" data-en="Essential tools for forex traders including calculators, converters, economic calendars, and market analysis tools." data-es="Herramientas esenciales para traders de forex incluyendo calculadoras, convertidores, calendarios económicos y herramientas de análisis de mercado.">
+                    Essential tools for forex traders including calculators, converters, economic calendars, and market analysis tools.
+                </p>
+                <div class="grid grid-4">
+                    <div class="card card-pad" id="tool-position-size">
+                        <h3 class="card-title" data-en="Position Size Calculator" data-es="Calculadora de Tamaño de Posición">Position Size Calculator</h3>
+                        <p class="muted" data-en="Calculate a position size based on balance, risk, stop-loss, and pip value." data-es="Calcula el tamaño de posición según balance, riesgo, stop-loss y valor del pip.">
+                            Calculate a position size based on balance, risk, stop-loss, and pip value.
+                        </p>
+                        <form class="tool-form" id="positionSizeForm">
+                            <div class="tool-row">
+                                <div class="tool-field">
+                                    <label for="psBalance" data-en="Balance (USD)" data-es="Balance (USD)">Balance (USD)</label>
+                                    <input id="psBalance" name="balance" type="number" min="0" step="0.01" value="1000" inputmode="decimal">
+                                </div>
+                                <div class="tool-field">
+                                    <label for="psRisk" data-en="Risk (%)" data-es="Riesgo (%)">Risk (%)</label>
+                                    <input id="psRisk" name="risk" type="number" min="0" step="0.1" value="1" inputmode="decimal">
+                                </div>
+                            </div>
+                            <div class="tool-row">
+                                <div class="tool-field">
+                                    <label for="psStopPips" data-en="Stop-loss (pips)" data-es="Stop-loss (pips)">Stop-loss (pips)</label>
+                                    <input id="psStopPips" name="stopPips" type="number" min="0" step="0.1" value="30" inputmode="decimal">
+                                </div>
+                                <div class="tool-field">
+                                    <label for="psPipValue" data-en="Pip value per 1.0 lot (USD)" data-es="Valor del pip por 1.0 lote (USD)">Pip value per 1.0 lot (USD)</label>
+                                    <input id="psPipValue" name="pipValue" type="number" min="0" step="0.01" value="10" inputmode="decimal">
+                                </div>
+                            </div>
+                            <div class="tool-actions">
+                                <button class="btn-inline" type="submit" data-en="Calculate" data-es="Calcular">Calculate</button>
+                                <button class="btn-inline" type="button" id="psResetBtn" data-en="Reset" data-es="Reiniciar">Reset</button>
+                            </div>
+                            <p class="tool-result muted" id="psResult" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                    <div class="card card-pad" id="tool-pip-value">
+                        <h3 class="card-title" data-en="Pip Value Calculator" data-es="Calculadora de Valor de Pip">Pip Value Calculator</h3>
+                        <p class="muted" data-en="Estimate pip value for common pairs (USD account) using lot size and price." data-es="Estima el valor del pip para pares comunes (cuenta en USD) usando tamaño de lote y precio.">
+                            Estimate pip value for common pairs (USD account) using lot size and price.
+                        </p>
+                        <form class="tool-form" id="pipValueForm">
+                            <div class="tool-row">
+                                <div class="tool-field">
+                                    <label for="pvPair" data-en="Pair" data-es="Par">Pair</label>
+                                    <select id="pvPair" name="pair">
+                                        <option value="EURUSD">EUR/USD</option>
+                                        <option value="GBPUSD">GBP/USD</option>
+                                        <option value="AUDUSD">AUD/USD</option>
+                                        <option value="USDJPY">USD/JPY</option>
+                                    </select>
+                                </div>
+                                <div class="tool-field">
+                                    <label for="pvLots" data-en="Lots" data-es="Lotes">Lots</label>
+                                    <input id="pvLots" name="lots" type="number" min="0" step="0.01" value="1" inputmode="decimal">
+                                </div>
+                            </div>
+                            <div class="tool-field">
+                                <label for="pvPrice" data-en="Price (required for USD/JPY)" data-es="Precio (requerido para USD/JPY)">Price (required for USD/JPY)</label>
+                                <input id="pvPrice" name="price" type="number" min="0" step="0.0001" value="150" inputmode="decimal">
+                            </div>
+                            <div class="tool-actions">
+                                <button class="btn-inline" type="submit" data-en="Calculate" data-es="Calcular">Calculate</button>
+                                <button class="btn-inline" type="button" id="pvResetBtn" data-en="Reset" data-es="Reiniciar">Reset</button>
+                            </div>
+                            <p class="tool-result muted" id="pvResult" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                    <div class="card card-pad" id="tool-converter">
+                        <h3 class="card-title" data-en="Currency Converter" data-es="Convertidor de Divisas">Currency Converter</h3>
+                        <p class="muted" data-en="Convert amounts using a custom exchange rate (works offline)." data-es="Convierte montos usando una tasa personalizada (funciona sin internet).">
+                            Convert amounts using a custom exchange rate (works offline).
+                        </p>
+                        <form class="tool-form" id="converterForm">
+                            <div class="tool-row">
+                                <div class="tool-field">
+                                    <label for="ccAmount" data-en="Amount" data-es="Monto">Amount</label>
+                                    <input id="ccAmount" name="amount" type="number" min="0" step="0.01" value="100" inputmode="decimal">
+                                </div>
+                                <div class="tool-field">
+                                    <label for="ccRate" data-en="Exchange rate" data-es="Tasa de cambio">Exchange rate</label>
+                                    <input id="ccRate" name="rate" type="number" min="0" step="0.0001" value="1.08" inputmode="decimal">
+                                </div>
+                            </div>
+                            <div class="tool-actions">
+                                <button class="btn-inline" type="submit" data-en="Convert" data-es="Convertir">Convert</button>
+                                <button class="btn-inline" type="button" id="ccResetBtn" data-en="Reset" data-es="Reiniciar">Reset</button>
+                            </div>
+                            <p class="tool-result muted" id="ccResult" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                    <div class="card card-pad" id="tool-calendar">
+                        <h3 class="card-title" data-en="Economic Calendar" data-es="Calendario Económico">Economic Calendar</h3>
+                        <p class="muted" data-en="Open a reliable economic calendar to track high-impact events." data-es="Abre un calendario económico confiable para seguir eventos de alto impacto.">
+                            Open a reliable economic calendar to track high-impact events.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="https://www.investing.com/economic-calendar/" target="_blank" rel="noopener noreferrer" data-en="Open calendar" data-es="Abrir calendario">Open calendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="learn" class="section">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Learn Trading" data-es="Aprender Trading">Learn Trading</h2>
+                <p class="section-lead" data-en="Comprehensive educational resources to help you become a successful forex trader. From beginner courses to advanced trading concepts." data-es="Recursos educativos completos para ayudarte a convertirte en un trader de forex exitoso. Desde cursos para principiantes hasta conceptos avanzados de trading.">
+                    Comprehensive educational resources to help you become a successful forex trader. From beginner courses to advanced trading concepts.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Beginner Course" data-es="Curso para Principiantes">Beginner Course</h3>
+                        <p class="muted" data-en="Start with the essentials: spreads, leverage, order types, and risk basics." data-es="Empieza con lo esencial: spreads, apalancamiento, tipos de órdenes y riesgo.">
+                            Start with the essentials: spreads, leverage, order types, and risk basics.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="guides/getting-started.html" data-en="Start learning" data-es="Empezar a aprender">Start learning</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Intermediate Course" data-es="Curso Intermedio">Intermediate Course</h3>
+                        <p class="muted" data-en="Build a repeatable process with market structure, setups, and journaling." data-es="Crea un proceso repetible con estructura de mercado, setups y journaling.">
+                            Build a repeatable process with market structure, setups, and journaling.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="guides/risk-management.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Video Tutorials" data-es="Tutoriales en Video">Video Tutorials</h3>
+                        <p class="muted" data-en="Short, practical lessons on charts, news, and trade management (coming soon)." data-es="Lecciones cortas y prácticas sobre gráficos, noticias y gestión (próximamente).">
+                            Short, practical lessons on charts, news, and trade management (coming soon).
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="#guides" data-en="Browse guides" data-es="Ver guías">Browse guides</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Market News" data-es="Noticias del Mercado">Market News</h2>
+                <p class="section-lead" data-en="Stay updated with the latest forex market news, broker updates, and economic events." data-es="Mantente actualizado con las últimas noticias del mercado forex, actualizaciones de brokers y eventos económicos.">
+                    Stay updated with the latest forex market news, broker updates, and economic events.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="EUR/USD Reaches New Highs" data-es="EUR/USD Alcanza Nuevos Máximos">EUR/USD Reaches New Highs</h3>
+                        <p class="muted mb-1" data-en="The euro strengthened against the dollar as traders repriced rate expectations and risk sentiment improved." data-es="El euro se fortaleció frente al dólar mientras los traders ajustaban expectativas de tasas y mejoraba el sentimiento.">
+                            The euro strengthened against the dollar as traders repriced rate expectations and risk sentiment improved.
+                        </p>
+                        <p class="muted small">2 hours ago</p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="New FCA Regulations" data-es="Nuevas Regulaciones FCA">New FCA Regulations</h3>
+                        <p class="muted mb-1" data-en="The FCA published updated guidance for marketing and risk disclosures for retail FX products." data-es="La FCA publicó nuevas guías para marketing y divulgación de riesgos para productos FX minoristas.">
+                            The FCA published updated guidance for marketing and risk disclosures for retail FX products.
+                        </p>
+                        <p class="muted small">5 hours ago</p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Broker Spread Reductions" data-es="Reducciones de Spreads de Brokers">Broker Spread Reductions</h3>
+                        <p class="muted mb-1" data-en="Several brokers announced spread changes on major pairs. Always check the full fee schedule and trading conditions." data-es="Varios brokers anunciaron cambios de spreads en pares principales. Revisa siempre el esquema de comisiones y condiciones.">
+                            Several brokers announced spread changes on major pairs. Always check the full fee schedule and trading conditions.
+                        </p>
+                        <p class="muted small">1 day ago</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="About Us" data-es="Acerca de Nosotros">About Us</h2>
+                <p class="section-lead section-lead-narrow" data-en="Brokercompare provides transparent, practical broker reviews and beginner-friendly trading resources." data-es="Brokercompare ofrece reseñas transparentes y prácticas de brokers y recursos para principiantes.">
+                    Brokercompare provides transparent, practical broker reviews and beginner-friendly trading resources.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="How we rate brokers" data-es="Cómo calificamos brokers">How we rate brokers</h3>
+                        <p class="muted" data-en="We score trading costs, platforms, regulation, deposits/withdrawals, and support. We also highlight who a broker is best for." data-es="Puntuamos costos, plataformas, regulación, depósitos/retiros y soporte. También indicamos para quién es mejor cada broker.">
+                            We score trading costs, platforms, regulation, deposits/withdrawals, and support. We also highlight who a broker is best for.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Transparency" data-es="Transparencia">Transparency</h3>
+                        <p class="muted" data-en="If we use affiliate links, we label them. This helps keep the site free—without changing our ratings." data-es="Si usamos enlaces afiliados, los indicamos. Esto ayuda a mantener el sitio gratuito—sin cambiar nuestras calificaciones.">
+                            If we use affiliate links, we label them. This helps keep the site free—without changing our ratings.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Education first" data-es="Educación primero">Education first</h3>
+                        <p class="muted" data-en="We focus on risk management, realistic expectations, and repeatable processes—not hype." data-es="Nos enfocamos en gestión de riesgo, expectativas realistas y procesos repetibles—sin exageraciones.">
+                            We focus on risk management, realistic expectations, and repeatable processes—not hype.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Contact" data-es="Contacto">Contact</h2>
+                <p class="section-lead section-lead-narrow" data-en="Questions, corrections, or a broker to review? Email us and we’ll respond." data-es="¿Preguntas, correcciones o un broker para reseñar? Escríbenos y responderemos.">
+                    Questions, corrections, or a broker to review? Email us and we’ll respond.
+                </p>
+                <div class="link-row link-row-center">
+                    <a class="btn-inline" href="mailto:contact@brokercompare.com" data-en="Email: contact@brokercompare.com" data-es="Email: contact@brokercompare.com">Email: contact@brokercompare.com</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="careers" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Careers" data-es="Carreras">Careers</h2>
+                <p class="section-lead section-lead-narrow" data-en="We occasionally hire writers and analysts. If you have proven trading experience and strong research skills, reach out." data-es="Ocasionalmente contratamos escritores y analistas. Si tienes experiencia comprobada y buen nivel de investigación, escríbenos.">
+                    We occasionally hire writers and analysts. If you have proven trading experience and strong research skills, reach out.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Forex Review Writer" data-es="Redactor de Reseñas Forex">Forex Review Writer</h3>
+                        <p class="muted" data-en="Write structured broker reviews and keep them updated. Part-time / remote." data-es="Escribe reseñas estructuradas y mantenlas actualizadas. Medio tiempo / remoto.">
+                            Write structured broker reviews and keep them updated. Part-time / remote.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="mailto:contact@brokercompare.com?subject=Application%3A%20Forex%20Review%20Writer" data-en="Apply by email" data-es="Aplicar por email">Apply by email</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Data Researcher" data-es="Investigador de Datos">Data Researcher</h3>
+                        <p class="muted" data-en="Validate spreads, fees, and regulation data across broker websites and filings." data-es="Valida spreads, comisiones y regulación en sitios de brokers y registros.">
+                            Validate spreads, fees, and regulation data across broker websites and filings.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="mailto:contact@brokercompare.com?subject=Application%3A%20Data%20Researcher" data-en="Apply by email" data-es="Aplicar por email">Apply by email</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Partner / Sponsor" data-es="Socio / Patrocinio">Partner / Sponsor</h3>
+                        <p class="muted" data-en="Interested in sponsorship? We only work with regulated brokers and clear terms." data-es="¿Interesado en patrocinio? Solo trabajamos con brokers regulados y términos claros.">
+                            Interested in sponsorship? We only work with regulated brokers and clear terms.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="mailto:contact@brokercompare.com?subject=Partnership%20Inquiry" data-en="Contact us" data-es="Contáctanos">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guides" class="section">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</h2>
+                <p class="section-lead section-lead-narrow" data-en="Step-by-step guides you can actually use. No fluff—just the fundamentals and a practical checklist." data-es="Guías paso a paso que puedes usar. Sin relleno—solo fundamentos y una lista práctica.">
+                    Comprehensive guides covering all aspects of forex trading.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Getting Started" data-es="Cómo Empezar">Getting Started</h3>
+                        <p class="muted" data-en="A simple roadmap: accounts, orders, leverage, and your first demo plan." data-es="Una ruta simple: cuentas, órdenes, apalancamiento y tu primer plan demo.">
+                            A simple roadmap: accounts, orders, leverage, and your first demo plan.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="guides/getting-started.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Risk Management" data-es="Gestión de Riesgo">Risk Management</h3>
+                        <p class="muted" data-en="Position sizing, stop-loss rules, and how to avoid account-killing mistakes." data-es="Tamaño de posición, reglas de stop-loss y cómo evitar errores fatales.">
+                            Position sizing, stop-loss rules, and how to avoid account-killing mistakes.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="guides/risk-management.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Choosing a Broker" data-es="Elegir un Broker">Choosing a Broker</h3>
+                        <p class="muted" data-en="A checklist for regulation, fees, platforms, and withdrawals." data-es="Checklist de regulación, comisiones, plataformas y retiros.">
+                            A checklist for regulation, fees, platforms, and withdrawals.
+                        </p>
+                        <div class="link-row">
+                            <a class="btn-inline" href="guides/choosing-broker.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Glossary" data-es="Glosario">Glossary</h2>
+                <p class="section-lead section-lead-narrow" data-en="Quick definitions for the terms you’ll see in broker reviews and trading guides." data-es="Definiciones rápidas de términos que verás en reseñas y guías.">
+                    Quick definitions for the terms you’ll see in broker reviews and trading guides.
+                </p>
+                <div class="card card-pad">
+                    <dl>
+                        <dt><strong data-en="Spread" data-es="Spread">Spread</strong></dt>
+                        <dd class="muted" data-en="The difference between the bid and ask price. Lower spreads generally mean lower trading costs." data-es="La diferencia entre el precio bid y ask. Spreads más bajos suelen significar menores costos.">The difference between the bid and ask price. Lower spreads generally mean lower trading costs.</dd>
+                        <dt><strong data-en="Leverage" data-es="Apalancamiento">Leverage</strong></dt>
+                        <dd class="muted" data-en="Borrowed exposure that increases position size. It can amplify both gains and losses." data-es="Exposición prestada que aumenta el tamaño de la posición. Amplifica ganancias y pérdidas.">Borrowed exposure that increases position size. It can amplify both gains and losses.</dd>
+                        <dt><strong data-en="Pip" data-es="Pip">Pip</strong></dt>
+                        <dd class="muted" data-en="A standard unit of price movement in FX (often 0.0001, or 0.01 for JPY pairs)." data-es="Unidad estándar de movimiento de precio en FX (a menudo 0.0001, o 0.01 para pares JPY).">A standard unit of price movement in FX (often 0.0001, or 0.01 for JPY pairs).</dd>
+                        <dt><strong data-en="Margin" data-es="Margen">Margin</strong></dt>
+                        <dd class="muted" data-en="Capital required to open and maintain a leveraged position." data-es="Capital requerido para abrir y mantener una posición apalancada.">Capital required to open and maintain a leveraged position.</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="FAQ" data-es="Preguntas Frecuentes">FAQ</h2>
+                <p class="section-lead section-lead-narrow" data-en="Quick answers to common questions about brokers, trading costs, and safety." data-es="Respuestas rápidas sobre brokers, costos y seguridad.">
+                    Quick answers to common questions about brokers, trading costs, and safety.
+                </p>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Are all brokers regulated?" data-es="¿Todos los brokers están regulados?">Are all brokers regulated?</h3>
+                        <p class="muted" data-en="We prioritize regulated brokers, but regulation depends on your country. Always verify the entity and license on the regulator’s website." data-es="Priorizamos brokers regulados, pero depende de tu país. Verifica siempre la entidad y licencia en el regulador.">
+                            We prioritize regulated brokers, but regulation depends on your country. Always verify the entity and license on the regulator’s website.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="What matters most when choosing a broker?" data-es="¿Qué importa más al elegir un broker?">What matters most when choosing a broker?</h3>
+                        <p class="muted" data-en="Regulation, total costs (spread + commissions), reliable withdrawals, and platform stability. Bonuses should never be the main reason." data-es="Regulación, costos totales (spread + comisiones), retiros confiables y estabilidad. Los bonos no deben ser la razón principal.">
+                            Regulation, total costs (spread + commissions), reliable withdrawals, and platform stability. Bonuses should never be the main reason.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Is forex trading risky?" data-es="¿El forex es riesgoso?">Is forex trading risky?</h3>
+                        <p class="muted" data-en="Yes. Leverage can magnify losses. Use position sizing, stop-losses, and never risk money you can’t afford to lose." data-es="Sí. El apalancamiento amplifica pérdidas. Usa tamaño de posición, stop-loss y no arriesgues dinero que no puedas perder.">
+                            Yes. Leverage can magnify losses. Use position sizing, stop-losses, and never risk money you can’t afford to lose.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="privacy" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Privacy" data-es="Privacidad">Privacy</h2>
+                <p class="section-lead section-lead-narrow" data-en="We keep data collection minimal. If you contact us, we only use your email to respond." data-es="Mantenemos la recopilación de datos al mínimo. Si nos contactas, solo usamos tu email para responder.">
+                    We keep data collection minimal. If you contact us, we only use your email to respond.
+                </p>
+                <div class="card card-pad">
+                    <ul>
+                        <li class="muted" data-en="We do not sell personal data." data-es="No vendemos datos personales.">We do not sell personal data.</li>
+                        <li class="muted" data-en="We may use basic analytics to understand page performance." data-es="Podemos usar analítica básica para entender rendimiento.">We may use basic analytics to understand page performance.</li>
+                        <li class="muted" data-en="You can request deletion of emails you’ve sent us." data-es="Puedes solicitar la eliminación de emails enviados.">You can request deletion of emails you’ve sent us.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="terms" class="section">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Terms" data-es="Términos">Terms</h2>
+                <p class="section-lead section-lead-narrow" data-en="By using this site, you agree to use the content for informational purposes only." data-es="Al usar este sitio, aceptas usar el contenido solo con fines informativos.">
+                    By using this site, you agree to use the content for informational purposes only.
+                </p>
+                <div class="card card-pad">
+                    <ul>
+                        <li class="muted" data-en="We do not provide financial advice." data-es="No brindamos asesoría financiera.">We do not provide financial advice.</li>
+                        <li class="muted" data-en="Broker conditions can change; always confirm on the broker’s website." data-es="Las condiciones pueden cambiar; confirma en el sitio del broker.">Broker conditions can change; always confirm on the broker’s website.</li>
+                        <li class="muted" data-en="You are responsible for your trading decisions." data-es="Eres responsable de tus decisiones de trading.">You are responsible for your trading decisions.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="disclaimer" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Disclaimer" data-es="Descargo">Disclaimer</h2>
+                <p class="section-lead section-lead-narrow" data-en="Trading leveraged products involves significant risk and may not be suitable for everyone." data-es="Operar productos apalancados conlleva riesgo significativo y puede no ser adecuado para todos.">
+                    Trading leveraged products involves significant risk and may not be suitable for everyone.
+                </p>
+                <div class="card card-pad">
+                    <p class="muted" data-en="This website is for educational and informational purposes only and does not constitute investment advice." data-es="Este sitio es solo educativo e informativo y no constituye asesoramiento de inversión.">
+                        This website is for educational and informational purposes only and does not constitute investment advice.
+                    </p>
+                    <p class="muted" data-en="Past performance is not indicative of future results. You can lose more than your deposit when trading with leverage." data-es="El desempeño pasado no indica resultados futuros. Puedes perder más que tu depósito al usar apalancamiento.">
+                        Past performance is not indicative of future results. You can lose more than your deposit when trading with leverage.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 data-en="Company" data-es="Empresa">Company</h4>
+                    <ul>
+                        <li><a href="#about" data-en="About Us" data-es="Acerca de Nosotros">About Us</a></li>
+                        <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+                        <li><a href="#careers" data-en="Careers" data-es="Carreras">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-en="Resources" data-es="Recursos">Resources</h4>
+                    <ul>
+                        <li><a href="#guides" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</a></li>
+                        <li><a href="#glossary" data-en="Glossary" data-es="Glosario">Glossary</a></li>
+                        <li><a href="#faq" data-en="FAQ" data-es="Preguntas Frecuentes">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-en="Legal" data-es="Legal">Legal</h4>
+                    <ul>
+                        <li><a href="#privacy" data-en="Privacy" data-es="Privacidad">Privacy</a></li>
+                        <li><a href="#terms" data-en="Terms" data-es="Términos">Terms</a></li>
+                        <li><a href="#disclaimer" data-en="Disclaimer" data-es="Descargo">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-en="© 2026 Brokercompare. All rights reserved." data-es="© 2026 Brokercompare. Todos los derechos reservados.">© 2026 Brokercompare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+    <script src="../shared/data-api.js"></script>
+    <script src="../shared/navigation.js"></script>
+</body>
+</html>
+

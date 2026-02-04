@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForexAnalytics Pro - Professional Broker Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo-section">
+                    <div class="logo">ForexAnalytics Pro</div>
+                    <div class="tagline" data-en="Professional Market Intelligence" data-es="Inteligencia de Mercado Profesional">Professional Market Intelligence</div>
+                </div>
+                <div class="header-actions">
+                    <button class="lang-selector" id="langToggle">ES</button>
+                    <button class="btn-subscribe" data-en="Subscribe" data-es="Suscribirse">Subscribe</button>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="#brokers" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</a>
+                <a href="#comparison" data-en="Comparison Tool" data-es="Herramienta de Comparación">Comparison Tool</a>
+                <a href="#research" data-en="Market Research" data-es="Investigación de Mercado">Market Research</a>
+                <a href="#reports" data-en="Reports" data-es="Informes">Reports</a>
+                <a href="#insights" data-en="Insights" data-es="Perspectivas">Insights</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-text">
+                    <h1 class="hero-title" data-en="Comprehensive Broker Analysis & Ratings" data-es="Análisis y Calificaciones Integrales de Brokers">
+                        Comprehensive Broker Analysis & Ratings
+                    </h1>
+                    <p class="hero-subtitle" data-en="Access detailed broker reviews, performance metrics, and expert analysis to make informed trading decisions." data-es="Accede a reseñas detalladas de brokers, métricas de rendimiento y análisis experto para tomar decisiones de trading informadas.">
+                        Access detailed broker reviews, performance metrics, and expert analysis to make informed trading decisions.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-box">
+                            <div class="stat-number">250+</div>
+                            <div class="stat-label" data-en="Brokers Reviewed" data-es="Brokers Revisados">Brokers Reviewed</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label" data-en="Active Users" data-es="Usuarios Activos">Active Users</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label" data-en="Accuracy Rate" data-es="Tasa de Precisión">Accuracy Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="brokers" class="broker-rankings">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Broker Rankings" data-es="Rankings de Brokers">Broker Rankings</h2>
+                <p class="section-description" data-en="Ranked by overall performance, reliability, and user satisfaction" data-es="Clasificados por rendimiento general, confiabilidad y satisfacción del usuario">
+                    Ranked by overall performance, reliability, and user satisfaction
+                </p>
+            </div>
+            <div class="rankings-list">
+                <div class="ranking-item">
+                    <div class="rank-number">1</div>
+                    <div class="rank-content">
+                        <div class="rank-header">
+                            <h3 class="broker-name">XM Group</h3>
+                            <div class="rank-badge" data-en="Top Rated" data-es="Mejor Calificado">Top Rated</div>
+                        </div>
+                        <div class="rank-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-en="Overall Score" data-es="Puntuación General">Overall Score</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 96%"></div>
+                                </div>
+                                <span class="score-value">9.6/10</span>
+                            </div>
+                            <div class="rank-info-grid">
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Regulation" data-es="Regulación">Regulation</span>
+                                    <span class="cell-value">CySEC, ASIC</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                    <span class="cell-value">$5</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Spreads" data-es="Spreads">Spreads</span>
+                                    <span class="cell-value">From 0.6 pips</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Platforms" data-es="Plataformas">Platforms</span>
+                                    <span class="cell-value">MT4, MT5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-view-report" onclick="window.open('https://www.xm.com', '_blank')" data-en="View Full Report" data-es="Ver Informe Completo">View Full Report</button>
+                    </div>
+                </div>
+
+                <div class="ranking-item">
+                    <div class="rank-number">2</div>
+                    <div class="rank-content">
+                        <div class="rank-header">
+                            <h3 class="broker-name">Exness</h3>
+                            <div class="rank-badge" data-en="Best Spreads" data-es="Mejores Spreads">Best Spreads</div>
+                        </div>
+                        <div class="rank-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-en="Overall Score" data-es="Puntuación General">Overall Score</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 94%"></div>
+                                </div>
+                                <span class="score-value">9.4/10</span>
+                            </div>
+                            <div class="rank-info-grid">
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Regulation" data-es="Regulación">Regulation</span>
+                                    <span class="cell-value">FCA, CySEC</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                    <span class="cell-value">$10</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Spreads" data-es="Spreads">Spreads</span>
+                                    <span class="cell-value">From 0.1 pips</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Platforms" data-es="Plataformas">Platforms</span>
+                                    <span class="cell-value">MT4, MT5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-view-report" onclick="window.open('https://www.exness.com', '_blank')" data-en="View Full Report" data-es="Ver Informe Completo">View Full Report</button>
+                    </div>
+                </div>
+
+                <div class="ranking-item">
+                    <div class="rank-number">3</div>
+                    <div class="rank-content">
+                        <div class="rank-header">
+                            <h3 class="broker-name">Libertex</h3>
+                            <div class="rank-badge" data-en="Top Rated" data-es="Mejor Calificado">Top Rated</div>
+                        </div>
+                        <div class="rank-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-en="Overall Score" data-es="Puntuación General">Overall Score</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 98%"></div>
+                                </div>
+                                <span class="score-value">9.8/10</span>
+                            </div>
+                            <div class="rank-info-grid">
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Regulation" data-es="Regulación">Regulation</span>
+                                    <span class="cell-value">CySEC</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                    <span class="cell-value">$100</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Spreads" data-es="Spreads">Spreads</span>
+                                    <span class="cell-value">From 0.0 pips</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Platforms" data-es="Plataformas">Platforms</span>
+                                    <span class="cell-value">Web, Mobile</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-view-report" onclick="window.open('https://www.libertex.com', '_blank')" data-en="Visit Libertex" data-es="Visitar Libertex">Visit Libertex</button>
+                    </div>
+                </div>
+
+                <div class="ranking-item">
+                    <div class="rank-number">2</div>
+                    <div class="rank-content">
+                        <div class="rank-header">
+                            <h3 class="broker-name">XM Group</h3>
+                            <div class="rank-badge" data-en="Best Spreads" data-es="Mejores Spreads">Best Spreads</div>
+                        </div>
+                        <div class="rank-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-en="Overall Score" data-es="Puntuación General">Overall Score</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 96%"></div>
+                                </div>
+                                <span class="score-value">9.6/10</span>
+                            </div>
+                            <div class="rank-info-grid">
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Regulation" data-es="Regulación">Regulation</span>
+                                    <span class="cell-value">CySEC, ASIC</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                    <span class="cell-value">$5</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Spreads" data-es="Spreads">Spreads</span>
+                                    <span class="cell-value">From 0.6 pips</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Platforms" data-es="Plataformas">Platforms</span>
+                                    <span class="cell-value">MT4, MT5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-view-report" onclick="window.open('https://www.xm.com', '_blank')" data-en="View Full Report" data-es="Ver Informe Completo">View Full Report</button>
+                    </div>
+                </div>
+
+                <div class="ranking-item">
+                    <div class="rank-number">3</div>
+                    <div class="rank-content">
+                        <div class="rank-header">
+                            <h3 class="broker-name">Exness</h3>
+                            <div class="rank-badge" data-en="Professional" data-es="Profesional">Professional</div>
+                        </div>
+                        <div class="rank-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-en="Overall Score" data-es="Puntuación General">Overall Score</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 94%"></div>
+                                </div>
+                                <span class="score-value">9.4/10</span>
+                            </div>
+                            <div class="rank-info-grid">
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Regulation" data-es="Regulación">Regulation</span>
+                                    <span class="cell-value">FCA, CySEC</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                    <span class="cell-value">$10</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Spreads" data-es="Spreads">Spreads</span>
+                                    <span class="cell-value">From 0.1 pips</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Platforms" data-es="Plataformas">Platforms</span>
+                                    <span class="cell-value">MT4, MT5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-view-report" onclick="window.open('https://www.exness.com', '_blank')" data-en="View Full Report" data-es="Ver Informe Completo">View Full Report</button>
+                    </div>
+                </div>
+
+                <div class="ranking-item">
+                    <div class="rank-number">4</div>
+                    <div class="rank-content">
+                        <div class="rank-header">
+                            <h3 class="broker-name">Pepperstone</h3>
+                            <div class="rank-badge" data-en="Professional" data-es="Profesional">Professional</div>
+                        </div>
+                        <div class="rank-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-en="Overall Score" data-es="Puntuación General">Overall Score</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 92%"></div>
+                                </div>
+                                <span class="score-value">9.2/10</span>
+                            </div>
+                            <div class="rank-info-grid">
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Regulation" data-es="Regulación">Regulation</span>
+                                    <span class="cell-value">ASIC, FCA</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                    <span class="cell-value">$200</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Spreads" data-es="Spreads">Spreads</span>
+                                    <span class="cell-value">From 0.0 pips</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="cell-label" data-en="Platforms" data-es="Plataformas">Platforms</span>
+                                    <span class="cell-value">MT4, MT5, cTrader</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-view-report" onclick="window.open('https://www.pepperstone.com', '_blank')" data-en="View Full Report" data-es="Ver Informe Completo">View Full Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" style="padding: 4rem 0; background: var(--bg-gray);">
+        <div class="container">
+            <h2 class="section-title" data-en="Comparison Tool" data-es="Herramienta de Comparación">Comparison Tool</h2>
+            <p class="section-description" data-en="Compare brokers side by side using our comprehensive comparison tool." data-es="Compara brokers lado a lado usando nuestra herramienta de comparación completa.">
+                Compare brokers side by side using our comprehensive comparison tool.
+            </p>
+        </div>
+    </section>
+
+    <section id="research" class="research-section">
+        <div class="container">
+            <h2 class="section-title" data-en="Latest Research & Analysis" data-es="Últimas Investigaciones y Análisis">Latest Research & Analysis</h2>
+            <div class="research-grid">
+                <article class="research-card">
+                    <div class="research-category" data-en="Market Analysis" data-es="Análisis de Mercado">Market Analysis</div>
+                    <h3 class="research-title" data-en="Q4 2025 Forex Market Outlook" data-es="Perspectiva del Mercado Forex Q4 2025">
+                        Q4 2025 Forex Market Outlook
+                    </h3>
+                    <p class="research-excerpt" data-en="Comprehensive analysis of currency trends, central bank policies, and market volatility expectations..." data-es="Análisis integral de tendencias de divisas, políticas de bancos centrales y expectativas de volatilidad del mercado...">
+                        Comprehensive analysis of currency trends, central bank policies, and market volatility expectations...
+                    </p>
+                    <div class="research-meta">
+                        <span class="research-date">Published: Jan 15, 2025</span>
+                        <a href="#research" class="research-link" data-en="Read More" data-es="Leer Más">Read More →</a>
+                    </div>
+                </article>
+                <article class="research-card">
+                    <div class="research-category" data-en="Broker Report" data-es="Informe de Broker">Broker Report</div>
+                    <h3 class="research-title" data-en="Regulatory Changes Impacting Retail Brokers" data-es="Cambios Regulatorios que Afectan a Brokers Minoristas">
+                        Regulatory Changes Impacting Retail Brokers
+                    </h3>
+                    <p class="research-excerpt" data-en="Analysis of new FCA and ESMA regulations and their impact on broker operations and client protection..." data-es="Análisis de las nuevas regulaciones FCA y ESMA y su impacto en las operaciones de brokers y protección al cliente...">
+                        Analysis of new FCA and ESMA regulations and their impact on broker operations and client protection...
+                    </p>
+                    <div class="research-meta">
+                        <span class="research-date">Published: Jan 12, 2025</span>
+                        <a href="#research" class="research-link" data-en="Read More" data-es="Leer Más">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="reports" style="padding: 4rem 0; background: var(--bg-gray);">
+        <div class="container">
+            <h2 class="section-title" data-en="Research Reports" data-es="Informes de Investigación">Research Reports</h2>
+            <p class="section-description" data-en="In-depth research reports on brokers, markets, and trading strategies." data-es="Informes de investigación en profundidad sobre brokers, mercados y estrategias de trading.">
+                In-depth research reports on brokers, markets, and trading strategies.
+            </p>
+        </div>
+    </section>
+
+    <section id="insights" style="padding: 4rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-title" data-en="Market Insights" data-es="Perspectivas de Mercado">Market Insights</h2>
+            <p class="section-description" data-en="Expert insights and analysis on market trends and broker performance." data-es="Perspectivas y análisis expertos sobre tendencias del mercado y rendimiento de brokers.">
+                Expert insights and analysis on market trends and broker performance.
+            </p>
+        </div>
+    </section>
+
+    <section id="reviews" style="padding: 4rem 0; background: var(--bg-gray);">
+        <div class="container">
+            <h2 class="section-title" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</h2>
+            <p class="section-description" data-en="Comprehensive reviews of forex brokers with detailed analysis." data-es="Reseñas completas de brokers de forex con análisis detallado.">
+                Comprehensive reviews of forex brokers with detailed analysis.
+            </p>
+        </div>
+    </section>
+
+    <section id="privacy" style="padding: 4rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-title" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</h2>
+            <p class="section-description" data-en="We are committed to protecting your privacy and personal information." data-es="Estamos comprometidos a proteger tu privacidad e información personal.">
+                We are committed to protecting your privacy and personal information.
+            </p>
+        </div>
+    </section>
+
+    <section id="terms" style="padding: 4rem 0; background: var(--bg-gray);">
+        <div class="container">
+            <h2 class="section-title" data-en="Terms of Use" data-es="Términos de Uso">Terms of Use</h2>
+            <p class="section-description" data-en="By using our website, you agree to our terms of use." data-es="Al usar nuestro sitio web, aceptas nuestros términos de uso.">
+                By using our website, you agree to our terms of use.
+            </p>
+        </div>
+    </section>
+
+    <section id="disclaimer" style="padding: 4rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-title" data-en="Disclaimer" data-es="Descargo de Responsabilidad">Disclaimer</h2>
+            <p class="section-description" data-en="Trading forex involves substantial risk. Information provided is for educational purposes only." data-es="El trading de forex implica un riesgo sustancial. La información proporcionada es solo para fines educativos.">
+                Trading forex involves substantial risk. Information provided is for educational purposes only.
+            </p>
+        </div>
+    </section>
+
+    <section id="cookies" style="padding: 4rem 0; background: var(--bg-gray);">
+        <div class="container">
+            <h2 class="section-title" data-en="Cookie Policy" data-es="Política de Cookies">Cookie Policy</h2>
+            <p class="section-description" data-en="Information about how we use cookies on our website." data-es="Información sobre cómo usamos las cookies en nuestro sitio web.">
+                Information about how we use cookies on our website.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-block">
+                    <h4 data-en="About ForexAnalytics Pro" data-es="Acerca de ForexAnalytics Pro">About ForexAnalytics Pro</h4>
+                    <p data-en="Leading provider of independent broker analysis and market intelligence for professional traders." data-es="Proveedor líder de análisis independiente de brokers e inteligencia de mercado para traders profesionales.">
+                        Leading provider of independent broker analysis and market intelligence for professional traders.
+                    </p>
+                </div>
+                <div class="footer-block">
+                    <h4 data-en="Quick Links" data-es="Enlaces Rápidos">Quick Links</h4>
+                    <ul>
+                        <li><a href="#reviews" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</a></li>
+                        <li><a href="#comparison" data-en="Comparison Tool" data-es="Herramienta de Comparación">Comparison Tool</a></li>
+                        <li><a href="#reports" data-en="Research Reports" data-es="Informes de Investigación">Research Reports</a></li>
+                        <li><a href="#insights" data-en="Market Insights" data-es="Perspectivas de Mercado">Market Insights</a></li>
+                    </ul>
+                </div>
+                <div class="footer-block">
+                    <h4 data-en="Legal & Compliance" data-es="Legal y Cumplimiento">Legal & Compliance</h4>
+                    <ul>
+                        <li><a href="#privacy" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
+                        <li><a href="#terms" data-en="Terms of Use" data-es="Términos de Uso">Terms of Use</a></li>
+                        <li><a href="#disclaimer" data-en="Disclaimer" data-es="Descargo de Responsabilidad">Disclaimer</a></li>
+                        <li><a href="#cookies" data-en="Cookie Policy" data-es="Política de Cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ForexAnalytics Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="../shared/data-api.js"></script>
+</body>
+</html>
+

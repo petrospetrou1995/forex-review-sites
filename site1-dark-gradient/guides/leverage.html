@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Leverage | BrokerPro Guides</title>
+    <meta name="description" content="Learn what leverage and margin mean in forex, how margin calls happen, and how to use leverage responsibly.">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header guide-header">
+        <nav class="nav guide-nav">
+            <div class="container">
+                <div class="nav-content">
+                    <a class="logo" href="../index.html" aria-label="BrokerPro home">
+                        <span class="logo-icon">📊</span>
+                        <span class="logo-text">BrokerPro</span>
+                    </a>
+                    <div class="nav-actions">
+                        <a class="guide-back link-cta" href="../index.html#guides" data-en="← Back to Guides" data-es="← Volver a Guías">← Back to Guides</a>
+                        <button class="lang-toggle" id="langToggle" type="button">ES</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="section-pad">
+        <div class="container">
+            <article class="guide-article">
+                <h1 class="guide-title" data-en="Understanding Leverage" data-es="Entendiendo el Apalancamiento">Understanding Leverage</h1>
+                <p class="guide-lead" data-en="Leverage is a tool, not a strategy. This guide explains margin, margin calls, and how to choose leverage that matches your risk plan." data-es="El apalancamiento es una herramienta, no una estrategia. Esta guía explica margen, llamadas de margen y cómo elegir apalancamiento según tu plan de riesgo.">
+                    Leverage is a tool, not a strategy. This guide explains margin, margin calls, and how to choose leverage that matches your risk plan.
+                </p>
+
+                <div class="card-panel guide-toc">
+                    <h2 class="subheading-card" data-en="Table of contents" data-es="Tabla de contenidos">Table of contents</h2>
+                    <ol class="guide-toc-list">
+                        <li><a class="link-cta" href="#definitions" data-en="Leverage vs margin" data-es="Apalancamiento vs margen">Leverage vs margin</a></li>
+                        <li><a class="link-cta" href="#marginCall" data-en="Margin call and stop-out" data-es="Llamada de margen y stop-out">Margin call and stop-out</a></li>
+                        <li><a class="link-cta" href="#responsible" data-en="Using leverage responsibly" data-es="Uso responsable del apalancamiento">Using leverage responsibly</a></li>
+                        <li><a class="link-cta" href="#examples" data-en="Simple examples" data-es="Ejemplos simples">Simple examples</a></li>
+                    </ol>
+                </div>
+
+                <section id="definitions" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="1) Leverage vs margin" data-es="1) Apalancamiento vs margen">1) Leverage vs margin</h2>
+                    <p class="guide-text" data-en="Leverage lets you control a larger position with a smaller deposit (margin). Margin is the amount your broker sets aside while your trade is open." data-es="El apalancamiento te permite controlar una posición mayor con un depósito menor (margen). El margen es el monto que el broker reserva mientras la operación está abierta.">
+                        Leverage lets you control a larger position with a smaller deposit (margin). Margin is the amount your broker sets aside while your trade is open.
+                    </p>
+                </section>
+
+                <section id="marginCall" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="2) Margin call and stop-out" data-es="2) Llamada de margen y stop-out">2) Margin call and stop-out</h2>
+                    <p class="guide-text" data-en="If your losses reduce your available equity too much, you can get a margin call. If equity keeps falling, the broker may close positions automatically (stop-out)." data-es="Si las pérdidas reducen demasiado tu equity disponible, puedes recibir una llamada de margen. Si sigue cayendo, el broker puede cerrar posiciones automáticamente (stop-out).">
+                        If your losses reduce your available equity too much, you can get a margin call. If equity keeps falling, the broker may close positions automatically (stop-out).
+                    </p>
+                    <ul class="guide-list">
+                        <li data-en="Using a stop-loss avoids forced liquidation in most cases." data-es="Usar stop-loss evita liquidación forzada en la mayoría de casos.">Using a stop-loss avoids forced liquidation in most cases.</li>
+                        <li data-en="High leverage + no stop-loss is a common account killer." data-es="Alto apalancamiento + sin stop-loss suele destruir cuentas.">High leverage + no stop-loss is a common account killer.</li>
+                    </ul>
+                </section>
+
+                <section id="responsible" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="3) Using leverage responsibly" data-es="3) Uso responsable del apalancamiento">3) Using leverage responsibly</h2>
+                    <ul class="guide-checklist">
+                        <li data-en="Choose position size from risk, not from maximum leverage allowed." data-es="Elige el tamaño por riesgo, no por el máximo apalancamiento permitido.">Choose position size from risk, not from maximum leverage allowed.</li>
+                        <li data-en="Keep margin usage comfortable so normal volatility doesn’t trigger a margin call." data-es="Mantén uso de margen cómodo para que la volatilidad normal no provoque llamada de margen.">Keep margin usage comfortable so normal volatility doesn’t trigger a margin call.</li>
+                        <li data-en="Lower leverage is often better for beginners." data-es="Menor apalancamiento suele ser mejor para principiantes.">Lower leverage is often better for beginners.</li>
+                    </ul>
+                </section>
+
+                <section id="examples" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="4) Simple examples" data-es="4) Ejemplos simples">4) Simple examples</h2>
+                    <p class="guide-text" data-en="If you risk $50 per trade, your position size should be set so that your stop-loss equals $50—even if your broker offers 1:500." data-es="Si arriesgas $50 por operación, tu tamaño debe hacer que el stop-loss equivalga a $50—aunque el broker ofrezca 1:500.">
+                        If you risk $50 per trade, your position size should be set so that your stop-loss equals $50—even if your broker offers 1:500.
+                    </p>
+                </section>
+
+                <section class="card-panel guide-related">
+                    <h2 class="subheading-card" data-en="Related guides" data-es="Guías relacionadas">Related guides</h2>
+                    <ul class="guide-related-list">
+                        <li><a class="link-cta" href="risk-management.html" data-en="Risk Management Strategies" data-es="Estrategias de Gestión de Riesgos">Risk Management Strategies</a></li>
+                        <li><a class="link-cta" href="getting-started.html" data-en="Getting Started with Forex Trading" data-es="Cómo Empezar con el Trading de Forex">Getting Started with Forex Trading</a></li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 BrokerPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../translations.js"></script>
+    <script src="../../shared/navigation.js"></script>
+</body>
+</html>
+

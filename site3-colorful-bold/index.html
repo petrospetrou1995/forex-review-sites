@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeVault - Bold Broker Reviews & Market Insights</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <span class="logo-text">TradeVault</span>
+                </div>
+                <nav class="nav">
+                    <a href="#brokers" data-en="Brokers" data-es="Brokers">Brokers</a>
+                    <a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a>
+                    <a href="#ratings" data-en="Ratings" data-es="Calificaciones">Ratings</a>
+                    <a href="#analysis" data-en="Analysis" data-es="Análisis">Analysis</a>
+                    <a href="#education" data-en="Education" data-es="Educación">Education</a>
+                    <a href="#strategies" data-en="Strategies" data-es="Estrategias">Strategies</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="lang-switch" id="langToggle">ES</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-headline" data-en="Discover Top Forex Brokers" data-es="Descubre los Mejores Brokers de Forex">
+                    Discover Top Forex Brokers
+                </h1>
+                <p class="hero-description" data-en="Get expert insights, compare brokers, and make smarter trading decisions" data-es="Obtén información experta, compara brokers y toma decisiones de trading más inteligentes">
+                    Get expert insights, compare brokers, and make smarter trading decisions
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-cta-primary" data-en="Browse Brokers" data-es="Explorar Brokers">Browse Brokers</button>
+                    <button class="btn-cta-secondary" data-en="Compare Now" data-es="Comparar Ahora">Compare Now</button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <section id="brokers" class="top-brokers">
+        <div class="container">
+            <h2 class="section-heading" data-en="Top Performing Brokers" data-es="Brokers con Mejor Rendimiento">Top Performing Brokers</h2>
+            <div class="brokers-showcase">
+                <div class="broker-showcase-card card-1">
+                    <div class="card-badge" data-en="Best Overall" data-es="Mejor en General">Best Overall</div>
+                    <div class="card-content">
+                        <div class="broker-brand">XM</div>
+                        <div class="broker-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-en="Rating" data-es="Calificación">Rating</span>
+                                <span class="stat-value">4.8/5</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-en="Users" data-es="Usuarios">Users</span>
+                                <span class="stat-value">5M+</span>
+                            </div>
+                        </div>
+                        <ul class="broker-features">
+                            <li data-en="Low spreads from 0.6 pips" data-es="Spreads bajos desde 0.6 pips">Low spreads from 0.6 pips</li>
+                            <li data-en="Leverage up to 1:888" data-es="Apalancamiento hasta 1:888">Leverage up to 1:888</li>
+                            <li data-en="24/7 customer support" data-es="Soporte al cliente 24/7">24/7 customer support</li>
+                        </ul>
+                        <button class="card-button" onclick="window.open('https://www.xm.com', '_blank')" data-en="View Details" data-es="Ver Detalles">View Details</button>
+                    </div>
+                </div>
+
+                <div class="broker-showcase-card card-2">
+                    <div class="card-badge" data-en="Top Rated" data-es="Mejor Calificado">Top Rated</div>
+                    <div class="card-content">
+                        <div class="broker-brand">Libertex</div>
+                        <div class="broker-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-en="Rating" data-es="Calificación">Rating</span>
+                                <span class="stat-value">4.9/5</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-en="Users" data-es="Usuarios">Users</span>
+                                <span class="stat-value">2M+</span>
+                            </div>
+                        </div>
+                        <ul class="broker-features">
+                            <li data-en="Spreads from 0.0 pips" data-es="Spreads desde 0.0 pips">Spreads from 0.0 pips</li>
+                            <li data-en="User-friendly platform" data-es="Plataforma fácil de usar">User-friendly platform</li>
+                            <li data-en="CySEC regulated" data-es="Regulado por CySEC">CySEC regulated</li>
+                        </ul>
+                        <button class="card-button" onclick="window.open('https://www.libertex.com', '_blank')" data-en="Visit Libertex" data-es="Visitar Libertex">Visit Libertex</button>
+                    </div>
+                </div>
+
+                <div class="broker-showcase-card card-3">
+                    <div class="card-badge" data-en="Best for Pros" data-es="Mejor para Profesionales">Best for Pros</div>
+                    <div class="card-content">
+                        <div class="broker-brand">Pepperstone</div>
+                        <div class="broker-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-en="Rating" data-es="Calificación">Rating</span>
+                                <span class="stat-value">4.7/5</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-en="Users" data-es="Usuarios">Users</span>
+                                <span class="stat-value">400K+</span>
+                            </div>
+                        </div>
+                        <ul class="broker-features">
+                            <li data-en="Raw spreads from 0.0 pips" data-es="Spreads raw desde 0.0 pips">Raw spreads from 0.0 pips</li>
+                            <li data-en="Advanced trading tools" data-es="Herramientas avanzadas de trading">Advanced trading tools</li>
+                            <li data-en="ECN execution" data-es="Ejecución ECN">ECN execution</li>
+                        </ul>
+                        <button class="card-button" onclick="window.open('https://www.pepperstone.com', '_blank')" data-en="View Details" data-es="Ver Detalles">View Details</button>
+                    </div>
+                </div>
+
+                <div class="broker-showcase-card card-1">
+                    <div class="card-badge" data-en="Lowest Spreads" data-es="Spreads Más Bajos">Lowest Spreads</div>
+                    <div class="card-content">
+                        <div class="broker-brand">Exness</div>
+                        <div class="broker-stats">
+                            <div class="stat">
+                                <span class="stat-label" data-en="Rating" data-es="Calificación">Rating</span>
+                                <span class="stat-value">4.6/5</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label" data-en="Users" data-es="Usuarios">Users</span>
+                                <span class="stat-value">10M+</span>
+                            </div>
+                        </div>
+                        <ul class="broker-features">
+                            <li data-en="Ultra-low spreads from 0.1 pips" data-es="Spreads ultra bajos desde 0.1 pips">Ultra-low spreads from 0.1 pips</li>
+                            <li data-en="Leverage up to 1:2000" data-es="Apalancamiento hasta 1:2000">Leverage up to 1:2000</li>
+                            <li data-en="Instant withdrawals" data-es="Retiros instantáneos">Instant withdrawals</li>
+                        </ul>
+                        <button class="card-button" onclick="window.open('https://www.exness.com', '_blank')" data-en="View Details" data-es="Ver Detalles">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</h2>
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;" data-en="Read detailed reviews from verified traders. Real experiences and honest feedback about each broker." data-es="Lee reseñas detalladas de traders verificados. Experiencias reales y comentarios honestos sobre cada broker.">
+                Read detailed reviews from verified traders. Real experiences and honest feedback about each broker.
+            </p>
+            
+            <div style="margin-bottom: 3rem; padding: 2rem; background: var(--bg-light); border-radius: 16px; border: 2px solid var(--color-primary);">
+                <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--text-dark);">Libertex <span style="color: var(--text-gray); font-size: 1rem; font-weight: normal;">(1,650 reviews)</span></h3>
+                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Anna B.</span>
+                        <span style="color: #fbbf24;">★★★★☆</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive." data-es="Plataforma fácil de usar perfecta para principiantes. La interfaz es intuitiva y fácil de navegar. Los spreads son competitivos.">
+                        User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">1 week ago</span>
+                </div>
+                <div style="padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Carlos M.</span>
+                        <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive." data-es="Excelente broker con una plataforma limpia y moderna. La interfaz basada en web funciona muy bien en cualquier dispositivo. El servicio al cliente es receptivo.">
+                        Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">2 weeks ago</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 3rem; padding: 2rem; background: var(--bg-light); border-radius: 16px; border: 2px solid var(--color-secondary);">
+                <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--text-dark);">XM Group <span style="color: var(--text-gray); font-size: 1rem; font-weight: normal;">(2,450 reviews)</span></h3>
+                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">John M.</span>
+                        <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Excellent broker! The spreads are competitive and execution is fast. Customer support is available 24/7 and they're very helpful." data-es="¡Excelente broker! Los spreads son competitivos y la ejecución es rápida. El soporte al cliente está disponible 24/7 y son muy útiles.">
+                        Excellent broker! The spreads are competitive and execution is fast. Customer support is available 24/7 and they're very helpful.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">2 weeks ago</span>
+                </div>
+                <div style="padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Sarah K.</span>
+                        <span style="color: #fbbf24;">★★★★☆</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Good broker overall. The platform is stable and spreads are reasonable. Customer service responds quickly to inquiries." data-es="Buen broker en general. La plataforma es estable y los spreads son razonables. El servicio al cliente responde rápidamente a las consultas.">
+                        Good broker overall. The platform is stable and spreads are reasonable. Customer service responds quickly to inquiries.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">1 month ago</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 3rem; padding: 2rem; background: var(--bg-light); border-radius: 16px; border: 2px solid var(--color-secondary);">
+                <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--text-dark);">Exness <span style="color: var(--text-gray); font-size: 1rem; font-weight: normal;">(3,120 reviews)</span></h3>
+                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">David L.</span>
+                        <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Ultra-low spreads and instant withdrawals make Exness my top choice. The platform is user-friendly and the mobile app works perfectly." data-es="Los spreads ultra bajos y los retiros instantáneos hacen de Exness mi primera opción. La plataforma es fácil de usar y la aplicación móvil funciona perfectamente.">
+                        Ultra-low spreads and instant withdrawals make Exness my top choice. The platform is user-friendly and the mobile app works perfectly.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">1 week ago</span>
+                </div>
+                <div style="padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Emma T.</span>
+                        <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Amazing broker! The spreads are the lowest I've seen. Withdrawals are truly instant - money appears in my account within minutes." data-es="¡Broker increíble! Los spreads son los más bajos que he visto. Los retiros son verdaderamente instantáneos: el dinero aparece en mi cuenta en minutos.">
+                        Amazing broker! The spreads are the lowest I've seen. Withdrawals are truly instant - money appears in my account within minutes.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">5 days ago</span>
+                </div>
+            </div>
+
+            <div style="padding: 2rem; background: var(--bg-light); border-radius: 16px; border: 2px solid var(--color-accent);">
+                <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--text-dark);">Libertex <span style="color: var(--text-gray); font-size: 1rem; font-weight: normal;">(1,650 reviews)</span></h3>
+                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Anna B.</span>
+                        <span style="color: #fbbf24;">★★★★☆</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive." data-es="Plataforma fácil de usar perfecta para principiantes. La interfaz es intuitiva y fácil de navegar. Los spreads son competitivos.">
+                        User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">1 week ago</span>
+                </div>
+                <div style="padding: 1.5rem; background: white; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Carlos M.</span>
+                        <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 0.5rem;" data-en="Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive." data-es="Excelente broker con una plataforma limpia y moderna. La interfaz basada en web funciona muy bien en cualquier dispositivo. El servicio al cliente es receptivo.">
+                        Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive.
+                    </p>
+                    <span style="color: var(--text-gray); font-size: 0.85rem;">2 weeks ago</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="strategies" style="padding: 5rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Trading Strategies" data-es="Estrategias de Trading">Trading Strategies</h2>
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;" data-en="Proven trading strategies used by professional traders." data-es="Estrategias de trading probadas utilizadas por traders profesionales.">
+                Proven trading strategies used by professional traders.
+            </p>
+        </div>
+    </section>
+
+    <section id="ratings" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Broker Ratings" data-es="Calificaciones de Brokers">Broker Ratings</h2>
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;" data-en="Comprehensive ratings based on multiple factors including regulation, spreads, customer service, and user reviews." data-es="Calificaciones completas basadas en múltiples factores incluyendo regulación, spreads, servicio al cliente y reseñas de usuarios.">
+                Comprehensive ratings based on multiple factors including regulation, spreads, customer service, and user reviews.
+            </p>
+        </div>
+    </section>
+
+    <section id="analysis" class="market-updates">
+        <div class="container">
+            <h2 class="section-heading" data-en="Market Analysis" data-es="Análisis de Mercado">Market Analysis</h2>
+            <div class="updates-grid">
+                <article class="update-card">
+                    <div class="update-header">
+                        <span class="update-tag tag-news" data-en="News" data-es="Noticias">News</span>
+                        <span class="update-time">1h ago</span>
+                    </div>
+                    <h3 class="update-title" data-en="GBP/USD Surges on BoE Policy Shift" data-es="GBP/USD Se Dispara por Cambio de Política del BoE">
+                        GBP/USD Surges on BoE Policy Shift
+                    </h3>
+                    <p class="update-text" data-en="The British pound strengthened significantly following the Bank of England's unexpected policy announcement..." data-es="La libra esterlina se fortaleció significativamente tras el anuncio de política inesperado del Banco de Inglaterra...">
+                        The British pound strengthened significantly following the Bank of England's unexpected policy announcement...
+                    </p>
+                </article>
+                <article class="update-card">
+                    <div class="update-header">
+                        <span class="update-tag tag-analysis" data-en="Analysis" data-es="Análisis">Analysis</span>
+                        <span class="update-time">3h ago</span>
+                    </div>
+                    <h3 class="update-title" data-en="EUR/USD Technical Outlook: Bullish Momentum Continues" data-es="Perspectiva Técnica EUR/USD: El Momentum Alcista Continúa">
+                        EUR/USD Technical Outlook: Bullish Momentum Continues
+                    </h3>
+                    <p class="update-text" data-en="Technical indicators suggest continued upward pressure on the EUR/USD pair..." data-es="Los indicadores técnicos sugieren presión alcista continua en el par EUR/USD...">
+                        Technical indicators suggest continued upward pressure on the EUR/USD pair...
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Trading Education" data-es="Educación de Trading">Trading Education</h2>
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;" data-en="Learn the fundamentals and advanced strategies of forex trading." data-es="Aprende los fundamentos y estrategias avanzadas del trading de forex.">
+                Learn the fundamentals and advanced strategies of forex trading.
+            </p>
+        </div>
+    </section>
+
+    <section id="about" style="padding: 5rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="About TradeVault" data-es="Acerca de TradeVault">About TradeVault</h2>
+            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="TradeVault provides bold and comprehensive broker reviews to help traders make informed decisions." data-es="TradeVault proporciona reseñas de brokers audaces y completas para ayudar a los traders a tomar decisiones informadas.">
+                TradeVault provides bold and comprehensive broker reviews to help traders make informed decisions.
+            </p>
+        </div>
+    </section>
+
+    <section id="team" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Our Team" data-es="Nuestro Equipo">Our Team</h2>
+            <p style="text-align: center; color: var(--text-gray);" data-en="Experienced traders and analysts dedicated to providing accurate broker information." data-es="Traders y analistas experimentados dedicados a proporcionar información precisa de brokers.">
+                Experienced traders and analysts dedicated to providing accurate broker information.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" style="padding: 5rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Contact Us" data-es="Contáctanos">Contact Us</h2>
+            <p style="text-align: center; color: var(--text-gray);" data-en="Email: contact@tradevault.com" data-es="Email: contact@tradevault.com">
+                Email: contact@tradevault.com
+            </p>
+        </div>
+    </section>
+
+    <section id="guides" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</h2>
+            <p style="text-align: center; color: var(--text-gray);" data-en="Comprehensive guides covering all aspects of forex trading." data-es="Guías completas que cubren todos los aspectos del trading de forex.">
+                Comprehensive guides covering all aspects of forex trading.
+            </p>
+        </div>
+    </section>
+
+    <section id="tutorials" style="padding: 5rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Tutorials" data-es="Tutoriales">Tutorials</h2>
+            <p style="text-align: center; color: var(--text-gray);" data-en="Step-by-step tutorials to help you master forex trading." data-es="Tutoriales paso a paso para ayudarte a dominar el trading de forex.">
+                Step-by-step tutorials to help you master forex trading.
+            </p>
+        </div>
+    </section>
+
+    <section id="webinars" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Webinars" data-es="Webinars">Webinars</h2>
+            <p style="text-align: center; color: var(--text-gray);" data-en="Join our live webinars with trading experts." data-es="Únete a nuestros webinars en vivo con expertos en trading.">
+                Join our live webinars with trading experts.
+            </p>
+        </div>
+    </section>
+
+    <section id="privacy" style="padding: 5rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</h2>
+            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="We are committed to protecting your privacy and personal information." data-es="Estamos comprometidos a proteger tu privacidad e información personal.">
+                We are committed to protecting your privacy and personal information.
+            </p>
+        </div>
+    </section>
+
+    <section id="terms" style="padding: 5rem 0; background: var(--bg-white);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Terms of Service" data-es="Términos de Servicio">Terms of Service</h2>
+            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="By using our website, you agree to our terms of service." data-es="Al usar nuestro sitio web, aceptas nuestros términos de servicio.">
+                By using our website, you agree to our terms of service.
+            </p>
+        </div>
+    </section>
+
+    <section id="disclaimer" style="padding: 5rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Disclaimer" data-es="Descargo de Responsabilidad">Disclaimer</h2>
+            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto;" data-en="Trading forex involves substantial risk. The information provided is for educational purposes only." data-es="El trading de forex implica un riesgo sustancial. La información proporcionada es solo para fines educativos.">
+                Trading forex involves substantial risk. The information provided is for educational purposes only.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4 data-en="Company" data-es="Empresa">Company</h4>
+                    <ul>
+                        <li><a href="#about" data-en="About" data-es="Acerca de">About</a></li>
+                        <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
+                        <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-es="Recursos">Resources</h4>
+                    <ul>
+                        <li><a href="#guides" data-en="Guides" data-es="Guías">Guides</a></li>
+                        <li><a href="#tutorials" data-en="Tutorials" data-es="Tutoriales">Tutorials</a></li>
+                        <li><a href="#webinars" data-en="Webinars" data-es="Webinars">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Legal" data-es="Legal">Legal</h4>
+                    <ul>
+                        <li><a href="#privacy" data-en="Privacy" data-es="Privacidad">Privacy</a></li>
+                        <li><a href="#terms" data-en="Terms" data-es="Términos">Terms</a></li>
+                        <li><a href="#disclaimer" data-en="Disclaimer" data-es="Descargo">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TradeVault. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="../shared/data-api.js"></script>
+</body>
+</html>
+

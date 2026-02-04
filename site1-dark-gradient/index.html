@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrokerPro - Trusted Forex Broker Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">
+                        <span class="logo-icon">📊</span>
+                        <span class="logo-text">BrokerPro</span>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                        <li><a href="#comparison" data-en="Compare" data-es="Comparar">Compare</a></li>
+                        <li><a href="#guides" data-en="Guides" data-es="Guías">Guides</a></li>
+                        <li><a href="#strategies" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                        <li><a href="#news" data-en="News" data-es="Noticias">News</a></li>
+                        <li><a href="#education" data-en="Education" data-es="Educación">Education</a></li>
+                        <li><a href="#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <button class="lang-toggle" id="langToggle" type="button">ES</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title" data-en="BrokerPro: Trusted Forex Broker Reviews" data-es="BrokerPro: Reseñas Confiables de Brokers de Forex">
+                        BrokerPro: Trusted Forex Broker Reviews
+                    </h1>
+                    <p class="hero-subtitle" data-en="Independent ratings, side-by-side comparisons, and guidance to choose the right broker for your strategy." data-es="Calificaciones independientes, comparaciones lado a lado y orientación para elegir el broker adecuado para tu estrategia.">
+                        Independent ratings, side-by-side comparisons, and guidance to choose the right broker for your strategy.
+                    </p>
+                </div>
+            </div>
+            <div class="hero-gradient"></div>
+        </section>
+
+        <section id="reviews" class="featured-brokers">
+            <div class="container">
+                <h2 class="section-title" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</h2>
+                <p class="section-intro" data-en="BrokerPro curates verified trader feedback and compliance checks. Explore trusted brokers with clear scores and highlights." data-es="BrokerPro recopila comentarios verificados de traders y revisiones de cumplimiento. Explora brokers confiables con puntajes claros y puntos destacados.">
+                    BrokerPro curates verified trader feedback and compliance checks. Explore trusted brokers with clear scores and highlights.
+                </p>
+
+                <h3 class="section-subheading" data-en="BrokerPro Top Picks" data-es="Selecciones Destacadas de BrokerPro">BrokerPro Top Picks</h3>
+                <div class="brokers-grid">
+                    <div class="broker-card" data-broker-id="libertex">
+                        <div class="broker-header">
+                            <div class="broker-logo">Libertex</div>
+                            <div class="broker-rating">
+                                <span class="rating-stars">★★★★★</span>
+                                <span class="rating-score">4.9</span>
+                            </div>
+                        </div>
+                        <div class="broker-info">
+                            <div class="info-item">
+                                <span class="info-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                <span class="info-value">$100</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Spread" data-es="Spread">Spread</span>
+                                <span class="info-value">From 0.0 pips</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Leverage" data-es="Apalancamiento">Leverage</span>
+                                <span class="info-value">1:30</span>
+                            </div>
+                        </div>
+                        <button class="btn-review" onclick="window.open('https://www.libertex.com', '_blank')" data-en="Visit Broker" data-es="Visitar Broker" type="button">Visit Broker</button>
+                    </div>
+
+                    <div class="broker-card" data-broker-id="xm">
+                        <div class="broker-header">
+                            <div class="broker-logo">XM</div>
+                            <div class="broker-rating">
+                                <span class="rating-stars">★★★★★</span>
+                                <span class="rating-score">4.8</span>
+                            </div>
+                        </div>
+                        <div class="broker-info">
+                            <div class="info-item">
+                                <span class="info-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                <span class="info-value">$5</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Spread" data-es="Spread">Spread</span>
+                                <span class="info-value">0.6 pips</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Leverage" data-es="Apalancamiento">Leverage</span>
+                                <span class="info-value">1:888</span>
+                            </div>
+                        </div>
+                        <button class="btn-review" onclick="window.open('https://www.xm.com', '_blank')" data-en="Visit Broker" data-es="Visitar Broker" type="button">Visit Broker</button>
+                    </div>
+
+                    <div class="broker-card" data-broker-id="exness">
+                        <div class="broker-header">
+                            <div class="broker-logo">Exness</div>
+                            <div class="broker-rating">
+                                <span class="rating-stars">★★★★★</span>
+                                <span class="rating-score">4.7</span>
+                            </div>
+                        </div>
+                        <div class="broker-info">
+                            <div class="info-item">
+                                <span class="info-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                <span class="info-value">$10</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Spread" data-es="Spread">Spread</span>
+                                <span class="info-value">0.1 pips</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Leverage" data-es="Apalancamiento">Leverage</span>
+                                <span class="info-value">1:2000</span>
+                            </div>
+                        </div>
+                        <button class="btn-review" onclick="window.open('https://www.exness.com', '_blank')" data-en="Visit Broker" data-es="Visitar Broker" type="button">Visit Broker</button>
+                    </div>
+
+                    <div class="broker-card" data-broker-id="pepperstone">
+                        <div class="broker-header">
+                            <div class="broker-logo">Pepperstone</div>
+                            <div class="broker-rating">
+                                <span class="rating-stars">★★★★☆</span>
+                                <span class="rating-score">4.6</span>
+                            </div>
+                        </div>
+                        <div class="broker-info">
+                            <div class="info-item">
+                                <span class="info-label" data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</span>
+                                <span class="info-value">$200</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Spread" data-es="Spread">Spread</span>
+                                <span class="info-value">0.0 pips</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Leverage" data-es="Apalancamiento">Leverage</span>
+                                <span class="info-value">1:500</span>
+                            </div>
+                        </div>
+                        <button class="btn-review" onclick="window.open('https://www.pepperstone.com', '_blank')" data-en="Visit Broker" data-es="Visitar Broker" type="button">Visit Broker</button>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <h3 class="section-subheading" data-en="Detailed Broker Reviews" data-es="Reseñas Detalladas de Brokers">Detailed Broker Reviews</h3>
+
+                    <div class="card-panel">
+                        <div class="card-header-flex">
+                            <div class="badge-logo">LB</div>
+                            <div>
+                                <h4 class="card-heading-sm">Libertex</h4>
+                                <div class="rating-row">
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                    <span class="rating-score">4.9/5</span>
+                                    <span class="rating-small">(1,650 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <h5 class="block-title" data-en="User Reviews" data-es="Reseñas de Usuarios">User Reviews</h5>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Anna B.</span>
+                                    <span class="rating-stars-gold">★★★★☆</span>
+                                </div>
+                                <p class="review-text" data-en="User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive and the educational materials are very helpful. Great for those new to trading." data-es="Plataforma fácil de usar perfecta para principiantes. La interfaz es intuitiva y fácil de navegar. Los spreads son competitivos y los materiales educativos son muy útiles. Excelente para aquellos nuevos en el trading.">
+                                    User-friendly platform perfect for beginners. The interface is intuitive and easy to navigate. Spreads are competitive and the educational materials are very helpful. Great for those new to trading.
+                                </p>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Carlos M.</span>
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                </div>
+                                <p class="review-text" data-en="Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive and helpful. Highly recommended for traders who prefer web platforms over desktop software." data-es="Excelente broker con una plataforma limpia y moderna. La interfaz basada en web funciona muy bien en cualquier dispositivo. El servicio al cliente es receptivo y útil. Muy recomendado para traders que prefieren plataformas web sobre software de escritorio.">
+                                    Excellent broker with a clean, modern platform. The web-based interface works great on any device. Customer service is responsive and helpful. Highly recommended for traders who prefer web platforms over desktop software.
+                                </p>
+                                <span class="review-date">2 weeks ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Maria S.</span>
+                                    <span class="rating-stars-gold">★★★★☆</span>
+                                </div>
+                                <p class="review-text" data-en="Good broker with solid regulation. The platform is straightforward and the mobile app is well-designed. Spreads are reasonable for a web-based platform. Would like to see more advanced charting tools." data-es="Buen broker con regulación sólida. La plataforma es sencilla y la aplicación móvil está bien diseñada. Los spreads son razonables para una plataforma basada en web. Me gustaría ver más herramientas de gráficos avanzadas.">
+                                    Good broker with solid regulation. The platform is straightforward and the mobile app is well-designed. Spreads are reasonable for a web-based platform. Would like to see more advanced charting tools.
+                                </p>
+                                <span class="review-date">3 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-header-flex">
+                            <div class="badge-logo">XM</div>
+                            <div>
+                                <h4 class="card-heading-sm">XM Group</h4>
+                                <div class="rating-row">
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                    <span class="rating-score">4.8/5</span>
+                                    <span class="rating-small">(2,450 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <h5 class="block-title" data-en="User Reviews" data-es="Reseñas de Usuarios">User Reviews</h5>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">John M.</span>
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                </div>
+                                <p class="review-text" data-en="Excellent broker! The spreads are competitive and execution is fast. Customer support is available 24/7 and they're very helpful. I've been trading with XM for over 2 years and never had any issues with withdrawals." data-es="¡Excelente broker! Los spreads son competitivos y la ejecución es rápida. El soporte al cliente está disponible 24/7 y son muy útiles. He estado operando con XM durante más de 2 años y nunca tuve problemas con los retiros.">
+                                    Excellent broker! The spreads are competitive and execution is fast. Customer support is available 24/7 and they're very helpful. I've been trading with XM for over 2 years and never had any issues with withdrawals.
+                                </p>
+                                <span class="review-date">2 weeks ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Sarah K.</span>
+                                    <span class="rating-stars-gold">★★★★☆</span>
+                                </div>
+                                <p class="review-text" data-en="Good broker overall. The platform is stable and spreads are reasonable. The only downside is that some exotic pairs have wider spreads. Customer service responds quickly to inquiries." data-es="Buen broker en general. La plataforma es estable y los spreads son razonables. El único inconveniente es que algunos pares exóticos tienen spreads más amplios. El servicio al cliente responde rápidamente a las consultas.">
+                                    Good broker overall. The platform is stable and spreads are reasonable. The only downside is that some exotic pairs have wider spreads. Customer service responds quickly to inquiries.
+                                </p>
+                                <span class="review-date">1 month ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Michael R.</span>
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                </div>
+                                <p class="review-text" data-en="Best broker I've used. Low minimum deposit, great leverage options, and the educational resources are fantastic. Highly recommended for beginners and experienced traders alike." data-es="El mejor broker que he usado. Depósito mínimo bajo, excelentes opciones de apalancamiento y los recursos educativos son fantásticos. Muy recomendado tanto para principiantes como para traders experimentados.">
+                                    Best broker I've used. Low minimum deposit, great leverage options, and the educational resources are fantastic. Highly recommended for beginners and experienced traders alike.
+                                </p>
+                                <span class="review-date">3 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-header-flex">
+                            <div class="badge-logo">EX</div>
+                            <div>
+                                <h4 class="card-heading-sm">Exness</h4>
+                                <div class="rating-row">
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                    <span class="rating-score">4.9/5</span>
+                                    <span class="rating-small">(3,120 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <h5 class="block-title" data-en="User Reviews" data-es="Reseñas de Usuarios">User Reviews</h5>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">David L.</span>
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                </div>
+                                <p class="review-text" data-en="Ultra-low spreads and instant withdrawals make Exness my top choice. The platform is user-friendly and the mobile app works perfectly. I've never experienced any slippage issues." data-es="Los spreads ultra bajos y los retiros instantáneos hacen de Exness mi primera opción. La plataforma es fácil de usar y la aplicación móvil funciona perfectamente. Nunca he experimentado problemas de deslizamiento.">
+                                    Ultra-low spreads and instant withdrawals make Exness my top choice. The platform is user-friendly and the mobile app works perfectly. I've never experienced any slippage issues.
+                                </p>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Emma T.</span>
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                </div>
+                                <p class="review-text" data-en="Amazing broker! The spreads are the lowest I've seen, especially on major pairs. Withdrawals are truly instant - money appears in my account within minutes. Highly professional service." data-es="¡Broker increíble! Los spreads son los más bajos que he visto, especialmente en pares principales. Los retiros son verdaderamente instantáneos: el dinero aparece en mi cuenta en minutos. Servicio muy profesional.">
+                                    Amazing broker! The spreads are the lowest I've seen, especially on major pairs. Withdrawals are truly instant - money appears in my account within minutes. Highly professional service.
+                                </p>
+                                <span class="review-date">5 days ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Robert P.</span>
+                                    <span class="rating-stars-gold">★★★★☆</span>
+                                </div>
+                                <p class="review-text" data-en="Very good broker with excellent execution speeds. The leverage options are impressive. Sometimes the spreads widen during news events, but that's normal. Overall satisfied with the service." data-es="Muy buen broker con velocidades de ejecución excelentes. Las opciones de apalancamiento son impresionantes. A veces los spreads se amplían durante eventos de noticias, pero eso es normal. En general satisfecho con el servicio.">
+                                    Very good broker with excellent execution speeds. The leverage options are impressive. Sometimes the spreads widen during news events, but that's normal. Overall satisfied with the service.
+                                </p>
+                                <span class="review-date">2 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-header-flex">
+                            <div class="badge-logo">PS</div>
+                            <div>
+                                <h4 class="card-heading-sm">Pepperstone</h4>
+                                <div class="rating-row">
+                                    <span class="rating-stars-gold">★★★★☆</span>
+                                    <span class="rating-score">4.7/5</span>
+                                    <span class="rating-small">(1,890 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <h5 class="block-title" data-en="User Reviews" data-es="Reseñas de Usuarios">User Reviews</h5>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">James W.</span>
+                                    <span class="rating-stars-gold">★★★★★</span>
+                                </div>
+                                <p class="review-text" data-en="Professional-grade broker perfect for serious traders. Raw spreads are excellent and the ECN execution is lightning fast. The cTrader platform is outstanding. Worth every penny." data-es="Broker de nivel profesional perfecto para traders serios. Los spreads raw son excelentes y la ejecución ECN es extremadamente rápida. La plataforma cTrader es excepcional. Vale cada centavo.">
+                                    Professional-grade broker perfect for serious traders. Raw spreads are excellent and the ECN execution is lightning fast. The cTrader platform is outstanding. Worth every penny.
+                                </p>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-name">Lisa H.</span>
+                                    <span class="rating-stars-gold">★★★★☆</span>
+                                </div>
+                                <p class="review-text" data-en="Great broker for advanced traders. The trading tools and analytics are top-notch. Minimum deposit is higher than some competitors, but the quality justifies it. Excellent customer support." data-es="Excelente broker para traders avanzados. Las herramientas de trading y análisis son de primera clase. El depósito mínimo es más alto que algunos competidores, pero la calidad lo justifica. Excelente soporte al cliente.">
+                                    Great broker for advanced traders. The trading tools and analytics are top-notch. Minimum deposit is higher than some competitors, but the quality justifies it. Excellent customer support.
+                                </p>
+                                <span class="review-date">3 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="comparison-section section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Broker Comparison" data-es="Comparación de Brokers">Broker Comparison</h2>
+                <p class="section-intro section-intro-narrow" data-en="Compare brokers side by side to find the best fit for your trading needs. Use our comprehensive comparison tool to filter by spreads, leverage, regulation, platforms, and more." data-es="Compara brokers lado a lado para encontrar el mejor ajuste para tus necesidades de trading. Usa nuestra herramienta de comparación completa para filtrar por spreads, apalancamiento, regulación, plataformas y más.">
+                    Compare brokers side by side to find the best fit for your trading needs. Use our comprehensive comparison tool to filter by spreads, leverage, regulation, platforms, and more.
+                </p>
+
+                <div class="card-panel">
+                    <h3 class="subheading-card" data-en="Comparison Criteria" data-es="Criterios de Comparación">Comparison Criteria</h3>
+                    <div class="grid-criteria">
+                        <div>
+                            <h4 class="criteria-label" data-en="Spreads &amp; Commissions" data-es="Spreads y Comisiones">Spreads &amp; Commissions</h4>
+                            <p class="criteria-text" data-en="Compare trading costs across different brokers" data-es="Compara los costos de trading entre diferentes brokers">
+                                Compare trading costs across different brokers
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="criteria-label" data-en="Leverage &amp; Margin" data-es="Apalancamiento y Margen">Leverage &amp; Margin</h4>
+                            <p class="criteria-text" data-en="Evaluate leverage options and margin requirements" data-es="Evalúa las opciones de apalancamiento y requisitos de margen">
+                                Evaluate leverage options and margin requirements
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="criteria-label" data-en="Regulation &amp; Safety" data-es="Regulación y Seguridad">Regulation &amp; Safety</h4>
+                            <p class="criteria-text" data-en="Check regulatory status and fund protection" data-es="Verifica el estado regulatorio y protección de fondos">
+                                Check regulatory status and fund protection
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="criteria-label" data-en="Platforms &amp; Tools" data-es="Plataformas y Herramientas">Platforms &amp; Tools</h4>
+                            <p class="criteria-text" data-en="Compare available trading platforms and features" data-es="Compara las plataformas de trading disponibles y características">
+                                Compare available trading platforms and features
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-panel">
+                    <h3 class="subheading-card" data-en="Quick Comparison Table" data-es="Tabla de Comparación Rápida">Quick Comparison Table</h3>
+                    <div class="table-scroll">
+                        <table class="table-basic">
+                            <thead>
+                                <tr>
+                                    <th data-en="Broker" data-es="Broker">Broker</th>
+                                    <th data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</th>
+                                    <th data-en="Spreads" data-es="Spreads">Spreads</th>
+                                    <th data-en="Leverage" data-es="Apalancamiento">Leverage</th>
+                                    <th data-en="Rating" data-es="Calificación">Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="primary">Libertex</td>
+                                    <td>$100</td>
+                                    <td>From 0.0 pips</td>
+                                    <td>1:30</td>
+                                    <td><span class="rating-stars-gold">★★★★★</span> 4.9</td>
+                                </tr>
+                                <tr>
+                                    <td class="primary">XM Group</td>
+                                    <td>$5</td>
+                                    <td>0.6 pips</td>
+                                    <td>1:888</td>
+                                    <td><span class="rating-stars-gold">★★★★★</span> 4.8</td>
+                                </tr>
+                                <tr>
+                                    <td class="primary">Exness</td>
+                                    <td>$10</td>
+                                    <td>0.1 pips</td>
+                                    <td>1:2000</td>
+                                    <td><span class="rating-stars-gold">★★★★★</span> 4.7</td>
+                                </tr>
+                                <tr>
+                                    <td class="primary">Pepperstone</td>
+                                    <td>$200</td>
+                                    <td>0.0 pips</td>
+                                    <td>1:500</td>
+                                    <td><span class="rating-stars-gold">★★★★☆</span> 4.6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guides" class="guides-section section-pad">
+            <div class="container">
+                <h2 class="section-title" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</h2>
+                <p class="section-intro" data-en="Comprehensive guides covering all aspects of forex trading, from beginner basics to advanced strategies." data-es="Guías completas que cubren todos los aspectos del trading de forex, desde conceptos básicos para principiantes hasta estrategias avanzadas.">
+                    Comprehensive guides covering all aspects of forex trading, from beginner basics to advanced strategies.
+                </p>
+                <div class="brokers-grid">
+                    <div class="broker-card">
+                        <h3 data-en="Getting Started with Forex Trading" data-es="Cómo Empezar con el Trading de Forex">Getting Started with Forex Trading</h3>
+                        <p data-en="Learn the fundamentals of forex trading including currency pairs, market hours, and basic terminology. This guide covers everything you need to know before placing your first trade, including how to read price charts and understand market movements." data-es="Aprende los fundamentos del trading de forex incluyendo pares de divisas, horarios del mercado y terminología básica. Esta guía cubre todo lo que necesitas saber antes de realizar tu primera operación, incluyendo cómo leer gráficos de precios y entender los movimientos del mercado.">
+                            Learn the fundamentals of forex trading including currency pairs, market hours, and basic terminology. This guide covers everything you need to know before placing your first trade, including how to read price charts and understand market movements.
+                        </p>
+                        <a class="link-cta" href="guides/getting-started.html" data-en="Read Full Guide →" data-es="Leer Guía Completa →">Read Full Guide →</a>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Risk Management Strategies" data-es="Estrategias de Gestión de Riesgos">Risk Management Strategies</h3>
+                        <p data-en="Master the art of risk management with proven strategies including position sizing, stop-loss placement, and risk-reward ratios. Learn how to protect your capital while maximizing profit potential through disciplined risk management techniques." data-es="Domina el arte de la gestión de riesgos con estrategias probadas incluyendo dimensionamiento de posiciones, colocación de stop-loss y ratios riesgo-recompensa. Aprende cómo proteger tu capital mientras maximizas el potencial de ganancias mediante técnicas disciplinadas de gestión de riesgos.">
+                            Master the art of risk management with proven strategies including position sizing, stop-loss placement, and risk-reward ratios. Learn how to protect your capital while maximizing profit potential through disciplined risk management techniques.
+                        </p>
+                        <a class="link-cta" href="guides/risk-management.html" data-en="Read Full Guide →" data-es="Leer Guía Completa →">Read Full Guide →</a>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Understanding Leverage" data-es="Entendiendo el Apalancamiento">Understanding Leverage</h3>
+                        <p data-en="A comprehensive guide to leverage, margin requirements, and how to use them responsibly. Understand the benefits and risks of trading with leverage, how margin calls work, and best practices for leverage management." data-es="Una guía completa sobre apalancamiento, requisitos de margen y cómo usarlos de manera responsable. Entiende los beneficios y riesgos de operar con apalancamiento, cómo funcionan las llamadas de margen y las mejores prácticas para la gestión del apalancamiento.">
+                            A comprehensive guide to leverage, margin requirements, and how to use them responsibly. Understand the benefits and risks of trading with leverage, how margin calls work, and best practices for leverage management.
+                        </p>
+                        <a class="link-cta" href="guides/leverage.html" data-en="Read Full Guide →" data-es="Leer Guía Completa →">Read Full Guide →</a>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Technical Analysis Basics" data-es="Conceptos Básicos de Análisis Técnico">Technical Analysis Basics</h3>
+                        <p data-en="Learn how to read charts, identify trends, and use technical indicators. This guide covers candlestick patterns, support and resistance levels, moving averages, and other essential technical analysis tools." data-es="Aprende a leer gráficos, identificar tendencias y usar indicadores técnicos. Esta guía cubre patrones de velas, niveles de soporte y resistencia, promedios móviles y otras herramientas esenciales de análisis técnico.">
+                            Learn how to read charts, identify trends, and use technical indicators. This guide covers candlestick patterns, support and resistance levels, moving averages, and other essential technical analysis tools.
+                        </p>
+                        <a class="link-cta" href="guides/technical-analysis.html" data-en="Read Full Guide →" data-es="Leer Guía Completa →">Read Full Guide →</a>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Fundamental Analysis" data-es="Análisis Fundamental">Fundamental Analysis</h3>
+                        <p data-en="Understand how economic indicators, central bank policies, and geopolitical events affect currency markets. Learn to analyze economic data and make informed trading decisions based on fundamental factors." data-es="Entiende cómo los indicadores económicos, las políticas de los bancos centrales y los eventos geopolíticos afectan los mercados de divisas. Aprende a analizar datos económicos y tomar decisiones de trading informadas basadas en factores fundamentales.">
+                            Understand how economic indicators, central bank policies, and geopolitical events affect currency markets. Learn to analyze economic data and make informed trading decisions based on fundamental factors.
+                        </p>
+                        <a class="link-cta" href="guides/fundamental-analysis.html" data-en="Read Full Guide →" data-es="Leer Guía Completa →">Read Full Guide →</a>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Choosing the Right Broker" data-es="Elegir el Broker Correcto">Choosing the Right Broker</h3>
+                        <p data-en="A step-by-step guide to selecting the best forex broker for your needs. Learn what to look for in regulation, spreads, platforms, customer service, and other important factors." data-es="Una guía paso a paso para seleccionar el mejor broker de forex para tus necesidades. Aprende qué buscar en regulación, spreads, plataformas, servicio al cliente y otros factores importantes.">
+                            A step-by-step guide to selecting the best forex broker for your needs. Learn what to look for in regulation, spreads, platforms, customer service, and other important factors.
+                        </p>
+                        <a class="link-cta" href="guides/choosing-broker.html" data-en="Read Full Guide →" data-es="Leer Guía Completa →">Read Full Guide →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategies" class="section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Trading Strategies" data-es="Estrategias de Trading">Trading Strategies</h2>
+                <p class="section-intro" data-en="Proven trading strategies used by professional traders. Learn scalping, day trading, swing trading, and position trading techniques." data-es="Estrategias de trading probadas utilizadas por traders profesionales. Aprende técnicas de scalping, day trading, swing trading y position trading.">
+                    Proven trading strategies used by professional traders. Learn scalping, day trading, swing trading, and position trading techniques.
+                </p>
+                <div class="brokers-grid">
+                    <div class="broker-card">
+                        <h3 data-en="Scalping Strategy" data-es="Estrategia de Scalping">Scalping Strategy</h3>
+                        <p data-en="Learn how to profit from small price movements by opening and closing positions quickly. This strategy requires discipline, fast execution, and low spreads. Perfect for active traders who can monitor the markets closely." data-es="Aprende cómo obtener ganancias de pequeños movimientos de precios abriendo y cerrando posiciones rápidamente. Esta estrategia requiere disciplina, ejecución rápida y spreads bajos. Perfecta para traders activos que pueden monitorear los mercados de cerca.">
+                            Learn how to profit from small price movements by opening and closing positions quickly. This strategy requires discipline, fast execution, and low spreads. Perfect for active traders who can monitor the markets closely.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Day Trading Strategy" data-es="Estrategia de Day Trading">Day Trading Strategy</h3>
+                        <p data-en="Master the art of day trading by opening and closing positions within the same trading day. Learn entry and exit signals, time management, and how to avoid overtrading." data-es="Domina el arte del day trading abriendo y cerrando posiciones dentro del mismo día de trading. Aprende señales de entrada y salida, gestión del tiempo y cómo evitar el overtrading.">
+                            Master the art of day trading by opening and closing positions within the same trading day. Learn entry and exit signals, time management, and how to avoid overtrading.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Swing Trading Strategy" data-es="Estrategia de Swing Trading">Swing Trading Strategy</h3>
+                        <p data-en="Capture medium-term price movements by holding positions for several days or weeks. This strategy is ideal for traders who cannot monitor markets constantly but want to take advantage of larger price swings." data-es="Captura movimientos de precios a mediano plazo manteniendo posiciones durante varios días o semanas. Esta estrategia es ideal para traders que no pueden monitorear los mercados constantemente pero quieren aprovechar oscilaciones de precios más grandes.">
+                            Capture medium-term price movements by holding positions for several days or weeks. This strategy is ideal for traders who cannot monitor markets constantly but want to take advantage of larger price swings.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Trend Following Strategy" data-es="Estrategia de Seguimiento de Tendencia">Trend Following Strategy</h3>
+                        <p data-en="Learn to identify and follow market trends for consistent profits. This strategy uses technical indicators to determine trend direction and enter trades in the direction of the prevailing trend." data-es="Aprende a identificar y seguir las tendencias del mercado para obtener ganancias consistentes. Esta estrategia usa indicadores técnicos para determinar la dirección de la tendencia y entrar en operaciones en la dirección de la tendencia predominante.">
+                            Learn to identify and follow market trends for consistent profits. This strategy uses technical indicators to determine trend direction and enter trades in the direction of the prevailing trend.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Breakout Trading Strategy" data-es="Estrategia de Trading de Ruptura">Breakout Trading Strategy</h3>
+                        <p data-en="Profit from price breakouts above resistance or below support levels. Learn how to identify valid breakouts, set appropriate stop-losses, and manage positions during volatile market conditions." data-es="Obtén ganancias de las rupturas de precios por encima de la resistencia o por debajo de los niveles de soporte. Aprende cómo identificar rupturas válidas, establecer stop-losses apropiados y gestionar posiciones durante condiciones de mercado volátiles.">
+                            Profit from price breakouts above resistance or below support levels. Learn how to identify valid breakouts, set appropriate stop-losses, and manage positions during volatile market conditions.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Carry Trade Strategy" data-es="Estrategia de Carry Trade">Carry Trade Strategy</h3>
+                        <p data-en="Earn interest rate differentials by buying high-yield currencies and selling low-yield currencies. Understand how interest rates affect currency values and how to implement this long-term strategy." data-es="Gana diferenciales de tasas de interés comprando divisas de alto rendimiento y vendiendo divisas de bajo rendimiento. Entiende cómo las tasas de interés afectan los valores de las divisas y cómo implementar esta estrategia a largo plazo.">
+                            Earn interest rate differentials by buying high-yield currencies and selling low-yield currencies. Understand how interest rates affect currency values and how to implement this long-term strategy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="latest-news">
+            <div class="container">
+                <h2 class="section-title" data-en="Latest Market News" data-es="Últimas Noticias del Mercado">Latest Market News</h2>
+                <p class="section-intro" data-en="Stay updated with the latest forex market news, broker updates, regulatory changes, and economic events that impact currency markets." data-es="Mantente actualizado con las últimas noticias del mercado forex, actualizaciones de brokers, cambios regulatorios y eventos económicos que impactan los mercados de divisas.">
+                    Stay updated with the latest forex market news, broker updates, regulatory changes, and economic events that impact currency markets.
+                </p>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <span class="news-category" data-en="Market Analysis" data-es="Análisis de Mercado">Market Analysis</span>
+                            <h3 class="news-title" data-en="EUR/USD Reaches New Highs Amid Economic Uncertainty" data-es="EUR/USD Alcanza Nuevos Máximos en Medio de Incertidumbre Económica">
+                                EUR/USD Reaches New Highs Amid Economic Uncertainty
+                            </h3>
+                            <p class="news-excerpt" data-en="The euro strengthened significantly against the dollar as investors seek safe haven assets. The pair reached 1.1650, its highest level in three months, driven by concerns over US economic policy and European Central Bank's hawkish stance." data-es="El euro se fortaleció significativamente frente al dólar mientras los inversores buscan activos refugio. El par alcanzó 1.1650, su nivel más alto en tres meses, impulsado por preocupaciones sobre la política económica de EE.UU. y la postura hawkish del Banco Central Europeo.">
+                                The euro strengthened significantly against the dollar as investors seek safe haven assets. The pair reached 1.1650, its highest level in three months, driven by concerns over US economic policy and European Central Bank's hawkish stance.
+                            </p>
+                            <span class="news-date">2 hours ago</span>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <span class="news-category" data-en="Regulation" data-es="Regulación">Regulation</span>
+                            <h3 class="news-title" data-en="New FCA Regulations Impact Broker Operations" data-es="Nuevas Regulaciones FCA Impactan Operaciones de Brokers">
+                                New FCA Regulations Impact Broker Operations
+                            </h3>
+                            <p class="news-excerpt" data-en="The Financial Conduct Authority announced stricter guidelines for retail forex trading, including enhanced client protection measures and stricter leverage limits. Brokers operating in the UK must comply with new requirements by Q2 2025." data-es="La Autoridad de Conducta Financiera anunció pautas más estrictas para el trading de forex minorista, incluyendo medidas mejoradas de protección al cliente y límites de apalancamiento más estrictos. Los brokers que operan en el Reino Unido deben cumplir con los nuevos requisitos para Q2 2025.">
+                                The Financial Conduct Authority announced stricter guidelines for retail forex trading, including enhanced client protection measures and stricter leverage limits. Brokers operating in the UK must comply with new requirements by Q2 2025.
+                            </p>
+                            <span class="news-date">5 hours ago</span>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <span class="news-category" data-en="Broker News" data-es="Noticias de Brokers">Broker News</span>
+                            <h3 class="news-title" data-en="Major Brokers Announce Spread Reductions" data-es="Brokers Principales Anuncian Reducciones de Spreads">
+                                Major Brokers Announce Spread Reductions
+                            </h3>
+                            <p class="news-excerpt" data-en="Several leading brokers have announced reductions in spreads for major currency pairs, making forex trading more accessible to retail traders. Competition in the industry continues to benefit traders with better trading conditions." data-es="Varios brokers líderes han anunciado reducciones en spreads para pares de divisas principales, haciendo el trading de forex más accesible para traders minoristas. La competencia en la industria continúa beneficiando a los traders con mejores condiciones de trading.">
+                                Several leading brokers have announced reductions in spreads for major currency pairs, making forex trading more accessible to retail traders. Competition in the industry continues to benefit traders with better trading conditions.
+                            </p>
+                            <span class="news-date">1 day ago</span>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <span class="news-category" data-en="Economic Events" data-es="Eventos Económicos">Economic Events</span>
+                            <h3 class="news-title" data-en="US Retail Sales Data Exceeds Expectations" data-es="Datos de Ventas Minoristas de EE.UU. Superan Expectativas">
+                                US Retail Sales Data Exceeds Expectations
+                            </h3>
+                            <p class="news-excerpt" data-en="US retail sales for November showed stronger-than-expected growth, boosting the dollar against major currencies. The data suggests resilient consumer spending despite economic headwinds." data-es="Las ventas minoristas de EE.UU. para noviembre mostraron un crecimiento más fuerte de lo esperado, impulsando el dólar frente a las principales divisas. Los datos sugieren un gasto del consumidor resiliente a pesar de los vientos económicos en contra.">
+                                US retail sales for November showed stronger-than-expected growth, boosting the dollar against major currencies. The data suggests resilient consumer spending despite economic headwinds.
+                            </p>
+                            <span class="news-date">2 days ago</span>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <span class="news-category" data-en="Central Banks" data-es="Bancos Centrales">Central Banks</span>
+                            <h3 class="news-title" data-en="ECB Signals Potential Rate Cuts in 2025" data-es="BCE Señala Posibles Recortes de Tasas en 2025">
+                                ECB Signals Potential Rate Cuts in 2025
+                            </h3>
+                            <p class="news-excerpt" data-en="The European Central Bank hinted at potential interest rate reductions next year as inflation concerns ease. This could weaken the euro against other major currencies in the medium term." data-es="El Banco Central Europeo insinuó posibles reducciones de tasas de interés el próximo año a medida que las preocupaciones por la inflación se alivian. Esto podría debilitar el euro frente a otras divisas principales a mediano plazo.">
+                                The European Central Bank hinted at potential interest rate reductions next year as inflation concerns ease. This could weaken the euro against other major currencies in the medium term.
+                            </p>
+                            <span class="news-date">3 days ago</span>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <span class="news-category" data-en="Market Trends" data-es="Tendencias del Mercado">Market Trends</span>
+                            <h3 class="news-title" data-en="GBP/USD Volatility Increases Ahead of BoE Meeting" data-es="Volatilidad de GBP/USD Aumenta Antes de Reunión del BoE">
+                                GBP/USD Volatility Increases Ahead of BoE Meeting
+                            </h3>
+                            <p class="news-excerpt" data-en="The British pound experiences increased volatility as traders position themselves ahead of the Bank of England's monetary policy meeting. Analysts expect policy shifts that could significantly impact GBP pairs." data-es="La libra esterlina experimenta una mayor volatilidad mientras los traders se posicionan antes de la reunión de política monetaria del Banco de Inglaterra. Los analistas esperan cambios de política que podrían impactar significativamente los pares GBP.">
+                                The British pound experiences increased volatility as traders position themselves ahead of the Bank of England's monetary policy meeting. Analysts expect policy shifts that could significantly impact GBP pairs.
+                            </p>
+                            <span class="news-date">4 days ago</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="analysis" class="analysis-section section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Market Analysis" data-es="Análisis de Mercado">Market Analysis</h2>
+                <p class="section-intro" data-en="Expert analysis and insights into currency markets, economic indicators, and trading opportunities. Our analysts provide daily, weekly, and monthly market outlooks." data-es="Análisis experto e información sobre los mercados de divisas, indicadores económicos y oportunidades de trading. Nuestros analistas proporcionan perspectivas diarias, semanales y mensuales del mercado.">
+                    Expert analysis and insights into currency markets, economic indicators, and trading opportunities. Our analysts provide daily, weekly, and monthly market outlooks.
+                </p>
+                <div class="brokers-grid">
+                    <div class="broker-card">
+                        <h3 data-en="Daily Market Outlook" data-es="Perspectiva Diaria del Mercado">Daily Market Outlook</h3>
+                        <p data-en="Get daily insights into major currency pairs, key support and resistance levels, and potential trading opportunities. Updated every trading day with technical and fundamental analysis." data-es="Obtén información diaria sobre los principales pares de divisas, niveles clave de soporte y resistencia, y oportunidades de trading potenciales. Actualizado todos los días de trading con análisis técnico y fundamental.">
+                            Get daily insights into major currency pairs, key support and resistance levels, and potential trading opportunities. Updated every trading day with technical and fundamental analysis.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Weekly Market Review" data-es="Revisión Semanal del Mercado">Weekly Market Review</h3>
+                        <p data-en="Comprehensive weekly analysis covering market trends, major economic events, and their impact on currency markets. Includes forecasts for the upcoming week." data-es="Análisis semanal completo que cubre tendencias del mercado, eventos económicos importantes y su impacto en los mercados de divisas. Incluye pronósticos para la próxima semana.">
+                            Comprehensive weekly analysis covering market trends, major economic events, and their impact on currency markets. Includes forecasts for the upcoming week.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Economic Calendar Analysis" data-es="Análisis del Calendario Económico">Economic Calendar Analysis</h3>
+                        <p data-en="Detailed analysis of upcoming economic events and their potential market impact. Learn which events to watch and how to trade around major economic releases." data-es="Análisis detallado de eventos económicos próximos y su impacto potencial en el mercado. Aprende qué eventos observar y cómo operar alrededor de los principales lanzamientos económicos.">
+                            Detailed analysis of upcoming economic events and their potential market impact. Learn which events to watch and how to trade around major economic releases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section-pad">
+            <div class="container">
+                <h2 class="section-title" data-en="Trading Education" data-es="Educación de Trading">Trading Education</h2>
+                <p class="section-intro" data-en="Comprehensive educational resources to help you become a successful forex trader. From beginner courses to advanced trading concepts." data-es="Recursos educativos completos para ayudarte a convertirte en un trader de forex exitoso. Desde cursos para principiantes hasta conceptos avanzados de trading.">
+                    Comprehensive educational resources to help you become a successful forex trader. From beginner courses to advanced trading concepts.
+                </p>
+                <div class="brokers-grid">
+                    <div class="broker-card">
+                        <h3 data-en="Beginner Course" data-es="Curso para Principiantes">Beginner Course</h3>
+                        <p data-en="Start your forex trading journey with our comprehensive beginner course. Learn the basics, understand market mechanics, and develop your first trading plan." data-es="Comienza tu viaje de trading de forex con nuestro curso completo para principiantes. Aprende los conceptos básicos, entiende la mecánica del mercado y desarrolla tu primer plan de trading.">
+                            Start your forex trading journey with our comprehensive beginner course. Learn the basics, understand market mechanics, and develop your first trading plan.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Intermediate Course" data-es="Curso Intermedio">Intermediate Course</h3>
+                        <p data-en="Advance your trading skills with intermediate strategies, advanced chart analysis, and risk management techniques. Perfect for traders ready to take the next step." data-es="Avanza tus habilidades de trading con estrategias intermedias, análisis avanzado de gráficos y técnicas de gestión de riesgos. Perfecto para traders listos para dar el siguiente paso.">
+                            Advance your trading skills with intermediate strategies, advanced chart analysis, and risk management techniques. Perfect for traders ready to take the next step.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Advanced Course" data-es="Curso Avanzado">Advanced Course</h3>
+                        <p data-en="Master advanced trading concepts including algorithmic trading, market microstructure, and professional risk management. Designed for serious traders." data-es="Domina conceptos avanzados de trading incluyendo trading algorítmico, microestructura del mercado y gestión profesional de riesgos. Diseñado para traders serios.">
+                            Master advanced trading concepts including algorithmic trading, market microstructure, and professional risk management. Designed for serious traders.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Webinars &amp; Live Sessions" data-es="Webinars y Sesiones en Vivo">Webinars &amp; Live Sessions</h3>
+                        <p data-en="Join our live webinars with expert traders. Learn from real-time market analysis, ask questions, and interact with professional traders." data-es="Únete a nuestros webinars en vivo con traders expertos. Aprende de análisis de mercado en tiempo real, haz preguntas e interactúa con traders profesionales.">
+                            Join our live webinars with expert traders. Learn from real-time market analysis, ask questions, and interact with professional traders.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Trading Psychology" data-es="Psicología del Trading">Trading Psychology</h3>
+                        <p data-en="Understand the psychological aspects of trading. Learn to control emotions, develop discipline, and maintain consistency in your trading approach." data-es="Entiende los aspectos psicológicos del trading. Aprende a controlar las emociones, desarrolla disciplina y mantén la consistencia en tu enfoque de trading.">
+                            Understand the psychological aspects of trading. Learn to control emotions, develop discipline, and maintain consistency in your trading approach.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Video Tutorials" data-es="Tutoriales en Video">Video Tutorials</h3>
+                        <p data-en="Access our library of video tutorials covering all aspects of forex trading. Step-by-step guides with visual explanations for better understanding." data-es="Accede a nuestra biblioteca de tutoriales en video que cubren todos los aspectos del trading de forex. Guías paso a paso con explicaciones visuales para una mejor comprensión.">
+                            Access our library of video tutorials covering all aspects of forex trading. Step-by-step guides with visual explanations for better understanding.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Trading Tools" data-es="Herramientas de Trading">Trading Tools</h2>
+                <p class="section-intro" data-en="Essential tools for forex traders including calculators, converters, economic calendars, and market analysis tools." data-es="Herramientas esenciales para traders de forex incluyendo calculadoras, convertidores, calendarios económicos y herramientas de análisis de mercado.">
+                    Essential tools for forex traders including calculators, converters, economic calendars, and market analysis tools.
+                </p>
+                <div class="brokers-grid">
+                    <div class="broker-card">
+                        <h3 data-en="Position Size Calculator" data-es="Calculadora de Tamaño de Posición">Position Size Calculator</h3>
+                        <p data-en="Calculate the optimal position size based on your account balance, risk percentage, and stop-loss distance. Essential for proper risk management." data-es="Calcula el tamaño óptimo de posición basado en el balance de tu cuenta, porcentaje de riesgo y distancia del stop-loss. Esencial para una gestión adecuada de riesgos.">
+                            Calculate the optimal position size based on your account balance, risk percentage, and stop-loss distance. Essential for proper risk management.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Pip Value Calculator" data-es="Calculadora de Valor de Pip">Pip Value Calculator</h3>
+                        <p data-en="Determine the monetary value of a pip for different currency pairs and lot sizes. Helps you understand potential profit and loss before entering trades." data-es="Determina el valor monetario de un pip para diferentes pares de divisas y tamaños de lote. Te ayuda a entender las ganancias y pérdidas potenciales antes de entrar en operaciones.">
+                            Determine the monetary value of a pip for different currency pairs and lot sizes. Helps you understand potential profit and loss before entering trades.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Currency Converter" data-es="Convertidor de Divisas">Currency Converter</h3>
+                        <p data-en="Real-time currency conversion tool with live exchange rates. Convert between any currency pairs instantly with up-to-date market rates." data-es="Herramienta de conversión de divisas en tiempo real con tasas de cambio en vivo. Convierte entre cualquier par de divisas instantáneamente con tasas de mercado actualizadas.">
+                            Real-time currency conversion tool with live exchange rates. Convert between any currency pairs instantly with up-to-date market rates.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Economic Calendar" data-es="Calendario Económico">Economic Calendar</h3>
+                        <p data-en="Stay informed about important economic events and their potential market impact. Filter by country, importance, and event type." data-es="Mantente informado sobre eventos económicos importantes y su impacto potencial en el mercado. Filtra por país, importancia y tipo de evento.">
+                            Stay informed about important economic events and their potential market impact. Filter by country, importance, and event type.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Margin Calculator" data-es="Calculadora de Margen">Margin Calculator</h3>
+                        <p data-en="Calculate margin requirements for your trades based on leverage, lot size, and currency pair. Essential for managing your account effectively." data-es="Calcula los requisitos de margen para tus operaciones basados en apalancamiento, tamaño de lote y par de divisas. Esencial para gestionar tu cuenta efectivamente.">
+                            Calculate margin requirements for your trades based on leverage, lot size, and currency pair. Essential for managing your account effectively.
+                        </p>
+                    </div>
+                    <div class="broker-card">
+                        <h3 data-en="Profit/Loss Calculator" data-es="Calculadora de Ganancia/Pérdida">Profit/Loss Calculator</h3>
+                        <p data-en="Calculate potential profit or loss before entering a trade. Input entry price, exit price, lot size, and currency pair to see potential outcomes." data-es="Calcula la ganancia o pérdida potencial antes de entrar en una operación. Ingresa precio de entrada, precio de salida, tamaño de lote y par de divisas para ver resultados potenciales.">
+                            Calculate potential profit or loss before entering a trade. Input entry price, exit price, lot size, and currency pair to see potential outcomes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section section-pad">
+            <div class="container">
+                <h2 class="section-title" data-en="Our Story" data-es="Nuestra Historia">Our Story</h2>
+                <div>
+                    <p class="section-body" data-en="BrokerPro was founded to provide transparent, unbiased broker reviews and help traders make informed decisions. We are committed to delivering accurate information and expert analysis." data-es="BrokerPro fue fundado para ofrecer reseñas de brokers transparentes e imparciales y ayudar a los traders a tomar decisiones informadas. Estamos comprometidos a entregar información precisa y análisis experto.">
+                        BrokerPro was founded to provide transparent, unbiased broker reviews and help traders make informed decisions. We are committed to delivering accurate information and expert analysis.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="team-section section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Editorial Team" data-es="Equipo Editorial">Editorial Team</h2>
+                <p class="section-intro" data-en="Our team consists of experienced traders, financial analysts, and industry experts dedicated to providing you with the most accurate and up-to-date broker information." data-es="Nuestro equipo está formado por traders experimentados, analistas financieros y expertos de la industria dedicados a proporcionarte la información de brokers más precisa y actualizada.">
+                    Our team consists of experienced traders, financial analysts, and industry experts dedicated to providing you with the most accurate and up-to-date broker information.
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section section-pad">
+            <div class="container">
+                <h2 class="section-title" data-en="Contact Us" data-es="Contáctanos">Contact Us</h2>
+                <div class="contact-card">
+                    <p class="contact-intro" data-en="Have questions or feedback? We'd love to hear from you." data-es="¿Tienes preguntas o comentarios? Nos encantaría saber de ti.">
+                        Have questions or feedback? We'd love to hear from you.
+                    </p>
+                    <p class="contact-email" data-en="Email: contact@brokerpro.com" data-es="Email: contact@brokerpro.com">
+                        Email: contact@brokerpro.com
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="privacy" class="privacy-section section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</h2>
+                <div>
+                    <p class="legal-text" data-en="We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information." data-es="Respetamos tu privacidad y estamos comprometidos a proteger tus datos personales. Esta política de privacidad explica cómo recopilamos, usamos y protegemos tu información.">
+                        We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="terms" class="terms-section section-pad">
+            <div class="container">
+                <h2 class="section-title" data-en="Terms of Service" data-es="Términos de Servicio">Terms of Service</h2>
+                <div>
+                    <p class="legal-text" data-en="By using our website, you agree to these terms of service. Please read them carefully before using our services." data-es="Al usar nuestro sitio web, aceptas estos términos de servicio. Por favor léelos cuidadosamente antes de usar nuestros servicios.">
+                        By using our website, you agree to these terms of service. Please read them carefully before using our services.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="disclaimer" class="disclaimer-section section-pad-dark">
+            <div class="container">
+                <h2 class="section-title" data-en="Disclaimer" data-es="Descargo de Responsabilidad">Disclaimer</h2>
+                <div>
+                    <p class="legal-text" data-en="The information provided on this website is for educational purposes only and should not be considered as financial advice. Trading forex involves substantial risk of loss." data-es="La información proporcionada en este sitio web es solo para fines educativos y no debe considerarse como asesoramiento financiero. El trading de forex implica un riesgo sustancial de pérdida.">
+                        The information provided on this website is for educational purposes only and should not be considered as financial advice. Trading forex involves substantial risk of loss.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-en="About" data-es="Acerca de">About</h4>
+                    <ul>
+                        <li><a href="#about" data-en="Our Story" data-es="Nuestra Historia">Our Story</a></li>
+                        <li><a href="#team" data-en="Editorial Team" data-es="Equipo Editorial">Editorial Team</a></li>
+                        <li><a href="#contact" data-en="Contact Us" data-es="Contáctanos">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Resources" data-es="Recursos">Resources</h4>
+                    <ul>
+                        <li><a href="#guides" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</a></li>
+                        <li><a href="#strategies" data-en="Trading Strategies" data-es="Estrategias de Trading">Trading Strategies</a></li>
+                        <li><a href="#comparison" data-en="Broker Comparison" data-es="Comparación de Brokers">Broker Comparison</a></li>
+                        <li><a href="#analysis" data-en="Market Analysis" data-es="Análisis de Mercado">Market Analysis</a></li>
+                        <li><a href="#education" data-en="Education" data-es="Educación">Education</a></li>
+                        <li><a href="#tools" data-en="Trading Tools" data-es="Herramientas de Trading">Trading Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Legal" data-es="Legal">Legal</h4>
+                    <ul>
+                        <li><a href="#privacy" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
+                        <li><a href="#terms" data-en="Terms of Service" data-es="Términos de Servicio">Terms of Service</a></li>
+                        <li><a href="#disclaimer" data-en="Disclaimer" data-es="Descargo de Responsabilidad">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BrokerPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="../shared/data-api.js"></script>
+    <script src="../shared/navigation.js"></script>
+</body>
+</html>
+

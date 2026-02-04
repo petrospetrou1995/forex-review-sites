@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrokerMetrics - Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">BrokerMetrics</div>
+                <div class="logo-subtitle" data-en="Analytics Dashboard" data-es="Panel de Análisis">Analytics Dashboard</div>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#overview" class="menu-item active">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text" data-en="Overview" data-es="Resumen">Overview</span>
+                </a>
+                <a href="#brokers" class="menu-item">
+                    <span class="menu-icon">🏢</span>
+                    <span class="menu-text" data-en="Brokers" data-es="Brokers">Brokers</span>
+                </a>
+                <a href="#analytics" class="menu-item">
+                    <span class="menu-icon">📈</span>
+                    <span class="menu-text" data-en="Analytics" data-es="Análisis">Analytics</span>
+                </a>
+                <a href="#reports" class="menu-item">
+                    <span class="menu-icon">📄</span>
+                    <span class="menu-text" data-en="Reports" data-es="Informes">Reports</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="lang-btn-sidebar" id="langToggle">ES</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div id="overview"></div>
+            <header class="dashboard-header">
+                <h1 class="page-title" data-en="Broker Analytics Overview" data-es="Resumen de Análisis de Brokers">Broker Analytics Overview</h1>
+                <div class="header-actions">
+                    <button class="btn-refresh" data-en="Refresh Data" data-es="Actualizar Datos">Refresh Data</button>
+                    <button class="btn-export" data-en="Export" data-es="Exportar">Export</button>
+                </div>
+            </header>
+
+            <div id="brokers" class="dashboard-content">
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <div class="stat-label" data-en="Total Brokers" data-es="Total Brokers">Total Brokers</div>
+                            <div class="stat-value" id="totalBrokers">250</div>
+                            <div class="stat-change positive">+12 <span data-en="this month" data-es="este mes">this month</span></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-label" data-en="Avg Rating" data-es="Calificación Promedio">Avg Rating</div>
+                            <div class="stat-value" id="avgRating">4.6</div>
+                            <div class="stat-change positive">+0.2 <span data-en="vs last month" data-es="vs mes pasado">vs last month</span></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <div class="stat-label" data-en="Total Reviews" data-es="Total Reseñas">Total Reviews</div>
+                            <div class="stat-value" id="totalReviews">12,450</div>
+                            <div class="stat-change positive">+1,234 <span data-en="new" data-es="nuevas">new</span></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <div class="stat-label" data-en="Growth Rate" data-es="Tasa de Crecimiento">Growth Rate</div>
+                            <div class="stat-value" id="growthRate">18%</div>
+                            <div class="stat-change positive">+3% <span data-en="increase" data-es="aumento">increase</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <h3 class="chart-title" data-en="Top Rated Brokers" data-es="Brokers Mejor Calificados">Top Rated Brokers</h3>
+                        <div class="chart-content" id="topBrokersChart">
+                            <div class="chart-bar-item">
+                                <div class="bar-label"><a href="https://www.xm.com" target="_blank" style="color: inherit; text-decoration: none;">XM Group</a></div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 96%"></div>
+                                </div>
+                                <div class="bar-value">4.8</div>
+                            </div>
+                            <div class="chart-bar-item">
+                                <div class="bar-label"><a href="https://www.libertex.com" target="_blank" style="color: inherit; text-decoration: none;">Libertex</a></div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 98%"></div>
+                                </div>
+                                <div class="bar-value">4.9</div>
+                            </div>
+                            <div class="chart-bar-item">
+                                <div class="bar-label"><a href="https://www.exness.com" target="_blank" style="color: inherit; text-decoration: none;">Exness</a></div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 94%"></div>
+                                </div>
+                                <div class="bar-value">4.7</div>
+                            </div>
+                            <div class="chart-bar-item">
+                                <div class="bar-label"><a href="https://www.pepperstone.com" target="_blank" style="color: inherit; text-decoration: none;">Pepperstone</a></div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 92%"></div>
+                                </div>
+                                <div class="bar-value">4.6</div>
+                            </div>
+                            <div class="chart-bar-item">
+                                <div class="bar-label"><a href="https://www.icmarkets.com" target="_blank" style="color: inherit; text-decoration: none;">IC Markets</a></div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: 90%"></div>
+                                </div>
+                                <div class="bar-value">4.5</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title" data-en="Broker Distribution" data-es="Distribución de Brokers">Broker Distribution</h3>
+                        <div class="chart-content" id="brokerDistribution">
+                            <div class="distribution-item">
+                                <div class="dist-label" data-en="Regulated" data-es="Regulados">Regulated</div>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 85%"></div>
+                                </div>
+                                <div class="dist-value">85%</div>
+                            </div>
+                            <div class="distribution-item">
+                                <div class="dist-label" data-en="MT4/MT5" data-es="MT4/MT5">MT4/MT5</div>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 92%"></div>
+                                </div>
+                                <div class="dist-value">92%</div>
+                            </div>
+                            <div class="distribution-item">
+                                <div class="dist-label" data-en="ECN" data-es="ECN">ECN</div>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 45%"></div>
+                                </div>
+                                <div class="dist-value">45%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-section">
+                    <h2 class="section-title" data-en="Recent Broker Updates" data-es="Actualizaciones Recientes de Brokers">Recent Broker Updates</h2>
+                    <div class="table-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th data-en="Broker" data-es="Broker">Broker</th>
+                                    <th data-en="Update Type" data-es="Tipo de Actualización">Update Type</th>
+                                    <th data-en="Details" data-es="Detalles">Details</th>
+                                    <th data-en="Date" data-es="Fecha">Date</th>
+                                    <th data-en="Status" data-es="Estado">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="brokerUpdatesTable">
+                                <tr>
+                                    <td><a href="https://www.libertex.com" target="_blank" style="color: inherit; text-decoration: underline;">Libertex</a></td>
+                                    <td><span class="badge badge-success" data-en="Platform Update" data-es="Actualización Plataforma">Platform Update</span></td>
+                                    <td data-en="New web platform features launched" data-es="Nuevas funciones de plataforma web lanzadas">New web platform features launched</td>
+                                    <td>2025-01-15</td>
+                                    <td><span class="status-badge active" data-en="Active" data-es="Activo">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="https://www.xm.com" target="_blank" style="color: inherit; text-decoration: underline;">XM Group</a></td>
+                                    <td><span class="badge badge-info" data-en="Spread Update" data-es="Actualización Spread">Spread Update</span></td>
+                                    <td data-en="EUR/USD spread reduced to 0.6 pips" data-es="Spread EUR/USD reducido a 0.6 pips">EUR/USD spread reduced to 0.6 pips</td>
+                                    <td>2025-01-14</td>
+                                    <td><span class="status-badge active" data-en="Active" data-es="Activo">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="https://www.exness.com" target="_blank" style="color: inherit; text-decoration: underline;">Exness</a></td>
+                                    <td><span class="badge badge-success" data-en="New Feature" data-es="Nueva Función">New Feature</span></td>
+                                    <td data-en="Instant withdrawals now available" data-es="Retiros instantáneos ahora disponibles">Instant withdrawals now available</td>
+                                    <td>2025-01-13</td>
+                                    <td><span class="status-badge active" data-en="Active" data-es="Activo">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="https://www.pepperstone.com" target="_blank" style="color: inherit; text-decoration: underline;">Pepperstone</a></td>
+                                    <td><span class="badge badge-warning" data-en="Regulation" data-es="Regulación">Regulation</span></td>
+                                    <td data-en="New FCA license obtained" data-es="Nueva licencia FCA obtenida">New FCA license obtained</td>
+                                    <td>2025-01-12</td>
+                                    <td><span class="status-badge active" data-en="Active" data-es="Activo">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="analytics" style="padding: 2rem; background: var(--main-bg); min-height: 400px;">
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;" data-en="Analytics Dashboard" data-es="Panel de Análisis">Analytics Dashboard</h2>
+                <p style="color: var(--text-secondary);" data-en="Advanced analytics and insights into broker performance." data-es="Análisis avanzados y perspectivas sobre el rendimiento de brokers.">
+                    Advanced analytics and insights into broker performance.
+                </p>
+            </div>
+
+            <div id="reports" style="padding: 2rem; background: var(--main-bg); min-height: 400px;">
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;" data-en="Reports" data-es="Informes">Reports</h2>
+                <p style="color: var(--text-secondary);" data-en="Generate and download detailed broker reports." data-es="Genera y descarga informes detallados de brokers.">
+                    Generate and download detailed broker reports.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="../shared/data-api.js"></script>
+</body>
+</html>
+

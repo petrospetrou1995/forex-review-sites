@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrokerData Pro - Comprehensive Broker Database</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">BrokerData Pro</div>
+                <div class="logo-subtitle" data-en="Data-Driven Reviews" data-es="Reseñas Basadas en Datos">Data-Driven Reviews</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text" data-en="Dashboard" data-es="Panel">Dashboard</span>
+                </a>
+                <a href="#brokers" class="nav-item">
+                    <span class="nav-icon">🏢</span>
+                    <span class="nav-text" data-en="All Brokers" data-es="Todos los Brokers">All Brokers</span>
+                </a>
+                <a href="#comparison" class="nav-item">
+                    <span class="nav-icon">⚖️</span>
+                    <span class="nav-text" data-en="Compare" data-es="Comparar">Compare</span>
+                </a>
+                <a href="#analytics" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-text" data-en="Analytics" data-es="Análisis">Analytics</span>
+                </a>
+                <a href="#reports" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text" data-en="Reports" data-es="Informes">Reports</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="lang-toggle-sidebar" id="langToggle">ES</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div id="dashboard"></div>
+            <header class="top-header">
+                <div class="header-content">
+                    <h1 class="page-title" data-en="Broker Database" data-es="Base de Datos de Brokers">Broker Database</h1>
+                    <div class="header-actions">
+                        <input type="search" placeholder="Search brokers..." data-en-placeholder="Search brokers..." data-es-placeholder="Buscar brokers..." class="search-box">
+                        <button class="filter-btn" data-en="Filters" data-es="Filtros">Filters</button>
+                    </div>
+                </div>
+            </header>
+
+            <div id="brokers" class="content-area">
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="select-all">
+                                </th>
+                                <th data-en="Broker Name" data-es="Nombre del Broker">Broker Name</th>
+                                <th data-en="Rating" data-es="Calificación">Rating</th>
+                                <th data-en="Regulation" data-es="Regulación">Regulation</th>
+                                <th data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</th>
+                                <th data-en="Spreads" data-es="Spreads">Spreads</th>
+                                <th data-en="Platforms" data-es="Plataformas">Platforms</th>
+                                <th data-en="Actions" data-es="Acciones">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="broker-cell">
+                                        <div class="broker-avatar">XM</div>
+                                        <div class="broker-info">
+                                            <div class="broker-name-cell">XM Group</div>
+                                            <div class="broker-meta" data-en="Est. 2009" data-es="Est. 2009">Est. 2009</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="rating-cell">
+                                        <span class="rating-num">4.8</span>
+                                        <div class="rating-bar">
+                                            <div class="rating-fill" style="width: 96%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" data-en="CySEC, ASIC" data-es="CySEC, ASIC">CySEC, ASIC</span>
+                                </td>
+                                <td>$5</td>
+                                <td>0.6 pips</td>
+                                <td>
+                                    <span class="platform-tag">MT4</span>
+                                    <span class="platform-tag">MT5</span>
+                                </td>
+                                <td>
+                                    <button class="action-btn" onclick="window.open('https://www.xm.com', '_blank')" data-en="View" data-es="Ver">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="broker-cell">
+                                        <div class="broker-avatar">LB</div>
+                                        <div class="broker-info">
+                                            <div class="broker-name-cell">Libertex</div>
+                                            <div class="broker-meta" data-en="Est. 1997" data-es="Est. 1997">Est. 1997</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="rating-cell">
+                                        <span class="rating-num">4.9</span>
+                                        <div class="rating-bar">
+                                            <div class="rating-fill" style="width: 98%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" data-en="CySEC" data-es="CySEC">CySEC</span>
+                                </td>
+                                <td>$100</td>
+                                <td>From 0.0 pips</td>
+                                <td>
+                                    <span class="platform-tag">Web</span>
+                                    <span class="platform-tag">Mobile</span>
+                                </td>
+                                <td>
+                                    <button class="action-btn" onclick="window.open('https://www.libertex.com', '_blank')" data-en="Visit Libertex" data-es="Visitar Libertex">Visit Libertex</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="broker-cell">
+                                        <div class="broker-avatar">EX</div>
+                                        <div class="broker-info">
+                                            <div class="broker-name-cell">Exness</div>
+                                            <div class="broker-meta" data-en="Est. 2008" data-es="Est. 2008">Est. 2008</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="rating-cell">
+                                        <span class="rating-num">4.7</span>
+                                        <div class="rating-bar">
+                                            <div class="rating-fill" style="width: 94%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" data-en="FCA, CySEC" data-es="FCA, CySEC">FCA, CySEC</span>
+                                </td>
+                                <td>$10</td>
+                                <td>0.1 pips</td>
+                                <td>
+                                    <span class="platform-tag">MT4</span>
+                                    <span class="platform-tag">MT5</span>
+                                </td>
+                                <td>
+                                    <button class="action-btn" onclick="window.open('https://www.exness.com', '_blank')" data-en="View" data-es="Ver">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="broker-cell">
+                                        <div class="broker-avatar">PS</div>
+                                        <div class="broker-info">
+                                            <div class="broker-name-cell">Pepperstone</div>
+                                            <div class="broker-meta" data-en="Est. 2010" data-es="Est. 2010">Est. 2010</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="rating-cell">
+                                        <span class="rating-num">4.6</span>
+                                        <div class="rating-bar">
+                                            <div class="rating-fill" style="width: 92%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" data-en="ASIC, FCA" data-es="ASIC, FCA">ASIC, FCA</span>
+                                </td>
+                                <td>$200</td>
+                                <td>0.0 pips</td>
+                                <td>
+                                    <span class="platform-tag">MT4</span>
+                                    <span class="platform-tag">MT5</span>
+                                    <span class="platform-tag">cTrader</span>
+                                </td>
+                                <td>
+                                    <button class="action-btn" onclick="window.open('https://www.pepperstone.com', '_blank')" data-en="View" data-es="Ver">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="broker-cell">
+                                        <div class="broker-avatar">IC</div>
+                                        <div class="broker-info">
+                                            <div class="broker-name-cell">IC Markets</div>
+                                            <div class="broker-meta" data-en="Est. 2007" data-es="Est. 2007">Est. 2007</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="rating-cell">
+                                        <span class="rating-num">4.5</span>
+                                        <div class="rating-bar">
+                                            <div class="rating-fill" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" data-en="ASIC, CySEC" data-es="ASIC, CySEC">ASIC, CySEC</span>
+                                </td>
+                                <td>$200</td>
+                                <td>0.0 pips</td>
+                                <td>
+                                    <span class="platform-tag">MT4</span>
+                                    <span class="platform-tag">MT5</span>
+                                    <span class="platform-tag">cTrader</span>
+                                </td>
+                                <td>
+                                    <button class="action-btn" onclick="window.open('https://www.icmarkets.com', '_blank')" data-en="View" data-es="Ver">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="page-btn" disabled data-en="Previous" data-es="Anterior">Previous</button>
+                    <span class="page-info" data-en="Page 1 of 10" data-es="Página 1 de 10">Page 1 of 10</span>
+                    <button class="page-btn" data-en="Next" data-es="Siguiente">Next</button>
+                </div>
+            </div>
+
+            <div id="comparison" style="padding: 2rem; background: var(--main-bg); min-height: 400px;">
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;" data-en="Broker Comparison" data-es="Comparación de Brokers">Broker Comparison</h2>
+                <p style="color: var(--text-secondary);" data-en="Compare brokers side by side using our comparison tool." data-es="Compara brokers lado a lado usando nuestra herramienta de comparación.">
+                    Compare brokers side by side using our comparison tool.
+                </p>
+            </div>
+
+            <div id="analytics" style="padding: 2rem; background: var(--main-bg); min-height: 400px;">
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;" data-en="Analytics" data-es="Análisis">Analytics</h2>
+                <p style="color: var(--text-secondary);" data-en="Broker performance analytics and market insights." data-es="Análisis de rendimiento de brokers y perspectivas de mercado.">
+                    Broker performance analytics and market insights.
+                </p>
+            </div>
+
+            <div id="reports" style="padding: 2rem; background: var(--main-bg); min-height: 400px;">
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;" data-en="Reports" data-es="Informes">Reports</h2>
+                <p style="color: var(--text-secondary);" data-en="Detailed broker reports and analysis." data-es="Informes detallados de brokers y análisis.">
+                    Detailed broker reports and analysis.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="../shared/data-api.js"></script>
+</body>
+</html>
+

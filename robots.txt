@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap (update with your actual domain)
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Disallow API endpoints from being indexed
+Disallow: /api/
+
+

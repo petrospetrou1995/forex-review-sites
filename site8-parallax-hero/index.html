@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForexPulse - Dynamic Broker Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">ForexPulse</div>
+                <ul class="nav-links">
+                    <li><a href="#brokers" data-en="Brokers" data-es="Brokers">Brokers</a></li>
+                    <li><a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                    <li><a href="#market" data-en="Market" data-es="Mercado">Market</a></li>
+                    <li><a href="#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                </ul>
+                <button class="lang-switch" id="langToggle">ES</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="parallax-hero">
+        <div class="parallax-layer layer-1" data-speed="0.5"></div>
+        <div class="parallax-layer layer-2" data-speed="0.3"></div>
+        <div class="parallax-layer layer-3" data-speed="0.1"></div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title" data-en="Find Your Perfect Trading Partner" data-es="Encuentra Tu Socio de Trading Perfecto">
+                    Find Your Perfect Trading Partner
+                </h1>
+                <p class="hero-subtitle" data-en="Comprehensive broker reviews backed by real trader experiences and market data" data-es="Reseñas completas de brokers respaldadas por experiencias reales de traders y datos de mercado">
+                    Comprehensive broker reviews backed by real trader experiences and market data
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-hero-primary" data-en="Start Exploring" data-es="Comenzar a Explorar">Start Exploring</button>
+                    <button class="btn-hero-secondary" data-en="Watch Demo" data-es="Ver Demo">Watch Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="brokers" class="brokers-showcase">
+        <div class="container">
+            <h2 class="section-heading" data-en="Top Rated Brokers" data-es="Brokers Mejor Calificados">Top Rated Brokers</h2>
+            <div class="brokers-masonry">
+                <div class="broker-tile tile-large">
+                    <div class="tile-overlay"></div>
+                    <div class="tile-content">
+                        <div class="tile-badge" data-en="#1 Rated" data-es="#1 Calificado">#1 Rated</div>
+                        <h3 class="tile-title">Libertex</h3>
+                        <div class="tile-rating">
+                            <span class="rating-stars">★★★★★</span>
+                            <span class="rating-score">4.9/5</span>
+                        </div>
+                        <p class="tile-description" data-en="Top-rated broker with user-friendly platform and competitive trading conditions. Regulated by CySEC." data-es="Broker mejor calificado con plataforma fácil de usar y condiciones de trading competitivas. Regulado por CySEC.">
+                            Top-rated broker with user-friendly platform and competitive trading conditions. Regulated by CySEC.
+                        </p>
+                        <button class="tile-btn" onclick="window.open('https://www.libertex.com', '_blank')" data-en="Visit Libertex" data-es="Visitar Libertex">Visit Libertex</button>
+                    </div>
+                </div>
+
+                <div class="broker-tile">
+                    <div class="tile-overlay"></div>
+                    <div class="tile-content">
+                        <div class="tile-badge" data-en="Best Spreads" data-es="Mejores Spreads">Best Spreads</div>
+                        <h3 class="tile-title">Exness</h3>
+                        <div class="tile-rating">
+                            <span class="rating-stars">★★★★★</span>
+                            <span class="rating-score">4.7/5</span>
+                        </div>
+                        <div class="tile-features">
+                            <span class="feature" data-en="0.1 pips" data-es="0.1 pips">0.1 pips</span>
+                            <span class="feature" data-en="Instant Withdrawals" data-es="Retiros Instantáneos">Instant Withdrawals</span>
+                        </div>
+                        <button class="tile-btn" onclick="window.open('https://www.exness.com', '_blank')" data-en="Learn More" data-es="Saber Más">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="broker-tile">
+                    <div class="tile-overlay"></div>
+                    <div class="tile-content">
+                        <div class="tile-badge" data-en="Professional" data-es="Profesional">Professional</div>
+                        <h3 class="tile-title">Pepperstone</h3>
+                        <div class="tile-rating">
+                            <span class="rating-stars">★★★★☆</span>
+                            <span class="rating-score">4.6/5</span>
+                        </div>
+                        <div class="tile-features">
+                            <span class="feature" data-en="ECN Execution" data-es="Ejecución ECN">ECN Execution</span>
+                            <span class="feature" data-en="Raw Spreads" data-es="Spreads Raw">Raw Spreads</span>
+                        </div>
+                        <button class="tile-btn" onclick="window.open('https://www.pepperstone.com', '_blank')" data-en="Learn More" data-es="Saber Más">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="broker-tile">
+                    <div class="tile-overlay"></div>
+                    <div class="tile-content">
+                        <div class="tile-badge" data-en="Award Winner" data-es="Ganador de Premios">Award Winner</div>
+                        <h3 class="tile-title">IC Markets</h3>
+                        <div class="tile-rating">
+                            <span class="rating-stars">★★★★☆</span>
+                            <span class="rating-score">4.5/5</span>
+                        </div>
+                        <div class="tile-features">
+                            <span class="feature" data-en="Low Latency" data-es="Baja Latencia">Low Latency</span>
+                            <span class="feature" data-en="cTrader" data-es="cTrader">cTrader</span>
+                        </div>
+                        <button class="tile-btn" onclick="window.open('https://www.icmarkets.com', '_blank')" data-en="Learn More" data-es="Saber Más">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="broker-tile">
+                    <div class="tile-overlay"></div>
+                    <div class="tile-content">
+                        <div class="tile-badge" data-en="Trusted" data-es="Confiado">Trusted</div>
+                        <h3 class="tile-title">XM Group</h3>
+                        <div class="tile-rating">
+                            <span class="rating-stars">★★★★★</span>
+                            <span class="rating-score">4.8/5</span>
+                        </div>
+                        <div class="tile-features">
+                            <span class="feature" data-en="24/7 Support" data-es="Soporte 24/7">24/7 Support</span>
+                            <span class="feature" data-en="MT4/MT5" data-es="MT4/MT5">MT4/MT5</span>
+                        </div>
+                        <button class="tile-btn" onclick="window.open('https://www.xm.com', '_blank')" data-en="Learn More" data-es="Saber Más">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Broker Reviews" data-es="Reseñas de Brokers">Broker Reviews</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto 3rem;" data-en="Comprehensive reviews of forex brokers." data-es="Reseñas completas de brokers de forex.">
+                Comprehensive reviews of forex brokers.
+            </p>
+        </div>
+    </section>
+
+    <section id="market" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <h2 class="section-heading" data-en="Market Information" data-es="Información del Mercado">Market Information</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Stay updated with the latest market news and trends." data-es="Mantente actualizado con las últimas noticias y tendencias del mercado.">
+                Stay updated with the latest market news and trends.
+            </p>
+        </div>
+    </section>
+
+    <section id="tools" class="features-section">
+        <div class="container">
+            <h2 class="section-heading" data-en="Trading Tools" data-es="Herramientas de Trading">Trading Tools</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto 3rem;" data-en="Useful tools for forex traders." data-es="Herramientas útiles para traders de forex.">
+                Useful tools for forex traders.
+            </p>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-heading" data-en="Why Choose ForexPulse" data-es="Por Qué Elegir ForexPulse">Why Choose ForexPulse</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 data-en="In-Depth Analysis" data-es="Análisis en Profundidad">In-Depth Analysis</h3>
+                    <p data-en="Comprehensive reviews covering all aspects of each broker" data-es="Reseñas completas que cubren todos los aspectos de cada broker">
+                        Comprehensive reviews covering all aspects of each broker
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3 data-en="Verified Reviews" data-es="Reseñas Verificadas">Verified Reviews</h3>
+                    <p data-en="All reviews are verified by real traders with active accounts" data-es="Todas las reseñas están verificadas por traders reales con cuentas activas">
+                        All reviews are verified by real traders with active accounts
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 data-en="Real-Time Data" data-es="Datos en Tiempo Real">Real-Time Data</h3>
+                    <p data-en="Up-to-date spreads, commissions, and market information" data-es="Spreads, comisiones e información de mercado actualizadas">
+                        Up-to-date spreads, commissions, and market information
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Our Story" data-es="Nuestra Historia">Our Story</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="ForexPulse was created to help traders find the best brokers." data-es="ForexPulse fue creado para ayudar a los traders a encontrar los mejores brokers.">
+                ForexPulse was created to help traders find the best brokers.
+            </p>
+        </div>
+    </section>
+
+    <section id="team" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <h2 class="section-heading" data-en="Our Team" data-es="Nuestro Equipo">Our Team</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Experienced traders and analysts." data-es="Traders y analistas experimentados.">
+                Experienced traders and analysts.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Contact Us" data-es="Contáctanos">Contact Us</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8;" data-en="Email: contact@forexpulse.com" data-es="Email: contact@forexpulse.com">
+                Email: contact@forexpulse.com
+            </p>
+        </div>
+    </section>
+
+    <section id="database" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <h2 class="section-heading" data-en="Broker Database" data-es="Base de Datos de Brokers">Broker Database</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Comprehensive database of forex brokers." data-es="Base de datos completa de brokers de forex.">
+                Comprehensive database of forex brokers.
+            </p>
+        </div>
+    </section>
+
+    <section id="guides" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Comprehensive trading guides and tutorials." data-es="Guías y tutoriales completos de trading.">
+                Comprehensive trading guides and tutorials.
+            </p>
+        </div>
+    </section>
+
+    <section id="analysis" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <h2 class="section-heading" data-en="Market Analysis" data-es="Análisis de Mercado">Market Analysis</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Expert market analysis and insights." data-es="Análisis experto del mercado y perspectivas.">
+                Expert market analysis and insights.
+            </p>
+        </div>
+    </section>
+
+    <section id="privacy" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="We protect your privacy and personal information." data-es="Protegemos tu privacidad e información personal.">
+                We protect your privacy and personal information.
+            </p>
+        </div>
+    </section>
+
+    <section id="terms" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <h2 class="section-heading" data-en="Terms of Service" data-es="Términos de Servicio">Terms of Service</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Terms and conditions for using our website." data-es="Términos y condiciones para usar nuestro sitio web.">
+                Terms and conditions for using our website.
+            </p>
+        </div>
+    </section>
+
+    <section id="disclaimer" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-heading" data-en="Disclaimer" data-es="Descargo de Responsabilidad">Disclaimer</h2>
+            <p style="text-align: center; color: var(--text-dark); opacity: 0.8; max-width: 700px; margin: 0 auto;" data-en="Trading involves risk. Information is for educational purposes only." data-es="El trading implica riesgo. La información es solo para fines educativos.">
+                Trading involves risk. Information is for educational purposes only.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 data-en="About" data-es="Acerca de">About</h4>
+                    <ul>
+                        <li><a href="#story" data-en="Our Story" data-es="Nuestra Historia">Our Story</a></li>
+                        <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
+                        <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Resources" data-es="Recursos">Resources</h4>
+                    <ul>
+                        <li><a href="#database" data-en="Broker Database" data-es="Base de Datos">Broker Database</a></li>
+                        <li><a href="#guides" data-en="Trading Guides" data-es="Guías">Trading Guides</a></li>
+                        <li><a href="#analysis" data-en="Market Analysis" data-es="Análisis">Market Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Legal" data-es="Legal">Legal</h4>
+                    <ul>
+                        <li><a href="#privacy" data-en="Privacy" data-es="Privacidad">Privacy</a></li>
+                        <li><a href="#terms" data-en="Terms" data-es="Términos">Terms</a></li>
+                        <li><a href="#disclaimer" data-en="Disclaimer" data-es="Descargo">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ForexPulse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="parallax.js"></script>
+    <script src="../shared/data-api.js"></script>
+</body>
+</html>
+

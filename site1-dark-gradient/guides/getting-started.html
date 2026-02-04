@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Forex Trading | BrokerPro Guides</title>
+    <meta name="description" content="A practical beginner guide to forex: how the market works, key terms, placing your first trade, and avoiding common mistakes.">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header guide-header">
+        <nav class="nav guide-nav">
+            <div class="container">
+                <div class="nav-content">
+                    <a class="logo" href="../index.html" aria-label="BrokerPro home">
+                        <span class="logo-icon">📊</span>
+                        <span class="logo-text">BrokerPro</span>
+                    </a>
+                    <div class="nav-actions">
+                        <a class="guide-back link-cta" href="../index.html#guides" data-en="← Back to Guides" data-es="← Volver a Guías">← Back to Guides</a>
+                        <button class="lang-toggle" id="langToggle" type="button">ES</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="section-pad">
+        <div class="container">
+            <article class="guide-article">
+                <h1 class="guide-title" data-en="Getting Started with Forex Trading" data-es="Cómo Empezar con el Trading de Forex">Getting Started with Forex Trading</h1>
+                <p class="guide-lead" data-en="This beginner-friendly guide explains how forex works, what you actually trade, and how to place your first trade responsibly." data-es="Esta guía para principiantes explica cómo funciona el forex, qué es lo que realmente se opera y cómo realizar tu primera operación de forma responsable.">
+                    This beginner-friendly guide explains how forex works, what you actually trade, and how to place your first trade responsibly.
+                </p>
+
+                <div class="card-panel guide-toc">
+                    <h2 class="subheading-card" data-en="Table of contents" data-es="Tabla de contenidos">Table of contents</h2>
+                    <ol class="guide-toc-list">
+                        <li><a class="link-cta" href="#whatIsForex" data-en="What is forex?" data-es="¿Qué es forex?">What is forex?</a></li>
+                        <li><a class="link-cta" href="#coreTerms" data-en="Core terms (pairs, pip, spread, lot)" data-es="Términos clave (pares, pip, spread, lote)">Core terms (pairs, pip, spread, lot)</a></li>
+                        <li><a class="link-cta" href="#howTradingWorks" data-en="How a trade works (order types)" data-es="Cómo funciona una operación (tipos de orden)">How a trade works (order types)</a></li>
+                        <li><a class="link-cta" href="#riskBasics" data-en="Risk basics (leverage, margin, stops)" data-es="Riesgo básico (apalancamiento, margen, stops)">Risk basics (leverage, margin, stops)</a></li>
+                        <li><a class="link-cta" href="#firstTrade" data-en="Your first trade checklist" data-es="Checklist para tu primera operación">Your first trade checklist</a></li>
+                    </ol>
+                </div>
+
+                <section id="whatIsForex" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="1) What is forex?" data-es="1) ¿Qué es forex?">1) What is forex?</h2>
+                    <p class="guide-text" data-en="Forex (FX) is the global market for exchanging currencies. You trade currency pairs like EUR/USD, which represents the value of one currency relative to another." data-es="Forex (FX) es el mercado global para intercambiar divisas. Se operan pares como EUR/USD, que representan el valor de una moneda frente a otra.">
+                        Forex (FX) is the global market for exchanging currencies. You trade currency pairs like EUR/USD, which represents the value of one currency relative to another.
+                    </p>
+                    <ul class="guide-list">
+                        <li data-en="When EUR/USD rises, the euro strengthens vs the US dollar." data-es="Cuando EUR/USD sube, el euro se fortalece frente al dólar estadounidense.">When EUR/USD rises, the euro strengthens vs the US dollar.</li>
+                        <li data-en="When EUR/USD falls, the US dollar strengthens vs the euro." data-es="Cuando EUR/USD baja, el dólar se fortalece frente al euro.">When EUR/USD falls, the US dollar strengthens vs the euro.</li>
+                    </ul>
+                </section>
+
+                <section id="coreTerms" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="2) Core terms" data-es="2) Términos clave">2) Core terms</h2>
+                    <div class="guide-grid">
+                        <div class="guide-box">
+                            <h3 class="guide-h3" data-en="Currency pair" data-es="Par de divisas">Currency pair</h3>
+                            <p class="guide-text" data-en="Two currencies quoted together (base/quote). Example: EUR/USD." data-es="Dos monedas cotizadas juntas (base/contrapartida). Ejemplo: EUR/USD.">Two currencies quoted together (base/quote). Example: EUR/USD.</p>
+                        </div>
+                        <div class="guide-box">
+                            <h3 class="guide-h3" data-en="Pip" data-es="Pip">Pip</h3>
+                            <p class="guide-text" data-en="A small unit of price movement. For most pairs, 1 pip = 0.0001." data-es="Una unidad pequeña de movimiento del precio. Para la mayoría de pares, 1 pip = 0.0001.">A small unit of price movement. For most pairs, 1 pip = 0.0001.</p>
+                        </div>
+                        <div class="guide-box">
+                            <h3 class="guide-h3" data-en="Spread" data-es="Spread">Spread</h3>
+                            <p class="guide-text" data-en="The difference between bid and ask; a key trading cost." data-es="La diferencia entre bid y ask; un costo clave de trading.">The difference between bid and ask; a key trading cost.</p>
+                        </div>
+                        <div class="guide-box">
+                            <h3 class="guide-h3" data-en="Lot size" data-es="Tamaño de lote">Lot size</h3>
+                            <p class="guide-text" data-en="Your trade size. Many platforms offer micro/mini/standard lots." data-es="El tamaño de tu operación. Muchas plataformas ofrecen lotes micro/mini/estándar.">Your trade size. Many platforms offer micro/mini/standard lots.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="howTradingWorks" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="3) How a trade works" data-es="3) Cómo funciona una operación">3) How a trade works</h2>
+                    <p class="guide-text" data-en="Most beginners start with two order types: market orders (execute now) and limit/stop orders (execute later at a specific price). Always know your invalidation point before entering." data-es="La mayoría empieza con dos tipos de orden: mercado (ejecuta ahora) y límite/stop (ejecuta después a un precio específico). Define tu punto de invalidez antes de entrar.">
+                        Most beginners start with two order types: market orders (execute now) and limit/stop orders (execute later at a specific price). Always know your invalidation point before entering.
+                    </p>
+                    <ul class="guide-list">
+                        <li data-en="Use a stop-loss to cap downside." data-es="Usa stop-loss para limitar la pérdida.">Use a stop-loss to cap downside.</li>
+                        <li data-en="Consider a take-profit to lock gains." data-es="Considera take-profit para asegurar ganancias.">Consider a take-profit to lock gains.</li>
+                    </ul>
+                </section>
+
+                <section id="riskBasics" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="4) Risk basics" data-es="4) Riesgo básico">4) Risk basics</h2>
+                    <p class="guide-text" data-en="Leverage magnifies both profits and losses. A common beginner mistake is oversizing. Focus on consistency: keep risk per trade small (for example, 0.5%–1% of your account)." data-es="El apalancamiento amplifica ganancias y pérdidas. Un error común es operar demasiado grande. Prioriza consistencia: arriesga poco por operación (por ejemplo, 0.5%–1% de la cuenta).">
+                        Leverage magnifies both profits and losses. A common beginner mistake is oversizing. Focus on consistency: keep risk per trade small (for example, 0.5%–1% of your account).
+                    </p>
+                </section>
+
+                <section id="firstTrade" class="card-panel guide-section">
+                    <h2 class="subheading-card" data-en="5) Your first trade checklist" data-es="5) Checklist para tu primera operación">5) Your first trade checklist</h2>
+                    <ul class="guide-checklist">
+                        <li data-en="Choose a major pair (EUR/USD, GBP/USD) to start." data-es="Elige un par mayor (EUR/USD, GBP/USD) para empezar.">Choose a major pair (EUR/USD, GBP/USD) to start.</li>
+                        <li data-en="Pick one setup and define entry, stop-loss, and take-profit." data-es="Define una sola estrategia y marca entrada, stop-loss y take-profit.">Pick one setup and define entry, stop-loss, and take-profit.</li>
+                        <li data-en="Size the position so the stop-loss equals your planned risk." data-es="Dimensiona la posición para que el stop-loss sea tu riesgo planificado.">Size the position so the stop-loss equals your planned risk.</li>
+                        <li data-en="Log the trade (reason, emotions, outcome)." data-es="Registra la operación (razón, emociones, resultado).">Log the trade (reason, emotions, outcome).</li>
+                    </ul>
+                </section>
+
+                <section class="card-panel guide-related">
+                    <h2 class="subheading-card" data-en="Related guides" data-es="Guías relacionadas">Related guides</h2>
+                    <ul class="guide-related-list">
+                        <li><a class="link-cta" href="risk-management.html" data-en="Risk Management Strategies" data-es="Estrategias de Gestión de Riesgos">Risk Management Strategies</a></li>
+                        <li><a class="link-cta" href="leverage.html" data-en="Understanding Leverage" data-es="Entendiendo el Apalancamiento">Understanding Leverage</a></li>
+                        <li><a class="link-cta" href="choosing-broker.html" data-en="Choosing the Right Broker" data-es="Elegir el Broker Correcto">Choosing the Right Broker</a></li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 BrokerPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../translations.js"></script>
+    <script src="../../shared/navigation.js"></script>
+</body>
+</html>
+

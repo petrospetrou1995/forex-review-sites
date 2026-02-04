@@ -1,0 +1,824 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #22d3ee;
+    --secondary-color: #6366f1;
+    --accent-color: #14b8a6;
+    --bg-dark: #0f172a;
+    --bg-darker: #0b1224;
+    --bg-card: #1c2638;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --gradient-1: linear-gradient(135deg, #22d3ee 0%, #6366f1 50%, #14b8a6 100%);
+    --gradient-2: linear-gradient(135deg, #0b1224 0%, #0f172a 50%, #111827 100%);
+}
+
+/* Utilities */
+.section-pad {
+    padding: 5rem 0;
+}
+
+.section-pad-dark {
+    padding: 5rem 0;
+    background: var(--bg-dark);
+}
+
+.section-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-intro-narrow {
+    max-width: 700px;
+}
+
+.section-subheading {
+    font-size: 2rem;
+    margin: 3rem 0 2rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.card-panel {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.card-header-flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.badge-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.card-heading-sm {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.rating-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-stars-gold {
+    color: #fbbf24;
+}
+
+.rating-small {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.block-title {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.review-card {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-darker);
+    border-radius: 8px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.review-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.review-text {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.review-date {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-3r {
+    margin-bottom: 3rem;
+}
+
+.mb-2r {
+    margin-bottom: 2rem;
+}
+
+.grid-criteria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.subheading-card {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.criteria-label {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.criteria-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.table-basic {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-basic thead tr {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.table-basic tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table-basic th {
+    padding: 1rem;
+    text-align: left;
+    color: var(--text-secondary);
+}
+
+.table-basic td {
+    padding: 1rem;
+    color: var(--text-secondary);
+}
+
+.table-basic .primary {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.link-cta {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.section-body {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.contact-intro {
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contact-email {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.legal-text {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Card content defaults */
+.broker-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.broker-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.broker-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-darker);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: var(--primary-color);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.lang-toggle {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.lang-toggle:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    background: var(--gradient-1);
+    border: none;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+}
+
+.hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(34, 211, 238, 0.28) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 50%);
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+/* Guides */
+.guide-header .logo {
+    text-decoration: none;
+}
+
+.guide-back {
+    white-space: nowrap;
+}
+
+.guide-article {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.guide-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+}
+
+.guide-lead {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.guide-toc-list {
+    margin-left: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.guide-section {
+    scroll-margin-top: 110px;
+}
+
+.guide-text {
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.guide-list,
+.guide-checklist,
+.guide-related-list,
+.guide-steps {
+    margin: 1rem 0 0 1.25rem;
+    color: var(--text-secondary);
+    display: grid;
+    gap: 0.5rem;
+}
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.guide-box {
+    background: rgba(2, 6, 23, 0.35);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.guide-h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* Sections */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.featured-brokers {
+    padding: 5rem 0;
+}
+
+.brokers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.broker-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.broker-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-1);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.broker-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.broker-card:hover::before {
+    transform: scaleX(1);
+}
+
+.broker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.broker-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.broker-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-stars {
+    color: #fbbf24;
+    font-size: 1rem;
+}
+
+.rating-score {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.broker-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.btn-review {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 10px 30px rgba(34, 211, 238, 0.15);
+}
+
+.btn-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(34, 211, 238, 0.2);
+}
+
+/* News */
+.latest-news {
+    padding: 5rem 0;
+    background: var(--bg-dark);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.news-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-image {
+    height: 200px;
+    background: var(--gradient-1);
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(34, 211, 238, 0.15);
+    color: var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.news-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.news-excerpt {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.news-date {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--bg-darker);
+    border-top: 1px solid var(--border-color);
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .nav-content {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .nav-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-actions {
+        flex-wrap: wrap;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .guide-title {
+        font-size: 2rem;
+    }
+    
+    .brokers-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .broker-card {
+        padding: 1.5rem;
+    }
+    
+    .news-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .footer-section {
+        width: 100%;
+    }
+    
+    /* Inline styles for mobile */
+    section[id] {
+        padding: 3rem 0 !important;
+    }
+    
+    section[id] h2,
+    section[id] .section-title {
+        font-size: 1.75rem !important;
+    }
+    
+    section[id] p {
+        font-size: 0.95rem !important;
+        padding: 0 1rem !important;
+    }
+    
+    /* Review cards mobile */
+    div[style*="background: var(--bg-card)"] {
+        padding: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    table {
+        font-size: 0.85rem;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem !important;
+    }
+    
+    .broker-card,
+    .news-card {
+        padding: 1rem;
+    }
+    
+    .btn-primary,
+    .btn-review {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
