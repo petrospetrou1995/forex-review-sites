@@ -127,7 +127,7 @@ body {
 
 .tool-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0.75rem;
 }
 
@@ -376,7 +376,7 @@ button.btn-inline {
 
 .broker-table th,
 .broker-table td {
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .broker-table th:last-child,
@@ -386,39 +386,53 @@ button.btn-inline {
 
 .table-wrapper {
     overflow-x: auto;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    padding: 0.5rem;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    background: var(--bg-color);
+    border-collapse: separate;
+    border-spacing: 0 0.75rem;
 }
 
 thead {
-    background: var(--hover-bg);
+    background: transparent;
 }
 
 th {
     text-align: left;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     font-weight: 600;
     color: var(--text-primary);
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 0;
 }
 
 td {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 1.5rem;
     color: var(--text-primary);
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr td:first-child {
+    border-left: 1px solid var(--border-color);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+tbody tr td:last-child {
+    border-right: 1px solid var(--border-color);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 tbody tr:hover {
-    background: var(--hover-bg);
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
 }
 
 .broker-name {
@@ -745,6 +759,25 @@ button.btn-link {
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .tool-row {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        min-width: 520px;
+    }
+
+    th {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    td {
+        padding: 1rem 1rem;
     }
 }
 
