@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- If you deploy to a different domain, update the base URL in each <loc>. -->
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/getting-started.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/choosing-broker.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/risk-management.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/technical-analysis.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/fundamental-analysis.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/leverage.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/beginner-course.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/intermediate-course.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site1-dark-gradient/guides/advanced-course.html</loc></url>
+
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/guides/getting-started.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/guides/risk-management.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/guides/choosing-broker.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/brokers/xm-group.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/brokers/exness.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/brokers/libertex.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/brokers/pepperstone.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site2-minimal-light/brokers/ic-markets.html</loc></url>
+
+  <url><loc>https://brokerpro.pages.dev/site3-colorful-bold/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site4-corporate-blue/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site5-magazine/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site6-glassmorphism/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site7-sidebar-data/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site8-parallax-hero/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site9-grid-portfolio/index.html</loc></url>
+  <url><loc>https://brokerpro.pages.dev/site10-dashboard/index.html</loc></url>
+</urlset>

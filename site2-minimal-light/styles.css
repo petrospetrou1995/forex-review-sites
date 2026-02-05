@@ -247,6 +247,37 @@ button.btn-inline {
     font-size: 0.85rem;
 }
 
+/* Team */
+.team-grid {
+    align-items: stretch;
+}
+
+.team-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.team-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--bg-light);
+    object-fit: cover;
+    object-position: 50% 20%;
+    flex-shrink: 0;
+}
+
+.team-name {
+    margin-bottom: 0.1rem;
+}
+
+.team-role {
+    margin: 0;
+}
+
 .link-row {
     display: flex;
     gap: 1rem;
