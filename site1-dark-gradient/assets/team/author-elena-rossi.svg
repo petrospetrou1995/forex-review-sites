@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Elena Rossi portrait illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8ad5ff"/>
+      <stop offset="1" stop-color="#c285ff"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1e2a78"/>
+      <stop offset="1" stop-color="#2b4db2"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="url(#bg)"/>
+  <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <path d="M35 92c6-9 14-14 25-14s19 5 25 14" fill="url(#shirt)"/>
+  <circle cx="60" cy="55" r="22" fill="#f7d9c4"/>
+  <path d="M44 55c0-13 8-22 16-22s16 9 16 22" fill="#2c2b45"/>
+  <path d="M44 55c1 9 8 15 16 15s15-6 16-15" fill="#f7d9c4"/>
+  <path d="M48 44c4-2 8-3 12-3s8 1 12 3" fill="#2c2b45"/>
+  <circle cx="52" cy="55" r="2.6" fill="#2c2b45"/>
+  <circle cx="68" cy="55" r="2.6" fill="#2c2b45"/>
+  <path d="M56 64c2 1 6 1 8 0" stroke="#d68a6a" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  <path d="M53 71c3 2 11 2 14 0" stroke="#e2a284" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

@@ -293,6 +293,52 @@
     margin-bottom: 0.35rem;
 }
 
+.team-role {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.team-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.team-header h3 {
+    margin: 0;
+}
+
+.team-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.25);
+    flex-shrink: 0;
+}
+
+.team-grid .broker-card {
+    border-color: rgba(148, 163, 184, 0.35);
+}
+
+/* Broker badge */
+.broker-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gradient-1);
+    color: #0b1220;
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
 .broker-card a {
     color: var(--primary-color);
     text-decoration: none;
@@ -576,9 +622,20 @@ body {
 }
 
 .broker-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+.broker-logo-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #0b1220;
 }
 
 .broker-rating {
