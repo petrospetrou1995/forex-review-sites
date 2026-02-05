@@ -118,6 +118,30 @@
             "@type": "Answer",
             "text": "Yes. Leverage can magnify losses. Use position sizing, stop-losses, and never risk money you can’t afford to lose."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good spread for EUR/USD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on account type and strategy. Standard accounts often have higher spreads with no commission, while raw accounts can show very tight spreads plus commission. Compare all-in cost (spread + commission) using your trade size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need MT4/MT5 to trade forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. Many brokers offer web and mobile platforms that work well for basic trading. MT4/MT5 can help if you use indicators, EAs, or advanced order workflows—choose what matches your needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I test a broker safely?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with a demo account, then a small live deposit. Place a few small trades, contact support with a real question, and do a withdrawal test before increasing account size."
+          }
         }
       ]
     }
@@ -158,6 +182,17 @@
                 <p class="intro-text" data-en="Unbiased reviews and comprehensive comparisons to help you choose the right broker for your trading needs." data-es="Reseñas imparciales y comparaciones completas para ayudarte a elegir el broker adecuado para tus necesidades de trading.">
                     Unbiased reviews and comprehensive comparisons to help you choose the right broker for your trading needs.
                 </p>
+                <div class="card card-pad mt-3" role="note" aria-label="Quick answer">
+                    <h2 class="card-title" data-en="Quick answer: how to choose a forex broker" data-es="Respuesta rápida: cómo elegir un broker">Quick answer: how to choose a forex broker</h2>
+                    <p class="muted mb-1" data-en="Choose a regulated broker that matches your strategy. Then compare all-in costs (spread + commission + swaps) and test withdrawals with a small amount." data-es="Elige un broker regulado que se ajuste a tu estrategia. Luego compara costos totales (spread + comisión + swaps) y prueba retiros con un monto pequeño.">
+                        Choose a regulated broker that matches your strategy. Then compare all-in costs (spread + commission + swaps) and test withdrawals with a small amount.
+                    </p>
+                    <ul class="learn-list muted small">
+                        <li data-en="Verify the licensed entity on the regulator’s official register." data-es="Verifica la entidad licenciada en el registro oficial del regulador.">Verify the licensed entity on the regulator’s official register.</li>
+                        <li data-en="Estimate costs using your typical trade size and holding time." data-es="Estima costos con tu tamaño de operación y tiempo de mantenimiento.">Estimate costs using your typical trade size and holding time.</li>
+                        <li data-en="Do a deposit + withdrawal test before scaling up." data-es="Haz una prueba de depósito + retiro antes de aumentar el capital.">Do a deposit + withdrawal test before scaling up.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -227,6 +262,56 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="card card-pad mt-3">
+                    <h3 class="card-title" data-en="Cost snapshot (spread-only estimate)" data-es="Resumen de costos (estimación solo por spread)">Cost snapshot (spread-only estimate)</h3>
+                    <p class="muted mb-1" data-en="Assumes EUR/USD, 1 standard lot where 1 pip ≈ $10. This is spread-only (commissions and swaps not included). Always confirm on the broker’s site." data-es="Supone EUR/USD, 1 lote estándar donde 1 pip ≈ $10. Es solo por spread (sin comisiones ni swaps). Confirma siempre en el sitio del broker.">
+                        Assumes EUR/USD, 1 standard lot where 1 pip ≈ $10. This is spread-only (commissions and swaps not included). Always confirm on the broker’s site.
+                    </p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-en="Broker" data-es="Broker">Broker</th>
+                                    <th data-en="Shown spread" data-es="Spread mostrado">Shown spread</th>
+                                    <th data-en="Estimated spread cost" data-es="Costo estimado del spread">Estimated spread cost</th>
+                                    <th data-en="Notes" data-es="Notas">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>XM Group</strong></td>
+                                    <td>0.6 pips</td>
+                                    <td>≈ $6</td>
+                                    <td class="muted" data-en="Good baseline for standard accounts." data-es="Buen punto de partida para cuentas estándar.">Good baseline for standard accounts.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Exness</strong></td>
+                                    <td>0.1 pips</td>
+                                    <td>≈ $1</td>
+                                    <td class="muted" data-en="Raw pricing may add commissions." data-es="Precios raw pueden agregar comisiones.">Raw pricing may add commissions.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Libertex</strong></td>
+                                    <td data-en="From 0.0 pips" data-es="Desde 0.0 pips">From 0.0 pips</td>
+                                    <td>≈ $0+</td>
+                                    <td class="muted" data-en="If spread is near zero, check commissions and swaps." data-es="Si el spread es casi cero, revisa comisiones y swaps.">If spread is near zero, check commissions and swaps.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pepperstone</strong></td>
+                                    <td>0.0 pips</td>
+                                    <td>≈ $0+</td>
+                                    <td class="muted" data-en="Raw accounts usually add commission per side." data-es="Cuentas raw suelen agregar comisión por lado.">Raw accounts usually add commission per side.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IC Markets</strong></td>
+                                    <td>0.0 pips</td>
+                                    <td>≈ $0+</td>
+                                    <td class="muted" data-en="Often commission-based on tight-spread accounts." data-es="A menudo con comisiones en cuentas de spread bajo.">Often commission-based on tight-spread accounts.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -838,6 +923,18 @@
                         </p>
                     </div>
                 </div>
+                <div class="card card-pad mt-3">
+                    <h3 class="card-title" data-en="Methodology &amp; data notes" data-es="Metodología y notas de datos">Methodology &amp; data notes</h3>
+                    <p class="muted mb-1" data-en="We aim to make broker comparisons easy to verify and easy to update." data-es="Buscamos que las comparaciones sean fáciles de verificar y actualizar.">
+                        We aim to make broker comparisons easy to verify and easy to update.
+                    </p>
+                    <ul class="learn-list muted small">
+                        <li data-en="Regulation: we check the broker’s exact licensed entity on official regulator registers when available." data-es="Regulación: verificamos la entidad licenciada en registros oficiales cuando es posible.">Regulation: we check the broker’s exact licensed entity on official regulator registers when available.</li>
+                        <li data-en="Costs: we compare all-in fees (spread + commissions + swaps) and provide simple examples like pip-to-$ estimates." data-es="Costos: comparamos tarifas totales (spread + comisiones + swaps) y damos ejemplos simples (pip a $).">Costs: we compare all-in fees (spread + commissions + swaps) and provide simple examples like pip-to-$ estimates.</li>
+                        <li data-en="Reviews: summaries reflect recurring themes across trader feedback; individual experiences can vary." data-es="Reseñas: los resúmenes reflejan temas recurrentes; la experiencia individual puede variar.">Reviews: summaries reflect recurring themes across trader feedback; individual experiences can vary.</li>
+                        <li data-en="Corrections: if you spot an error, email us and we’ll investigate and update." data-es="Correcciones: si ves un error, envíanos un email y lo revisaremos.">Corrections: if you spot an error, email us and we’ll investigate and update.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -982,6 +1079,24 @@
                         <h3 class="card-title" data-en="Is forex trading risky?" data-es="¿El forex es riesgoso?">Is forex trading risky?</h3>
                         <p class="muted" data-en="Yes. Leverage can magnify losses. Use position sizing, stop-losses, and never risk money you can’t afford to lose." data-es="Sí. El apalancamiento amplifica pérdidas. Usa tamaño de posición, stop-loss y no arriesgues dinero que no puedas perder.">
                             Yes. Leverage can magnify losses. Use position sizing, stop-losses, and never risk money you can’t afford to lose.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="What is a good spread for EUR/USD?" data-es="¿Qué spread es bueno para EUR/USD?">What is a good spread for EUR/USD?</h3>
+                        <p class="muted" data-en="It depends on account type and strategy. Standard accounts often have higher spreads with no commission, while raw accounts can show very tight spreads plus commission. Compare all-in cost (spread + commission)." data-es="Depende del tipo de cuenta y estrategia. Cuentas estándar suelen tener spreads más altos sin comisión, mientras cuentas raw muestran spreads bajos + comisión. Compara costo total (spread + comisión).">
+                            It depends on account type and strategy. Standard accounts often have higher spreads with no commission, while raw accounts can show very tight spreads plus commission. Compare all-in cost (spread + commission).
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Do I need MT4/MT5 to trade forex?" data-es="¿Necesito MT4/MT5 para operar forex?">Do I need MT4/MT5 to trade forex?</h3>
+                        <p class="muted" data-en="Not necessarily. Web and mobile platforms are enough for many traders. MT4/MT5 can help if you use indicators, EAs, or advanced workflows—choose what matches your needs." data-es="No necesariamente. Plataformas web y móvil bastan para muchos traders. MT4/MT5 ayuda si usas indicadores, EAs o flujos avanzados—elige según tu necesidad.">
+                            Not necessarily. Web and mobile platforms are enough for many traders. MT4/MT5 can help if you use indicators, EAs, or advanced workflows—choose what matches your needs.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="How can I test a broker safely?" data-es="¿Cómo puedo probar un broker de forma segura?">How can I test a broker safely?</h3>
+                        <p class="muted" data-en="Start with a demo, then a small live deposit. Place a few small trades, contact support, and do a withdrawal test before increasing your account size." data-es="Empieza con demo, luego un depósito pequeño. Haz pocas operaciones, contacta soporte y prueba un retiro antes de aumentar el capital.">
+                            Start with a demo, then a small live deposit. Place a few small trades, contact support, and do a withdrawal test before increasing your account size.
                         </p>
                     </div>
                 </div>
