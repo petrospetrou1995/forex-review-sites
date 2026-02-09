@@ -37,6 +37,26 @@ function initMobileMenu() {
             setExpanded(false);
         }
     });
+
+    // Close menu on outside click and ESC (mobile UX).
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!(target instanceof Element)) return;
+        if (target === toggle || toggle.contains(target)) return;
+        if (target === nav || nav.contains(target)) return;
+        if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            setExpanded(false);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            setExpanded(false);
+        }
+    });
 }
 
 function initPositionSizeTool() {

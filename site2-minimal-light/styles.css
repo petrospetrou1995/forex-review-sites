@@ -728,10 +728,24 @@ button.btn-link {
         flex-direction: column;
         gap: 0.5rem;
         margin-top: 1rem;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: white;
     }
     
     .nav-links.active {
         display: flex;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 0.75rem 0.75rem;
+        border-radius: 8px;
+    }
+
+    .nav-links a:hover {
+        background: var(--hover-bg);
     }
 
     .menu-btn {

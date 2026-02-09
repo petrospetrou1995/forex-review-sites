@@ -32,5 +32,43 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Mobile menu toggle (site1 header)
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('primaryNav');
+    if (toggle && nav) {
+        const setExpanded = (expanded) => {
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        };
+
+        setExpanded(false);
+
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            setExpanded(nav.classList.contains('active'));
+        });
+
+        // Close menu when a nav link is clicked (mobile UX).
+        nav.addEventListener('click', (e) => {
+            const target = e.target;
+            if (!(target instanceof Element)) return;
+            if (target.closest('a')) {
+                nav.classList.remove('active');
+                setExpanded(false);
+            }
+        });
+
+        // Close menu on outside click (mobile UX).
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            if (!(target instanceof Element)) return;
+            if (target === toggle || toggle.contains(target)) return;
+            if (target === nav || nav.contains(target)) return;
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                setExpanded(false);
+            }
+        });
+    }
 });
 
