@@ -48,6 +48,9 @@
                         <p class="muted" data-en="Best for active traders who care about execution quality and platform choice (MT4/MT5/cTrader depending on region)." data-es="Ideal para traders activos que valoran ejecución y elección de plataforma (MT4/MT5/cTrader según región).">
                             Best for active traders who care about execution quality and platform choice (MT4/MT5/cTrader depending on region).
                         </p>
+                        <p class="label mt-3" data-en="Brokercompare rating (example)" data-es="Calificación Brokercompare (ejemplo)">Brokercompare rating (example)</p>
+                        <span class="rating">4.6/5</span>
+                        <p class="muted small" data-en="Example score for comparison UI + schema." data-es="Puntaje de ejemplo para comparación + schema.">Example score for comparison UI + schema.</p>
                     </div>
                     <div class="card card-pad">
                         <h2 class="card-title" data-en="Regulation (example)" data-es="Regulación (ejemplo)">Regulation (example)</h2>
@@ -113,6 +116,24 @@
                         <a class="btn-inline" href="../guides/risk-management.html" data-en="Risk management" data-es="Gestión de riesgo">Risk management</a>
                     </div>
                 </div>
+
+                <div class="card card-pad mt-3">
+                    <h2 class="card-title" data-en="FAQ" data-es="FAQ">FAQ</h2>
+                    <ul>
+                        <li class="muted">
+                            <strong data-en="Is Pepperstone regulated?" data-es="¿Pepperstone está regulado?">Is Pepperstone regulated?</strong><br>
+                            <span data-en="Pepperstone operates under different entities. Verify the exact entity and license for your country on the regulator’s register." data-es="Pepperstone opera bajo distintas entidades. Verifica la entidad exacta y licencia para tu país en el registro del regulador.">Pepperstone operates under different entities. Verify the exact entity and license for your country on the regulator’s register.</span>
+                        </li>
+                        <li class="muted mt-3">
+                            <strong data-en="What are the main Pepperstone fees?" data-es="¿Cuáles son las principales comisiones de Pepperstone?">What are the main Pepperstone fees?</strong><br>
+                            <span data-en="Main costs are spreads and, on raw accounts, commissions. If you hold trades overnight, include swaps/financing." data-es="Los costos principales son spreads y, en cuentas raw, comisiones. Si mantienes posiciones overnight, incluye swaps/financiamiento.">Main costs are spreads and, on raw accounts, commissions. If you hold trades overnight, include swaps/financing.</span>
+                        </li>
+                        <li class="muted mt-3">
+                            <strong data-en="How can I test withdrawals safely?" data-es="¿Cómo puedo probar retiros de forma segura?">How can I test withdrawals safely?</strong><br>
+                            <span data-en="Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling." data-es="Completa KYC primero, deposita un monto pequeño y retira al mismo método registrando el tiempo antes de escalar.">Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -124,6 +145,88 @@
             </div>
         </div>
     </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Brokers",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/index.html#brokers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Pepperstone Review",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/brokers/pepperstone.html"
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "Organization",
+        "name": "Pepperstone"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Brokercompare"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.6",
+        "bestRating": "5"
+      },
+      "datePublished": "2026-02-04",
+      "reviewBody": "Pepperstone is often chosen by active traders for execution quality and platform choice. Always verify the exact entity and confirm spreads, commissions, and withdrawals for your region."
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Pepperstone regulated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pepperstone operates under different entities. Verify the exact entity and license for your country on the regulator’s register."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the main Pepperstone fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Main costs are spreads and, on raw accounts, commissions. If you hold trades overnight, include swaps and financing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I test withdrawals safely?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling."
+          }
+        }
+      ]
+    }
+    </script>
 
     <script src="../translations.js"></script>
     <script src="../app.js"></script>

@@ -48,6 +48,9 @@
                         <p class="muted" data-en="Best for traders who prefer a clean web/mobile platform and want a simple interface. Review total costs carefully." data-es="Ideal para quienes prefieren una plataforma web/móvil limpia y una interfaz simple. Revisa costos totales.">
                             Best for traders who prefer a clean web/mobile platform and want a simple interface. Review total costs carefully.
                         </p>
+                        <p class="label mt-3" data-en="Brokercompare rating (example)" data-es="Calificación Brokercompare (ejemplo)">Brokercompare rating (example)</p>
+                        <span class="rating">4.9/5</span>
+                        <p class="muted small" data-en="Example score for comparison UI + schema." data-es="Puntaje de ejemplo para comparación + schema.">Example score for comparison UI + schema.</p>
                     </div>
                     <div class="card card-pad">
                         <h2 class="card-title" data-en="Regulation (example)" data-es="Regulación (ejemplo)">Regulation (example)</h2>
@@ -113,6 +116,24 @@
                         <a class="btn-inline" href="../guides/getting-started.html" data-en="Getting started guide" data-es="Guía para empezar">Getting started guide</a>
                     </div>
                 </div>
+
+                <div class="card card-pad mt-3">
+                    <h2 class="card-title" data-en="FAQ" data-es="FAQ">FAQ</h2>
+                    <ul>
+                        <li class="muted">
+                            <strong data-en="Is Libertex regulated?" data-es="¿Libertex está regulado?">Is Libertex regulated?</strong><br>
+                            <span data-en="Libertex operates under specific entities. Verify the exact entity and license for your country on the regulator’s register." data-es="Libertex opera bajo entidades específicas. Verifica la entidad exacta y licencia para tu país en el registro del regulador.">Libertex operates under specific entities. Verify the exact entity and license for your country on the regulator’s register.</span>
+                        </li>
+                        <li class="muted mt-3">
+                            <strong data-en="What are the main Libertex fees?" data-es="¿Cuáles son las principales comisiones de Libertex?">What are the main Libertex fees?</strong><br>
+                            <span data-en="Main costs can include spreads, commissions, and swaps depending on instrument and account type. Confirm the full fee schedule." data-es="Los costos pueden incluir spreads, comisiones y swaps según instrumento y cuenta. Confirma el esquema completo.">Main costs can include spreads, commissions, and swaps depending on instrument and account type. Confirm the full fee schedule.</span>
+                        </li>
+                        <li class="muted mt-3">
+                            <strong data-en="How can I test withdrawals safely?" data-es="¿Cómo puedo probar retiros de forma segura?">How can I test withdrawals safely?</strong><br>
+                            <span data-en="Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling." data-es="Completa KYC primero, deposita un monto pequeño y retira al mismo método registrando el tiempo antes de escalar.">Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -124,6 +145,88 @@
             </div>
         </div>
     </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Brokers",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/index.html#brokers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Libertex Review",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/brokers/libertex.html"
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "Organization",
+        "name": "Libertex"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Brokercompare"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.9",
+        "bestRating": "5"
+      },
+      "datePublished": "2026-02-04",
+      "reviewBody": "Libertex focuses on a streamlined web and mobile trading experience. Always verify fees, availability, and the exact regulated entity for your country."
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Libertex regulated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Libertex operates under specific entities. Verify the exact entity and license for your country on the regulator’s register."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the main Libertex fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Main costs can include spreads, commissions, and swaps depending on instrument and account type. Confirm the full fee schedule."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I test withdrawals safely?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling."
+          }
+        }
+      ]
+    }
+    </script>
 
     <script src="../translations.js"></script>
     <script src="../app.js"></script>

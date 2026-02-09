@@ -48,6 +48,9 @@
                         <p class="muted" data-en="Best for active traders who care about spreads/commissions and want MT4/MT5/cTrader options (where available)." data-es="Ideal para traders activos que priorizan spreads/comisiones y quieren opciones MT4/MT5/cTrader (si está disponible).">
                             Best for active traders who care about spreads/commissions and want MT4/MT5/cTrader options (where available).
                         </p>
+                        <p class="label mt-3" data-en="Brokercompare rating (example)" data-es="Calificación Brokercompare (ejemplo)">Brokercompare rating (example)</p>
+                        <span class="rating">4.5/5</span>
+                        <p class="muted small" data-en="Example score for comparison UI + schema." data-es="Puntaje de ejemplo para comparación + schema.">Example score for comparison UI + schema.</p>
                     </div>
                     <div class="card card-pad">
                         <h2 class="card-title" data-en="Regulation (example)" data-es="Regulación (ejemplo)">Regulation (example)</h2>
@@ -113,6 +116,24 @@
                         <a class="btn-inline" href="../guides/getting-started.html" data-en="Getting started guide" data-es="Guía para empezar">Getting started guide</a>
                     </div>
                 </div>
+
+                <div class="card card-pad mt-3">
+                    <h2 class="card-title" data-en="FAQ" data-es="FAQ">FAQ</h2>
+                    <ul>
+                        <li class="muted">
+                            <strong data-en="Is IC Markets regulated?" data-es="¿IC Markets está regulado?">Is IC Markets regulated?</strong><br>
+                            <span data-en="IC Markets operates under different entities. Verify the exact entity and license for your country on the regulator’s register." data-es="IC Markets opera bajo distintas entidades. Verifica la entidad exacta y licencia para tu país en el registro del regulador.">IC Markets operates under different entities. Verify the exact entity and license for your country on the regulator’s register.</span>
+                        </li>
+                        <li class="muted mt-3">
+                            <strong data-en="What are the main IC Markets fees?" data-es="¿Cuáles son las principales comisiones de IC Markets?">What are the main IC Markets fees?</strong><br>
+                            <span data-en="Main costs are spreads and, on raw accounts, commissions. If you hold trades overnight, include swaps/financing." data-es="Los costos principales son spreads y, en cuentas raw, comisiones. Si mantienes posiciones overnight, incluye swaps/financiamiento.">Main costs are spreads and, on raw accounts, commissions. If you hold trades overnight, include swaps/financing.</span>
+                        </li>
+                        <li class="muted mt-3">
+                            <strong data-en="How can I test withdrawals safely?" data-es="¿Cómo puedo probar retiros de forma segura?">How can I test withdrawals safely?</strong><br>
+                            <span data-en="Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling." data-es="Completa KYC primero, deposita un monto pequeño y retira al mismo método registrando el tiempo antes de escalar.">Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -124,6 +145,88 @@
             </div>
         </div>
     </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Brokers",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/index.html#brokers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "IC Markets Review",
+          "item": "https://brokerpro.pages.dev/site2-minimal-light/brokers/ic-markets.html"
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "Organization",
+        "name": "IC Markets"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Brokercompare"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.5",
+        "bestRating": "5"
+      },
+      "datePublished": "2026-02-04",
+      "reviewBody": "IC Markets is often chosen by active traders for competitive pricing and multiple platform options. Always verify the exact entity and confirm spreads, commissions, and withdrawals for your region."
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is IC Markets regulated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IC Markets operates under different entities. Verify the exact entity and license for your country on the regulator’s register."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the main IC Markets fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Main costs are spreads and, on raw accounts, commissions. If you hold trades overnight, include swaps and financing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I test withdrawals safely?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before scaling."
+          }
+        }
+      ]
+    }
+    </script>
 
     <script src="../translations.js"></script>
     <script src="../app.js"></script>
