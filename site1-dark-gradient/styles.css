@@ -229,6 +229,11 @@
     font-weight: 600;
 }
 
+.broker-review-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+}
+
 .section-body {
     color: var(--text-secondary);
     line-height: 1.8;
