@@ -24,6 +24,9 @@ jobs:
       - name: Add weekly news
         run: node scripts/add-weekly-news.mjs
 
+      - name: Stamp publish datetimes
+        run: node scripts/stamp-published-dates.mjs
+
       - name: Commit and push changes
         run: |
           git status --porcelain

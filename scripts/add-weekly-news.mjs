@@ -68,7 +68,7 @@ function buildSite1NewsItem({ datetime, week, year, key }) {
     <p class="news-excerpt"
        data-en="This week’s focus: rate expectations, risk sentiment, and the key macro events traders are watching. Check the calendar, define your risk, and review spreads before placing trades."
        data-es="Enfoque de esta semana: expectativas de tasas, sentimiento de riesgo y eventos macro clave. Revisa el calendario, define tu riesgo y verifica spreads antes de operar.">This week’s focus: rate expectations, risk sentiment, and the key macro events traders are watching. Check the calendar, define your risk, and review spreads before placing trades.</p>
-    <time class="news-date" datetime="${datetime}" data-relative-time="true">Just now</time>
+    <time class="news-date" data-relative-time="true" data-stamp-on-publish="true">Just now</time>
   </div>
 </article>
 `.trim();
@@ -83,7 +83,7 @@ function buildSite2NewsItem({ datetime, week, year, key }) {
   <p class="muted mb-1"
      data-en="A quick weekly brief on macro themes and what to watch. Always verify regulation, fees, and withdrawal terms in your region before choosing a broker."
      data-es="Resumen semanal de temas macro y qué vigilar. Verifica regulación, comisiones y retiros en tu región antes de elegir broker.">A quick weekly brief on macro themes and what to watch. Always verify regulation, fees, and withdrawal terms in your region before choosing a broker.</p>
-  <time class="muted small news-date" datetime="${datetime}" data-relative-time="true">Just now</time>
+  <time class="muted small news-date" data-relative-time="true" data-stamp-on-publish="true">Just now</time>
 </div>
 `.trim();
 }
