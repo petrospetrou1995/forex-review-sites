@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-02-10T13:03:54Z",
+  "brokers": {
+    "libertex": {
+      "name": "Libertex",
+      "aggregate": {
+        "ratingValue": 0,
+        "reviewCount": 0,
+        "bestRating": 5
+      },
+      "reviews": []
+    },
+    "xm-group": {
+      "name": "XM Group",
+      "aggregate": {
+        "ratingValue": 0,
+        "reviewCount": 0,
+        "bestRating": 5
+      },
+      "reviews": []
+    },
+    "exness": {
+      "name": "Exness",
+      "aggregate": {
+        "ratingValue": 0,
+        "reviewCount": 0,
+        "bestRating": 5
+      },
+      "reviews": []
+    },
+    "pepperstone": {
+      "name": "Pepperstone",
+      "aggregate": {
+        "ratingValue": 0,
+        "reviewCount": 0,
+        "bestRating": 5
+      },
+      "reviews": []
+    }
+  }
+}

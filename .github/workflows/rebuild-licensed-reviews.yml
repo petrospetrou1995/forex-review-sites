@@ -1,0 +1,45 @@
+name: Rebuild licensed reviews
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "data/reviews/exports/**"
+      - "data/reviews/README.md"
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    # Avoid infinite loops (this job creates a commit).
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Normalize licensed exports
+        run: node scripts/reviews/normalize-licensed-exports.mjs
+
+      - name: Rebuild site1 review blocks
+        run: node scripts/reviews/rebuild-site1-reviews.mjs
+
+      - name: Commit and push (if changed)
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/reviews/normalized.json site1-dark-gradient/index.html
+          git commit -m "chore(reviews): import licensed broker reviews"
+          git push
+
