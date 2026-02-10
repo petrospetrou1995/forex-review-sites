@@ -9,8 +9,3 @@ export function isKnownBrokerSlug(slug) {
   return BROKERS.some((b) => b.slug === slug);
 }
 
-export function brokerSlugToPageSlug(slug) {
-  // Currently the page slug matches broker slug.
-  return slug;
-}
-
