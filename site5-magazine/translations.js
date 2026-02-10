@@ -3,6 +3,7 @@ let currentLang = localStorage.getItem('lang') || 'en';
 function initTranslations() {
     document.addEventListener('DOMContentLoaded', () => {
         applyLanguage(currentLang);
+        initRelativeTimes();
         
         const langToggle = document.getElementById('langToggle');
         if (langToggle) {
@@ -11,6 +12,7 @@ function initTranslations() {
                 currentLang = currentLang === 'en' ? 'es' : 'en';
                 localStorage.setItem('lang', currentLang);
                 applyLanguage(currentLang);
+                updateRelativeTimes();
                 langToggle.textContent = currentLang === 'en' ? 'ES' : 'EN';
             });
         }
@@ -33,5 +35,53 @@ function applyLanguage(lang) {
 }
 
 initTranslations();
+
+function formatRelativeTimeFromNow(date, lang) {
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    if (!Number.isFinite(diffMs)) return '';
+
+    const diffMinutes = Math.max(0, Math.round(diffMs / 60000));
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffMinutes < 60) {
+        if (lang === 'es') return `hace ${diffMinutes} min`;
+        return `${diffMinutes} min ago`;
+    }
+    if (diffHours < 24) {
+        if (lang === 'es') return `hace ${diffHours} h`;
+        return `${diffHours} hours ago`;
+    }
+    if (diffDays < 7) {
+        if (lang === 'es') return `hace ${diffDays} días`;
+        return `${diffDays} days ago`;
+    }
+    const diffWeeks = Math.floor(diffDays / 7);
+    if (diffWeeks < 5) {
+        if (lang === 'es') return `hace ${diffWeeks} semana${diffWeeks === 1 ? '' : 's'}`;
+        return `${diffWeeks} week${diffWeeks === 1 ? '' : 's'} ago`;
+    }
+    const diffMonths = Math.floor(diffDays / 30);
+    if (lang === 'es') return `hace ${diffMonths} mes${diffMonths === 1 ? '' : 'es'}`;
+    return `${diffMonths} month${diffMonths === 1 ? '' : 's'} ago`;
+}
+
+function updateRelativeTimes() {
+    const lang = currentLang || 'en';
+    document.querySelectorAll('time[data-relative-time="true"]').forEach((el) => {
+        const dt = el.getAttribute('datetime');
+        if (!dt) return;
+        const date = new Date(dt);
+        if (Number.isNaN(date.getTime())) return;
+        const formatted = formatRelativeTimeFromNow(date, lang);
+        if (formatted) el.textContent = formatted;
+    });
+}
+
+function initRelativeTimes() {
+    updateRelativeTimes();
+    window.setInterval(updateRelativeTimes, 60 * 1000);
+}
 
 
