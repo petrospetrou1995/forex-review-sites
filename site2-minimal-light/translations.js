@@ -36,7 +36,16 @@ function updateRelativeTimes() {
         const dt = el.getAttribute('datetime');
         if (!dt) return;
         const label = formatRelativeTimeFromNow(dt, lang);
-        if (label) el.textContent = label;
+        if (!label) return;
+
+        const showAbsolute = el.getAttribute('data-show-absolute') === 'true';
+        if (!showAbsolute) {
+            el.textContent = label;
+            return;
+        }
+
+        const abs = dt.includes('T') ? dt.split('T')[0] : dt;
+        el.textContent = `${label} · ${abs}`;
     });
 }
 

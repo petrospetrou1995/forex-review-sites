@@ -29,6 +29,7 @@ function stampTimes(html, nowIso) {
   const re = /<time\b([^>]*?)\bdata-stamp-on-publish\s*=\s*"true"([^>]*)>([\s\S]*?)<\/time>/g;
 
   let changed = false;
+  const absDate = nowIso.split('T')[0];
   const next = html.replace(re, (_m, a, b, inner) => {
     const attrs = `${a}${b}`;
 
@@ -41,7 +42,10 @@ function stampTimes(html, nowIso) {
 
     changed = true;
     const cleaned = attrs.replace(/\s*\bdata-stamp-on-publish\s*=\s*"true"\s*/g, ' ');
-    return `<time${cleaned} datetime="${nowIso}">${inner}</time>`;
+    const innerTrim = String(inner).trim();
+    const shouldStampInnerDate = /data-show-absolute\s*=\s*"true"/.test(attrs) || innerTrim === 'Just now' || innerTrim === 'Publishing…';
+    const nextInner = shouldStampInnerDate ? absDate : inner;
+    return `<time${cleaned} datetime="${nowIso}">${nextInner}</time>`;
   });
 
   return { html: next, changed };
