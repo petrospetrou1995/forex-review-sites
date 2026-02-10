@@ -31,9 +31,6 @@ temp/
 
 # Local data
 data/
-!data/
-!data/reviews/
-!data/reviews/**
 *.db
 *.sqlite
 
