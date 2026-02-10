@@ -30,6 +30,9 @@ jobs:
 
       - name: Rebuild site1 review blocks
         run: node scripts/reviews/rebuild-site1-reviews.mjs
+      
+      - name: Rebuild broker pages (licensed summaries)
+        run: node scripts/reviews/rebuild-site1-broker-pages.mjs
 
       - name: Commit and push (if changed)
         run: |
@@ -39,7 +42,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/reviews/normalized.json site1-dark-gradient/index.html
+          git add data/reviews/normalized.json site1-dark-gradient/index.html site1-dark-gradient/brokers/*.html
           git commit -m "chore(reviews): import licensed broker reviews"
           git push
 
