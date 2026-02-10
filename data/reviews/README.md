@@ -15,9 +15,7 @@ This folder is for **reviews you have a license to use** (exports from third‑p
    - Update rating counts used on the page (and can be extended to schema)
 
 ### Supported export format (v1)
-Each file in `data/reviews/exports/` can be either:
-- **JSON**: a JSON array of objects (recommended)
-- **CSV**: a CSV with a header row
+Each file in `data/reviews/exports/` must be a JSON array of objects with this minimal shape:
 
 ```json
 [
@@ -41,15 +39,6 @@ Notes:
 - `date` must be `YYYY-MM-DD`
 - `author` will be anonymized to initials on the site
 - `sourceName`/`sourceUrl` are displayed as “Source” so the site shows third‑party evidence
-
-### CSV columns (v1)
-Your CSV should include these columns (at minimum):
-- `brokerSlug`
-- `rating` (or `stars` / `score`)
-- `text` (or `body` / `comment`)
-- `date` (or `publishedAt` / `createdAt`)
-- `author`
-- `sourceName` and optional `sourceUrl`
 
 ### Adding more brokers
 Extend the slug list in:

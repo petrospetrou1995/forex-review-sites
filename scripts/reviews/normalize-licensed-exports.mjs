@@ -14,86 +14,11 @@ function writeJson(absPath, data) {
   fs.writeFileSync(absPath, JSON.stringify(data, null, 2) + '\n', 'utf8');
 }
 
-function listExportFiles(dirAbs) {
+function listJsonFiles(dirAbs) {
   if (!fs.existsSync(dirAbs)) return [];
   return fs.readdirSync(dirAbs)
-    .filter((f) => {
-      const lower = f.toLowerCase();
-      return lower.endsWith('.json') || lower.endsWith('.csv');
-    })
+    .filter((f) => f.toLowerCase().endsWith('.json'))
     .map((f) => path.join(dirAbs, f));
-}
-
-function parseCsv(raw) {
-  // Minimal CSV parser supporting quoted fields and commas.
-  const rows = [];
-  let row = [];
-  let cur = '';
-  let inQuotes = false;
-  for (let i = 0; i < raw.length; i += 1) {
-    const ch = raw[i];
-    const next = raw[i + 1];
-    if (inQuotes) {
-      if (ch === '"' && next === '"') {
-        cur += '"';
-        i += 1;
-      } else if (ch === '"') {
-        inQuotes = false;
-      } else {
-        cur += ch;
-      }
-      continue;
-    }
-    if (ch === '"') {
-      inQuotes = true;
-      continue;
-    }
-    if (ch === ',') {
-      row.push(cur);
-      cur = '';
-      continue;
-    }
-    if (ch === '\n') {
-      row.push(cur);
-      rows.push(row);
-      row = [];
-      cur = '';
-      continue;
-    }
-    if (ch === '\r') continue;
-    cur += ch;
-  }
-  if (cur.length || row.length) {
-    row.push(cur);
-    rows.push(row);
-  }
-  return rows;
-}
-
-function readExportAsObjects(absPath) {
-  const raw = fs.readFileSync(absPath, 'utf8');
-  const lower = absPath.toLowerCase();
-  if (lower.endsWith('.json')) {
-    const json = JSON.parse(raw);
-    return Array.isArray(json) ? json : [];
-  }
-  if (lower.endsWith('.csv')) {
-    const rows = parseCsv(raw);
-    if (!rows.length) return [];
-    const header = rows[0].map((h) => String(h || '').trim());
-    const objects = [];
-    for (const r of rows.slice(1)) {
-      const obj = {};
-      for (let i = 0; i < header.length; i += 1) {
-        const key = header[i];
-        if (!key) continue;
-        obj[key] = r[i] ?? '';
-      }
-      objects.push(obj);
-    }
-    return objects;
-  }
-  return [];
 }
 
 function toYyyyMmDd(value) {
@@ -129,16 +54,16 @@ function anonymizeAuthor(author) {
 }
 
 function normalizeItem(item, fallbackSourceName) {
-  const brokerSlug = item.brokerSlug || item.broker || item.broker_id || item.slug;
+  const brokerSlug = item.brokerSlug || item.broker || item.broker_id;
   if (!brokerSlug || !isKnownBrokerSlug(brokerSlug)) return null;
 
-  const rating = clampRating(item.rating ?? item.stars ?? item.score ?? item.ratingValue);
+  const rating = clampRating(item.rating ?? item.stars ?? item.score);
   const text = String(item.text ?? item.body ?? item.comment ?? '').trim();
   const date = toYyyyMmDd(item.date ?? item.createdAt ?? item.publishedAt);
   if (!rating || !text || !date) return null;
 
   const sourceName = String(item.sourceName ?? item.source ?? fallbackSourceName ?? 'Licensed export').trim() || 'Licensed export';
-  const sourceUrl = item.sourceUrl || item.url ? String(item.sourceUrl || item.url).trim() : '';
+  const sourceUrl = item.sourceUrl ? String(item.sourceUrl).trim() : '';
 
   return {
     brokerSlug,
@@ -165,16 +90,16 @@ function aggregateForBroker(reviews) {
 function run() {
   const exportsDir = path.join(ROOT, 'data/reviews/exports');
   const outFile = path.join(ROOT, 'data/reviews/normalized.json');
-  const files = listExportFiles(exportsDir);
+  const files = listJsonFiles(exportsDir);
 
   const byBroker = Object.fromEntries(BROKERS.map((b) => [b.slug, []]));
 
   for (const absPath of files) {
-    const base = path.basename(absPath).replace(/\.(json|csv)$/i, '');
-    const items = readExportAsObjects(absPath);
-    if (!items.length) continue;
+    const base = path.basename(absPath, '.json');
+    const json = readJson(absPath);
+    if (!Array.isArray(json)) continue;
 
-    for (const item of items) {
+    for (const item of json) {
       const n = normalizeItem(item, base);
       if (!n) continue;
       byBroker[n.brokerSlug].push(n);
