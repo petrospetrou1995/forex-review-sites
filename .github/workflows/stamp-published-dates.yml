@@ -1,0 +1,41 @@
+name: Stamp published dates
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "site1-dark-gradient/index.html"
+      - "site2-minimal-light/index.html"
+
+permissions:
+  contents: write
+
+jobs:
+  stamp:
+    # Avoid infinite loops (this job creates a commit).
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Stamp publish datetimes
+        run: node scripts/stamp-published-dates.mjs
+
+      - name: Commit and push (if changed)
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site1-dark-gradient/index.html site2-minimal-light/index.html
+          git commit -m "chore(news): stamp published datetimes"
+          git push
+
