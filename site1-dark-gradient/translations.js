@@ -33,6 +33,29 @@ function formatRelativeTimeFromNow(isoString, lang) {
     return lang === 'es' ? `Hace ${diffDay} ${unit}` : `${diffDay} ${unit} ago`;
 }
 
+function sortNewsCardsByDatetimeDesc() {
+    const newsSection = document.getElementById('news');
+    if (!newsSection) return;
+    const grid = newsSection.querySelector('.news-grid');
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('article.news-card'));
+    if (cards.length < 2) return;
+
+    const getTs = (card) => {
+        const t = card.querySelector('time.news-date[datetime]');
+        const dt = t?.getAttribute('datetime');
+        if (!dt) return -Infinity;
+        const ms = Date.parse(dt);
+        return Number.isFinite(ms) ? ms : -Infinity;
+    };
+
+    cards
+        .map((card, idx) => ({ card, idx, ts: getTs(card) }))
+        .sort((a, b) => (b.ts - a.ts) || (a.idx - b.idx))
+        .forEach(({ card }) => grid.appendChild(card));
+}
+
 function updateRelativeTimes() {
     const lang = currentLang || document.documentElement.lang || 'en';
     const nodes = document.querySelectorAll('time[data-relative-time]');
@@ -69,6 +92,7 @@ function initTranslations() {
         applyLanguage(currentLang);
         initReviewCounts();
         initReviewViewMore();
+        sortNewsCardsByDatetimeDesc();
         initRelativeTimes();
         
         // Language toggle button
