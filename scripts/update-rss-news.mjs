@@ -47,18 +47,52 @@ function safeUrl(url) {
   }
 }
 
+function attrFromTag(xml, tag, attr) {
+  const re = new RegExp(`<${tag}[^>]*\\b${attr}="([^"]+)"[^>]*\\/?>`, 'i');
+  const m = String(xml || '').match(re);
+  return m ? decodeEntities(m[1]).trim() : '';
+}
+
 function parseRssItems(xml) {
   const items = [];
-  const blocks = String(xml || '').match(/<item\b[\s\S]*?<\/item>/gi) || [];
-  for (const block of blocks) {
+  const input = String(xml || '');
+
+  // RSS 2.0 / RSS 1.0 (RDF) items
+  const rssBlocks = input.match(/<item\b[\s\S]*?<\/item>/gi) || [];
+  for (const block of rssBlocks) {
     const title = textFromTag(block, 'title');
-    const link = safeUrl(textFromTag(block, 'link'));
-    const pubDateRaw = textFromTag(block, 'pubDate') || textFromTag(block, 'published') || textFromTag(block, 'updated');
+    const link =
+      safeUrl(textFromTag(block, 'link')) ||
+      safeUrl(textFromTag(block, 'guid')) ||
+      safeUrl(attrFromTag(block, 'item', 'rdf:about'));
+    const pubDateRaw =
+      textFromTag(block, 'pubDate') ||
+      textFromTag(block, 'dc:date') ||
+      textFromTag(block, 'dcterms:issued') ||
+      textFromTag(block, 'dcterms:created') ||
+      textFromTag(block, 'published') ||
+      textFromTag(block, 'updated');
     const pubMs = Date.parse(pubDateRaw);
     const pubIso = Number.isFinite(pubMs) ? new Date(pubMs).toISOString().replace(/\.\d{3}Z$/, 'Z') : '';
     if (!title || !link || !pubIso) continue;
     items.push({ title, link, pubIso });
   }
+
+  // Atom entries (some official sources prefer Atom)
+  const atomBlocks = input.match(/<entry\b[\s\S]*?<\/entry>/gi) || [];
+  for (const block of atomBlocks) {
+    const title = textFromTag(block, 'title');
+    const link =
+      safeUrl(attrFromTag(block, 'link', 'href')) ||
+      safeUrl(textFromTag(block, 'link')) ||
+      safeUrl(textFromTag(block, 'id'));
+    const pubDateRaw = textFromTag(block, 'updated') || textFromTag(block, 'published');
+    const pubMs = Date.parse(pubDateRaw);
+    const pubIso = Number.isFinite(pubMs) ? new Date(pubMs).toISOString().replace(/\.\d{3}Z$/, 'Z') : '';
+    if (!title || !link || !pubIso) continue;
+    items.push({ title, link, pubIso });
+  }
+
   return items;
 }
 
@@ -156,23 +190,117 @@ async function buildItemsFromFeeds(feedUrls, limit) {
     if (!dedup.has(it.link)) dedup.set(it.link, it);
   }
 
-  return Array.from(dedup.values())
-    .sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso))
-    .slice(0, limit);
+  return Array.from(dedup.values()).sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso)).slice(0, limit);
+}
+
+function buildLatamMatcher() {
+  const keywords = [
+    'latam',
+    'latin america',
+    'américa latina',
+    'america latina',
+    'mexico',
+    'méxico',
+    'brazil',
+    'brasil',
+    'argentina',
+    'chile',
+    'colombia',
+    'peru',
+    'perú',
+    'uruguay',
+    'paraguay',
+    'ecuador',
+    'bolivia',
+    'venezuela',
+    'costa rica',
+    'panama',
+    'panamá',
+    'guatemala',
+    'honduras',
+    'nicaragua',
+    'el salvador',
+    'dominican',
+    'república dominicana',
+    'caribbean',
+    'caribe',
+    // currency codes commonly used in FX headlines
+    'mxn',
+    'brl',
+    'ars',
+    'clp',
+    'cop',
+    'pen',
+    'uyu',
+    'crc',
+    'dop',
+    'ves',
+    'bob',
+    'pyg',
+    'gtq',
+    'hnl',
+    'nio',
+    'pab'
+  ];
+
+  const re = new RegExp(`\\b(${keywords.map((k) => k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')).join('|')})\\b`, 'i');
+  const trustedLatamDomains = new Set(['banxico.org.mx']);
+
+  return (it) => {
+    const title = String(it?.title || '');
+    if (re.test(title)) return true;
+    try {
+      const host = new URL(it.link).hostname.replace(/^www\./, '');
+      return trustedLatamDomains.has(host);
+    } catch {
+      return false;
+    }
+  };
+}
+
+async function buildLatamFocusedItems(feedUrls, limit) {
+  const all = [];
+  for (const url of feedUrls) {
+    try {
+      const xml = await fetchText(url);
+      all.push(...parseRssItems(xml));
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(`WARN: ${String(e?.message || e)} `);
+    }
+  }
+
+  const dedup = new Map();
+  for (const it of all) {
+    if (!dedup.has(it.link)) dedup.set(it.link, it);
+  }
+
+  const sorted = Array.from(dedup.values()).sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso));
+  const isLatam = buildLatamMatcher();
+  const latam = sorted.filter(isLatam);
+
+  // Prefer LATAM-related headlines, but never return empty/too few.
+  if (latam.length >= Math.max(4, Math.min(7, limit))) return latam.slice(0, limit);
+  const fill = sorted.filter((it) => !isLatam(it)).slice(0, Math.max(0, limit - latam.length));
+  return latam.concat(fill).slice(0, limit);
 }
 
 async function run() {
   const updated = [];
 
-  // Site1: different mix (DailyFX + Fed + BIS)
+  // LATAM-focused: central banks, FX, and finance (with a LATAM keyword preference)
   {
     const relPath = 'site1-dark-gradient/index.html';
     const html = readFileRel(relPath);
-    const items = await buildItemsFromFeeds(
+    const items = await buildLatamFocusedItems(
       [
-        'https://www.dailyfx.com/rss',
-        'https://www.federalreserve.gov/feeds/press_all.xml',
-        'https://www.bis.org/doclist/all_pressrels.rss'
+        // Mexico (central bank indicators, FX + policy rate)
+        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=fix&BMXC_idioma=es',
+        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=tasObj&BMXC_idioma=es',
+        // LATAM-friendly FX headlines (Spanish)
+        'https://www.fxstreet.es/rss/news',
+        // Central banking / FX reserve coverage (filter will prefer LATAM)
+        'https://www.centralbanking.com/feeds/rss/category/central-banks/reserves/foreign-exchange'
       ],
       9
     );
@@ -186,15 +314,20 @@ async function run() {
     }
   }
 
-  // Site2: different mix (FXStreet + BoE news + ECB press)
+  // Site2: different sources, still LATAM-focused
   {
     const relPath = 'site2-minimal-light/news/index.html';
     const html = readFileRel(relPath);
-    const items = await buildItemsFromFeeds(
+    const items = await buildLatamFocusedItems(
       [
-        'https://www.fxstreet.com/rss/news',
-        'https://www.bankofengland.co.uk/rss/news',
-        'https://www.ecb.europa.eu/rss/press.html'
+        // FX / finance headlines (filter will prefer LATAM currencies & countries)
+        'https://www.investing.com/rss/forex.rss',
+        'https://www.fxstreet.es/rss/news',
+        // Central banking decisions / macro context (filter will prefer LATAM)
+        'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions',
+        // Extra Mexico macro signals (remittances / reserves)
+        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=remesa&BMXC_idioma=es',
+        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=reserv&BMXC_idioma=es'
       ],
       9
     );
