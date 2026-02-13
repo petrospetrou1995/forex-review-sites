@@ -1,16 +1,16 @@
-name: Weekly news update
+name: Refresh RSS headlines
 
 on:
   workflow_dispatch:
   schedule:
-    # Every Monday at 09:00 UTC
-    - cron: "0 9 * * 1"
+    # Every hour (UTC)
+    - cron: "10 * * * *"
 
 permissions:
   contents: write
 
 jobs:
-  add_weekly_news:
+  refresh_rss:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,18 +21,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Add weekly news
-        run: node scripts/add-weekly-news.mjs
-
-      - name: Stamp publish datetimes
-        run: node scripts/stamp-published-dates.mjs
-
       - name: Update RSS headlines
         run: node scripts/update-rss-news.mjs
 
       - name: Commit and push changes
         run: |
-          git status --porcelain
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             exit 0
@@ -40,6 +33,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site1-dark-gradient/index.html site2-minimal-light/news/index.html
-          git commit -m "chore(news): add weekly brief and refresh headlines"
+          git commit -m "chore(news): refresh RSS headlines"
           git push
 

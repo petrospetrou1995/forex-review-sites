@@ -63,11 +63,11 @@ function buildSite1NewsItem({ datetime, week, year, key }) {
   <div class="news-content">
     <span class="news-category" data-en="Weekly Brief" data-es="Resumen semanal">Weekly Brief</span>
     <h3 class="news-title"
-        data-en="Weekly Forex Brief — Week ${week} (${year})"
-        data-es="Resumen Forex Semanal — Semana ${week} (${year})">Weekly Forex Brief — Week ${week} (${year})</h3>
+        data-en="Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})"
+        data-es="Resumen Forex Semanal (BrokerProReviews) — Semana ${week} (${year})">Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})</h3>
     <p class="news-excerpt"
-       data-en="This week’s focus: rate expectations, risk sentiment, and the key macro events traders are watching. Check the calendar, define your risk, and review spreads before placing trades."
-       data-es="Enfoque de esta semana: expectativas de tasas, sentimiento de riesgo y eventos macro clave. Revisa el calendario, define tu riesgo y verifica spreads antes de operar.">This week’s focus: rate expectations, risk sentiment, and the key macro events traders are watching. Check the calendar, define your risk, and review spreads before placing trades.</p>
+       data-en="This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling."
+       data-es="Checklist de la semana: fechas macro, temas FX y recordatorios de riesgo. Verifica regulación, prueba retiros y compara costos totales antes de escalar.">This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling.</p>
     <time class="news-date" data-relative-time="true" data-stamp-on-publish="true">Just now</time>
   </div>
 </article>
@@ -78,11 +78,11 @@ function buildSite2NewsItem({ datetime, week, year, key }) {
   return `
 <div class="card card-pad" data-weekly-news="true" data-weekly-key="${key}">
   <h3 class="card-title"
-      data-en="Weekly Forex Brief — Week ${week} (${year})"
-      data-es="Resumen Forex Semanal — Semana ${week} (${year})">Weekly Forex Brief — Week ${week} (${year})</h3>
+      data-en="Weekly Market Brief (Brokercompare) — Week ${week} (${year})"
+      data-es="Resumen Semanal de Mercado (Brokercompare) — Semana ${week} (${year})">Weekly Market Brief (Brokercompare) — Week ${week} (${year})</h3>
   <p class="muted mb-1"
-     data-en="A quick weekly brief on macro themes and what to watch. Always verify regulation, fees, and withdrawal terms in your region before choosing a broker."
-     data-es="Resumen semanal de temas macro y qué vigilar. Verifica regulación, comisiones y retiros en tu región antes de elegir broker.">A quick weekly brief on macro themes and what to watch. Always verify regulation, fees, and withdrawal terms in your region before choosing a broker.</p>
+     data-en="A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount."
+     data-es="Snapshot semanal: qué importa, qué vigilar y qué evitar. Compara plataformas y regulación, y prueba depósitos/retiros con un monto pequeño.">A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount.</p>
   <time class="muted small news-date" data-relative-time="true" data-stamp-on-publish="true">Just now</time>
 </div>
 `.trim();
@@ -116,7 +116,7 @@ function run() {
 
   // site2
   {
-    const relPath = 'site2-minimal-light/index.html';
+    const relPath = 'site2-minimal-light/news/index.html';
     const markerStart = '<!-- WEEKLY_NEWS_START -->';
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     const html = readFileRel(relPath);

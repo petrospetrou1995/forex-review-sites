@@ -56,6 +56,7 @@ function run() {
   const targets = [
     'site1-dark-gradient/index.html',
     'site2-minimal-light/index.html',
+    'site2-minimal-light/news/index.html',
   ];
 
   const updated = [];

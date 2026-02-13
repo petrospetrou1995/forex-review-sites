@@ -178,11 +178,11 @@
                 <ul class="nav-links" id="primaryNav">
                     <li><a href="#brokers" data-en="Brokers" data-es="Brokers">Brokers</a></li>
                     <li><a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
-                    <li><a href="#comparison" data-en="Compare" data-es="Comparar">Compare</a></li>
-                    <li><a href="#strategies" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                    <li><a href="compare/" data-en="Compare" data-es="Comparar">Compare</a></li>
+                    <li><a href="strategies/" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
                     <li><a href="#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
-                    <li><a href="#learn" data-en="Learn" data-es="Aprender">Learn</a></li>
-                    <li><a href="#news" data-en="News" data-es="Noticias">News</a></li>
+                    <li><a href="learn/" data-en="Learn" data-es="Aprender">Learn</a></li>
+                    <li><a href="news/" data-en="News" data-es="Noticias">News</a></li>
                 </ul>
                 <div class="nav-right">
                     <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
@@ -355,124 +355,48 @@
             </div>
         </section>
 
-        <section id="comparison" class="section section--alt">
+        <section id="resources" class="section section--alt">
             <div class="container">
-                <h2 class="section-heading mb-2" data-en="Broker Comparison" data-es="Comparación de Brokers">Broker Comparison</h2>
-                <p class="section-lead" data-en="Compare brokers side by side using our comprehensive comparison tool. Filter by spreads, leverage, regulation, and more to find the perfect broker for your needs." data-es="Compara brokers lado a lado usando nuestra herramienta de comparación completa. Filtra por spreads, apalancamiento, regulación y más para encontrar el broker perfecto para tus necesidades.">
-                    Compare brokers side by side using our comprehensive comparison tool. Filter by spreads, leverage, regulation, and more to find the perfect broker for your needs.
+                <h2 class="section-heading mb-2" data-en="Explore" data-es="Explorar">Explore</h2>
+                <p class="section-lead" data-en="We moved detailed sections to dedicated pages so the homepage loads faster." data-es="Movimos secciones detalladas a páginas dedicadas para que el inicio cargue más rápido.">
+                    We moved detailed sections to dedicated pages so the homepage loads faster.
                 </p>
-                <div class="card card-pad">
-                    <h3 class="card-title" data-en="Comparison Features" data-es="Características de Comparación">Comparison Features</h3>
-                    <div class="grid grid-4-tight">
-                        <div>
-                            <h4 class="label" data-en="Spreads" data-es="Spreads">Spreads</h4>
-                            <p class="muted small" data-en="Compare trading costs" data-es="Compara costos de trading">Compare trading costs</p>
-                        </div>
-                        <div>
-                            <h4 class="label" data-en="Leverage" data-es="Apalancamiento">Leverage</h4>
-                            <p class="muted small" data-en="Evaluate leverage options" data-es="Evalúa opciones de apalancamiento">Evaluate leverage options</p>
-                        </div>
-                        <div>
-                            <h4 class="label" data-en="Regulation" data-es="Regulación">Regulation</h4>
-                            <p class="muted small" data-en="Check regulatory status" data-es="Verifica estado regulatorio">Check regulatory status</p>
-                        </div>
-                        <div>
-                            <h4 class="label" data-en="Platforms" data-es="Plataformas">Platforms</h4>
-                            <p class="muted small" data-en="Compare trading platforms" data-es="Compara plataformas de trading">Compare trading platforms</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-pad mt-3 comparison-tool" id="comparisonTool">
-                    <div class="comparison-tool__top">
-                        <div>
-                            <h3 class="card-title" data-en="Compare brokers" data-es="Comparar brokers">Compare brokers</h3>
-                            <p class="muted small" data-en="Select up to 3 brokers, then compare key stats side by side." data-es="Selecciona hasta 3 brokers y compara estadísticas clave lado a lado.">
-                                Select up to 3 brokers, then compare key stats side by side.
-                            </p>
-                        </div>
-                        <button class="btn-inline" type="button" id="compareClearBtn" data-en="Clear selection" data-es="Limpiar selección">Clear selection</button>
-                    </div>
-
-                    <div class="comparison-tool__filters">
-                        <div class="tool-field">
-                            <label for="compareSearch" data-en="Search" data-es="Buscar">Search</label>
-                            <input id="compareSearch" type="text" inputmode="search" data-en-placeholder="Search brokers…" data-es-placeholder="Buscar brokers…" placeholder="Search brokers…">
-                        </div>
-                        <div class="tool-field">
-                            <label for="comparePlatform" data-en="Platform" data-es="Plataforma">Platform</label>
-                            <select id="comparePlatform">
-                                <option value="" data-en="All platforms" data-es="Todas las plataformas">All platforms</option>
-                            </select>
-                        </div>
-                        <div class="tool-field">
-                            <label for="compareRegulation" data-en="Regulation" data-es="Regulación">Regulation</label>
-                            <select id="compareRegulation">
-                                <option value="" data-en="All regulators" data-es="Todos los reguladores">All regulators</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="comparison-tool__picklist" id="comparePicklist"></div>
-
-                    <div class="comparison-tool__result">
-                        <p class="muted" id="compareStatus" role="status" aria-live="polite" data-en="Select at least 2 brokers to compare." data-es="Selecciona al menos 2 brokers para comparar.">
-                            Select at least 2 brokers to compare.
-                        </p>
-                        <div class="table-wrapper" id="compareTableWrap" hidden></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="strategies" class="section">
-            <div class="container">
-                <h2 class="section-heading mb-2" data-en="Trading Strategies" data-es="Estrategias de Trading">Trading Strategies</h2>
-                <p class="section-lead" data-en="Learn proven trading strategies used by professional traders. From scalping to swing trading, find the strategy that fits your trading style." data-es="Aprende estrategias de trading probadas utilizadas por traders profesionales. Desde scalping hasta swing trading, encuentra la estrategia que se ajusta a tu estilo de trading.">
-                    Learn proven trading strategies used by professional traders. From scalping to swing trading, find the strategy that fits your trading style.
-                </p>
-                <div class="grid grid-3">
+                <div class="grid grid-4">
                     <div class="card card-pad">
-                        <h3 class="card-title" data-en="Scalping" data-es="Scalping">Scalping</h3>
-                        <p class="muted" data-en="Profit from small price movements with quick trades. Requires discipline and low spreads." data-es="Obtén ganancias de pequeños movimientos de precios con operaciones rápidas. Requiere disciplina y spreads bajos.">
-                            Profit from small price movements with quick trades. Requires discipline and low spreads.
+                        <h3 class="card-title" data-en="Compare brokers" data-es="Comparar brokers">Compare brokers</h3>
+                        <p class="muted" data-en="Filter by platforms and regulation, then compare side by side." data-es="Filtra por plataformas y regulación, y compara lado a lado.">
+                            Filter by platforms and regulation, then compare side by side.
                         </p>
-                        <p class="muted small" data-en="Best for liquid pairs, tight stops, and a strict session plan." data-es="Ideal para pares líquidos, stops ajustados y un plan de sesión estricto.">
-                            Best for liquid pairs, tight stops, and a strict session plan.
-                        </p>
-                        <ul class="muted small">
-                            <li data-en="Focus on spread + commission costs" data-es="Enfócate en costos de spread + comisión">Focus on spread + commission costs</li>
-                            <li data-en="Use predefined entries and exits" data-es="Usa entradas y salidas predefinidas">Use predefined entries and exits</li>
-                            <li data-en="Keep risk per trade small" data-es="Mantén el riesgo por operación pequeño">Keep risk per trade small</li>
-                        </ul>
+                        <div class="link-row">
+                            <a class="btn-inline" href="compare/" data-en="Open compare →" data-es="Abrir comparación →">Open compare →</a>
+                        </div>
                     </div>
                     <div class="card card-pad">
-                        <h3 class="card-title" data-en="Day Trading" data-es="Day Trading">Day Trading</h3>
-                        <p class="muted" data-en="Open and close positions within the same day. Ideal for active traders who can monitor markets." data-es="Abre y cierra posiciones dentro del mismo día. Ideal para traders activos que pueden monitorear los mercados.">
-                            Open and close positions within the same day. Ideal for active traders who can monitor markets.
+                        <h3 class="card-title" data-en="Strategies" data-es="Estrategias">Strategies</h3>
+                        <p class="muted" data-en="Scalping, day trading, and swing trading essentials." data-es="Conceptos clave de scalping, day trading y swing trading.">
+                            Scalping, day trading, and swing trading essentials.
                         </p>
-                        <p class="muted small" data-en="Prioritize high-volume sessions and clear intraday levels." data-es="Prioriza sesiones con volumen y niveles intradía claros.">
-                            Prioritize high-volume sessions and clear intraday levels.
-                        </p>
-                        <ul class="muted small">
-                            <li data-en="Plan trades around key news events" data-es="Planifica operaciones alrededor de noticias clave">Plan trades around key news events</li>
-                            <li data-en="Avoid holding overnight risk" data-es="Evita mantener riesgo overnight">Avoid holding overnight risk</li>
-                            <li data-en="Track daily risk limits" data-es="Controla límites de riesgo diarios">Track daily risk limits</li>
-                        </ul>
+                        <div class="link-row">
+                            <a class="btn-inline" href="strategies/" data-en="Open strategies →" data-es="Abrir estrategias →">Open strategies →</a>
+                        </div>
                     </div>
                     <div class="card card-pad">
-                        <h3 class="card-title" data-en="Swing Trading" data-es="Swing Trading">Swing Trading</h3>
-                        <p class="muted" data-en="Hold positions for several days or weeks to capture medium-term trends. Perfect for part-time traders." data-es="Mantén posiciones durante varios días o semanas para capturar tendencias a mediano plazo. Perfecto para traders a tiempo parcial.">
-                            Hold positions for several days or weeks to capture medium-term trends. Perfect for part-time traders.
+                        <h3 class="card-title" data-en="Learn" data-es="Aprender">Learn</h3>
+                        <p class="muted" data-en="Risk-first modules and step-by-step guides." data-es="Módulos centrados en el riesgo y guías paso a paso.">
+                            Risk-first modules and step-by-step guides.
                         </p>
-                        <p class="muted small" data-en="Use higher timeframes, wider stops, and clear trend filters." data-es="Usa marcos de tiempo altos, stops más amplios y filtros de tendencia claros.">
-                            Use higher timeframes, wider stops, and clear trend filters.
+                        <div class="link-row">
+                            <a class="btn-inline" href="learn/" data-en="Open learning →" data-es="Abrir aprendizaje →">Open learning →</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="News" data-es="Noticias">News</h3>
+                        <p class="muted" data-en="Weekly brief and market headlines." data-es="Resumen semanal y titulares del mercado.">
+                            Weekly brief and market headlines.
                         </p>
-                        <ul class="muted small">
-                            <li data-en="Size positions for wider volatility" data-es="Dimensiona posiciones para mayor volatilidad">Size positions for wider volatility</li>
-                            <li data-en="Review trades daily, not hourly" data-es="Revisa operaciones a diario, no cada hora">Review trades daily, not hourly</li>
-                            <li data-en="Use alerts to manage entries" data-es="Usa alertas para gestionar entradas">Use alerts to manage entries</li>
-                        </ul>
+                        <div class="link-row">
+                            <a class="btn-inline" href="news/" data-en="Open news →" data-es="Abrir noticias →">Open news →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -592,87 +516,7 @@
             </div>
         </section>
 
-        <section id="learn" class="section">
-            <div class="container">
-                <h2 class="section-heading mb-2" data-en="Learn Trading" data-es="Aprender Trading">Learn Trading</h2>
-                <p class="section-lead" data-en="Comprehensive educational resources to help you become a successful forex trader. From beginner courses to advanced trading concepts." data-es="Recursos educativos completos para ayudarte a convertirte en un trader de forex exitoso. Desde cursos para principiantes hasta conceptos avanzados de trading.">
-                    Comprehensive educational resources to help you become a successful forex trader. From beginner courses to advanced trading concepts.
-                </p>
-                <div class="grid grid-3">
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="Beginner Course" data-es="Curso para Principiantes">Beginner Course</h3>
-                        <p class="muted" data-en="A step-by-step course that covers the foundations and helps you place your first trades with confidence." data-es="Un curso paso a paso que cubre las bases y te ayuda a realizar tus primeras operaciones con confianza.">
-                            A step-by-step course that covers the foundations and helps you place your first trades with confidence.
-                        </p>
-                        <ul class="learn-list muted small">
-                            <li data-en="How forex works, pairs, and pips" data-es="Cómo funciona forex, pares y pips">How forex works, pairs, and pips</li>
-                            <li data-en="Order types, leverage, and margin" data-es="Tipos de órdenes, apalancamiento y margen">Order types, leverage, and margin</li>
-                            <li data-en="Risk basics and position sizing" data-es="Riesgo básico y tamaño de posición">Risk basics and position sizing</li>
-                        </ul>
-                        <div class="link-row">
-                            <a class="btn-inline" href="guides/getting-started.html" data-en="Start learning" data-es="Empezar a aprender">Start learning</a>
-                        </div>
-                    </div>
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="Intermediate Course" data-es="Curso Intermedio">Intermediate Course</h3>
-                        <p class="muted" data-en="Structure your trading plan with clear setups, rules, and performance tracking." data-es="Estructura tu plan con setups claros, reglas y seguimiento del rendimiento.">
-                            Structure your trading plan with clear setups, rules, and performance tracking.
-                        </p>
-                        <ul class="learn-list muted small">
-                            <li data-en="Market structure and trend filters" data-es="Estructura de mercado y filtros de tendencia">Market structure and trend filters</li>
-                            <li data-en="Entry/exit rules and trade management" data-es="Reglas de entrada/salida y gestión">Entry/exit rules and trade management</li>
-                            <li data-en="Journaling and review routines" data-es="Journaling y rutinas de revisión">Journaling and review routines</li>
-                        </ul>
-                        <div class="link-row">
-                            <a class="btn-inline" href="guides/risk-management.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="news" class="section section--alt">
-            <div class="container">
-                <h2 class="section-heading mb-2" data-en="Market News" data-es="Noticias del Mercado">Market News</h2>
-                <p class="section-lead" data-en="Stay updated with the latest forex market news, broker updates, and economic events." data-es="Mantente actualizado con las últimas noticias del mercado forex, actualizaciones de brokers y eventos económicos.">
-                    Stay updated with the latest forex market news, broker updates, and economic events.
-                </p>
-                <div class="grid grid-3">
-                    <!-- WEEKLY_NEWS_START -->
-                    <div class="card card-pad" data-weekly-news="true" data-weekly-key="2026-W07">
-  <h3 class="card-title"
-      data-en="Weekly Forex Brief — Week 7 (2026)"
-      data-es="Resumen Forex Semanal — Semana 7 (2026)">Weekly Forex Brief — Week 7 (2026)</h3>
-  <p class="muted mb-1"
-     data-en="A quick weekly brief on macro themes and what to watch. Always verify regulation, fees, and withdrawal terms in your region before choosing a broker."
-     data-es="Resumen semanal de temas macro y qué vigilar. Verifica regulación, comisiones y retiros en tu región antes de elegir broker.">A quick weekly brief on macro themes and what to watch. Always verify regulation, fees, and withdrawal terms in your region before choosing a broker.</p>
-  <time class="muted small news-date" datetime="2026-02-10T09:05:06Z" data-relative-time="true" data-show-absolute="true">2026-02-10</time>
-</div>
-                    <!-- WEEKLY_NEWS_END -->
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="EUR/USD Reaches New Highs" data-es="EUR/USD Alcanza Nuevos Máximos">EUR/USD Reaches New Highs</h3>
-                        <p class="muted mb-1" data-en="The euro strengthened against the dollar as traders repriced rate expectations and risk sentiment improved." data-es="El euro se fortaleció frente al dólar mientras los traders ajustaban expectativas de tasas y mejoraba el sentimiento.">
-                            The euro strengthened against the dollar as traders repriced rate expectations and risk sentiment improved.
-                        </p>
-                        <time class="muted small news-date" datetime="2026-02-04T10:00:00Z" data-relative-time="true">2 hours ago</time>
-                    </div>
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="New FCA Regulations" data-es="Nuevas Regulaciones FCA">New FCA Regulations</h3>
-                        <p class="muted mb-1" data-en="The FCA published updated guidance for marketing and risk disclosures for retail FX products." data-es="La FCA publicó nuevas guías para marketing y divulgación de riesgos para productos FX minoristas.">
-                            The FCA published updated guidance for marketing and risk disclosures for retail FX products.
-                        </p>
-                        <time class="muted small news-date" datetime="2026-02-04T07:00:00Z" data-relative-time="true">5 hours ago</time>
-                    </div>
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="Broker Spread Reductions" data-es="Reducciones de Spreads de Brokers">Broker Spread Reductions</h3>
-                        <p class="muted mb-1" data-en="Several brokers announced spread changes on major pairs. Always check the full fee schedule and trading conditions." data-es="Varios brokers anunciaron cambios de spreads en pares principales. Revisa siempre el esquema de comisiones y condiciones.">
-                            Several brokers announced spread changes on major pairs. Always check the full fee schedule and trading conditions.
-                        </p>
-                        <time class="muted small news-date" datetime="2026-02-03T12:00:00Z" data-relative-time="true">1 day ago</time>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Learn + News moved to dedicated pages for performance -->
 
         <section id="about" class="section section--alt">
             <div class="container">
@@ -774,43 +618,7 @@
             </div>
         </section>
 
-        <section id="guides" class="section">
-            <div class="container">
-                <h2 class="section-heading-md" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</h2>
-                <p class="section-lead section-lead-narrow" data-en="Step-by-step guides you can actually use. No fluff—just the fundamentals and a practical checklist." data-es="Guías paso a paso que puedes usar. Sin relleno—solo fundamentos y una lista práctica.">
-                    Comprehensive guides covering all aspects of forex trading.
-                </p>
-                <div class="grid grid-3">
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="Getting Started" data-es="Cómo Empezar">Getting Started</h3>
-                        <p class="muted" data-en="A simple roadmap: accounts, orders, leverage, and your first demo plan." data-es="Una ruta simple: cuentas, órdenes, apalancamiento y tu primer plan demo.">
-                            A simple roadmap: accounts, orders, leverage, and your first demo plan.
-                        </p>
-                        <div class="link-row">
-                            <a class="btn-inline" href="guides/getting-started.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
-                        </div>
-                    </div>
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="Risk Management" data-es="Gestión de Riesgo">Risk Management</h3>
-                        <p class="muted" data-en="Position sizing, stop-loss rules, and how to avoid account-killing mistakes." data-es="Tamaño de posición, reglas de stop-loss y cómo evitar errores fatales.">
-                            Position sizing, stop-loss rules, and how to avoid account-killing mistakes.
-                        </p>
-                        <div class="link-row">
-                            <a class="btn-inline" href="guides/risk-management.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
-                        </div>
-                    </div>
-                    <div class="card card-pad">
-                        <h3 class="card-title" data-en="Choosing a Broker" data-es="Elegir un Broker">Choosing a Broker</h3>
-                        <p class="muted" data-en="A checklist for regulation, fees, platforms, and withdrawals." data-es="Checklist de regulación, comisiones, plataformas y retiros.">
-                            A checklist for regulation, fees, platforms, and withdrawals.
-                        </p>
-                        <div class="link-row">
-                            <a class="btn-inline" href="guides/choosing-broker.html" data-en="Read guide" data-es="Leer guía">Read guide</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Guides moved to /learn/ -->
 
         <section id="glossary" class="section section--alt">
             <div class="container">
@@ -943,7 +751,10 @@
                 <div>
                     <h4 data-en="Resources" data-es="Recursos">Resources</h4>
                     <ul>
-                        <li><a href="#guides" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</a></li>
+                        <li><a href="learn/#guides" data-en="Trading Guides" data-es="Guías de Trading">Trading Guides</a></li>
+                        <li><a href="compare/" data-en="Compare" data-es="Comparar">Compare</a></li>
+                        <li><a href="strategies/" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                        <li><a href="news/" data-en="News" data-es="Noticias">News</a></li>
                         <li><a href="#glossary" data-en="Glossary" data-es="Glosario">Glossary</a></li>
                         <li><a href="#faq" data-en="FAQ" data-es="Preguntas Frecuentes">FAQ</a></li>
                     </ul>

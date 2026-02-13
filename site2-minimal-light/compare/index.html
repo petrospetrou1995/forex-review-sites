@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Brokers | Brokercompare</title>
+    <meta name="description" content="Compare forex brokers side by side by spreads, deposits, regulation, and platforms. Use filters and build a quick comparison table.">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a class="logo" href="../index.html">Brokercompare</a>
+                <ul class="nav-links" id="primaryNav">
+                    <li><a href="../index.html#brokers" data-en="Brokers" data-es="Brokers">Brokers</a></li>
+                    <li><a href="../reviews/" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                    <li><a href="./" data-en="Compare" data-es="Comparar">Compare</a></li>
+                    <li><a href="../strategies/" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                    <li><a href="../index.html#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                    <li><a href="../learn/" data-en="Learn" data-es="Aprender">Learn</a></li>
+                    <li><a href="../news/" data-en="News" data-es="Noticias">News</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
+                    <button class="lang-btn" id="langToggle" type="button">ES</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="container">
+                <h1 class="intro-title" data-en="Compare brokers side by side" data-es="Compara brokers lado a lado">Compare brokers side by side</h1>
+                <p class="intro-text" data-en="Select up to 3 brokers and compare key stats. Always verify the exact regulated entity and your all-in costs (spread + commission + swaps)." data-es="Selecciona hasta 3 brokers y compara estadísticas clave. Verifica siempre la entidad regulada y tu costo total (spread + comisión + swaps).">
+                    Select up to 3 brokers and compare key stats. Always verify the exact regulated entity and your all-in costs (spread + commission + swaps).
+                </p>
+            </div>
+        </section>
+
+        <section id="brokers" class="broker-table">
+            <div class="container">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-en="Broker" data-es="Broker">Broker</th>
+                                <th data-en="Rating" data-es="Calificación">Rating</th>
+                                <th data-en="Min Deposit" data-es="Depósito Mín">Min Deposit</th>
+                                <th data-en="Spreads" data-es="Spreads">Spreads</th>
+                                <th data-en="Platform" data-es="Plataforma">Platform</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="broker-name"><a class="btn-link" href="../brokers/xm-group.html">XM Group</a></div>
+                                    <div class="broker-reg" data-en="CySEC, ASIC" data-es="CySEC, ASIC">CySEC, ASIC</div>
+                                </td>
+                                <td><span class="rating">4.8</span></td>
+                                <td>$5</td>
+                                <td>0.6 pips</td>
+                                <td>MT4, MT5</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name"><a class="btn-link" href="../brokers/exness.html">Exness</a></div>
+                                    <div class="broker-reg" data-en="FCA, CySEC" data-es="FCA, CySEC">FCA, CySEC</div>
+                                </td>
+                                <td><span class="rating">4.7</span></td>
+                                <td>$10</td>
+                                <td>0.1 pips</td>
+                                <td>MT4, MT5</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name"><a class="btn-link" href="../brokers/libertex.html">Libertex</a></div>
+                                    <div class="broker-reg" data-en="CySEC" data-es="CySEC">CySEC</div>
+                                </td>
+                                <td><span class="rating">4.9</span></td>
+                                <td>$100</td>
+                                <td>From 0.0 pips</td>
+                                <td>Web, Mobile, MT4, MT5</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name"><a class="btn-link" href="../brokers/pepperstone.html">Pepperstone</a></div>
+                                    <div class="broker-reg" data-en="ASIC, FCA" data-es="ASIC, FCA">ASIC, FCA</div>
+                                </td>
+                                <td><span class="rating">4.6</span></td>
+                                <td>$200</td>
+                                <td>0.0 pips</td>
+                                <td>MT4, MT5, cTrader</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="broker-name"><a class="btn-link" href="../brokers/ic-markets.html">IC Markets</a></div>
+                                    <div class="broker-reg" data-en="ASIC, CySEC" data-es="ASIC, CySEC">ASIC, CySEC</div>
+                                </td>
+                                <td><span class="rating">4.5</span></td>
+                                <td>$200</td>
+                                <td>0.0 pips</td>
+                                <td>MT4, MT5, cTrader</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card card-pad mt-3">
+                    <h2 class="card-title" data-en="Cost snapshot (spread-only estimate)" data-es="Resumen de costos (estimación solo por spread)">Cost snapshot (spread-only estimate)</h2>
+                    <p class="muted mb-1" data-en="Assumes EUR/USD, 1 standard lot where 1 pip ≈ $10. This is spread-only (commissions and swaps not included). Always confirm on the broker’s site." data-es="Supone EUR/USD, 1 lote estándar donde 1 pip ≈ $10. Es solo por spread (sin comisiones ni swaps). Confirma siempre en el sitio del broker.">
+                        Assumes EUR/USD, 1 standard lot where 1 pip ≈ $10. This is spread-only (commissions and swaps not included). Always confirm on the broker’s site.
+                    </p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-en="Broker" data-es="Broker">Broker</th>
+                                    <th data-en="Shown spread" data-es="Spread mostrado">Shown spread</th>
+                                    <th data-en="Estimated spread cost" data-es="Costo estimado del spread">Estimated spread cost</th>
+                                    <th data-en="Notes" data-es="Notas">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>XM Group</strong></td>
+                                    <td>0.6 pips</td>
+                                    <td>≈ $6</td>
+                                    <td class="muted" data-en="Good baseline for standard accounts." data-es="Buen punto de partida para cuentas estándar.">Good baseline for standard accounts.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Exness</strong></td>
+                                    <td>0.1 pips</td>
+                                    <td>≈ $1</td>
+                                    <td class="muted" data-en="Raw pricing may add commissions." data-es="Precios raw pueden agregar comisiones.">Raw pricing may add commissions.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Libertex</strong></td>
+                                    <td data-en="From 0.0 pips" data-es="Desde 0.0 pips">From 0.0 pips</td>
+                                    <td>≈ $0+</td>
+                                    <td class="muted" data-en="If spread is near zero, check commissions and swaps." data-es="Si el spread es casi cero, revisa comisiones y swaps.">If spread is near zero, check commissions and swaps.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pepperstone</strong></td>
+                                    <td>0.0 pips</td>
+                                    <td>≈ $0+</td>
+                                    <td class="muted" data-en="Raw accounts usually add commission per side." data-es="Cuentas raw suelen agregar comisión por lado.">Raw accounts usually add commission per side.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IC Markets</strong></td>
+                                    <td>0.0 pips</td>
+                                    <td>≈ $0+</td>
+                                    <td class="muted" data-en="Often commission-based on tight-spread accounts." data-es="A menudo con comisiones en cuentas de spread bajo.">Often commission-based on tight-spread accounts.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="section section--alt">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Broker Comparison" data-es="Comparación de Brokers">Broker Comparison</h2>
+                <p class="section-lead" data-en="Compare brokers side by side using our comprehensive comparison tool. Filter by spreads, leverage, regulation, and more to find the perfect broker for your needs." data-es="Compara brokers lado a lado usando nuestra herramienta de comparación completa. Filtra por spreads, apalancamiento, regulación y más para encontrar el broker perfecto para tus necesidades.">
+                    Compare brokers side by side using our comprehensive comparison tool. Filter by spreads, leverage, regulation, and more to find the perfect broker for your needs.
+                </p>
+                <div class="card card-pad">
+                    <h3 class="card-title" data-en="Comparison Features" data-es="Características de Comparación">Comparison Features</h3>
+                    <div class="grid grid-4-tight">
+                        <div>
+                            <h4 class="label" data-en="Spreads" data-es="Spreads">Spreads</h4>
+                            <p class="muted small" data-en="Compare trading costs" data-es="Compara costos de trading">Compare trading costs</p>
+                        </div>
+                        <div>
+                            <h4 class="label" data-en="Leverage" data-es="Apalancamiento">Leverage</h4>
+                            <p class="muted small" data-en="Evaluate leverage options" data-es="Evalúa opciones de apalancamiento">Evaluate leverage options</p>
+                        </div>
+                        <div>
+                            <h4 class="label" data-en="Regulation" data-es="Regulación">Regulation</h4>
+                            <p class="muted small" data-en="Check regulatory status" data-es="Verifica estado regulatorio">Check regulatory status</p>
+                        </div>
+                        <div>
+                            <h4 class="label" data-en="Platforms" data-es="Plataformas">Platforms</h4>
+                            <p class="muted small" data-en="Compare trading platforms" data-es="Compara plataformas de trading">Compare trading platforms</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-pad mt-3 comparison-tool" id="comparisonTool">
+                    <div class="comparison-tool__top">
+                        <div>
+                            <h3 class="card-title" data-en="Compare brokers" data-es="Comparar brokers">Compare brokers</h3>
+                            <p class="muted small" data-en="Select up to 3 brokers, then compare key stats side by side." data-es="Selecciona hasta 3 brokers y compara estadísticas clave lado a lado.">
+                                Select up to 3 brokers, then compare key stats side by side.
+                            </p>
+                        </div>
+                        <button class="btn-inline" type="button" id="compareClearBtn" data-en="Clear selection" data-es="Limpiar selección">Clear selection</button>
+                    </div>
+
+                    <div class="comparison-tool__filters">
+                        <div class="tool-field">
+                            <label for="compareSearch" data-en="Search" data-es="Buscar">Search</label>
+                            <input id="compareSearch" type="text" inputmode="search" data-en-placeholder="Search brokers…" data-es-placeholder="Buscar brokers…" placeholder="Search brokers…">
+                        </div>
+                        <div class="tool-field">
+                            <label for="comparePlatform" data-en="Platform" data-es="Plataforma">Platform</label>
+                            <select id="comparePlatform">
+                                <option value="" data-en="All platforms" data-es="Todas las plataformas">All platforms</option>
+                            </select>
+                        </div>
+                        <div class="tool-field">
+                            <label for="compareRegulation" data-en="Regulation" data-es="Regulación">Regulation</label>
+                            <select id="compareRegulation">
+                                <option value="" data-en="All regulators" data-es="Todos los reguladores">All regulators</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="comparison-tool__picklist" id="comparePicklist"></div>
+
+                    <div class="comparison-tool__result">
+                        <p class="muted" id="compareStatus" role="status" aria-live="polite" data-en="Select at least 2 brokers to compare." data-es="Selecciona al menos 2 brokers para comparar.">
+                            Select at least 2 brokers to compare.
+                        </p>
+                        <div class="table-wrapper" id="compareTableWrap" hidden></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p data-en="© 2026 Brokercompare. All rights reserved." data-es="© 2026 Brokercompare. Todos los derechos reservados.">© 2026 Brokercompare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../translations.js"></script>
+    <script src="../app.js"></script>
+</body>
+</html>
+

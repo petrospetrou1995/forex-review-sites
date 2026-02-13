@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Strategies | Brokercompare</title>
+    <meta name="description" content="Trading strategies: scalping, day trading, swing trading, trend following, breakouts, range trading, news trading, and carry. Includes checklists, risk rules, and platform fit tips.">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a class="logo" href="../index.html">Brokercompare</a>
+                <ul class="nav-links" id="primaryNav">
+                    <li><a href="../index.html#brokers" data-en="Brokers" data-es="Brokers">Brokers</a></li>
+                    <li><a href="../reviews/" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                    <li><a href="../compare/" data-en="Compare" data-es="Comparar">Compare</a></li>
+                    <li><a href="./" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                    <li><a href="../index.html#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                    <li><a href="../learn/" data-en="Learn" data-es="Aprender">Learn</a></li>
+                    <li><a href="../news/" data-en="News" data-es="Noticias">News</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
+                    <button class="lang-btn" id="langToggle" type="button">ES</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="container">
+                <h1 class="intro-title" data-en="Trading strategies" data-es="Estrategias de trading">Trading strategies</h1>
+                <p class="intro-text" data-en="Pick one style, define risk rules first, then compare brokers that match your platform and execution needs. Use this page as a practical checklist, not as a signal service." data-es="Elige un estilo, define reglas de riesgo primero y luego compara brokers según plataformas y ejecución. Usa esta página como checklist práctico, no como señales.">
+                    Pick one style, define risk rules first, then compare brokers that match your platform and execution needs.
+                </p>
+                <div class="link-row link-row-center">
+                    <a class="btn-inline" href="../compare/" data-en="Compare brokers" data-es="Comparar brokers">Compare brokers</a>
+                    <a class="btn-inline" href="../learn/" data-en="Learn risk basics" data-es="Aprender riesgo básico">Learn risk basics</a>
+                </div>
+                <div class="card card-pad mt-3" role="note" aria-label="Risk note">
+                    <p class="muted mb-1" data-en="Risk note: no strategy wins all the time. Your job is to keep losses small, be consistent, and only scale after you can show stable results." data-es="Nota de riesgo: ninguna estrategia gana siempre. Tu trabajo es mantener pérdidas pequeñas, ser consistente y escalar solo con resultados estables.">
+                        Risk note: no strategy wins all the time. Your job is to keep losses small, be consistent, and only scale after you can show stable results.
+                    </p>
+                    <ul class="learn-list muted small">
+                        <li data-en="Use a fixed risk per trade (example: 0.5%–1%)." data-es="Usa riesgo fijo por operación (ej.: 0.5%–1%).">Use a fixed risk per trade (example: 0.5%–1%).</li>
+                        <li data-en="Always predefine stop-loss and take-profit before entry." data-es="Define stop-loss y take-profit antes de entrar.">Always predefine stop-loss and take-profit before entry.</li>
+                        <li data-en="Track outcomes in a journal for 30–50 trades before judging a strategy." data-es="Registra 30–50 operaciones antes de evaluar la estrategia.">Track outcomes in a journal for 30–50 trades before judging a strategy.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategies" class="section">
+            <div class="container">
+                <h2 class="section-heading mb-2" data-en="Trading Strategies" data-es="Estrategias de Trading">Trading Strategies</h2>
+                <p class="section-lead" data-en="Learn proven trading strategies used by professional traders. From scalping to swing trading, find the strategy that fits your trading style." data-es="Aprende estrategias de trading probadas utilizadas por traders profesionales. Desde scalping hasta swing trading, encuentra la estrategia que se ajusta a tu estilo de trading.">
+                    Learn proven trading strategies used by professional traders. From scalping to swing trading, find the strategy that fits your trading style.
+                </p>
+
+                <div class="card card-pad" id="strategy-fit">
+                    <h3 class="card-title" data-en="Choose a strategy that fits you" data-es="Elige una estrategia que se adapte a ti">Choose a strategy that fits you</h3>
+                    <div class="grid grid-3">
+                        <div>
+                            <p class="muted mb-1" data-en="Time available" data-es="Tiempo disponible">Time available</p>
+                            <ul class="learn-list muted small">
+                                <li data-en="Low time: swing / position." data-es="Poco tiempo: swing / posición.">Low time: swing / position.</li>
+                                <li data-en="Medium time: day trading." data-es="Tiempo medio: day trading.">Medium time: day trading.</li>
+                                <li data-en="High time: scalping." data-es="Mucho tiempo: scalping.">High time: scalping.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="muted mb-1" data-en="Costs sensitivity" data-es="Sensibilidad a costos">Costs sensitivity</p>
+                            <ul class="learn-list muted small">
+                                <li data-en="Scalping: spreads/commissions matter most." data-es="Scalping: spreads/comisiones importan más.">Scalping: spreads/commissions matter most.</li>
+                                <li data-en="Swing: swaps and slippage matter more." data-es="Swing: swaps y slippage importan más.">Swing: swaps and slippage matter more.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="muted mb-1" data-en="Platform fit" data-es="Plataforma">Platform fit</p>
+                            <ul class="learn-list muted small">
+                                <li data-en="EAs/indicators: MT4/MT5." data-es="EAs/indicadores: MT4/MT5.">EAs/indicators: MT4/MT5.</li>
+                                <li data-en="Fast execution UI: cTrader / desktop." data-es="Ejecución rápida: cTrader / escritorio.">Fast execution UI: cTrader / desktop.</li>
+                                <li data-en="Simple workflow: web/mobile platforms." data-es="Flujo simple: web/móvil.">Simple workflow: web/mobile platforms.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="link-row mt-3">
+                        <a class="btn-inline" href="../compare/" data-en="Open compare tool →" data-es="Abrir comparación →">Open compare tool →</a>
+                        <a class="btn-inline" href="../learn/" data-en="Risk management guide →" data-es="Guía de riesgo →">Risk management guide →</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Scalping" data-es="Scalping">Scalping</h3>
+                        <p class="muted" data-en="Profit from small price movements with quick trades. Requires discipline and low spreads." data-es="Obtén ganancias de pequeños movimientos de precios con operaciones rápidas. Requiere disciplina y spreads bajos.">
+                            Profit from small price movements with quick trades. Requires discipline and low spreads.
+                        </p>
+                        <p class="muted small" data-en="Best for liquid pairs, tight stops, and a strict session plan." data-es="Ideal para pares líquidos, stops ajustados y un plan de sesión estricto.">
+                            Best for liquid pairs, tight stops, and a strict session plan.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Focus on spread + commission costs" data-es="Enfócate en costos de spread + comisión">Focus on spread + commission costs</li>
+                            <li data-en="Use predefined entries and exits" data-es="Usa entradas y salidas predefinidas">Use predefined entries and exits</li>
+                            <li data-en="Keep risk per trade small" data-es="Mantén el riesgo por operación pequeño">Keep risk per trade small</li>
+                        </ul>
+                        <p class="muted small mt-3" data-en="Checklist: trade only your best setup; stop after 2 losses; avoid major news spikes." data-es="Checklist: opera solo tu mejor setup; para tras 2 pérdidas; evita noticias fuertes.">
+                            Checklist: trade only your best setup; stop after 2 losses; avoid major news spikes.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Day Trading" data-es="Day Trading">Day Trading</h3>
+                        <p class="muted" data-en="Open and close positions within the same day. Ideal for active traders who can monitor markets." data-es="Abre y cierra posiciones dentro del mismo día. Ideal para traders activos que pueden monitorear los mercados.">
+                            Open and close positions within the same day. Ideal for active traders who can monitor markets.
+                        </p>
+                        <p class="muted small" data-en="Prioritize high-volume sessions and clear intraday levels." data-es="Prioriza sesiones con volumen y niveles intradía claros.">
+                            Prioritize high-volume sessions and clear intraday levels.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Plan trades around key news events" data-es="Planifica operaciones alrededor de noticias clave">Plan trades around key news events</li>
+                            <li data-en="Avoid holding overnight risk" data-es="Evita mantener riesgo overnight">Avoid holding overnight risk</li>
+                            <li data-en="Track daily risk limits" data-es="Controla límites de riesgo diarios">Track daily risk limits</li>
+                        </ul>
+                        <p class="muted small mt-3" data-en="Checklist: define a session plan; take only A+ setups; journal each trade with screenshots." data-es="Checklist: define plan de sesión; solo setups A+; registra cada operación con capturas.">
+                            Checklist: define a session plan; take only A+ setups; journal each trade with screenshots.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Swing Trading" data-es="Swing Trading">Swing Trading</h3>
+                        <p class="muted" data-en="Hold positions for several days or weeks to capture medium-term trends. Perfect for part-time traders." data-es="Mantén posiciones durante varios días o semanas para capturar tendencias a mediano plazo. Perfecto para traders a tiempo parcial.">
+                            Hold positions for several days or weeks to capture medium-term trends. Perfect for part-time traders.
+                        </p>
+                        <p class="muted small" data-en="Use higher timeframes, wider stops, and clear trend filters." data-es="Usa marcos de tiempo altos, stops más amplios y filtros de tendencia claros.">
+                            Use higher timeframes, wider stops, and clear trend filters.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Size positions for wider volatility" data-es="Dimensiona posiciones para mayor volatilidad">Size positions for wider volatility</li>
+                            <li data-en="Review trades daily, not hourly" data-es="Revisa operaciones a diario, no cada hora">Review trades daily, not hourly</li>
+                            <li data-en="Use alerts to manage entries" data-es="Usa alertas para gestionar entradas">Use alerts to manage entries</li>
+                        </ul>
+                        <p class="muted small mt-3" data-en="Checklist: confirm the higher-timeframe trend; plan exits at key levels; watch swaps if holding overnight." data-es="Checklist: confirma tendencia en marco alto; planifica salidas; vigila swaps al mantener.">
+                            Checklist: confirm the higher-timeframe trend; plan exits at key levels; watch swaps if holding overnight.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-3 mt-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Trend following" data-es="Seguimiento de tendencia">Trend following</h3>
+                        <p class="muted" data-en="Trade in the direction of the dominant trend using structure and simple filters (moving averages, higher highs/lows)." data-es="Opera a favor de la tendencia usando estructura y filtros simples (medias móviles, máximos/mínimos).">
+                            Trade in the direction of the dominant trend using structure and simple filters (moving averages, higher highs/lows).
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Wait for pullbacks instead of chasing." data-es="Espera retrocesos, no persigas.">Wait for pullbacks instead of chasing.</li>
+                            <li data-en="Use trailing stops to protect gains." data-es="Usa trailing stop para proteger.">Use trailing stops to protect gains.</li>
+                            <li data-en="Avoid counter-trend trades during strong momentum." data-es="Evita contr tendencia con momentum.">Avoid counter-trend trades during strong momentum.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Breakout trading" data-es="Trading de ruptura">Breakout trading</h3>
+                        <p class="muted" data-en="Trade a move out of a well-defined range or key level. Focus on confirmation and risk control during volatility." data-es="Opera la salida de un rango/nivel clave. Enfócate en confirmación y control de riesgo.">
+                            Trade a move out of a well-defined range or key level. Focus on confirmation and risk control during volatility.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Look for consolidation before the break." data-es="Busca consolidación antes.">Look for consolidation before the break.</li>
+                            <li data-en="Use retest confirmation when possible." data-es="Confirma con retesteo.">Use retest confirmation when possible.</li>
+                            <li data-en="Stops go beyond the broken level." data-es="Stops más allá del nivel.">Stops go beyond the broken level.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Range trading" data-es="Trading de rango">Range trading</h3>
+                        <p class="muted" data-en="Buy near support and sell near resistance when the market is clearly range-bound." data-es="Compra en soporte y vende en resistencia cuando el mercado está en rango.">
+                            Buy near support and sell near resistance when the market is clearly range-bound.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Works best in calm regimes (low trend strength)." data-es="Mejor en calma (poca tendencia).">Works best in calm regimes (low trend strength).</li>
+                            <li data-en="Define invalidation beyond the range edges." data-es="Define invalidación fuera del rango.">Define invalidation beyond the range edges.</li>
+                            <li data-en="Be careful around news (ranges can break)." data-es="Cuidado con noticias (rompe rangos).">Be careful around news (ranges can break).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid grid-3 mt-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="News trading (advanced)" data-es="Trading de noticias (avanzado)">News trading (advanced)</h3>
+                        <p class="muted" data-en="High volatility around releases can cause slippage and spreads to widen. Only attempt with strict rules and small risk." data-es="Alta volatilidad puede causar slippage y spreads amplios. Solo con reglas estrictas y riesgo pequeño.">
+                            High volatility around releases can cause slippage and spreads to widen. Only attempt with strict rules and small risk.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Avoid market orders during spikes." data-es="Evita órdenes de mercado en picos.">Avoid market orders during spikes.</li>
+                            <li data-en="Prefer waiting for the first move, then the setup." data-es="Espera el primer movimiento y luego el setup.">Prefer waiting for the first move, then the setup.</li>
+                            <li data-en="Know your broker’s execution behavior." data-es="Conoce la ejecución del broker.">Know your broker’s execution behavior.</li>
+                        </ul>
+                        <div class="link-row mt-3">
+                            <a class="btn-inline" href="../news/" data-en="See market news →" data-es="Ver noticias →">See market news →</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Carry trade (macro)" data-es="Carry trade (macro)">Carry trade (macro)</h3>
+                        <p class="muted" data-en="Earn interest rate differentials by holding higher-yield vs lower-yield currencies (risk-on/off matters)." data-es="Busca diferenciales de tasas manteniendo divisas de mayor vs menor rendimiento (importa el riesgo).">
+                            Earn interest rate differentials by holding higher-yield vs lower-yield currencies (risk-on/off matters).
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Monitor central bank policy changes." data-es="Monitorea bancos centrales.">Monitor central bank policy changes.</li>
+                            <li data-en="Use wider risk limits; positions can swing." data-es="Usa límites amplios; hay swings.">Use wider risk limits; positions can swing.</li>
+                            <li data-en="Understand swaps and financing." data-es="Entiende swaps y financiación.">Understand swaps and financing.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Position trading" data-es="Trading de posición">Position trading</h3>
+                        <p class="muted" data-en="Longer-term holding based on macro + higher timeframe structure. Fewer trades, more patience." data-es="Mantener a largo plazo con macro + estructura. Menos operaciones, más paciencia.">
+                            Longer-term holding based on macro + higher timeframe structure. Fewer trades, more patience.
+                        </p>
+                        <ul class="muted small">
+                            <li data-en="Plan around big themes, not small noise." data-es="Opera temas grandes, no ruido.">Plan around big themes, not small noise.</li>
+                            <li data-en="Swaps can dominate returns—calculate them." data-es="Swaps pueden dominar—calcúlalos.">Swaps can dominate returns—calculate them.</li>
+                            <li data-en="Use alerts and weekly reviews." data-es="Usa alertas y revisión semanal.">Use alerts and weekly reviews.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--alt" id="common-mistakes">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Common mistakes (and quick fixes)" data-es="Errores comunes (y soluciones)">Common mistakes (and quick fixes)</h2>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Overtrading" data-es="Sobre-operar">Overtrading</h3>
+                        <p class="muted" data-en="Taking too many mediocre setups increases fees and emotional stress." data-es="Demasiados setups mediocres aumentan comisiones y estrés.">
+                            Taking too many mediocre setups increases fees and emotional stress.
+                        </p>
+                        <p class="muted small" data-en="Fix: define 1–2 setups and a daily stop rule (max losses / max trades)." data-es="Solución: define 1–2 setups y regla de stop diario (máx pérdidas / máx operaciones).">
+                            Fix: define 1–2 setups and a daily stop rule (max losses / max trades).
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Ignoring all-in costs" data-es="Ignorar costos totales">Ignoring all-in costs</h3>
+                        <p class="muted" data-en="Spread + commission + swaps can flip a “good” strategy into a losing one." data-es="Spread + comisión + swaps pueden convertir una estrategia en perdedora.">
+                            Spread + commission + swaps can flip a “good” strategy into a losing one.
+                        </p>
+                        <p class="muted small" data-en="Fix: estimate costs for your pair + holding time, then compare brokers." data-es="Solución: estima costos según par + tiempo, y compara brokers.">
+                            Fix: estimate costs for your pair + holding time, then compare brokers.
+                        </p>
+                        <div class="link-row mt-3">
+                            <a class="btn-inline" href="../compare/" data-en="Compare now →" data-es="Comparar ahora →">Compare now →</a>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="No process" data-es="Sin proceso">No process</h3>
+                        <p class="muted" data-en="Without rules, you can’t improve because you can’t measure." data-es="Sin reglas no puedes mejorar porque no puedes medir.">
+                            Without rules, you can’t improve because you can’t measure.
+                        </p>
+                        <p class="muted small" data-en="Fix: journal every trade (setup, entry, stop, target, outcome, lesson)." data-es="Solución: registra cada operación (setup, entrada, stop, objetivo, resultado, lección).">
+                            Fix: journal every trade (setup, entry, stop, target, outcome, lesson).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="strategies-faq">
+            <div class="container">
+                <h2 class="section-heading-md" data-en="Strategies FAQ" data-es="FAQ de estrategias">Strategies FAQ</h2>
+                <div class="grid grid-3">
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Which strategy is best for beginners?" data-es="¿Qué estrategia es mejor para principiantes?">Which strategy is best for beginners?</h3>
+                        <p class="muted" data-en="Usually swing trading or simple day trading with strict risk rules. Scalping is hardest because costs and speed matter." data-es="Normalmente swing o day trading simple con reglas estrictas. Scalping es lo más difícil por costos y velocidad.">
+                            Usually swing trading or simple day trading with strict risk rules. Scalping is hardest because costs and speed matter.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="Do I need MT4/MT5?" data-es="¿Necesito MT4/MT5?">Do I need MT4/MT5?</h3>
+                        <p class="muted" data-en="Not necessarily. Web/mobile platforms can be enough. Use MT4/MT5 if you rely on indicators, EAs, or specific workflows." data-es="No necesariamente. Web/móvil puede bastar. Usa MT4/MT5 si necesitas indicadores, EAs o flujos específicos.">
+                            Not necessarily. Web/mobile platforms can be enough. Use MT4/MT5 if you rely on indicators, EAs, or specific workflows.
+                        </p>
+                    </div>
+                    <div class="card card-pad">
+                        <h3 class="card-title" data-en="How do I test a strategy safely?" data-es="¿Cómo pruebo una estrategia de forma segura?">How do I test a strategy safely?</h3>
+                        <p class="muted" data-en="Start with demo, then tiny risk. Track 30–50 trades. Only scale after consistency and after testing withdrawals with a small amount." data-es="Empieza en demo y luego riesgo mínimo. Registra 30–50 operaciones. Escala solo con consistencia y tras probar retiros.">
+                            Start with demo, then tiny risk. Track 30–50 trades. Only scale after consistency and after testing withdrawals with a small amount.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p data-en="© 2026 Brokercompare. All rights reserved." data-es="© 2026 Brokercompare. Todos los derechos reservados.">© 2026 Brokercompare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../translations.js"></script>
+    <script src="../app.js"></script>
+</body>
+</html>
+
