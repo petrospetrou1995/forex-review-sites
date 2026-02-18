@@ -258,6 +258,13 @@ function buildLatamMatcher() {
   };
 }
 
+function isFresh(pubIso, maxAgeDays) {
+  const ms = Date.parse(pubIso);
+  if (!Number.isFinite(ms)) return false;
+  const cutoff = Date.now() - maxAgeDays * 24 * 60 * 60 * 1000;
+  return ms >= cutoff;
+}
+
 async function buildLatamFocusedItems(feedUrls, limit) {
   const all = [];
   for (const url of feedUrls) {
@@ -277,11 +284,12 @@ async function buildLatamFocusedItems(feedUrls, limit) {
 
   const sorted = Array.from(dedup.values()).sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso));
   const isLatam = buildLatamMatcher();
-  const latam = sorted.filter(isLatam);
+  const fresh = sorted.filter((it) => isFresh(it.pubIso, 45));
+  const latam = fresh.filter(isLatam);
 
-  // Prefer LATAM-related headlines, but never return empty/too few.
+  // Prefer LATAM-related headlines, but also keep results fresh.
   if (latam.length >= Math.max(4, Math.min(7, limit))) return latam.slice(0, limit);
-  const fill = sorted.filter((it) => !isLatam(it)).slice(0, Math.max(0, limit - latam.length));
+  const fill = fresh.filter((it) => !isLatam(it)).slice(0, Math.max(0, limit - latam.length));
   return latam.concat(fill).slice(0, limit);
 }
 
@@ -299,8 +307,8 @@ async function run() {
         'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=tasObj&BMXC_idioma=es',
         // LATAM-friendly FX headlines (Spanish)
         'https://www.fxstreet.es/rss/news',
-        // Central banking / FX reserve coverage (filter will prefer LATAM)
-        'https://www.centralbanking.com/feeds/rss/category/central-banks/reserves/foreign-exchange'
+        // Central banking decisions & policy (filter will prefer LATAM)
+        'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions'
       ],
       9
     );
