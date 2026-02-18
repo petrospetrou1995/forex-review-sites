@@ -86,6 +86,54 @@ function initRelativeTimes() {
     relativeTimeTimer = window.setInterval(updateRelativeTimes, 60000);
 }
 
+function setDailyToggleLabel(btn, expanded) {
+    const en = expanded ? 'Show less' : 'Show more daily briefs';
+    const es = expanded ? 'Ver menos' : 'Ver más resúmenes diarios';
+    btn.setAttribute('data-en', en);
+    btn.setAttribute('data-es', es);
+    btn.textContent = currentLang === 'es' ? es : en;
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
+function initDailyBriefsToggle() {
+    const newsSection = document.getElementById('news');
+    if (!newsSection) return;
+    const grid = newsSection.querySelector('.news-grid');
+    if (!grid) return;
+
+    const btn = grid.querySelector('button[data-daily-toggle]');
+    if (!btn) return;
+
+    const items = Array.from(grid.querySelectorAll('article.news-card[data-daily-news="true"]'));
+    const DEFAULT_VISIBLE = 3;
+    const hasOverflow = items.length > DEFAULT_VISIBLE;
+
+    btn.classList.toggle('is-hidden', !hasOverflow);
+    if (!hasOverflow) return;
+
+    const apply = (expanded) => {
+        items.forEach((el, idx) => {
+            if (idx < DEFAULT_VISIBLE) {
+                el.classList.remove('is-hidden');
+                return;
+            }
+            el.classList.toggle('is-hidden', !expanded);
+        });
+        grid.setAttribute('data-daily-expanded', expanded ? 'true' : 'false');
+        setDailyToggleLabel(btn, expanded);
+    };
+
+    const expanded = grid.getAttribute('data-daily-expanded') === 'true';
+    apply(expanded);
+
+    if (btn.getAttribute('data-bound') === 'true') return;
+    btn.setAttribute('data-bound', 'true');
+    btn.addEventListener('click', () => {
+        const isExpandedNow = grid.getAttribute('data-daily-expanded') === 'true';
+        apply(!isExpandedNow);
+    });
+}
+
 // Initialize translations
 function initTranslations() {
     document.addEventListener('DOMContentLoaded', () => {
@@ -93,6 +141,7 @@ function initTranslations() {
         initReviewCounts();
         initReviewViewMore();
         sortNewsCardsByDatetimeDesc();
+        initDailyBriefsToggle();
         initRelativeTimes();
         
         // Language toggle button
@@ -105,6 +154,7 @@ function initTranslations() {
                 applyLanguage(currentLang);
                 initReviewCounts();
                 syncReviewViewMoreButtons();
+                initDailyBriefsToggle();
                 updateRelativeTimes();
                 langToggle.textContent = currentLang === 'en' ? 'ES' : 'EN';
             });

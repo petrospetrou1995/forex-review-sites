@@ -40,6 +40,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site1-dark-gradient/index.html site2-minimal-light/news/index.html
+          git add site1-dark-gradient/news/daily site2-minimal-light/news/daily
           git add scripts/add-daily-news.mjs .github/workflows/daily-news.yml
           git commit -m "chore(news): add daily brief and refresh headlines"
           git push

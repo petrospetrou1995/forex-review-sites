@@ -278,6 +278,10 @@ button.btn-inline {
     margin: 0;
 }
 
+.is-hidden {
+    display: none !important;
+}
+
 .link-row {
     display: flex;
     gap: 1rem;
