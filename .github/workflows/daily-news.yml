@@ -1,0 +1,46 @@
+name: Daily news update
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every day at 09:10 UTC
+    - cron: "10 9 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  add_daily_news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Add daily brief
+        run: node scripts/add-daily-news.mjs
+
+      - name: Stamp publish datetimes
+        run: node scripts/stamp-published-dates.mjs
+
+      - name: Update RSS headlines
+        run: node scripts/update-rss-news.mjs
+
+      - name: Commit and push changes
+        run: |
+          git status --porcelain
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site1-dark-gradient/index.html site2-minimal-light/news/index.html
+          git add scripts/add-daily-news.mjs .github/workflows/daily-news.yml
+          git commit -m "chore(news): add daily brief and refresh headlines"
+          git push
+
