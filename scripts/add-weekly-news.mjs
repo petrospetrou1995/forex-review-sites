@@ -57,46 +57,113 @@ function readFileRel(relPath) {
   return fs.readFileSync(path.join(ROOT, relPath), 'utf8');
 }
 
-function buildSite1NewsItem({ datetime, week, year, key, hrefPrefix = 'news/weekly' }) {
-  const href = `${hrefPrefix}/${key}/`;
+function escapeAttr(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function escapeText(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function joinHref(base, key) {
+  const b = String(base || '').replace(/\/+$/, '');
+  if (!b) return `${key}/`;
+  return `${b}/${key}/`;
+}
+
+function weekKeyToRange(key) {
+  const m = String(key || '').match(/^(\d{4})-W(\d{2})$/);
+  if (!m) return { startIso: '2026-01-01', endIso: '2026-01-07' };
+  const year = Number(m[1]);
+  const week = Number(m[2]);
+  const simple = new Date(Date.UTC(year, 0, 1 + (week - 1) * 7));
+  const dow = simple.getUTCDay();
+  const start = new Date(simple);
+  if (dow <= 4) start.setUTCDate(simple.getUTCDate() - simple.getUTCDay() + 1);
+  else start.setUTCDate(simple.getUTCDate() + 8 - simple.getUTCDay());
+  const end = new Date(start);
+  end.setUTCDate(start.getUTCDate() + 6);
+  const startIso = start.toISOString().slice(0, 10);
+  const endIso = end.toISOString().slice(0, 10);
+  return { startIso, endIso };
+}
+
+function weekKeyToDatetime(key) {
+  const { startIso } = weekKeyToRange(key);
+  return `${startIso}T00:00:00Z`;
+}
+
+function extractBetweenMarkers(html, markerStart, markerEnd) {
+  const startIdx = html.indexOf(markerStart);
+  const endIdx = html.indexOf(markerEnd);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return '';
+  return html.slice(startIdx + markerStart.length, endIdx);
+}
+
+function replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, indentSpaces = 20) {
+  const startIdx = html.indexOf(markerStart);
+  const endIdx = html.indexOf(markerEnd);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
+    throw new Error(`Markers not found or invalid: ${markerStart} ... ${markerEnd}`);
+  }
+  const before = html.slice(0, startIdx + markerStart.length);
+  const after = html.slice(endIdx);
+  const indent = '\n' + ' '.repeat(indentSpaces);
+  const inner = nextInner?.trim() ? indent + nextInner.trim() + '\n' + ' '.repeat(indentSpaces) : indent + '\n' + ' '.repeat(indentSpaces);
+  return before + inner + after;
+}
+
+function buildSite1NewsItem({ week, year, key, hrefBase = 'news/weekly' }) {
+  const href = joinHref(hrefBase, key);
+  const { startIso, endIso } = weekKeyToRange(key);
+  const titleEn = `Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})`;
+  const titleEs = `Resumen Forex Semanal (BrokerProReviews) — Semana ${week} (${year})`;
+  const excerptEn = `Week range: ${startIso} → ${endIso}. Macro themes, pairs to watch, LATAM checklist, and risk rules.`;
+  const excerptEs = `Rango semanal: ${startIso} → ${endIso}. Temas macro, pares a vigilar, checklist LATAM y reglas de riesgo.`;
   return `
 <article class="news-card" data-weekly-news="true" data-weekly-key="${key}">
   <div class="news-image"></div>
   <div class="news-content">
     <span class="news-category" data-en="Weekly Brief" data-es="Resumen semanal">Weekly Brief</span>
     <h3 class="news-title">
-      <a class="link-cta" href="${href}"
-         data-en="Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})"
-         data-es="Resumen Forex Semanal (BrokerProReviews) — Semana ${week} (${year})">Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})</a>
+      <a class="link-cta" href="${href}" data-en="${escapeAttr(titleEn)}" data-es="${escapeAttr(titleEs)}">${escapeText(titleEn)}</a>
     </h3>
-    <p class="news-excerpt"
-       data-en="This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling."
-       data-es="Checklist de la semana: fechas macro, temas FX y recordatorios de riesgo. Verifica regulación, prueba retiros y compara costos totales antes de escalar.">This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling.</p>
-    <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${datetime.split('T')[0]}</time>
+    <p class="news-excerpt" data-en="${escapeAttr(excerptEn)}" data-es="${escapeAttr(excerptEs)}">${escapeText(excerptEn)}</p>
+    <time class="news-date" datetime="${weekKeyToDatetime(key)}" data-relative-time="true" data-show-absolute="true">${weekKeyToRange(key).startIso}</time>
   </div>
 </article>
 `.trim();
 }
 
-function buildSite2NewsItem({ datetime, week, year, key }) {
-  const href = `weekly/${key}/`;
+function buildSite2NewsItem({ week, year, key, hrefBase = 'weekly' }) {
+  const href = joinHref(hrefBase, key);
+  const { startIso, endIso } = weekKeyToRange(key);
+  const titleEn = `Weekly Market Brief (Brokercompare) — Week ${week} (${year})`;
+  const titleEs = `Resumen Semanal de Mercado (Brokercompare) — Semana ${week} (${year})`;
+  const excerptEn = `Week range: ${startIso} → ${endIso}. A short weekly snapshot (LATAM): what matters, what to watch, and what to double-check.`;
+  const excerptEs = `Rango semanal: ${startIso} → ${endIso}. Snapshot semanal (LATAM): qué importa, qué vigilar y qué revisar.`;
   return `
 <div class="card card-pad" data-weekly-news="true" data-weekly-key="${key}">
   <h3 class="card-title">
-    <a class="btn-link" href="${href}"
-       data-en="Weekly Market Brief (Brokercompare) — Week ${week} (${year})"
-       data-es="Resumen Semanal de Mercado (Brokercompare) — Semana ${week} (${year})">Weekly Market Brief (Brokercompare) — Week ${week} (${year})</a>
+    <a class="btn-link" href="${href}" data-en="${escapeAttr(titleEn)}" data-es="${escapeAttr(titleEs)}">${escapeText(titleEn)}</a>
   </h3>
-  <p class="muted mb-1"
-     data-en="A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount."
-     data-es="Snapshot semanal: qué importa, qué vigilar y qué evitar. Compara plataformas y regulación, y prueba depósitos/retiros con un monto pequeño.">A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount.</p>
-  <time class="muted small news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${datetime.split('T')[0]}</time>
+  <p class="muted mb-1" data-en="${escapeAttr(excerptEn)}" data-es="${escapeAttr(excerptEs)}">${escapeText(excerptEn)}</p>
+  <time class="muted small news-date" datetime="${weekKeyToDatetime(key)}" data-relative-time="true" data-show-absolute="true">${weekKeyToRange(key).startIso}</time>
 </div>
 `.trim();
 }
 
 function buildSite1WeeklyPageHtml({ key, week, year, datetime }) {
   const canonical = `https://brokerproreviews.com/news/weekly/${key}/`;
+  const { startIso, endIso } = weekKeyToRange(key);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,7 +208,8 @@ function buildSite1WeeklyPageHtml({ key, week, year, datetime }) {
         <p class="guide-lead"
            data-en="A practical weekly plan: what matters, what to watch, and what to double-check before trading (especially for LATAM)."
            data-es="Un plan semanal práctico: qué importa, qué vigilar y qué revisar dos veces antes de operar (especialmente en LATAM).">A practical weekly plan: what matters, what to watch, and what to double-check before trading (especially for LATAM).</p>
-        <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${key}</time>
+        <p class="rating-small" data-en="Week range: ${startIso} → ${endIso}" data-es="Rango semanal: ${startIso} → ${endIso}">Week range: ${startIso} → ${endIso}</p>
+        <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${datetime.split('T')[0]}</time>
 
         <div class="card-panel mt-5">
           <h2 class="section-subheading" data-en="1) Macro themes to watch" data-es="1) Temas macro a vigilar">1) Macro themes to watch</h2>
@@ -180,6 +248,7 @@ function buildSite1WeeklyPageHtml({ key, week, year, datetime }) {
 
 function buildSite2WeeklyPageHtml({ key, week, year, datetime }) {
   const canonical = `https://brokercompare.com/news/weekly/${key}/`;
+  const { startIso, endIso } = weekKeyToRange(key);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -224,7 +293,8 @@ function buildSite2WeeklyPageHtml({ key, week, year, datetime }) {
         <p class="intro-text"
            data-en="A practical weekly plan for LATAM traders: broker checks, forex catalysts, and risk rules."
            data-es="Plan semanal práctico para traders en LATAM: checklist de brokers, catalizadores de FX y reglas de riesgo.">A practical weekly plan for LATAM traders: broker checks, forex catalysts, and risk rules.</p>
-        <time class="muted small news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${key}</time>
+        <p class="muted small" data-en="Week range: ${startIso} → ${endIso}" data-es="Rango semanal: ${startIso} → ${endIso}">Week range: ${startIso} → ${endIso}</p>
+        <time class="muted small news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${datetime.split('T')[0]}</time>
       </div>
     </section>
 
@@ -232,24 +302,24 @@ function buildSite2WeeklyPageHtml({ key, week, year, datetime }) {
       <div class="container">
         <div class="card card-pad">
           <h2 class="card-title" data-en="Broker checklist" data-es="Checklist de brokers">Broker checklist</h2>
-          <ul class="muted" style="margin-top:0.75rem">
+          <ul class="muted">
             <li data-en="Verify the exact regulated entity for your LATAM country." data-es="Verifica la entidad regulada exacta para tu país en LATAM.">Verify the exact regulated entity for your LATAM country.</li>
             <li data-en="Compare all-in costs (spreads + commission + swaps)." data-es="Compara costos totales (spreads + comisión + swaps).">Compare all-in costs (spreads + commission + swaps).</li>
             <li data-en="Test withdrawals early; track fees and settlement time." data-es="Prueba retiros temprano; registra comisiones y tiempos.">Test withdrawals early; track fees and settlement time.</li>
           </ul>
         </div>
 
-        <div class="card card-pad" style="margin-top:1rem">
+        <div class="card card-pad">
           <h2 class="card-title" data-en="Forex catalysts" data-es="Catalizadores FX">Forex catalysts</h2>
-          <ul class="muted" style="margin-top:0.75rem">
+          <ul class="muted">
             <li data-en="Inflation and rate expectations (local + US) drive FX volatility." data-es="Inflación y expectativas de tasas (local + EE. UU.) impulsan volatilidad FX.">Inflation and rate expectations (local + US) drive FX volatility.</li>
             <li data-en="Watch USD/MXN and USD/BRL liquidity windows for spread changes." data-es="Vigila ventanas de liquidez de USD/MXN y USD/BRL por cambios de spread.">Watch USD/MXN and USD/BRL liquidity windows for spread changes.</li>
           </ul>
         </div>
 
-        <div class="card card-pad" style="margin-top:1rem">
+        <div class="card card-pad">
           <h2 class="card-title" data-en="Risk rules" data-es="Reglas de riesgo">Risk rules</h2>
-          <ul class="muted" style="margin-top:0.75rem">
+          <ul class="muted">
             <li data-en="Set a daily loss cap and stop when hit." data-es="Define un tope de pérdida diaria y detente al alcanzarlo.">Set a daily loss cap and stop when hit.</li>
             <li data-en="Reduce size first when volatility spikes." data-es="Reduce tamaño primero si sube la volatilidad.">Reduce size first when volatility spikes.</li>
           </ul>
@@ -307,23 +377,40 @@ function run() {
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     try {
       const html = readFileRel(relPath);
-      const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
-      const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && (!middle.includes(`href="weekly/${key}/"`) || !middle.includes('datetime='));
-      const next = updateBetweenMarkers(html, {
-        markerStart,
-        markerEnd,
-        buildNewItem: () => buildSite1NewsItem({ datetime, week, year, key, hrefPrefix: 'weekly' }),
-        itemRegex: /<article class="news-card" data-weekly-news="true" data-weekly-key="[^"]+">[\s\S]*?<\/article>/g,
-        maxItems: 24,
-        currentKey: key,
-        replaceExisting: needsUpgrade,
-      });
-      if (next !== html) {
-        writeFileRel(relPath, next);
-        updated.push(relPath);
-      }
+      const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+      const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-weekly-key="(\d{4}-W\d{2})"/g)).map(m => m[1])])).slice(0, 24);
+      const nextInner = keys.map((k) => {
+        const mm = String(k).match(/^(\d{4})-W(\d{2})$/);
+        const y = Number(mm?.[1] || year);
+        const w = Number(mm?.[2] || week);
+        return buildSite1NewsItem({ week: w, year: y, key: k, hrefBase: 'weekly' });
+      }).join('\n');
+      const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+      if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
     } catch {
       // ignore if page not present
+    }
+  }
+
+  // Update site1 Weekly briefs category page
+  {
+    const relPath = 'site1-dark-gradient/news/weekly/index.html';
+    const markerStart = '<!-- WEEKLY_NEWS_START -->';
+    const markerEnd = '<!-- WEEKLY_NEWS_END -->';
+    try {
+      const html = readFileRel(relPath);
+      const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+      const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-weekly-key="(\d{4}-W\d{2})"/g)).map(m => m[1])])).slice(0, 60);
+      const nextInner = keys.map((k) => {
+        const mm = String(k).match(/^(\d{4})-W(\d{2})$/);
+        const y = Number(mm?.[1] || year);
+        const w = Number(mm?.[2] || week);
+        return buildSite1NewsItem({ week: w, year: y, key: k, hrefBase: '' });
+      }).join('\n');
+      const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+      if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
+    } catch {
+      // ignore
     }
   }
 
@@ -333,21 +420,16 @@ function run() {
     const markerStart = '<!-- WEEKLY_NEWS_START -->';
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     const html = readFileRel(relPath);
-    const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
-    const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && (!middle.includes(`news/weekly/${key}/`) || !middle.includes('datetime='));
-    const next = updateBetweenMarkers(html, {
-      markerStart,
-      markerEnd,
-      buildNewItem: () => buildSite1NewsItem({ datetime, week, year, key }),
-      itemRegex: /<article class="news-card" data-weekly-news="true" data-weekly-key="[^"]+">[\s\S]*?<\/article>/g,
-      maxItems: 12,
-      currentKey: key,
-      replaceExisting: needsUpgrade,
-    });
-    if (next !== html) {
-      writeFileRel(relPath, next);
-      updated.push(relPath);
-    }
+    const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+    const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-weekly-key="(\d{4}-W\d{2})"/g)).map(m => m[1])])).slice(0, 12);
+    const nextInner = keys.map((k) => {
+      const mm = String(k).match(/^(\d{4})-W(\d{2})$/);
+      const y = Number(mm?.[1] || year);
+      const w = Number(mm?.[2] || week);
+      return buildSite1NewsItem({ week: w, year: y, key: k, hrefBase: 'news/weekly' });
+    }).join('\n');
+    const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+    if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
   }
 
   // site2
@@ -356,20 +438,37 @@ function run() {
     const markerStart = '<!-- WEEKLY_NEWS_START -->';
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     const html = readFileRel(relPath);
-    const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
-    const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && !middle.includes(`weekly/${key}/`);
-    const next = updateBetweenMarkers(html, {
-      markerStart,
-      markerEnd,
-      buildNewItem: () => buildSite2NewsItem({ datetime, week, year, key }),
-      itemRegex: /<div class="card card-pad" data-weekly-news="true" data-weekly-key="[^"]+">[\s\S]*?<\/div>/g,
-      maxItems: 12,
-      currentKey: key,
-      replaceExisting: needsUpgrade,
-    });
-    if (next !== html) {
-      writeFileRel(relPath, next);
-      updated.push(relPath);
+    const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+    const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-weekly-key="(\d{4}-W\d{2})"/g)).map(m => m[1])])).slice(0, 12);
+    const nextInner = keys.map((k) => {
+      const mm = String(k).match(/^(\d{4})-W(\d{2})$/);
+      const y = Number(mm?.[1] || year);
+      const w = Number(mm?.[2] || week);
+      return buildSite2NewsItem({ week: w, year: y, key: k, hrefBase: 'weekly' });
+    }).join('\n');
+    const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+    if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
+  }
+
+  // site2 Weekly briefs category page
+  {
+    const relPath = 'site2-minimal-light/news/weekly/index.html';
+    const markerStart = '<!-- WEEKLY_NEWS_START -->';
+    const markerEnd = '<!-- WEEKLY_NEWS_END -->';
+    try {
+      const html = readFileRel(relPath);
+      const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+      const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-weekly-key="(\d{4}-W\d{2})"/g)).map(m => m[1])])).slice(0, 60);
+      const nextInner = keys.map((k) => {
+        const mm = String(k).match(/^(\d{4})-W(\d{2})$/);
+        const y = Number(mm?.[1] || year);
+        const w = Number(mm?.[2] || week);
+        return buildSite2NewsItem({ week: w, year: y, key: k, hrefBase: '' });
+      }).join('\n');
+      const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+      if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
+    } catch {
+      // ignore
     }
   }
 

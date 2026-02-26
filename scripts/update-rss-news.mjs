@@ -380,28 +380,39 @@ async function run() {
       30
     );
     if (fresh.length) {
-      // Canonical storage of the RSS archive is the /news/ page.
-      const archivePath = 'site1-dark-gradient/news/index.html';
-      let archiveHtml = '';
+      // Canonical storage of the RSS archive is the /news/ pages.
+      const archivePaths = [
+        'site1-dark-gradient/news/index.html',
+        'site1-dark-gradient/news/headlines/index.html',
+      ];
+
+      // Prefer existing content from the first archive page that exists.
       let existing = [];
-      try {
-        archiveHtml = readFileRel(archivePath);
-        const existingMid = extractBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
-        existing = parseExistingRssCardsSite1(existingMid);
-      } catch {
-        archiveHtml = '';
-        existing = [];
+      for (const p of archivePaths) {
+        try {
+          const archiveHtml = readFileRel(p);
+          const existingMid = extractBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
+          existing = parseExistingRssCardsSite1(existingMid);
+          if (existing.length) break;
+        } catch {
+          // ignore
+        }
       }
 
       const merged = mergeKeepRecent(existing, fresh, 60);
 
-      // Update archive page (all items)
-      if (archiveHtml) {
-        const nextArchiveInner = buildSite1Cards(merged);
-        const nextArchive = updateBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextArchiveInner, ' '.repeat(20));
-        if (nextArchive !== archiveHtml) {
-          writeFileRel(archivePath, nextArchive);
-          updated.push(archivePath);
+      // Update archive pages (all items)
+      for (const archivePath of archivePaths) {
+        try {
+          const archiveHtml = readFileRel(archivePath);
+          const nextArchiveInner = buildSite1Cards(merged);
+          const nextArchive = updateBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextArchiveInner, ' '.repeat(20));
+          if (nextArchive !== archiveHtml) {
+            writeFileRel(archivePath, nextArchive);
+            updated.push(archivePath);
+          }
+        } catch {
+          // ignore missing page
         }
       }
 
@@ -441,6 +452,22 @@ async function run() {
       if (next !== html) {
         writeFileRel(relPath, next);
         updated.push(relPath);
+      }
+
+      // Also update Headlines category page if present.
+      {
+        const archivePath = 'site2-minimal-light/news/headlines/index.html';
+        try {
+          const archiveHtml = readFileRel(archivePath);
+          const nextArchiveInner = buildSite2Cards(items);
+          const nextArchive = updateBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextArchiveInner, ' '.repeat(20));
+          if (nextArchive !== archiveHtml) {
+            writeFileRel(archivePath, nextArchive);
+            updated.push(archivePath);
+          }
+        } catch {
+          // ignore
+        }
       }
     }
   }

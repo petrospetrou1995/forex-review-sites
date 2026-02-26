@@ -338,44 +338,171 @@ function readFileRel(relPath) {
   return fs.readFileSync(path.join(ROOT, relPath), 'utf8');
 }
 
-function buildSite1DailyItem({ key, datetime = isoNowUtc(), hrefPrefix = 'news/daily' }) {
-  const href = `${hrefPrefix}/${key}/`;
+function escapeAttr(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function escapeText(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function joinHref(base, key) {
+  const b = String(base || '').replace(/\/+$/, '');
+  if (!b) return `${key}/`;
+  return `${b}/${key}/`;
+}
+
+function dayKeyToDatetime(key) {
+  // Stable timestamp for cards/listing pages: matches the UTC date.
+  return `${key}T09:10:00Z`;
+}
+
+function extractBetweenMarkers(html, markerStart, markerEnd) {
+  const startIdx = html.indexOf(markerStart);
+  const endIdx = html.indexOf(markerEnd);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return '';
+  return html.slice(startIdx + markerStart.length, endIdx);
+}
+
+function replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, indentSpaces = 20) {
+  const startIdx = html.indexOf(markerStart);
+  const endIdx = html.indexOf(markerEnd);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
+    throw new Error(`Markers not found or invalid: ${markerStart} ... ${markerEnd}`);
+  }
+  const before = html.slice(0, startIdx + markerStart.length);
+  const after = html.slice(endIdx);
+  const indent = '\n' + ' '.repeat(indentSpaces);
+  const inner = nextInner?.trim() ? indent + nextInner.trim() + '\n' + ' '.repeat(indentSpaces) : indent + '\n' + ' '.repeat(indentSpaces);
+  return before + inner + after;
+}
+
+function extractDailyHighlightsFromSite1Page(pageHtml) {
+  const s = String(pageHtml || '');
+  const grab = (h2Text) => {
+    const idx = s.indexOf(h2Text);
+    if (idx === -1) return '';
+    const rest = s.slice(idx);
+    const m = rest.match(/<h3 class="subheading-card"><a[^>]*>([\s\S]*?)<\/a>/i);
+    if (!m?.[1]) return '';
+    return decodeEntities(m[1].replace(/<[^>]+>/g, '').trim());
+  };
+  return {
+    broker: grab('Broker &amp; industry updates'),
+    forex: grab('Forex &amp; macro headlines'),
+    crypto: grab('Crypto headlines'),
+  };
+}
+
+function extractDailyHighlightsFromSite2Page(pageHtml) {
+  const s = String(pageHtml || '');
+  const grab = (h2Text) => {
+    const idx = s.indexOf(h2Text);
+    if (idx === -1) return '';
+    const rest = s.slice(idx);
+    const m = rest.match(/<a class="btn-link"[^>]*>([\s\S]*?)<\/a>/i);
+    if (!m?.[1]) return '';
+    return decodeEntities(m[1].replace(/<[^>]+>/g, '').trim());
+  };
+  return {
+    broker: grab('Broker &amp; industry'),
+    forex: grab('Forex &amp; macro'),
+    crypto: grab('Crypto'),
+  };
+}
+
+function dailyExcerptFromHighlightsEn(h) {
+  const parts = [];
+  if (h?.broker) parts.push(`Broker: ${truncate(h.broker, 70)}`);
+  if (h?.forex) parts.push(`FX: ${truncate(h.forex, 70)}`);
+  if (h?.crypto) parts.push(`Crypto: ${truncate(h.crypto, 70)}`);
+  return parts.length ? `Highlights: ${parts.join(' • ')}` : '';
+}
+
+function dailyExcerptFromHighlightsEs(h) {
+  const parts = [];
+  if (h?.broker) parts.push(`Broker: ${truncate(h.broker, 70)}`);
+  if (h?.forex) parts.push(`FX: ${truncate(h.forex, 70)}`);
+  if (h?.crypto) parts.push(`Cripto: ${truncate(h.crypto, 70)}`);
+  return parts.length ? `Titulares: ${parts.join(' • ')}` : '';
+}
+
+function buildSite1DailyItem({ key, hrefBase = 'news/daily', highlights }) {
+  const href = joinHref(hrefBase, key);
   const titleEn = `LATAM Broker + Crypto/FX Brief — ${key}`;
   const titleEs = `Resumen LATAM Brokers + Cripto/FX — ${key}`;
+  const excerptEn = dailyExcerptFromHighlightsEn(highlights) ||
+    'Today’s checklist (LATAM): confirm the regulated entity for your country, review spreads on USD/MXN & USD/BRL, check deposit/withdrawal rails, and verify whether crypto CFDs/spot are supported and restricted in your region.';
+  const excerptEs = dailyExcerptFromHighlightsEs(highlights) ||
+    'Checklist de hoy (LATAM): confirma la entidad regulada para tu país, revisa spreads en USD/MXN y USD/BRL, revisa depósitos/retiros y verifica si hay soporte y restricciones para cripto (CFDs/spot) en tu región.';
   return `
 <article class="news-card" data-daily-news="true" data-daily-key="${key}">
   <div class="news-image"></div>
   <div class="news-content">
     <span class="news-category" data-en="Daily Brief" data-es="Resumen diario">Daily Brief</span>
     <h3 class="news-title">
-      <a class="link-cta" href="${href}" data-en="${titleEn.replace(/"/g, '&quot;')}" data-es="${titleEs.replace(/"/g, '&quot;')}">${titleEn}</a>
+      <a class="link-cta" href="${href}" data-en="${escapeAttr(titleEn)}" data-es="${escapeAttr(titleEs)}">${escapeText(titleEn)}</a>
     </h3>
     <p class="news-excerpt"
-       data-en="Today’s checklist (LATAM): confirm the regulated entity for your country, review spreads on USD/MXN &amp; USD/BRL, check deposit/withdrawal rails, and verify whether crypto CFDs/spot are supported and restricted in your region."
-       data-es="Checklist de hoy (LATAM): confirma la entidad regulada para tu país, revisa spreads en USD/MXN y USD/BRL, revisa depósitos/retiros y verifica si hay soporte y restricciones para cripto (CFDs/spot) en tu región.">Today’s checklist (LATAM): confirm the regulated entity for your country, review spreads on USD/MXN &amp; USD/BRL, check deposit/withdrawal rails, and verify whether crypto CFDs/spot are supported and restricted in your region.</p>
-    <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${key}</time>
+       data-en="${escapeAttr(excerptEn)}"
+       data-es="${escapeAttr(excerptEs)}">${escapeText(excerptEn)}</p>
+    <time class="news-date" datetime="${dayKeyToDatetime(key)}" data-relative-time="true" data-show-absolute="true">${key}</time>
   </div>
 </article>
 `.trim();
 }
 
-function buildSite2DailyItem({ key }) {
-  const href = `daily/${key}/`;
+function buildSite2DailyItem({ key, hrefBase = 'daily', highlights }) {
+  const href = joinHref(hrefBase, key);
   const titleEn = `Daily LATAM Broker & Crypto/FX Brief — ${key}`;
   const titleEs = `Resumen diario LATAM (Brokers y Cripto/FX) — ${key}`;
-  const titleEnHtml = titleEn.replace(/&/g, '&amp;');
-  const titleEsHtml = titleEs.replace(/&/g, '&amp;');
+  const excerptEn = dailyExcerptFromHighlightsEn(highlights) ||
+    'Daily focus: LATAM broker conditions (local entity, fees, withdrawals) + forex & crypto catalysts. Open the original headlines below, and always cross-check the regulator register for your jurisdiction.';
+  const excerptEs = dailyExcerptFromHighlightsEs(highlights) ||
+    'Enfoque diario: condiciones de brokers en LATAM (entidad local, comisiones, retiros) + catalizadores de forex y cripto. Abre los titulares originales abajo y valida siempre en el registro del regulador de tu jurisdicción.';
   return `
 <div class="card card-pad" data-daily-news="true" data-daily-key="${key}">
   <h3 class="card-title">
-    <a class="btn-link" href="${href}" data-en="${titleEnHtml.replace(/"/g, '&quot;')}" data-es="${titleEsHtml.replace(/"/g, '&quot;')}">${titleEnHtml}</a>
+    <a class="btn-link" href="${href}" data-en="${escapeAttr(titleEn)}" data-es="${escapeAttr(titleEs)}">${escapeText(titleEn)}</a>
   </h3>
   <p class="muted mb-1"
-     data-en="Daily focus: LATAM broker conditions (local entity, fees, withdrawals) + forex &amp; crypto catalysts. Open the original headlines below, and always cross-check the regulator register for your jurisdiction."
-     data-es="Enfoque diario: condiciones de brokers en LATAM (entidad local, comisiones, retiros) + catalizadores de forex y cripto. Abre los titulares originales abajo y valida siempre en el registro del regulador de tu jurisdicción.">Daily focus: LATAM broker conditions (local entity, fees, withdrawals) + forex &amp; crypto catalysts. Open the original headlines below, and always cross-check the regulator register for your jurisdiction.</p>
-  <time class="muted small news-date" datetime="${isoNowUtc()}" data-relative-time="true" data-show-absolute="true">${key}</time>
+     data-en="${escapeAttr(excerptEn)}"
+     data-es="${escapeAttr(excerptEs)}">${escapeText(excerptEn)}</p>
+  <time class="muted small news-date" datetime="${dayKeyToDatetime(key)}" data-relative-time="true" data-show-absolute="true">${key}</time>
 </div>
 `.trim();
+}
+
+function rebuildDailyCardsSite1(keys, { hrefBase }) {
+  return keys.map((key) => {
+    try {
+      const page = readFileRel(`site1-dark-gradient/news/daily/${key}/index.html`);
+      const highlights = extractDailyHighlightsFromSite1Page(page);
+      return buildSite1DailyItem({ key, hrefBase, highlights });
+    } catch {
+      return buildSite1DailyItem({ key, hrefBase, highlights: {} });
+    }
+  }).join('\n');
+}
+
+function rebuildDailyCardsSite2(keys, { hrefBase }) {
+  return keys.map((key) => {
+    try {
+      const page = readFileRel(`site2-minimal-light/news/daily/${key}/index.html`);
+      const highlights = extractDailyHighlightsFromSite2Page(page);
+      return buildSite2DailyItem({ key, hrefBase, highlights });
+    } catch {
+      return buildSite2DailyItem({ key, hrefBase, highlights: {} });
+    }
+  }).join('\n');
 }
 
 function renderSourceListSite1(items) {
@@ -633,18 +760,11 @@ async function run() {
     const markerStart = '<!-- DAILY_NEWS_START -->';
     const markerEnd = '<!-- DAILY_NEWS_END -->';
     const html = readFileRel(relPath);
-    const next = updateBetweenMarkers(html, {
-      markerStart,
-      markerEnd,
-      buildNewItem: () => buildSite1DailyItem({ key, datetime }),
-      itemRegex: /<article class="news-card" data-daily-news="true" data-daily-key="[^"]+">[\s\S]*?<\/article>/g,
-      maxItems: 31,
-      currentKey: key,
-    });
-    if (next !== html) {
-      writeFileRel(relPath, next);
-      updated.push(relPath);
-    }
+    const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+    const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-daily-key="(\d{4}-\d{2}-\d{2})"/g)).map(m => m[1])])).slice(0, 31);
+    const nextInner = rebuildDailyCardsSite1(keys, { hrefBase: 'news/daily' });
+    const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+    if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
   }
 
   // site1 All News page daily list
@@ -654,20 +774,30 @@ async function run() {
     const markerEnd = '<!-- DAILY_NEWS_END -->';
     try {
       const html = readFileRel(relPath);
-      const next = updateBetweenMarkers(html, {
-        markerStart,
-        markerEnd,
-        buildNewItem: () => buildSite1DailyItem({ key, datetime, hrefPrefix: 'daily' }),
-        itemRegex: /<article class="news-card" data-daily-news="true" data-daily-key="[^"]+">[\s\S]*?<\/article>/g,
-        maxItems: 31,
-        currentKey: key,
-      });
-      if (next !== html) {
-        writeFileRel(relPath, next);
-        updated.push(relPath);
-      }
+      const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+      const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-daily-key="(\d{4}-\d{2}-\d{2})"/g)).map(m => m[1])])).slice(0, 31);
+      const nextInner = rebuildDailyCardsSite1(keys, { hrefBase: 'daily' });
+      const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+      if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
     } catch {
       // ignore if page not present
+    }
+  }
+
+  // site1 Daily briefs category page
+  {
+    const relPath = 'site1-dark-gradient/news/daily/index.html';
+    const markerStart = '<!-- DAILY_NEWS_START -->';
+    const markerEnd = '<!-- DAILY_NEWS_END -->';
+    try {
+      const html = readFileRel(relPath);
+      const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+      const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-daily-key="(\d{4}-\d{2}-\d{2})"/g)).map(m => m[1])])).slice(0, 60);
+      const nextInner = rebuildDailyCardsSite1(keys, { hrefBase: '' });
+      const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+      if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
+    } catch {
+      // ignore
     }
   }
 
@@ -677,17 +807,27 @@ async function run() {
     const markerStart = '<!-- DAILY_NEWS_START -->';
     const markerEnd = '<!-- DAILY_NEWS_END -->';
     const html = readFileRel(relPath);
-    const next = updateBetweenMarkers(html, {
-      markerStart,
-      markerEnd,
-      buildNewItem: () => buildSite2DailyItem({ key }),
-      itemRegex: /<div class="card card-pad" data-daily-news="true" data-daily-key="[^"]+">[\s\S]*?<\/div>/g,
-      maxItems: 31,
-      currentKey: key,
-    });
-    if (next !== html) {
-      writeFileRel(relPath, next);
-      updated.push(relPath);
+    const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+    const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-daily-key="(\d{4}-\d{2}-\d{2})"/g)).map(m => m[1])])).slice(0, 31);
+    const nextInner = rebuildDailyCardsSite2(keys, { hrefBase: 'daily' });
+    const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+    if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
+  }
+
+  // site2 Daily briefs category page
+  {
+    const relPath = 'site2-minimal-light/news/daily/index.html';
+    const markerStart = '<!-- DAILY_NEWS_START -->';
+    const markerEnd = '<!-- DAILY_NEWS_END -->';
+    try {
+      const html = readFileRel(relPath);
+      const middle = extractBetweenMarkers(html, markerStart, markerEnd);
+      const keys = Array.from(new Set([key, ...Array.from(middle.matchAll(/data-daily-key="(\d{4}-\d{2}-\d{2})"/g)).map(m => m[1])])).slice(0, 60);
+      const nextInner = rebuildDailyCardsSite2(keys, { hrefBase: '' });
+      const next = replaceBetweenMarkers(html, markerStart, markerEnd, nextInner, 20);
+      if (next !== html) { writeFileRel(relPath, next); updated.push(relPath); }
+    } catch {
+      // ignore
     }
   }
 
