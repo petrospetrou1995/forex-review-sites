@@ -135,6 +135,73 @@ function updateBetweenMarkers(html, markerStart, markerEnd, nextInner, indent) {
   return before + rebuilt + after;
 }
 
+function extractBetweenMarkers(html, markerStart, markerEnd) {
+  const startIdx = html.indexOf(markerStart);
+  const endIdx = html.indexOf(markerEnd);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return '';
+  return html.slice(startIdx + markerStart.length, endIdx);
+}
+
+function parseExistingRssCardsSite1(middle) {
+  const blocks = String(middle || '').match(/<article class="news-card rss-news-card">[\s\S]*?<\/article>/gi) || [];
+  const items = [];
+  for (const b of blocks) {
+    const href = (b.match(/<a[^>]+href="([^"]+)"/i) || [])[1] || '';
+    const dt = (b.match(/<time[^>]+datetime="([^"]+)"/i) || [])[1] || '';
+    const link = safeUrl(href);
+    const pubIso = String(dt || '').trim();
+    if (!link || !pubIso) continue;
+    const anchorTextRaw = decodeEntities(stripCdata((b.match(/<a[^>]*>([\s\S]*?)<\/a>/i) || [])[1] || '')).replace(/<[^>]+>/g, '');
+    let anchorText = anchorTextRaw.replace(/\s+/g, ' ').trim();
+    const src = domainLabel(link);
+    // Clean up any legacy injected titles that accidentally included the source label repeatedly.
+    for (let i = 0; i < 3; i++) {
+      if (anchorText.toLowerCase().startsWith(`${src.toLowerCase()} `)) {
+        anchorText = anchorText.slice(src.length).trim();
+        continue;
+      }
+      break;
+    }
+    items.push({ title: anchorText || link, link, pubIso });
+  }
+  return items;
+}
+
+function parseExistingRssCardsSite2(middle) {
+  const blocks = String(middle || '').match(/<div class="card card-pad rss-news-card">[\s\S]*?<\/div>/gi) || [];
+  const items = [];
+  for (const b of blocks) {
+    const href = (b.match(/<a[^>]+href="([^"]+)"/i) || [])[1] || '';
+    const dt = (b.match(/<time[^>]+datetime="([^"]+)"/i) || [])[1] || '';
+    const link = safeUrl(href);
+    const pubIso = String(dt || '').trim();
+    if (!link || !pubIso) continue;
+    const anchorTextRaw = decodeEntities(stripCdata((b.match(/<a[^>]*>([\s\S]*?)<\/a>/i) || [])[1] || '')).replace(/<[^>]+>/g, '');
+    let anchorText = anchorTextRaw.replace(/\s+/g, ' ').trim();
+    const src = domainLabel(link);
+    for (let i = 0; i < 3; i++) {
+      if (anchorText.toLowerCase().startsWith(`${src.toLowerCase()} `)) {
+        anchorText = anchorText.slice(src.length).trim();
+        continue;
+      }
+      break;
+    }
+    items.push({ title: anchorText || link, link, pubIso });
+  }
+  return items;
+}
+
+function mergeKeepRecent(existing, incoming, maxItems) {
+  const map = new Map();
+  for (const it of [...incoming, ...existing]) {
+    if (!it?.link || !it?.pubIso) continue;
+    if (!map.has(it.link)) map.set(it.link, it);
+  }
+  return Array.from(map.values())
+    .sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso))
+    .slice(0, maxItems);
+}
+
 function buildSite1Cards(items) {
   return items.map((it) => {
     const src = domainLabel(it.link);
@@ -300,7 +367,7 @@ async function run() {
   {
     const relPath = 'site1-dark-gradient/index.html';
     const html = readFileRel(relPath);
-    const items = await buildLatamFocusedItems(
+    const fresh = await buildLatamFocusedItems(
       [
         // Mexico (central bank indicators, FX + policy rate)
         'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=fix&BMXC_idioma=es',
@@ -312,7 +379,10 @@ async function run() {
       ],
       9
     );
-    if (items.length) {
+    if (fresh.length) {
+      const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
+      const existing = parseExistingRssCardsSite1(existingMid);
+      const items = mergeKeepRecent(existing, fresh, 36);
       const nextInner = buildSite1Cards(items);
       const next = updateBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextInner, ' '.repeat(20));
       if (next !== html) {
@@ -326,7 +396,7 @@ async function run() {
   {
     const relPath = 'site2-minimal-light/news/index.html';
     const html = readFileRel(relPath);
-    const items = await buildLatamFocusedItems(
+    const fresh = await buildLatamFocusedItems(
       [
         // FX / finance headlines (filter will prefer LATAM currencies & countries)
         'https://www.investing.com/rss/forex.rss',
@@ -339,7 +409,10 @@ async function run() {
       ],
       9
     );
-    if (items.length) {
+    if (fresh.length) {
+      const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
+      const existing = parseExistingRssCardsSite2(existingMid);
+      const items = mergeKeepRecent(existing, fresh, 36);
       const nextInner = buildSite2Cards(items);
       const next = updateBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextInner, ' '.repeat(20));
       if (next !== html) {

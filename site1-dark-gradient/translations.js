@@ -39,7 +39,8 @@ function sortNewsCardsByDatetimeDesc() {
     const grid = newsSection.querySelector('.news-grid');
     if (!grid) return;
 
-    const cards = Array.from(grid.querySelectorAll('article.news-card'));
+    // Only sort RSS cards so we don't break Daily/Weekly layout + toggles.
+    const cards = Array.from(grid.querySelectorAll('article.news-card.rss-news-card'));
     if (cards.length < 2) return;
 
     const getTs = (card) => {
@@ -105,7 +106,7 @@ function initDailyBriefsToggle() {
     if (!btn) return;
 
     const items = Array.from(grid.querySelectorAll('article.news-card[data-daily-news="true"]'));
-    const DEFAULT_VISIBLE = 3;
+    const DEFAULT_VISIBLE = 6;
     const hasOverflow = items.length > DEFAULT_VISIBLE;
 
     btn.classList.toggle('is-hidden', !hasOverflow);
@@ -134,6 +135,54 @@ function initDailyBriefsToggle() {
     });
 }
 
+function setRssToggleLabel(btn, expanded) {
+    const en = expanded ? 'View less' : 'View more news';
+    const es = expanded ? 'Ver menos' : 'Ver más noticias';
+    btn.setAttribute('data-en', en);
+    btn.setAttribute('data-es', es);
+    btn.textContent = currentLang === 'es' ? es : en;
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
+function initRssNewsToggle() {
+    const newsSection = document.getElementById('news');
+    if (!newsSection) return;
+    const grid = newsSection.querySelector('.news-grid');
+    if (!grid) return;
+
+    const btn = grid.querySelector('button[data-rss-toggle]');
+    if (!btn) return;
+
+    const items = Array.from(grid.querySelectorAll('article.news-card.rss-news-card'));
+    const DEFAULT_VISIBLE = 6;
+    const hasOverflow = items.length > DEFAULT_VISIBLE;
+
+    btn.classList.toggle('is-hidden', !hasOverflow);
+    if (!hasOverflow) return;
+
+    const apply = (expanded) => {
+        items.forEach((el, idx) => {
+            if (idx < DEFAULT_VISIBLE) {
+                el.classList.remove('is-hidden');
+                return;
+            }
+            el.classList.toggle('is-hidden', !expanded);
+        });
+        grid.setAttribute('data-rss-expanded', expanded ? 'true' : 'false');
+        setRssToggleLabel(btn, expanded);
+    };
+
+    const expanded = grid.getAttribute('data-rss-expanded') === 'true';
+    apply(expanded);
+
+    if (btn.getAttribute('data-bound') === 'true') return;
+    btn.setAttribute('data-bound', 'true');
+    btn.addEventListener('click', () => {
+        const isExpandedNow = grid.getAttribute('data-rss-expanded') === 'true';
+        apply(!isExpandedNow);
+    });
+}
+
 // Initialize translations
 function initTranslations() {
     document.addEventListener('DOMContentLoaded', () => {
@@ -142,6 +191,7 @@ function initTranslations() {
         initReviewViewMore();
         sortNewsCardsByDatetimeDesc();
         initDailyBriefsToggle();
+        initRssNewsToggle();
         initRelativeTimes();
         
         // Language toggle button
@@ -155,6 +205,7 @@ function initTranslations() {
                 initReviewCounts();
                 syncReviewViewMoreButtons();
                 initDailyBriefsToggle();
+                initRssNewsToggle();
                 updateRelativeTimes();
                 langToggle.textContent = currentLang === 'en' ? 'ES' : 'EN';
             });

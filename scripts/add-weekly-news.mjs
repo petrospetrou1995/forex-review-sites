@@ -21,7 +21,7 @@ function getIsoWeekUTC(d = new Date()) {
   return { week: weekNo, year: date.getUTCFullYear() };
 }
 
-function updateBetweenMarkers(html, { markerStart, markerEnd, buildNewItem, itemRegex, maxItems, currentKey }) {
+function updateBetweenMarkers(html, { markerStart, markerEnd, buildNewItem, itemRegex, maxItems, currentKey, replaceExisting = false }) {
   const startIdx = html.indexOf(markerStart);
   const endIdx = html.indexOf(markerEnd);
   if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
@@ -32,12 +32,13 @@ function updateBetweenMarkers(html, { markerStart, markerEnd, buildNewItem, item
   const middle = html.slice(startIdx + markerStart.length, endIdx);
   const after = html.slice(endIdx);
 
-  if (currentKey && middle.includes(`data-weekly-key="${currentKey}"`)) {
-    return html;
-  }
-
   const existingItems = middle.match(itemRegex) || [];
-  const nextItems = [buildNewItem(), ...existingItems].slice(0, maxItems);
+  const nextNew = buildNewItem();
+  const hasCurrent = currentKey ? existingItems.some((s) => s.includes(`data-weekly-key="${currentKey}"`)) : false;
+  if (hasCurrent && !replaceExisting) return html;
+  const nextItems = hasCurrent
+    ? existingItems.map((s) => (s.includes(`data-weekly-key="${currentKey}"`) ? nextNew : s)).slice(0, maxItems)
+    : [nextNew, ...existingItems].slice(0, maxItems);
 
   // Keep formatting predictable: one leading newline + 20 spaces like the surrounding HTML.
   const indent = '\n' + ' '.repeat(20);
@@ -57,14 +58,17 @@ function readFileRel(relPath) {
 }
 
 function buildSite1NewsItem({ datetime, week, year, key }) {
+  const href = `news/weekly/${key}/`;
   return `
 <article class="news-card" data-weekly-news="true" data-weekly-key="${key}">
   <div class="news-image"></div>
   <div class="news-content">
     <span class="news-category" data-en="Weekly Brief" data-es="Resumen semanal">Weekly Brief</span>
-    <h3 class="news-title"
-        data-en="Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})"
-        data-es="Resumen Forex Semanal (BrokerProReviews) — Semana ${week} (${year})">Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})</h3>
+    <h3 class="news-title">
+      <a class="link-cta" href="${href}"
+         data-en="Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})"
+         data-es="Resumen Forex Semanal (BrokerProReviews) — Semana ${week} (${year})">Weekly Forex Brief (BrokerProReviews) — Week ${week} (${year})</a>
+    </h3>
     <p class="news-excerpt"
        data-en="This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling."
        data-es="Checklist de la semana: fechas macro, temas FX y recordatorios de riesgo. Verifica regulación, prueba retiros y compara costos totales antes de escalar.">This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling.</p>
@@ -75,11 +79,14 @@ function buildSite1NewsItem({ datetime, week, year, key }) {
 }
 
 function buildSite2NewsItem({ datetime, week, year, key }) {
+  const href = `weekly/${key}/`;
   return `
 <div class="card card-pad" data-weekly-news="true" data-weekly-key="${key}">
-  <h3 class="card-title"
-      data-en="Weekly Market Brief (Brokercompare) — Week ${week} (${year})"
-      data-es="Resumen Semanal de Mercado (Brokercompare) — Semana ${week} (${year})">Weekly Market Brief (Brokercompare) — Week ${week} (${year})</h3>
+  <h3 class="card-title">
+    <a class="btn-link" href="${href}"
+       data-en="Weekly Market Brief (Brokercompare) — Week ${week} (${year})"
+       data-es="Resumen Semanal de Mercado (Brokercompare) — Semana ${week} (${year})">Weekly Market Brief (Brokercompare) — Week ${week} (${year})</a>
+  </h3>
   <p class="muted mb-1"
      data-en="A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount."
      data-es="Snapshot semanal: qué importa, qué vigilar y qué evitar. Compara plataformas y regulación, y prueba depósitos/retiros con un monto pequeño.">A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount.</p>
@@ -88,11 +95,210 @@ function buildSite2NewsItem({ datetime, week, year, key }) {
 `.trim();
 }
 
+function buildSite1WeeklyPageHtml({ key, week, year, datetime }) {
+  const canonical = `https://brokerproreviews.com/news/weekly/${key}/`;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Forex Brief — Week ${week} (${year}) | BrokerProReviews</title>
+  <meta name="description" content="Weekly LATAM-focused forex brief: macro themes, what to watch, broker checklist, and risk rules.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="${canonical}">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header guide-header">
+    <nav class="nav guide-nav">
+      <div class="container">
+        <div class="nav-content">
+          <a class="logo" href="../../../index.html" aria-label="BrokerProReviews home">
+            <span class="logo-icon">📊</span>
+            <span class="logo-text">BrokerProReviews</span>
+          </a>
+          <div class="nav-actions">
+            <a class="guide-back link-cta" href="../../../index.html#news" data-en="← Back to news" data-es="← Volver a noticias">← Back to news</a>
+            <button class="lang-toggle" id="langToggle" type="button">ES</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section-pad section-pad-dark">
+    <div class="container">
+      <article class="guide-article">
+        <h1 class="guide-title"
+            data-en="Weekly Forex Brief (LATAM) — Week ${week} (${year})"
+            data-es="Resumen Forex Semanal (LATAM) — Semana ${week} (${year})">Weekly Forex Brief (LATAM) — Week ${week} (${year})</h1>
+        <p class="guide-lead"
+           data-en="A practical weekly plan: what matters, what to watch, and what to double-check before trading (especially for LATAM)."
+           data-es="Un plan semanal práctico: qué importa, qué vigilar y qué revisar dos veces antes de operar (especialmente en LATAM).">A practical weekly plan: what matters, what to watch, and what to double-check before trading (especially for LATAM).</p>
+        <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${key}</time>
+
+        <div class="card-panel mt-5">
+          <h2 class="section-subheading" data-en="1) Macro themes to watch" data-es="1) Temas macro a vigilar">1) Macro themes to watch</h2>
+          <ul class="card-list">
+            <li data-en="Rate path: watch central bank communication and surprise inflation prints." data-es="Ruta de tasas: vigila comunicación de bancos centrales y sorpresas de inflación.">Rate path: watch central bank communication and surprise inflation prints.</li>
+            <li data-en="Risk mood: equities/credit volatility can spill into FX (carry vs safe havens)." data-es="Sentimiento de riesgo: volatilidad en acciones/crédito puede afectar FX (carry vs refugios).">Risk mood: equities/credit volatility can spill into FX (carry vs safe havens).</li>
+            <li data-en="Energy + commodities: key for BRL/COP/CLP terms-of-trade sensitivity." data-es="Energía y commodities: clave para sensibilidad de BRL/COP/CLP.">Energy + commodities: key for BRL/COP/CLP terms-of-trade sensitivity.</li>
+          </ul>
+        </div>
+
+        <div class="card-panel mt-4">
+          <h2 class="section-subheading" data-en="2) LATAM trading checklist" data-es="2) Checklist de trading LATAM">2) LATAM trading checklist</h2>
+          <ul class="card-list">
+            <li data-en="Confirm which regulated entity serves your country (same brand ≠ same license)." data-es="Confirma qué entidad regulada atiende tu país (misma marca ≠ misma licencia).">Confirm which regulated entity serves your country (same brand ≠ same license).</li>
+            <li data-en="Test deposits/withdrawals with a small amount (fees, time, bank rails)." data-es="Prueba depósitos/retiros con monto pequeño (comisiones, tiempo, rieles bancarios).">Test deposits/withdrawals with a small amount (fees, time, bank rails).</li>
+            <li data-en="Check spreads around local open/close and during US data releases." data-es="Revisa spreads en aperturas/cierres locales y durante datos de EE. UU.">Check spreads around local open/close and during US data releases.</li>
+          </ul>
+        </div>
+
+        <div class="card-panel mt-4">
+          <h2 class="section-subheading" data-en="3) Risk rules for the week" data-es="3) Reglas de riesgo para la semana">3) Risk rules for the week</h2>
+          <ul class="card-list">
+            <li data-en="Define max daily loss and stop when hit (avoid revenge trading)." data-es="Define pérdida máxima diaria y detente al alcanzarla (evita revancha).">Define max daily loss and stop when hit (avoid revenge trading).</li>
+            <li data-en="Predefine invalidation levels; don’t widen stops after entry." data-es="Define niveles de invalidez; no amplíes stops después de entrar.">Predefine invalidation levels; don’t widen stops after entry.</li>
+            <li data-en="If volatility spikes, cut size first—then reduce frequency." data-es="Si sube la volatilidad, reduce tamaño primero—luego frecuencia.">If volatility spikes, cut size first—then reduce frequency.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script src="../../../translations.js"></script>
+</body>
+</html>`;
+}
+
+function buildSite2WeeklyPageHtml({ key, week, year, datetime }) {
+  const canonical = `https://brokercompare.com/news/weekly/${key}/`;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Market Brief — Week ${week} (${year}) | Brokercompare</title>
+  <meta name="description" content="Weekly LATAM market brief: broker checklist, forex catalysts, and risk rules.">
+  <link rel="canonical" href="${canonical}">
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a class="logo" href="../../../index.html">Brokercompare</a>
+        <ul class="nav-links" id="primaryNav">
+          <li><a href="../../../index.html#brokers" data-en="Brokers" data-es="Brokers">Brokers</a></li>
+          <li><a href="../../../reviews/" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+          <li><a href="../../../compare/" data-en="Compare" data-es="Comparar">Compare</a></li>
+          <li><a href="../../../strategies/" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+          <li><a href="../../../index.html#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+          <li><a href="../../../learn/" data-en="Learn" data-es="Aprender">Learn</a></li>
+          <li><a href="../../" data-en="News" data-es="Noticias">News</a></li>
+        </ul>
+        <div class="nav-right">
+          <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
+          <button class="lang-btn" id="langToggle" type="button">ES</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="container">
+        <h1 class="intro-title"
+            data-en="Weekly market brief (LATAM) — Week ${week} (${year})"
+            data-es="Resumen semanal (LATAM) — Semana ${week} (${year})">Weekly market brief (LATAM) — Week ${week} (${year})</h1>
+        <p class="intro-text"
+           data-en="A practical weekly plan for LATAM traders: broker checks, forex catalysts, and risk rules."
+           data-es="Plan semanal práctico para traders en LATAM: checklist de brokers, catalizadores de FX y reglas de riesgo.">A practical weekly plan for LATAM traders: broker checks, forex catalysts, and risk rules.</p>
+        <time class="muted small news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${key}</time>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="card card-pad">
+          <h2 class="card-title" data-en="Broker checklist" data-es="Checklist de brokers">Broker checklist</h2>
+          <ul class="muted" style="margin-top:0.75rem">
+            <li data-en="Verify the exact regulated entity for your LATAM country." data-es="Verifica la entidad regulada exacta para tu país en LATAM.">Verify the exact regulated entity for your LATAM country.</li>
+            <li data-en="Compare all-in costs (spreads + commission + swaps)." data-es="Compara costos totales (spreads + comisión + swaps).">Compare all-in costs (spreads + commission + swaps).</li>
+            <li data-en="Test withdrawals early; track fees and settlement time." data-es="Prueba retiros temprano; registra comisiones y tiempos.">Test withdrawals early; track fees and settlement time.</li>
+          </ul>
+        </div>
+
+        <div class="card card-pad" style="margin-top:1rem">
+          <h2 class="card-title" data-en="Forex catalysts" data-es="Catalizadores FX">Forex catalysts</h2>
+          <ul class="muted" style="margin-top:0.75rem">
+            <li data-en="Inflation and rate expectations (local + US) drive FX volatility." data-es="Inflación y expectativas de tasas (local + EE. UU.) impulsan volatilidad FX.">Inflation and rate expectations (local + US) drive FX volatility.</li>
+            <li data-en="Watch USD/MXN and USD/BRL liquidity windows for spread changes." data-es="Vigila ventanas de liquidez de USD/MXN y USD/BRL por cambios de spread.">Watch USD/MXN and USD/BRL liquidity windows for spread changes.</li>
+          </ul>
+        </div>
+
+        <div class="card card-pad" style="margin-top:1rem">
+          <h2 class="card-title" data-en="Risk rules" data-es="Reglas de riesgo">Risk rules</h2>
+          <ul class="muted" style="margin-top:0.75rem">
+            <li data-en="Set a daily loss cap and stop when hit." data-es="Define un tope de pérdida diaria y detente al alcanzarlo.">Set a daily loss cap and stop when hit.</li>
+            <li data-en="Reduce size first when volatility spikes." data-es="Reduce tamaño primero si sube la volatilidad.">Reduce size first when volatility spikes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../../translations.js"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById('menuToggle');
+      var nav = document.getElementById('primaryNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        nav.classList.toggle('is-open', !expanded);
+      });
+    })();
+  </script>
+</body>
+</html>`;
+}
+
 function run() {
   const datetime = isoNowUtc();
   const { week, year } = getIsoWeekUTC(new Date());
   const key = `${year}-W${pad2(week)}`;
   const updated = [];
+
+  // Weekly pages (write once per week)
+  {
+    const relPath = `site1-dark-gradient/news/weekly/${key}/index.html`;
+    const abs = path.join(ROOT, relPath);
+    if (!fs.existsSync(abs)) {
+      writeFileRel(relPath, buildSite1WeeklyPageHtml({ key, week, year, datetime }));
+      updated.push(relPath);
+    }
+  }
+
+  {
+    const relPath = `site2-minimal-light/news/weekly/${key}/index.html`;
+    const abs = path.join(ROOT, relPath);
+    if (!fs.existsSync(abs)) {
+      writeFileRel(relPath, buildSite2WeeklyPageHtml({ key, week, year, datetime }));
+      updated.push(relPath);
+    }
+  }
 
   // site1
   {
@@ -100,6 +306,8 @@ function run() {
     const markerStart = '<!-- WEEKLY_NEWS_START -->';
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     const html = readFileRel(relPath);
+    const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
+    const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && !middle.includes(`news/weekly/${key}/`);
     const next = updateBetweenMarkers(html, {
       markerStart,
       markerEnd,
@@ -107,6 +315,7 @@ function run() {
       itemRegex: /<article class="news-card" data-weekly-news="true" data-weekly-key="[^"]+">[\s\S]*?<\/article>/g,
       maxItems: 12,
       currentKey: key,
+      replaceExisting: needsUpgrade,
     });
     if (next !== html) {
       writeFileRel(relPath, next);
@@ -120,6 +329,8 @@ function run() {
     const markerStart = '<!-- WEEKLY_NEWS_START -->';
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     const html = readFileRel(relPath);
+    const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
+    const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && !middle.includes(`weekly/${key}/`);
     const next = updateBetweenMarkers(html, {
       markerStart,
       markerEnd,
@@ -127,6 +338,7 @@ function run() {
       itemRegex: /<div class="card card-pad" data-weekly-news="true" data-weekly-key="[^"]+">[\s\S]*?<\/div>/g,
       maxItems: 12,
       currentKey: key,
+      replaceExisting: needsUpgrade,
     });
     if (next !== html) {
       writeFileRel(relPath, next);
