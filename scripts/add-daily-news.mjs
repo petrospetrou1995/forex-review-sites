@@ -338,8 +338,8 @@ function readFileRel(relPath) {
   return fs.readFileSync(path.join(ROOT, relPath), 'utf8');
 }
 
-function buildSite1DailyItem({ key }) {
-  const href = `news/daily/${key}/`;
+function buildSite1DailyItem({ key, datetime = isoNowUtc(), hrefPrefix = 'news/daily' }) {
+  const href = `${hrefPrefix}/${key}/`;
   const titleEn = `LATAM Broker + Crypto/FX Brief — ${key}`;
   const titleEs = `Resumen LATAM Brokers + Cripto/FX — ${key}`;
   return `
@@ -353,7 +353,7 @@ function buildSite1DailyItem({ key }) {
     <p class="news-excerpt"
        data-en="Today’s checklist (LATAM): confirm the regulated entity for your country, review spreads on USD/MXN &amp; USD/BRL, check deposit/withdrawal rails, and verify whether crypto CFDs/spot are supported and restricted in your region."
        data-es="Checklist de hoy (LATAM): confirma la entidad regulada para tu país, revisa spreads en USD/MXN y USD/BRL, revisa depósitos/retiros y verifica si hay soporte y restricciones para cripto (CFDs/spot) en tu región.">Today’s checklist (LATAM): confirm the regulated entity for your country, review spreads on USD/MXN &amp; USD/BRL, check deposit/withdrawal rails, and verify whether crypto CFDs/spot are supported and restricted in your region.</p>
-    <time class="news-date" datetime="${isoNowUtc()}" data-relative-time="true" data-show-absolute="true">${key}</time>
+    <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${key}</time>
   </div>
 </article>
 `.trim();
@@ -636,7 +636,7 @@ async function run() {
     const next = updateBetweenMarkers(html, {
       markerStart,
       markerEnd,
-      buildNewItem: () => buildSite1DailyItem({ key }),
+      buildNewItem: () => buildSite1DailyItem({ key, datetime }),
       itemRegex: /<article class="news-card" data-daily-news="true" data-daily-key="[^"]+">[\s\S]*?<\/article>/g,
       maxItems: 31,
       currentKey: key,
@@ -644,6 +644,30 @@ async function run() {
     if (next !== html) {
       writeFileRel(relPath, next);
       updated.push(relPath);
+    }
+  }
+
+  // site1 All News page daily list
+  {
+    const relPath = 'site1-dark-gradient/news/index.html';
+    const markerStart = '<!-- DAILY_NEWS_START -->';
+    const markerEnd = '<!-- DAILY_NEWS_END -->';
+    try {
+      const html = readFileRel(relPath);
+      const next = updateBetweenMarkers(html, {
+        markerStart,
+        markerEnd,
+        buildNewItem: () => buildSite1DailyItem({ key, datetime, hrefPrefix: 'daily' }),
+        itemRegex: /<article class="news-card" data-daily-news="true" data-daily-key="[^"]+">[\s\S]*?<\/article>/g,
+        maxItems: 31,
+        currentKey: key,
+      });
+      if (next !== html) {
+        writeFileRel(relPath, next);
+        updated.push(relPath);
+      }
+    } catch {
+      // ignore if page not present
     }
   }
 

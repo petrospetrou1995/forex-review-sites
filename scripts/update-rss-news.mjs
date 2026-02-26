@@ -377,16 +377,39 @@ async function run() {
         // Central banking decisions & policy (filter will prefer LATAM)
         'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions'
       ],
-      9
+      30
     );
     if (fresh.length) {
-      const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
-      const existing = parseExistingRssCardsSite1(existingMid);
-      const items = mergeKeepRecent(existing, fresh, 36);
-      const nextInner = buildSite1Cards(items);
-      const next = updateBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextInner, ' '.repeat(20));
-      if (next !== html) {
-        writeFileRel(relPath, next);
+      // Canonical storage of the RSS archive is the /news/ page.
+      const archivePath = 'site1-dark-gradient/news/index.html';
+      let archiveHtml = '';
+      let existing = [];
+      try {
+        archiveHtml = readFileRel(archivePath);
+        const existingMid = extractBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
+        existing = parseExistingRssCardsSite1(existingMid);
+      } catch {
+        archiveHtml = '';
+        existing = [];
+      }
+
+      const merged = mergeKeepRecent(existing, fresh, 60);
+
+      // Update archive page (all items)
+      if (archiveHtml) {
+        const nextArchiveInner = buildSite1Cards(merged);
+        const nextArchive = updateBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextArchiveInner, ' '.repeat(20));
+        if (nextArchive !== archiveHtml) {
+          writeFileRel(archivePath, nextArchive);
+          updated.push(archivePath);
+        }
+      }
+
+      // Update homepage (only last 6)
+      const homeInner = buildSite1Cards(merged.slice(0, 6));
+      const nextHome = updateBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', homeInner, ' '.repeat(20));
+      if (nextHome !== html) {
+        writeFileRel(relPath, nextHome);
         updated.push(relPath);
       }
     }
@@ -407,7 +430,7 @@ async function run() {
         'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=remesa&BMXC_idioma=es',
         'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=reserv&BMXC_idioma=es'
       ],
-      9
+      30
     );
     if (fresh.length) {
       const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');

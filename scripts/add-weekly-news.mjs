@@ -57,8 +57,8 @@ function readFileRel(relPath) {
   return fs.readFileSync(path.join(ROOT, relPath), 'utf8');
 }
 
-function buildSite1NewsItem({ datetime, week, year, key }) {
-  const href = `news/weekly/${key}/`;
+function buildSite1NewsItem({ datetime, week, year, key, hrefPrefix = 'news/weekly' }) {
+  const href = `${hrefPrefix}/${key}/`;
   return `
 <article class="news-card" data-weekly-news="true" data-weekly-key="${key}">
   <div class="news-image"></div>
@@ -72,7 +72,7 @@ function buildSite1NewsItem({ datetime, week, year, key }) {
     <p class="news-excerpt"
        data-en="This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling."
        data-es="Checklist de la semana: fechas macro, temas FX y recordatorios de riesgo. Verifica regulación, prueba retiros y compara costos totales antes de escalar.">This week’s checklist: key macro dates, major FX themes, and risk-first reminders. Verify regulation, test withdrawals, and compare all-in costs before scaling.</p>
-    <time class="news-date" data-relative-time="true" data-stamp-on-publish="true">Just now</time>
+    <time class="news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${datetime.split('T')[0]}</time>
   </div>
 </article>
 `.trim();
@@ -90,7 +90,7 @@ function buildSite2NewsItem({ datetime, week, year, key }) {
   <p class="muted mb-1"
      data-en="A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount."
      data-es="Snapshot semanal: qué importa, qué vigilar y qué evitar. Compara plataformas y regulación, y prueba depósitos/retiros con un monto pequeño.">A short weekly snapshot: what matters, what to watch, and what to avoid. Compare platforms and regulation, then test deposits/withdrawals with a small amount.</p>
-  <time class="muted small news-date" data-relative-time="true" data-stamp-on-publish="true">Just now</time>
+  <time class="muted small news-date" datetime="${datetime}" data-relative-time="true" data-show-absolute="true">${datetime.split('T')[0]}</time>
 </div>
 `.trim();
 }
@@ -300,6 +300,33 @@ function run() {
     }
   }
 
+  // Update site1 All News page weekly list
+  {
+    const relPath = 'site1-dark-gradient/news/index.html';
+    const markerStart = '<!-- WEEKLY_NEWS_START -->';
+    const markerEnd = '<!-- WEEKLY_NEWS_END -->';
+    try {
+      const html = readFileRel(relPath);
+      const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
+      const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && (!middle.includes(`href="weekly/${key}/"`) || !middle.includes('datetime='));
+      const next = updateBetweenMarkers(html, {
+        markerStart,
+        markerEnd,
+        buildNewItem: () => buildSite1NewsItem({ datetime, week, year, key, hrefPrefix: 'weekly' }),
+        itemRegex: /<article class="news-card" data-weekly-news="true" data-weekly-key="[^"]+">[\s\S]*?<\/article>/g,
+        maxItems: 24,
+        currentKey: key,
+        replaceExisting: needsUpgrade,
+      });
+      if (next !== html) {
+        writeFileRel(relPath, next);
+        updated.push(relPath);
+      }
+    } catch {
+      // ignore if page not present
+    }
+  }
+
   // site1
   {
     const relPath = 'site1-dark-gradient/index.html';
@@ -307,7 +334,7 @@ function run() {
     const markerEnd = '<!-- WEEKLY_NEWS_END -->';
     const html = readFileRel(relPath);
     const middle = html.slice(html.indexOf(markerStart) + markerStart.length, html.indexOf(markerEnd));
-    const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && !middle.includes(`news/weekly/${key}/`);
+    const needsUpgrade = middle.includes(`data-weekly-key="${key}"`) && (!middle.includes(`news/weekly/${key}/`) || !middle.includes('datetime='));
     const next = updateBetweenMarkers(html, {
       markerStart,
       markerEnd,
