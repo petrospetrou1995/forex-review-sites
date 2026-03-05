@@ -67,10 +67,10 @@ function setDailyToggleLabel(btn, expanded) {
 function initDailyBriefsToggle() {
     const newsSection = document.getElementById('news');
     if (!newsSection) return;
-    const grid = newsSection.querySelector('.grid');
+    const grid = newsSection.querySelector('.grid[data-news-grid="daily"]') || newsSection.querySelector('.grid');
     if (!grid) return;
 
-    const btn = grid.querySelector('button[data-daily-toggle]');
+    const btn = newsSection.querySelector('button[data-daily-toggle]');
     if (!btn) return;
 
     const items = Array.from(grid.querySelectorAll('[data-daily-news="true"]'));

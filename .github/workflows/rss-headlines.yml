@@ -32,7 +32,12 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add site1-dark-gradient/index.html site2-minimal-light/news/index.html
+          git add \
+            site1-dark-gradient/index.html \
+            site1-dark-gradient/news/index.html \
+            site1-dark-gradient/news/headlines/index.html \
+            site2-minimal-light/news/index.html \
+            site2-minimal-light/news/headlines/index.html
           git commit -m "chore(news): refresh RSS headlines"
           git push
 

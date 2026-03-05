@@ -36,12 +36,8 @@ function formatRelativeTimeFromNow(isoString, lang) {
 function sortNewsCardsByDatetimeDesc() {
     const newsSection = document.getElementById('news');
     if (!newsSection) return;
-    const grid = newsSection.querySelector('.news-grid');
-    if (!grid) return;
-
-    // Only sort RSS cards so we don't break Daily/Weekly layout + toggles.
-    const cards = Array.from(grid.querySelectorAll('article.news-card.rss-news-card'));
-    if (cards.length < 2) return;
+    const grids = Array.from(newsSection.querySelectorAll('.news-grid'));
+    if (!grids.length) return;
 
     const getTs = (card) => {
         const t = card.querySelector('time.news-date[datetime]');
@@ -51,10 +47,15 @@ function sortNewsCardsByDatetimeDesc() {
         return Number.isFinite(ms) ? ms : -Infinity;
     };
 
-    cards
-        .map((card, idx) => ({ card, idx, ts: getTs(card) }))
-        .sort((a, b) => (b.ts - a.ts) || (a.idx - b.idx))
-        .forEach(({ card }) => grid.appendChild(card));
+    grids.forEach((grid) => {
+        // Only sort RSS cards so we don't break Daily/Weekly layout + toggles.
+        const cards = Array.from(grid.querySelectorAll('article.news-card.rss-news-card'));
+        if (cards.length < 2) return;
+        cards
+            .map((card, idx) => ({ card, idx, ts: getTs(card) }))
+            .sort((a, b) => (b.ts - a.ts) || (a.idx - b.idx))
+            .forEach(({ card }) => grid.appendChild(card));
+    });
 }
 
 function updateRelativeTimes() {
@@ -99,10 +100,10 @@ function setDailyToggleLabel(btn, expanded) {
 function initDailyBriefsToggle() {
     const newsSection = document.getElementById('news');
     if (!newsSection) return;
-    const grid = newsSection.querySelector('.news-grid');
+    const grid = newsSection.querySelector('.news-grid[data-news-grid="daily"]') || newsSection.querySelector('.news-grid');
     if (!grid) return;
 
-    const btn = grid.querySelector('button[data-daily-toggle]');
+    const btn = newsSection.querySelector('button[data-daily-toggle]');
     if (!btn) return;
 
     const items = Array.from(grid.querySelectorAll('article.news-card[data-daily-news="true"]'));
