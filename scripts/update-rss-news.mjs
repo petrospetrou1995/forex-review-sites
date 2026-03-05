@@ -172,6 +172,61 @@ function inferLangFromLink(link) {
   return 'en';
 }
 
+function guessLangFromTitle(title) {
+  const t = String(title || '').trim();
+  if (!t) return 'en';
+
+  // Fast/robust hints for Spanish.
+  if (/[áéíóúñ¿¡]/i.test(t)) return 'es';
+  const lower = t.toLowerCase();
+  const tokens = lower
+    .replace(/[^a-z\u00c0-\u017f]+/gi, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  const tokenSet = new Set(tokens);
+
+  const esWords = [
+    // Common Spanish tokens (exact match via tokenSet for short words)
+    'el', 'la', 'los', 'las', 'de', 'del', 'y', 'para', 'con', 'sin', 'según',
+    // Stronger Spanish vocabulary
+    'hoy', 'pronóstico', 'previsión', 'precio', 'sube', 'cae', 'antes', 'tras', 'debido', 'frente', 'mientras',
+    'zona euro', 'eurozona', 'dólar', 'refugio', 'datos', 'probabilidades', 'recorte', 'tasas'
+  ];
+  const enWords = [
+    // Common English tokens (exact match via tokenSet for short words)
+    'the', 'a', 'an', 'of', 'to', 'in', 'on', 'as', 'with', 'after', 'ahead', 'against',
+    // Stronger English vocabulary
+    'today', 'forecast', 'price', 'rises', 'falls', 'turns', 'following', 'due',
+    'rate', 'rates', 'cut', 'hike'
+  ];
+
+  let esScore = 0;
+  let enScore = 0;
+
+  const score = (w, isTokenMatch) => (w.length >= 6 ? 3 : w.length >= 4 ? 2 : 1);
+
+  for (const w of esWords) {
+    const hit = w.includes(' ')
+      ? lower.includes(w)
+      : (w.length <= 3 ? tokenSet.has(w) : lower.includes(w));
+    if (hit) esScore += score(w);
+  }
+  for (const w of enWords) {
+    const hit = w.includes(' ')
+      ? lower.includes(w)
+      : (w.length <= 3 ? tokenSet.has(w) : lower.includes(w));
+    if (hit) enScore += score(w);
+  }
+
+  // If both appear, treat strong Spanish markers as decisive.
+  if (esScore === enScore) {
+    // FXStreet Spanish URLs sometimes still include English words; fall back to punctuation/accents already handled.
+    return 'en';
+  }
+  return esScore > enScore ? 'es' : 'en';
+}
+
 function extractMetaContent(html, selector) {
   // selector is a list of (attrName, attrValue) pairs to match.
   const s = String(html || '');
@@ -671,8 +726,13 @@ async function run() {
       )
     ]);
 
-    const freshEn = freshEnRaw.map((it) => ({ ...it, lang: 'en' }));
-    const freshEs = freshEsRaw.map((it) => ({ ...it, lang: 'es' }));
+    const freshCombined = [
+      ...freshEnRaw.map((it) => ({ ...it, lang: 'en' })),
+      ...freshEsRaw.map((it) => ({ ...it, lang: 'es' })),
+    ].map((it) => ({ ...it, lang: guessLangFromTitle(it.title) || it.lang || inferLangFromLink(it.link) }));
+
+    const freshEn = freshCombined.filter((it) => it.lang === 'en');
+    const freshEs = freshCombined.filter((it) => it.lang === 'es');
 
     if (freshEn.length || freshEs.length) {
       // Canonical storage of the RSS archive is the /news/ pages.
@@ -694,14 +754,16 @@ async function run() {
         }
       }
 
-      const existingEn = existing.filter((it) => (it.lang || 'en') === 'en');
-      const existingEs = existing.filter((it) => (it.lang || 'en') === 'es');
+      const existingNorm = existing.map((it) => ({ ...it, lang: guessLangFromTitle(it.title) || it.lang || inferLangFromLink(it.link) }));
+      const existingEn = existingNorm.filter((it) => it.lang === 'en');
+      const existingEs = existingNorm.filter((it) => it.lang === 'es');
       let mergedEn = mergeKeepRecent(existingEn, freshEn, 30);
       let mergedEs = mergeKeepRecent(existingEs, freshEs, 30);
 
       // Enrich with short purpose/impact reports (best-effort, deterministic).
-      mergedEn = await enrichWithReports(mergedEn, 'en', 60);
-      mergedEs = await enrichWithReports(mergedEs, 'es', 60);
+      // Keep the reports fresh and fast: enrich the most recent items only.
+      mergedEn = await enrichWithReports(mergedEn, 'en', 12);
+      mergedEs = await enrichWithReports(mergedEs, 'es', 12);
       const merged = [...mergedEn, ...mergedEs].sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso));
 
       // Update archive pages (all items)
@@ -759,19 +821,37 @@ async function run() {
       )
     ]);
 
-    const freshEn = freshEnRaw.map((it) => ({ ...it, lang: 'en' }));
-    const freshEs = freshEsRaw.map((it) => ({ ...it, lang: 'es' }));
+    const freshCombined = [
+      ...freshEnRaw.map((it) => ({ ...it, lang: 'en' })),
+      ...freshEsRaw.map((it) => ({ ...it, lang: 'es' })),
+    ].map((it) => ({ ...it, lang: guessLangFromTitle(it.title) || it.lang || inferLangFromLink(it.link) }));
 
-    if (freshEn.length || freshEs.length) {
-      const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
-      const existing = parseExistingRssCardsSite2(existingMid);
-      const existingEn = existing.filter((it) => (it.lang || 'en') === 'en');
-      const existingEs = existing.filter((it) => (it.lang || 'en') === 'es');
+    const freshEn = freshCombined.filter((it) => it.lang === 'en');
+    const freshEs = freshCombined.filter((it) => it.lang === 'es');
+
+    const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
+    let existing = parseExistingRssCardsSite2(existingMid);
+
+    // If feeds fail temporarily, still normalize/rebuild from existing content.
+    if (!existing.length) {
+      try {
+        const archiveHtml = readFileRel('site2-minimal-light/news/headlines/index.html');
+        const archiveMid = extractBetweenMarkers(archiveHtml, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
+        existing = parseExistingRssCardsSite2(archiveMid);
+      } catch {
+        // ignore
+      }
+    }
+
+    if (freshEn.length || freshEs.length || existing.length) {
+      const existingNorm = existing.map((it) => ({ ...it, lang: guessLangFromTitle(it.title) || it.lang || inferLangFromLink(it.link) }));
+      const existingEn = existingNorm.filter((it) => it.lang === 'en');
+      const existingEs = existingNorm.filter((it) => it.lang === 'es');
       let mergedEn = mergeKeepRecent(existingEn, freshEn, 18);
       let mergedEs = mergeKeepRecent(existingEs, freshEs, 18);
 
-      mergedEn = await enrichWithReports(mergedEn, 'en', 36);
-      mergedEs = await enrichWithReports(mergedEs, 'es', 36);
+      mergedEn = await enrichWithReports(mergedEn, 'en', 10);
+      mergedEs = await enrichWithReports(mergedEs, 'es', 10);
 
       const items = [...mergedEn, ...mergedEs].sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso));
       const nextInner = buildSite2Cards(items);
