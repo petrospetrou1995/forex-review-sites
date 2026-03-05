@@ -113,7 +113,6 @@
                     <div class="broker-card">
                         <div class="broker-header">
                             <div class="broker-logo">
-                                <span aria-hidden="true">🌎</span>
                                 <span data-en="LATAM hub" data-es="Hub LATAM">LATAM hub</span>
                             </div>
                         </div>
@@ -133,7 +132,6 @@
                     <div class="broker-card">
                         <div class="broker-header">
                             <div class="broker-logo">
-                                <span aria-hidden="true">🇲🇽</span>
                                 <span data-en="Mexico" data-es="México">Mexico</span>
                             </div>
                         </div>
@@ -153,7 +151,6 @@
                     <div class="broker-card">
                         <div class="broker-header">
                             <div class="broker-logo">
-                                <span aria-hidden="true">🇨🇴</span>
                                 <span data-en="Colombia" data-es="Colombia">Colombia</span>
                             </div>
                         </div>
@@ -515,7 +512,8 @@
                     <a class="link-cta" href="news/headlines/" data-en="Headlines →" data-es="Titulares →">Headlines →</a>
                     <a class="link-cta" href="news/" data-en="All news →" data-es="Todas las noticias →">All news →</a>
                 </div>
-                <div class="news-grid">
+                <h3 class="section-subheading mt-4" data-en="Daily briefs" data-es="Resúmenes diarios">Daily briefs</h3>
+                <div class="news-grid" data-news-grid="daily">
                     <!-- DAILY_NEWS_START -->
                     <article class="news-card" data-daily-news="true" data-daily-key="2026-03-01">
   <div class="news-image"></div>
@@ -635,9 +633,14 @@
   </div>
 </article>
                     <!-- DAILY_NEWS_END -->
-                    <div class="link-row">
-                        <button class="btn-more" type="button" data-daily-toggle aria-expanded="false" data-en="Show more daily briefs" data-es="Ver más resúmenes diarios">Show more daily briefs</button>
-                    </div>
+                </div>
+                <div class="link-row">
+                    <button class="btn-more" type="button" data-daily-toggle aria-expanded="false" data-en="Show more daily briefs" data-es="Ver más resúmenes diarios">Show more daily briefs</button>
+                    <a class="link-cta" href="news/daily/" data-en="View all daily briefs →" data-es="Ver todos los resúmenes diarios →">View all daily briefs →</a>
+                </div>
+
+                <h3 class="section-subheading mt-4" data-en="Weekly briefs" data-es="Resúmenes semanales">Weekly briefs</h3>
+                <div class="news-grid" data-news-grid="weekly">
                     <!-- WEEKLY_NEWS_START -->
                     <article class="news-card" data-weekly-news="true" data-weekly-key="2026-W10">
   <div class="news-image"></div>
@@ -684,8 +687,37 @@
   </div>
 </article>
                     <!-- WEEKLY_NEWS_END -->
+                </div>
+                <div class="link-row">
+                    <a class="link-cta" href="news/weekly/" data-en="View all weekly briefs →" data-es="Ver todos los resúmenes semanales →">View all weekly briefs →</a>
+                </div>
+
+                <h3 class="section-subheading mt-4" data-en="Headlines" data-es="Titulares">Headlines</h3>
+                <div class="news-grid" data-news-grid="headlines">
                     <!-- RSS_NEWS_START -->
                     <article class="news-card rss-news-card">
+  <div class="news-image"></div>
+  <div class="news-content">
+    <span class="news-category" data-en="fxstreet.es" data-es="fxstreet.es">fxstreet.es</span>
+    <h3 class="news-title">
+      <a class="link-cta" href="https://www.fxstreet.es/news/china-enfoque-pragmatico-de-crecimiento-y-estabilidad-cambiaria-td-securities-202603050912" target="_blank" rel="noopener noreferrer" data-en="China: Enfoque pragmático de crecimiento y estabilidad cambiaria – TD Securities" data-es="China: Enfoque pragmático de crecimiento y estabilidad cambiaria – TD Securities">China: Enfoque pragmático de crecimiento y estabilidad cambiaria – TD Securities</a>
+    </h3>
+    <p class="news-excerpt" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
+    <time class="news-date" datetime="2026-03-05T09:12:31Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+  </div>
+</article>
+<article class="news-card rss-news-card">
+  <div class="news-image"></div>
+  <div class="news-content">
+    <span class="news-category" data-en="fxstreet.es" data-es="fxstreet.es">fxstreet.es</span>
+    <h3 class="news-title">
+      <a class="link-cta" href="https://www.fxstreet.es/news/el-eur-gbp-se-estabiliza-cerca-de-08700-antes-de-los-datos-de-ventas-minoristas-de-la-eurozona-202603050906" target="_blank" rel="noopener noreferrer" data-en="El EUR/GBP se estabiliza cerca de 0.8700 antes de los datos de ventas minoristas de la Eurozona" data-es="El EUR/GBP se estabiliza cerca de 0.8700 antes de los datos de ventas minoristas de la Eurozona">El EUR/GBP se estabiliza cerca de 0.8700 antes de los datos de ventas minoristas de la Eurozona</a>
+    </h3>
+    <p class="news-excerpt" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
+    <time class="news-date" datetime="2026-03-05T09:06:32Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+  </div>
+</article>
+<article class="news-card rss-news-card">
   <div class="news-image"></div>
   <div class="news-content">
     <span class="news-category" data-en="fxstreet.es" data-es="fxstreet.es">fxstreet.es</span>
@@ -729,32 +761,11 @@
     <time class="news-date" datetime="2026-03-05T08:32:28Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
   </div>
 </article>
-<article class="news-card rss-news-card">
-  <div class="news-image"></div>
-  <div class="news-content">
-    <span class="news-category" data-en="fxstreet.es" data-es="fxstreet.es">fxstreet.es</span>
-    <h3 class="news-title">
-      <a class="link-cta" href="https://www.fxstreet.es/news/forex-hoy-los-activos-refugio-siguen-en-demanda-a-medida-que-se-amplia-la-crisis-en-oriente-medio-202603050827" target="_blank" rel="noopener noreferrer" data-en="Forex Hoy: Los activos refugio siguen demandados ante la intensificación de la crisis en Oriente Medio" data-es="Forex Hoy: Los activos refugio siguen demandados ante la intensificación de la crisis en Oriente Medio">Forex Hoy: Los activos refugio siguen demandados ante la intensificación de la crisis en Oriente Medio</a>
-    </h3>
-    <p class="news-excerpt" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-    <time class="news-date" datetime="2026-03-05T08:27:43Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-  </div>
-</article>
-<article class="news-card rss-news-card">
-  <div class="news-image"></div>
-  <div class="news-content">
-    <span class="news-category" data-en="fxstreet.es" data-es="fxstreet.es">fxstreet.es</span>
-    <h3 class="news-title">
-      <a class="link-cta" href="https://www.fxstreet.es/news/espana-la-produccion-industrial-crece-un-03-anual-en-enero-frente-al-17-esperado-202603050807" target="_blank" rel="noopener noreferrer" data-en="España: La producción industrial crece un 0.3% anual en enero frente al 1.7% esperado" data-es="España: La producción industrial crece un 0.3% anual en enero frente al 1.7% esperado">España: La producción industrial crece un 0.3% anual en enero frente al 1.7% esperado</a>
-    </h3>
-    <p class="news-excerpt" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-    <time class="news-date" datetime="2026-03-05T08:07:48Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-  </div>
-</article>
                     <!-- RSS_NEWS_END -->
-                    <div class="link-row">
-                        <a class="link-cta" href="news/" data-en="View all news →" data-es="Ver todas las noticias →">View all news →</a>
-                    </div>
+                </div>
+                <div class="link-row">
+                    <a class="link-cta" href="news/headlines/" data-en="View all headlines →" data-es="Ver todos los titulares →">View all headlines →</a>
+                    <a class="link-cta" href="news/" data-en="View all news →" data-es="Ver todas las noticias →">View all news →</a>
                 </div>
             </div>
         </section>

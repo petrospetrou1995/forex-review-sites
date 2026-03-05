@@ -56,7 +56,8 @@
                     <a class="btn-link" href="weekly/" data-en="Weekly briefs →" data-es="Resúmenes semanales →">Weekly briefs →</a>
                     <a class="btn-link" href="headlines/" data-en="Headlines →" data-es="Titulares →">Headlines →</a>
                 </div>
-                <div class="grid grid-3">
+                <h3 class="section-heading mb-2 mt-4" data-en="Daily briefs" data-es="Resúmenes diarios">Daily briefs</h3>
+                <div class="grid grid-3" data-news-grid="daily">
                     <!-- DAILY_NEWS_START -->
                     <div class="card card-pad" data-daily-news="true" data-daily-key="2026-03-01">
   <h3 class="card-title">
@@ -140,9 +141,14 @@
   <time class="muted small news-date" datetime="2026-02-18T09:10:00Z" data-relative-time="true" data-show-absolute="true">2026-02-18</time>
 </div>
                     <!-- DAILY_NEWS_END -->
-                    <div class="link-row link-row-center">
-                        <button class="btn-inline" type="button" data-daily-toggle aria-expanded="false" data-en="Show more daily briefs" data-es="Ver más resúmenes diarios">Show more daily briefs</button>
-                    </div>
+                </div>
+                <div class="link-row link-row-center">
+                    <button class="btn-inline" type="button" data-daily-toggle aria-expanded="false" data-en="Show more daily briefs" data-es="Ver más resúmenes diarios">Show more daily briefs</button>
+                    <a class="btn-link" href="daily/" data-en="View all daily briefs →" data-es="Ver todos los resúmenes diarios →">View all daily briefs →</a>
+                </div>
+
+                <h3 class="section-heading mb-2 mt-4" data-en="Weekly briefs" data-es="Resúmenes semanales">Weekly briefs</h3>
+                <div class="grid grid-3" data-news-grid="weekly">
                     <!-- WEEKLY_NEWS_START -->
                     <div class="card card-pad" data-weekly-news="true" data-weekly-key="2026-W10">
   <h3 class="card-title">
@@ -173,8 +179,29 @@
   <time class="muted small news-date" datetime="2026-02-09T00:00:00Z" data-relative-time="true" data-show-absolute="true">2026-02-09</time>
 </div>
                     <!-- WEEKLY_NEWS_END -->
+                </div>
+                <div class="link-row link-row-center">
+                    <a class="btn-link" href="weekly/" data-en="View all weekly briefs →" data-es="Ver todos los resúmenes semanales →">View all weekly briefs →</a>
+                </div>
+
+                <h3 class="section-heading mb-2 mt-4" data-en="Headlines" data-es="Titulares">Headlines</h3>
+                <div class="grid grid-3" data-news-grid="headlines">
                     <!-- RSS_NEWS_START -->
                     <div class="card card-pad rss-news-card">
+  <h3 class="card-title">
+    <a class="btn-link" href="https://www.fxstreet.es/news/china-enfoque-pragmatico-de-crecimiento-y-estabilidad-cambiaria-td-securities-202603050912" target="_blank" rel="noopener noreferrer" data-en="China: Enfoque pragmático de crecimiento y estabilidad cambiaria – TD Securities" data-es="China: Enfoque pragmático de crecimiento y estabilidad cambiaria – TD Securities">China: Enfoque pragmático de crecimiento y estabilidad cambiaria – TD Securities</a>
+  </h3>
+  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
+  <time class="muted small news-date" datetime="2026-03-05T09:12:31Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+</div>
+<div class="card card-pad rss-news-card">
+  <h3 class="card-title">
+    <a class="btn-link" href="https://www.fxstreet.es/news/el-eur-gbp-se-estabiliza-cerca-de-08700-antes-de-los-datos-de-ventas-minoristas-de-la-eurozona-202603050906" target="_blank" rel="noopener noreferrer" data-en="El EUR/GBP se estabiliza cerca de 0.8700 antes de los datos de ventas minoristas de la Eurozona" data-es="El EUR/GBP se estabiliza cerca de 0.8700 antes de los datos de ventas minoristas de la Eurozona">El EUR/GBP se estabiliza cerca de 0.8700 antes de los datos de ventas minoristas de la Eurozona</a>
+  </h3>
+  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
+  <time class="muted small news-date" datetime="2026-03-05T09:06:32Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+</div>
+<div class="card card-pad rss-news-card">
   <h3 class="card-title">
     <a class="btn-link" href="https://www.fxstreet.es/news/el-usd-inr-se-desploma-al-abrir-ya-que-el-rbi-interviene-para-apoyar-a-la-rupia-india-202603050555" target="_blank" rel="noopener noreferrer" data-en="El USD/INR corrige bruscamente tras la intervención del RBI" data-es="El USD/INR corrige bruscamente tras la intervención del RBI">El USD/INR corrige bruscamente tras la intervención del RBI</a>
   </h3>
@@ -190,10 +217,24 @@
 </div>
 <div class="card card-pad rss-news-card">
   <h3 class="card-title">
+    <a class="btn-link" href="https://www.investing.com/analysis/gbpusd-market-not-expecting-boe-rate-cut-in-march-200676113" target="_blank" rel="noopener noreferrer" data-en="GBP/USD: Market Not Expecting BoE Rate Cut in March" data-es="GBP/USD: Market Not Expecting BoE Rate Cut in March">GBP/USD: Market Not Expecting BoE Rate Cut in March</a>
+  </h3>
+  <p class="muted mb-1" data-en="Source: investing.com. Open original →" data-es="Fuente: investing.com. Abrir original →">Source: investing.com. Open original →</p>
+  <time class="muted small news-date" datetime="2026-03-05T08:52:00Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+</div>
+<div class="card card-pad rss-news-card">
+  <h3 class="card-title">
     <a class="btn-link" href="https://www.fxstreet.es/news/el-yen-japones-da-un-giro-frente-al-dolar-estadounidense-a-medida-que-las-apuestas-moderadas-de-la-fed-disminuyen-202603050846" target="_blank" rel="noopener noreferrer" data-en="El Yen japonés da un giro frente al Dólar mientras las apuestas moderadas de la Fed disminuyen" data-es="El Yen japonés da un giro frente al Dólar mientras las apuestas moderadas de la Fed disminuyen">El Yen japonés da un giro frente al Dólar mientras las apuestas moderadas de la Fed disminuyen</a>
   </h3>
   <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
   <time class="muted small news-date" datetime="2026-03-05T08:46:18Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+</div>
+<div class="card card-pad rss-news-card">
+  <h3 class="card-title">
+    <a class="btn-link" href="https://www.investing.com/analysis/us-dollar-strength-builds-as-energy-shock-and-hormuz-risk-return-to-markets-200676112" target="_blank" rel="noopener noreferrer" data-en="US Dollar Strength Builds as Energy Shock and Hormuz Risk Return to Markets" data-es="US Dollar Strength Builds as Energy Shock and Hormuz Risk Return to Markets">US Dollar Strength Builds as Energy Shock and Hormuz Risk Return to Markets</a>
+  </h3>
+  <p class="muted mb-1" data-en="Source: investing.com. Open original →" data-es="Fuente: investing.com. Abrir original →">Source: investing.com. Open original →</p>
+  <time class="muted small news-date" datetime="2026-03-05T08:42:00Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
 </div>
 <div class="card card-pad rss-news-card">
   <h3 class="card-title">
@@ -208,6 +249,13 @@
   </h3>
   <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
   <time class="muted small news-date" datetime="2026-03-05T08:27:43Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
+</div>
+<div class="card card-pad rss-news-card">
+  <h3 class="card-title">
+    <a class="btn-link" href="https://www.investing.com/analysis/fx-outlook-no-quick-fix-200676105" target="_blank" rel="noopener noreferrer" data-en="FX Outlook: No Quick Fix" data-es="FX Outlook: No Quick Fix">FX Outlook: No Quick Fix</a>
+  </h3>
+  <p class="muted mb-1" data-en="Source: investing.com. Open original →" data-es="Fuente: investing.com. Abrir original →">Source: investing.com. Open original →</p>
+  <time class="muted small news-date" datetime="2026-03-05T08:20:00Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
 </div>
 <div class="card card-pad rss-news-card">
   <h3 class="card-title">
@@ -391,42 +439,10 @@
   <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
   <time class="muted small news-date" datetime="2026-03-05T02:21:15Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
 </div>
-<div class="card card-pad rss-news-card">
-  <h3 class="card-title">
-    <a class="btn-link" href="https://www.fxstreet.es/news/china-establece-un-objetivo-de-crecimiento-para-2026-del-45-5-frente-al-5-alcanzado-el-ano-pasado-202603050204" target="_blank" rel="noopener noreferrer" data-en="China establece un objetivo de crecimiento para 2026 del 4.5%–5% frente al 5% alcanzado el año…" data-es="China establece un objetivo de crecimiento para 2026 del 4.5%–5% frente al 5% alcanzado el año…">China establece un objetivo de crecimiento para 2026 del 4.5%–5% frente al 5% alcanzado el año…</a>
-  </h3>
-  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-  <time class="muted small news-date" datetime="2026-03-05T02:04:16Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-</div>
-<div class="card card-pad rss-news-card">
-  <h3 class="card-title">
-    <a class="btn-link" href="https://www.fxstreet.es/news/aud-jpy-cae-por-debajo-de-11100-mientras-el-superavit-comercial-de-australia-se-reduce-202603050152" target="_blank" rel="noopener noreferrer" data-en="AUD/JPY cae por debajo de 111.00 mientras el superávit comercial de Australia se reduce" data-es="AUD/JPY cae por debajo de 111.00 mientras el superávit comercial de Australia se reduce">AUD/JPY cae por debajo de 111.00 mientras el superávit comercial de Australia se reduce</a>
-  </h3>
-  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-  <time class="muted small news-date" datetime="2026-03-05T01:52:22Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-</div>
-<div class="card card-pad rss-news-card">
-  <h3 class="card-title">
-    <a class="btn-link" href="https://www.fxstreet.es/news/el-pboc-establece-el-punto-medio-del-yuan-en-el-nivel-mas-fuerte-en-34-meses-202603050151" target="_blank" rel="noopener noreferrer" data-en="El PBoC establece el punto medio del Yuan en el nivel más fuerte en 34 meses" data-es="El PBoC establece el punto medio del Yuan en el nivel más fuerte en 34 meses">El PBoC establece el punto medio del Yuan en el nivel más fuerte en 34 meses</a>
-  </h3>
-  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-  <time class="muted small news-date" datetime="2026-03-05T01:51:31Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-</div>
-<div class="card card-pad rss-news-card">
-  <h3 class="card-title">
-    <a class="btn-link" href="https://www.fxstreet.es/news/el-dolar-canadiense-salta-por-encima-de-13600-ante-el-aumento-de-los-precios-del-petroleo-crudo-202603050135" target="_blank" rel="noopener noreferrer" data-en="El Dólar canadiense salta por encima de 1.3600 ante el aumento de los precios del petróleo cru…" data-es="El Dólar canadiense salta por encima de 1.3600 ante el aumento de los precios del petróleo cru…">El Dólar canadiense salta por encima de 1.3600 ante el aumento de los precios del petróleo cru…</a>
-  </h3>
-  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-  <time class="muted small news-date" datetime="2026-03-05T01:35:43Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-</div>
-<div class="card card-pad rss-news-card">
-  <h3 class="card-title">
-    <a class="btn-link" href="https://www.fxstreet.es/news/plata-analisis-del-precio-el-xag-usd-se-mantiene-por-encima-de-8400-pero-parece-vulnerable-202603050104" target="_blank" rel="noopener noreferrer" data-en="Plata Análisis del Precio: El XAG/USD se mantiene por encima de 84.00$, pero parece vulnerable" data-es="Plata Análisis del Precio: El XAG/USD se mantiene por encima de 84.00$, pero parece vulnerable">Plata Análisis del Precio: El XAG/USD se mantiene por encima de 84.00$, pero parece vulnerable</a>
-  </h3>
-  <p class="muted mb-1" data-en="Source: fxstreet.es. Open original →" data-es="Fuente: fxstreet.es. Abrir original →">Source: fxstreet.es. Open original →</p>
-  <time class="muted small news-date" datetime="2026-03-05T01:04:17Z" data-relative-time="true" data-show-absolute="true">2026-03-05</time>
-</div>
                     <!-- RSS_NEWS_END -->
+                </div>
+                <div class="link-row link-row-center">
+                    <a class="btn-link" href="headlines/" data-en="View all headlines →" data-es="Ver todos los titulares →">View all headlines →</a>
                 </div>
             </div>
         </section>
