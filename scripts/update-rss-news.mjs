@@ -32,11 +32,26 @@ function stripCdata(str) {
   return m ? m[1] : s;
 }
 
+function stripTags(html) {
+  return String(html || '').replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ');
+}
+
 function textFromTag(xml, tag) {
   const re = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i');
   const m = xml.match(re);
   if (!m) return '';
   return decodeEntities(stripCdata(m[1]).trim());
+}
+
+function textFromTagAny(xml, tags) {
+  for (const t of tags) {
+    const v = textFromTag(xml, t);
+    if (v) return v;
+  }
+  return '';
 }
 
 function safeUrl(url) {
@@ -65,6 +80,8 @@ function parseRssItems(xml) {
       safeUrl(textFromTag(block, 'link')) ||
       safeUrl(textFromTag(block, 'guid')) ||
       safeUrl(attrFromTag(block, 'item', 'rdf:about'));
+    const summaryRaw = textFromTagAny(block, ['description', 'summary', 'content:encoded']);
+    const rssSummary = decodeEntities(stripTags(stripCdata(summaryRaw))).replace(/\s+/g, ' ').trim();
     const pubDateRaw =
       textFromTag(block, 'pubDate') ||
       textFromTag(block, 'dc:date') ||
@@ -75,7 +92,7 @@ function parseRssItems(xml) {
     const pubMs = Date.parse(pubDateRaw);
     const pubIso = Number.isFinite(pubMs) ? new Date(pubMs).toISOString().replace(/\.\d{3}Z$/, 'Z') : '';
     if (!title || !link || !pubIso) continue;
-    items.push({ title, link, pubIso });
+    items.push({ title, link, pubIso, rssSummary });
   }
 
   // Atom entries (some official sources prefer Atom)
@@ -86,24 +103,30 @@ function parseRssItems(xml) {
       safeUrl(attrFromTag(block, 'link', 'href')) ||
       safeUrl(textFromTag(block, 'link')) ||
       safeUrl(textFromTag(block, 'id'));
+    const summaryRaw = textFromTagAny(block, ['summary', 'content']);
+    const rssSummary = decodeEntities(stripTags(stripCdata(summaryRaw))).replace(/\s+/g, ' ').trim();
     const pubDateRaw = textFromTag(block, 'updated') || textFromTag(block, 'published');
     const pubMs = Date.parse(pubDateRaw);
     const pubIso = Number.isFinite(pubMs) ? new Date(pubMs).toISOString().replace(/\.\d{3}Z$/, 'Z') : '';
     if (!title || !link || !pubIso) continue;
-    items.push({ title, link, pubIso });
+    items.push({ title, link, pubIso, rssSummary });
   }
 
   return items;
 }
 
-async function fetchText(url) {
+async function fetchText(url, { accept, acceptLanguage, timeoutMs } = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs || 12000);
   const res = await fetch(url, {
+    signal: controller.signal,
     headers: {
       // Some feeds block default Node UA.
       'user-agent': 'BrokercompareNewsBot/1.0 (+https://example.invalid)',
-      'accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5'
+      'accept': accept || 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+      ...(acceptLanguage ? { 'accept-language': acceptLanguage } : {})
     }
-  });
+  }).finally(() => clearTimeout(timer));
   if (!res.ok) throw new Error(`Fetch failed ${res.status} ${url}`);
   return await res.text();
 }
@@ -121,6 +144,210 @@ function truncate(s, n) {
   const str = String(s || '').trim();
   if (str.length <= n) return str;
   return str.slice(0, Math.max(0, n - 1)).trimEnd() + '…';
+}
+
+function escapeAttr(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeText(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function inferLangFromLink(link) {
+  try {
+    const host = new URL(link).hostname.replace(/^www\./, '');
+    if (host === 'banxico.org.mx') return 'es';
+    if (host === 'fxstreet.es') return 'es';
+    if (host === 'fxstreet.com') return 'en';
+    if (host === 'investing.com') return 'en';
+    if (host === 'centralbanking.com') return 'en';
+  } catch {
+    // ignore
+  }
+  return 'en';
+}
+
+function extractMetaContent(html, selector) {
+  // selector is a list of (attrName, attrValue) pairs to match.
+  const s = String(html || '');
+  for (const [attrName, attrValue] of selector) {
+    const re = new RegExp(`<meta[^>]+\\b${attrName}="${attrValue}"[^>]+\\bcontent="([^"]+)"[^>]*>`, 'i');
+    const m = s.match(re);
+    if (m?.[1]) return decodeEntities(m[1]).trim();
+  }
+  return '';
+}
+
+function extractFirstParagraphText(html) {
+  const s = String(html || '');
+  const m = s.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+  if (!m?.[1]) return '';
+  const txt = decodeEntities(stripTags(m[1])).replace(/\s+/g, ' ').trim();
+  if (txt.length < 40) return '';
+  return txt;
+}
+
+const pageSummaryCache = new Map();
+
+async function fetchPageSummary(link, lang) {
+  const key = `${lang || 'en'}|${link}`;
+  if (pageSummaryCache.has(key)) return pageSummaryCache.get(key);
+
+  const acceptLanguage = lang === 'es' ? 'es-ES,es;q=0.9,en;q=0.6' : 'en-US,en;q=0.9,es;q=0.5';
+  try {
+    const html = await fetchText(link, {
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      acceptLanguage,
+      timeoutMs: 12000
+    });
+    const meta =
+      extractMetaContent(html, [['property', 'og:description'], ['name', 'description'], ['name', 'twitter:description']]) ||
+      extractFirstParagraphText(html);
+    const out = { ok: true, summary: meta || '' };
+    pageSummaryCache.set(key, out);
+    return out;
+  } catch {
+    const out = { ok: false, summary: '' };
+    pageSummaryCache.set(key, out);
+    return out;
+  }
+}
+
+function extractImpactSignals(text) {
+  const t = String(text || '').toLowerCase();
+  const signals = {
+    rates: /\b(rate|rates|interest|policy|tighten|cut|hike|banxico|fomc|central bank|tasa|tasas|inter[eé]s|pol[ií]tica monetaria|banco central)\b/i.test(t),
+    inflation: /\b(inflation|cpi|prices|pce|inflaci[oó]n|ipc|precios)\b/i.test(t),
+    jobs: /\b(jobs|payroll|unemployment|employment|empleo|desempleo|n[oó]minas)\b/i.test(t),
+    fx: /\b(fx|forex|usd|eur|jpy|gbp|mxn|brl|ars|clp|cop|pen|peso|real|d[oó]lar|yen|euro|libra)\b/i.test(t),
+    banks: /\b(bank|banks|banking|lender|banco|bancos|bancario)\b/i.test(t),
+    crypto: /\b(bitcoin|btc|ethereum|eth|crypto|cryptocurrency|cripto|criptomoneda)\b/i.test(t),
+    equities: /\b(stocks|equities|shares|bolsa|acciones)\b/i.test(t),
+    commodities: /\b(oil|brent|wti|gold|silver|copper|petr[oó]leo|oro|plata|cobre)\b/i.test(t),
+  };
+
+  const countries = [];
+  if (/\bmexic|méxic|mexico|méxico|banxico\b/i.test(t)) countries.push('Mexico');
+  if (/\bbrazil|brasil\b/i.test(t)) countries.push('Brazil');
+  if (/\bargentina\b/i.test(t)) countries.push('Argentina');
+  if (/\bchile\b/i.test(t)) countries.push('Chile');
+  if (/\bcolombia\b/i.test(t)) countries.push('Colombia');
+  if (/\bperu|perú\b/i.test(t)) countries.push('Peru');
+
+  const currencies = [];
+  if (/\bmxn\b/i.test(t) || /\bpeso mexicano\b/i.test(t)) currencies.push('MXN');
+  if (/\bbrl\b/i.test(t) || /\breal\b/i.test(t)) currencies.push('BRL');
+  if (/\bars\b/i.test(t)) currencies.push('ARS');
+  if (/\bclp\b/i.test(t)) currencies.push('CLP');
+  if (/\bcop\b/i.test(t)) currencies.push('COP');
+  if (/\bpen\b/i.test(t)) currencies.push('PEN');
+
+  return { signals, countries, currencies };
+}
+
+function buildCategoryLabel(signals, lang) {
+  const parts = [];
+  if (signals.rates) parts.push(lang === 'es' ? 'Banca central / tasas' : 'Central banking / rates');
+  else if (signals.inflation || signals.jobs) parts.push(lang === 'es' ? 'Datos macro' : 'Macro data');
+  if (signals.fx) parts.push('FX');
+  if (signals.banks) parts.push(lang === 'es' ? 'Bancos' : 'Banks');
+  if (signals.crypto) parts.push(lang === 'es' ? 'Cripto' : 'Crypto');
+  if (signals.commodities) parts.push(lang === 'es' ? 'Commodities' : 'Commodities');
+  if (signals.equities) parts.push(lang === 'es' ? 'Acciones' : 'Equities');
+  if (!parts.length) return lang === 'es' ? 'Mercados' : 'Markets';
+  return parts.slice(0, 3).join(' • ');
+}
+
+function buildRegionLabel(countries, currencies, lang) {
+  const c = Array.from(new Set(countries || [])).slice(0, 2);
+  const fx = Array.from(new Set(currencies || [])).slice(0, 3);
+  if (c.length || fx.length) {
+    const bits = [];
+    if (c.length) bits.push(c.join(', '));
+    if (fx.length) bits.push(fx.join(', '));
+    return bits.join(' · ');
+  }
+  return lang === 'es' ? 'LATAM (contexto regional)' : 'LATAM (regional context)';
+}
+
+function buildRssReport(it, lang) {
+  const sourceText = [it?.pageSummary, it?.rssSummary, it?.title].filter(Boolean).join(' — ');
+  const base = String(it?.pageSummary || it?.rssSummary || '').trim();
+  const purposeCore = base || String(it?.title || '').trim();
+  const purpose = truncate(purposeCore, 220);
+
+  const { signals, countries, currencies } = extractImpactSignals(sourceText);
+  const category = buildCategoryLabel(signals, lang);
+  const region = buildRegionLabel(countries, currencies, lang);
+
+  const purposePara =
+    lang === 'es'
+      ? `Propósito (${category} · ${region}): ${purpose}`
+      : `Purpose (${category} · ${region}): ${purpose}`;
+
+  const impactCore =
+    lang === 'es'
+      ? `Impacto potencial: Puede afectar expectativas y precios (especialmente ${category}) con relevancia para ${region}.`
+      : `Potential impact: This may shift expectations and pricing (especially ${category}) with relevance to ${region}.`;
+
+  const watchBit = (currencies?.length || countries?.length)
+    ? (lang === 'es'
+      ? ` Pistas: observa ${[
+        currencies?.length ? `pares y cruces con ${currencies.slice(0, 3).join(', ')}` : '',
+        signals.rates ? 'tasa de referencia y rendimientos' : '',
+        signals.fx ? 'movimiento del USD y spreads' : '',
+      ].filter(Boolean).join('; ')}.`
+      : ` Signals to watch: ${[
+        currencies?.length ? `moves in pairs involving ${currencies.slice(0, 3).join(', ')}` : '',
+        signals.rates ? 'policy-rate guidance and yields' : '',
+        signals.fx ? 'USD moves and spreads' : '',
+      ].filter(Boolean).join('; ')}.`)
+    : (lang === 'es'
+      ? ' Pistas: observa reacción del USD, expectativas de tasas y sentimiento de riesgo.'
+      : ' Signals to watch: USD reaction, rate expectations, and risk sentiment.');
+
+  const impact = `${impactCore}${watchBit}`;
+
+  return {
+    purpose: purposePara,
+    impact: truncate(impact, 220)
+  };
+}
+
+async function enrichWithReports(items, lang, maxToFetch = 60) {
+  const list = Array.from(items || []);
+  const limit = Math.max(0, Math.min(maxToFetch, list.length));
+  const concurrency = 4;
+  let idx = 0;
+
+  async function worker() {
+    while (idx < limit) {
+      const i = idx++;
+      const it = list[i];
+      const res = await fetchPageSummary(it.link, lang);
+      if (res.ok && res.summary) it.pageSummary = res.summary;
+      const rep = buildRssReport(it, lang);
+      it.reportPurpose = rep.purpose;
+      it.reportImpact = rep.impact;
+    }
+  }
+
+  const workers = Array.from({ length: concurrency }, () => worker());
+  await Promise.all(workers);
+
+  // For any remaining items (if we ever cap maxToFetch), still generate reports from RSS summary/title.
+  for (let i = limit; i < list.length; i++) {
+    const it = list[i];
+    const rep = buildRssReport(it, lang);
+    it.reportPurpose = rep.purpose;
+    it.reportImpact = rep.impact;
+  }
+  return list;
 }
 
 function updateBetweenMarkers(html, markerStart, markerEnd, nextInner, indent) {
@@ -148,6 +375,9 @@ function parseExistingRssCardsSite1(middle) {
   for (const b of blocks) {
     const href = (b.match(/<a[^>]+href="([^"]+)"/i) || [])[1] || '';
     const dt = (b.match(/<time[^>]+datetime="([^"]+)"/i) || [])[1] || '';
+    const lang = ((b.match(/data-rss-lang="(en|es)"/i) || [])[1] || '').toLowerCase();
+    const reportPurpose = decodeEntities((b.match(/data-rss-purpose="true"[^>]*\bdata-en="([^"]*)"/i) || [])[1] || '').trim();
+    const reportImpact = decodeEntities((b.match(/data-rss-impact="true"[^>]*\bdata-en="([^"]*)"/i) || [])[1] || '').trim();
     const link = safeUrl(href);
     const pubIso = String(dt || '').trim();
     if (!link || !pubIso) continue;
@@ -162,7 +392,14 @@ function parseExistingRssCardsSite1(middle) {
       }
       break;
     }
-    items.push({ title: anchorText || link, link, pubIso });
+    items.push({
+      title: anchorText || link,
+      link,
+      pubIso,
+      lang: lang || inferLangFromLink(link),
+      reportPurpose,
+      reportImpact
+    });
   }
   return items;
 }
@@ -173,6 +410,9 @@ function parseExistingRssCardsSite2(middle) {
   for (const b of blocks) {
     const href = (b.match(/<a[^>]+href="([^"]+)"/i) || [])[1] || '';
     const dt = (b.match(/<time[^>]+datetime="([^"]+)"/i) || [])[1] || '';
+    const lang = ((b.match(/data-rss-lang="(en|es)"/i) || [])[1] || '').toLowerCase();
+    const reportPurpose = decodeEntities((b.match(/data-rss-purpose="true"[^>]*\bdata-en="([^"]*)"/i) || [])[1] || '').trim();
+    const reportImpact = decodeEntities((b.match(/data-rss-impact="true"[^>]*\bdata-en="([^"]*)"/i) || [])[1] || '').trim();
     const link = safeUrl(href);
     const pubIso = String(dt || '').trim();
     if (!link || !pubIso) continue;
@@ -186,7 +426,14 @@ function parseExistingRssCardsSite2(middle) {
       }
       break;
     }
-    items.push({ title: anchorText || link, link, pubIso });
+    items.push({
+      title: anchorText || link,
+      link,
+      pubIso,
+      lang: lang || inferLangFromLink(link),
+      reportPurpose,
+      reportImpact
+    });
   }
   return items;
 }
@@ -195,7 +442,19 @@ function mergeKeepRecent(existing, incoming, maxItems) {
   const map = new Map();
   for (const it of [...incoming, ...existing]) {
     if (!it?.link || !it?.pubIso) continue;
-    if (!map.has(it.link)) map.set(it.link, it);
+    const lang = (it.lang || inferLangFromLink(it.link) || 'en').toLowerCase();
+    const key = `${lang}|${it.link}`;
+    if (!map.has(key)) {
+      map.set(key, { ...it, lang });
+      continue;
+    }
+    // Prefer newer fields from incoming, but keep any existing report text if missing.
+    const prev = map.get(key);
+    const next = { ...prev, ...it, lang };
+    if (!next.reportPurpose && prev.reportPurpose) next.reportPurpose = prev.reportPurpose;
+    if (!next.reportImpact && prev.reportImpact) next.reportImpact = prev.reportImpact;
+    if (!next.rssSummary && prev.rssSummary) next.rssSummary = prev.rssSummary;
+    map.set(key, next);
   }
   return Array.from(map.values())
     .sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso))
@@ -206,15 +465,24 @@ function buildSite1Cards(items) {
   return items.map((it) => {
     const src = domainLabel(it.link);
     const title = truncate(it.title, 110);
-    const titleEsc = title.replace(/"/g, '&quot;');
+    const lang = (it.lang || inferLangFromLink(it.link) || 'en').toLowerCase();
+    const titleEsc = escapeAttr(title);
+    const titleHtml = escapeText(title);
+    const rep = buildRssReport(it, lang);
+    const purposeEsc = escapeAttr(rep.purpose);
+    const impactEsc = escapeAttr(rep.impact);
+    const purposeHtml = escapeText(rep.purpose);
+    const impactHtml = escapeText(rep.impact);
     return `
-<article class="news-card rss-news-card">
+<article class="news-card rss-news-card" data-rss-lang="${lang}" data-lang-only="${lang}">
   <div class="news-image"></div>
   <div class="news-content">
     <span class="news-category" data-en="${src}" data-es="${src}">${src}</span>
     <h3 class="news-title">
-      <a class="link-cta" href="${it.link}" target="_blank" rel="noopener noreferrer" data-en="${titleEsc}" data-es="${titleEsc}">${title}</a>
+      <a class="link-cta" href="${it.link}" target="_blank" rel="noopener noreferrer" data-en="${titleEsc}" data-es="${titleEsc}">${titleHtml}</a>
     </h3>
+    <p class="news-excerpt" data-rss-purpose="true" data-en="${purposeEsc}" data-es="${purposeEsc}">${purposeHtml}</p>
+    <p class="news-excerpt" data-rss-impact="true" data-en="${impactEsc}" data-es="${impactEsc}">${impactHtml}</p>
     <p class="news-excerpt" data-en="Source: ${src}. Open original →" data-es="Fuente: ${src}. Abrir original →">Source: ${src}. Open original →</p>
     <time class="news-date" datetime="${it.pubIso}" data-relative-time="true" data-show-absolute="true">${it.pubIso.split('T')[0]}</time>
   </div>
@@ -227,12 +495,21 @@ function buildSite2Cards(items) {
   return items.map((it) => {
     const src = domainLabel(it.link);
     const title = truncate(it.title, 95);
-    const titleEsc = title.replace(/"/g, '&quot;');
+    const lang = (it.lang || inferLangFromLink(it.link) || 'en').toLowerCase();
+    const titleEsc = escapeAttr(title);
+    const titleHtml = escapeText(title);
+    const rep = buildRssReport(it, lang);
+    const purposeEsc = escapeAttr(rep.purpose);
+    const impactEsc = escapeAttr(rep.impact);
+    const purposeHtml = escapeText(rep.purpose);
+    const impactHtml = escapeText(rep.impact);
     return `
-<div class="card card-pad rss-news-card">
+<div class="card card-pad rss-news-card" data-rss-lang="${lang}" data-lang-only="${lang}">
   <h3 class="card-title">
-    <a class="btn-link" href="${it.link}" target="_blank" rel="noopener noreferrer" data-en="${titleEsc}" data-es="${titleEsc}">${title}</a>
+    <a class="btn-link" href="${it.link}" target="_blank" rel="noopener noreferrer" data-en="${titleEsc}" data-es="${titleEsc}">${titleHtml}</a>
   </h3>
+  <p class="muted mb-1" data-rss-purpose="true" data-en="${purposeEsc}" data-es="${purposeEsc}">${purposeHtml}</p>
+  <p class="muted mb-1" data-rss-impact="true" data-en="${impactEsc}" data-es="${impactEsc}">${impactHtml}</p>
   <p class="muted mb-1" data-en="Source: ${src}. Open original →" data-es="Fuente: ${src}. Abrir original →">Source: ${src}. Open original →</p>
   <time class="muted small news-date" datetime="${it.pubIso}" data-relative-time="true" data-show-absolute="true">${it.pubIso.split('T')[0]}</time>
 </div>
@@ -367,19 +644,37 @@ async function run() {
   {
     const relPath = 'site1-dark-gradient/index.html';
     const html = readFileRel(relPath);
-    const fresh = await buildLatamFocusedItems(
-      [
-        // Mexico (central bank indicators, FX + policy rate)
-        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=fix&BMXC_idioma=es',
-        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=tasObj&BMXC_idioma=es',
-        // LATAM-friendly FX headlines (Spanish)
-        'https://www.fxstreet.es/rss/news',
-        // Central banking decisions & policy (filter will prefer LATAM)
-        'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions'
-      ],
-      30
-    );
-    if (fresh.length) {
+    const [freshEnRaw, freshEsRaw] = await Promise.all([
+      buildLatamFocusedItems(
+        [
+          // Mexico (central bank indicators, FX + policy rate) — English
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=fix&BMXC_idioma=en',
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=tasObj&BMXC_idioma=en',
+          // LATAM-friendly FX headlines (English)
+          'https://www.fxstreet.com/rss/news',
+          // Forex / finance headlines (English)
+          'https://www.investing.com/rss/forex.rss',
+          // Central banking decisions & policy
+          'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions'
+        ],
+        30
+      ),
+      buildLatamFocusedItems(
+        [
+          // Mexico (central bank indicators, FX + policy rate) — Spanish
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=fix&BMXC_idioma=es',
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=tasObj&BMXC_idioma=es',
+          // LATAM-friendly FX headlines (Spanish)
+          'https://www.fxstreet.es/rss/news'
+        ],
+        30
+      )
+    ]);
+
+    const freshEn = freshEnRaw.map((it) => ({ ...it, lang: 'en' }));
+    const freshEs = freshEsRaw.map((it) => ({ ...it, lang: 'es' }));
+
+    if (freshEn.length || freshEs.length) {
       // Canonical storage of the RSS archive is the /news/ pages.
       const archivePaths = [
         'site1-dark-gradient/news/index.html',
@@ -399,7 +694,15 @@ async function run() {
         }
       }
 
-      const merged = mergeKeepRecent(existing, fresh, 60);
+      const existingEn = existing.filter((it) => (it.lang || 'en') === 'en');
+      const existingEs = existing.filter((it) => (it.lang || 'en') === 'es');
+      let mergedEn = mergeKeepRecent(existingEn, freshEn, 30);
+      let mergedEs = mergeKeepRecent(existingEs, freshEs, 30);
+
+      // Enrich with short purpose/impact reports (best-effort, deterministic).
+      mergedEn = await enrichWithReports(mergedEn, 'en', 60);
+      mergedEs = await enrichWithReports(mergedEs, 'es', 60);
+      const merged = [...mergedEn, ...mergedEs].sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso));
 
       // Update archive pages (all items)
       for (const archivePath of archivePaths) {
@@ -417,7 +720,7 @@ async function run() {
       }
 
       // Update homepage (only last 6)
-      const homeInner = buildSite1Cards(merged.slice(0, 6));
+      const homeInner = buildSite1Cards([...mergedEn.slice(0, 6), ...mergedEs.slice(0, 6)].sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso)));
       const nextHome = updateBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', homeInner, ' '.repeat(20));
       if (nextHome !== html) {
         writeFileRel(relPath, nextHome);
@@ -430,23 +733,47 @@ async function run() {
   {
     const relPath = 'site2-minimal-light/news/index.html';
     const html = readFileRel(relPath);
-    const fresh = await buildLatamFocusedItems(
-      [
-        // FX / finance headlines (filter will prefer LATAM currencies & countries)
-        'https://www.investing.com/rss/forex.rss',
-        'https://www.fxstreet.es/rss/news',
-        // Central banking decisions / macro context (filter will prefer LATAM)
-        'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions',
-        // Extra Mexico macro signals (remittances / reserves)
-        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=remesa&BMXC_idioma=es',
-        'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=reserv&BMXC_idioma=es'
-      ],
-      30
-    );
-    if (fresh.length) {
+    const [freshEnRaw, freshEsRaw] = await Promise.all([
+      buildLatamFocusedItems(
+        [
+          // FX / finance headlines (English)
+          'https://www.investing.com/rss/forex.rss',
+          'https://www.fxstreet.com/rss/news',
+          // Central banking decisions / macro context
+          'https://www.centralbanking.com/feeds/rss/category/central-banks/monetary-policy/monetary-policy-decisions',
+          // Extra Mexico macro signals (remittances / reserves) — English
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=remesa&BMXC_idioma=en',
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=reserv&BMXC_idioma=en'
+        ],
+        30
+      ),
+      buildLatamFocusedItems(
+        [
+          // FX / finance headlines (Spanish)
+          'https://www.fxstreet.es/rss/news',
+          // Extra Mexico macro signals (remittances / reserves) — Spanish
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=remesa&BMXC_idioma=es',
+          'https://www.banxico.org.mx/rsscb/rss?BMXC_canal=reserv&BMXC_idioma=es'
+        ],
+        30
+      )
+    ]);
+
+    const freshEn = freshEnRaw.map((it) => ({ ...it, lang: 'en' }));
+    const freshEs = freshEsRaw.map((it) => ({ ...it, lang: 'es' }));
+
+    if (freshEn.length || freshEs.length) {
       const existingMid = extractBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->');
       const existing = parseExistingRssCardsSite2(existingMid);
-      const items = mergeKeepRecent(existing, fresh, 36);
+      const existingEn = existing.filter((it) => (it.lang || 'en') === 'en');
+      const existingEs = existing.filter((it) => (it.lang || 'en') === 'es');
+      let mergedEn = mergeKeepRecent(existingEn, freshEn, 18);
+      let mergedEs = mergeKeepRecent(existingEs, freshEs, 18);
+
+      mergedEn = await enrichWithReports(mergedEn, 'en', 36);
+      mergedEs = await enrichWithReports(mergedEs, 'es', 36);
+
+      const items = [...mergedEn, ...mergedEs].sort((a, b) => Date.parse(b.pubIso) - Date.parse(a.pubIso));
       const nextInner = buildSite2Cards(items);
       const next = updateBetweenMarkers(html, '<!-- RSS_NEWS_START -->', '<!-- RSS_NEWS_END -->', nextInner, ' '.repeat(20));
       if (next !== html) {

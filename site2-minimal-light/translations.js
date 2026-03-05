@@ -135,6 +135,13 @@ function applyLanguage(lang) {
             }
         }
     });
+
+    // Some content (e.g. RSS headlines) is language-specific rather than translated.
+    document.querySelectorAll('[data-lang-only]').forEach((el) => {
+        const only = (el.getAttribute('data-lang-only') || '').toLowerCase();
+        if (!only) return;
+        el.toggleAttribute('hidden', only !== lang);
+    });
     
     document.documentElement.lang = lang;
 }

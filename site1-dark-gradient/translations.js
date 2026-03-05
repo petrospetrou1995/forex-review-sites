@@ -176,6 +176,14 @@ function applyLanguage(lang) {
             }
         }
     });
+
+    // Some content (e.g. RSS headlines) is language-specific rather than translated.
+    // Use a dedicated attribute to show/hide per current language without affecting other toggles.
+    document.querySelectorAll('[data-lang-only]').forEach((el) => {
+        const only = (el.getAttribute('data-lang-only') || '').toLowerCase();
+        if (!only) return;
+        el.toggleAttribute('hidden', only !== lang);
+    });
     
     // Update HTML lang attribute
     document.documentElement.lang = lang;
