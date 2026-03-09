@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { runAll as runSitemaps } from './generate-sitemaps.mjs';
 
 const ROOT = process.cwd();
 
@@ -837,6 +838,9 @@ async function run() {
   } else {
     console.log(`Daily news already present (key=${key})`);
   }
+
+  // Keep /sitemap.xml current whenever new pages/cards are written.
+  runSitemaps();
 }
 
 run();

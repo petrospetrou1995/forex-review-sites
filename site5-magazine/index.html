@@ -21,7 +21,8 @@
       "inLanguage": ["en", "es"]
     }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.css"></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -372,8 +373,8 @@
         </div>
     </footer>
 
-    <script src="translations.js"></script>
-    <script src="../shared/data-api.js"></script>
+    <script  src="translations.js" defer></script>
+    <script  src="../shared/data-api.js" defer></script>
     <script>
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', { 
             weekday: 'long', 

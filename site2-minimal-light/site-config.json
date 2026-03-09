@@ -1,0 +1,10 @@
+{
+  "key": "site2",
+  "dir": "site2-minimal-light",
+  "siteName": "Brokercompare",
+  "baseUrl": "https://brokerpro.pages.dev/site2-minimal-light",
+  "ogImage": "https://brokerpro.pages.dev/og/brokerpro.png",
+  "logoUrl": "https://brokerpro.pages.dev/og/brokerpro.png",
+  "twitterCard": "summary_large_image"
+}
+

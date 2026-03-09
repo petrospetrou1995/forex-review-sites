@@ -1,0 +1,233 @@
+[
+  {
+    "broker_name": "Libertex",
+    "slug": "libertex",
+    "website": "https://www.libertex.com",
+    "rating": 4.9,
+    "regulation": ["CySEC"],
+    "spreads": "From 0.0 pips (example; instrument/account dependent)",
+    "minimum_deposit": "$100",
+    "trading_platforms": ["Web", "Mobile", "MT4", "MT5"],
+    "deposit_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Cards (Visa/Mastercard where available)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "withdrawal_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Card withdrawals (where supported)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "pros": [
+      "Strong multi-platform coverage (web/mobile plus MT4/MT5 where available).",
+      "Clear focus on streamlined onboarding and platform usability.",
+      "Suitable for traders who want a simple interface with common FX tooling."
+    ],
+    "cons": [
+      "Conditions and protections can differ by entity and region.",
+      "Fees can vary by instrument and account configuration.",
+      "Always confirm withdrawal methods and timelines for your country."
+    ],
+    "comparison_fees": "May include commissions; include swaps/financing for overnight holds",
+    "verdict": "Libertex can be a good fit if you want a streamlined experience with common platforms. Before funding, verify the exact regulated entity for your country, compare all-in costs, and complete a small withdrawal test.",
+    "faqs": [
+      {
+        "q": "Is Libertex regulated?",
+        "a": "Libertex operates under different entities. Verify the exact entity and license for your country on the regulator’s official register before depositing."
+      },
+      {
+        "q": "What are the main Libertex fees?",
+        "a": "Typical trading costs are spreads and (depending on account type) commissions. If you hold overnight, include swaps/financing. Confirm fees per instrument."
+      },
+      {
+        "q": "How can I test withdrawals safely?",
+        "a": "Complete KYC first, deposit a small amount, then withdraw back to the same method and record processing time before increasing account size."
+      }
+    ]
+  },
+  {
+    "broker_name": "XM Group",
+    "slug": "xm-group",
+    "website": "https://www.xm.com",
+    "rating": 4.8,
+    "regulation": ["CySEC", "ASIC"],
+    "spreads": "0.6 pips (example; varies by account and market conditions)",
+    "minimum_deposit": "$5",
+    "trading_platforms": ["MT4", "MT5"],
+    "deposit_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Cards (Visa/Mastercard where available)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "withdrawal_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Card withdrawals (where supported)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "pros": [
+      "Low stated minimum deposit can be helpful for cautious testing.",
+      "Common MT4/MT5 tooling for indicators and workflows.",
+      "Good for traders who want a familiar MetaTrader setup."
+    ],
+    "cons": [
+      "Entity and protections vary by region.",
+      "Costs can differ by account type and instrument.",
+      "Always test withdrawals early to confirm rails for your country."
+    ],
+    "comparison_fees": "Mostly spread-based; swaps/financing apply on overnight holds",
+    "verdict": "XM can be a practical choice for MetaTrader users who want to test with a small initial deposit. Verify the entity for your country, compare all-in costs, and confirm withdrawal rails before funding more.",
+    "faqs": [
+      {
+        "q": "Does XM offer MT4 and MT5?",
+        "a": "XM commonly supports MT4 and MT5. Confirm platform availability, instruments, and account requirements for your region before signing up."
+      },
+      {
+        "q": "What should I verify for regulation?",
+        "a": "Check the exact entity you register under and verify the license status on the regulator’s official register. Protections can differ by entity."
+      },
+      {
+        "q": "How do I compare costs properly?",
+        "a": "Use the all-in cost (spread + commission + swaps). Run a small live test to observe execution, slippage, and spread widening during volatility."
+      }
+    ]
+  },
+  {
+    "broker_name": "Exness",
+    "slug": "exness",
+    "website": "https://www.exness.com",
+    "rating": 4.7,
+    "regulation": ["FCA", "CySEC"],
+    "spreads": "From 0.1 pips (example; account dependent)",
+    "minimum_deposit": "$10",
+    "trading_platforms": ["MT4", "MT5"],
+    "deposit_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Cards (Visa/Mastercard where available)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "withdrawal_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Card withdrawals (where supported)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "pros": [
+      "Competitive pricing is often cited by cost-focused traders (account dependent).",
+      "MT4/MT5 support for common workflows.",
+      "Good fit for traders who want to compare different account types by cost model."
+    ],
+    "cons": [
+      "Entity protections vary by region and entity.",
+      "Fees and conditions can differ by instrument and account type.",
+      "Always confirm withdrawals and support responsiveness for your country."
+    ],
+    "comparison_fees": "Raw/commission models can apply; include swaps/financing if holding overnight",
+    "verdict": "Exness can fit cost-conscious traders who want MetaTrader options. The key is verifying your exact entity, then comparing the all-in cost for your pairs and testing withdrawals before scaling.",
+    "faqs": [
+      {
+        "q": "Is Exness regulated?",
+        "a": "Exness operates under multiple entities. Verify the exact entity and license for your country on the regulator’s register before depositing."
+      },
+      {
+        "q": "What is the minimum deposit for Exness?",
+        "a": "Minimum deposit varies by region, entity, and method. Treat any stated minimum as a starting point and confirm inside your portal before funding."
+      },
+      {
+        "q": "How can I test the broker safely?",
+        "a": "Start with a demo, then a small live deposit. Place a few small trades, contact support with a real question, and complete a small withdrawal test."
+      }
+    ]
+  },
+  {
+    "broker_name": "Pepperstone",
+    "slug": "pepperstone",
+    "website": "https://pepperstone.com",
+    "rating": 4.6,
+    "regulation": ["ASIC", "FCA"],
+    "spreads": "0.0 pips (example on raw pricing; varies by market conditions)",
+    "minimum_deposit": "$200",
+    "trading_platforms": ["MT4", "MT5", "cTrader"],
+    "deposit_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Cards (Visa/Mastercard where available)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "withdrawal_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Card withdrawals (where supported)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "pros": [
+      "Strong platform selection (MetaTrader + cTrader where available).",
+      "Often suited for traders who care about execution and platform tooling.",
+      "Good for comparing cost models across account types."
+    ],
+    "cons": [
+      "Entity and protections vary by region.",
+      "Costs depend on account type and instrument.",
+      "Always verify withdrawal rails and support for your country."
+    ],
+    "comparison_fees": "Raw accounts typically add commission; include swaps/financing for holds",
+    "verdict": "Pepperstone is a strong candidate if you want MT4/MT5/cTrader options and you’re sensitive to execution. Verify the exact entity, compare all-in cost, and test withdrawals before scaling.",
+    "faqs": [
+      {
+        "q": "Does Pepperstone offer cTrader?",
+        "a": "Pepperstone commonly offers cTrader alongside MetaTrader platforms, but availability can vary by region/entity. Confirm during sign-up."
+      },
+      {
+        "q": "How do I evaluate spreads vs commissions?",
+        "a": "Use all-in cost for your trade size and pair: spread + commission + swaps. A raw account can look tight but adds commission."
+      },
+      {
+        "q": "What’s the safest onboarding approach?",
+        "a": "Confirm entity and license, start small, test support responsiveness, and complete a withdrawal test before funding more."
+      }
+    ]
+  },
+  {
+    "broker_name": "IC Markets",
+    "slug": "ic-markets",
+    "website": "https://www.icmarkets.com",
+    "rating": 4.5,
+    "regulation": ["ASIC", "CySEC"],
+    "spreads": "0.0 pips (example on raw pricing; varies by market conditions)",
+    "minimum_deposit": "$200",
+    "trading_platforms": ["MT4", "MT5", "cTrader"],
+    "deposit_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Cards (Visa/Mastercard where available)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "withdrawal_methods": [
+      "Bank transfer (availability varies by entity/country)",
+      "Card withdrawals (where supported)",
+      "Local methods / e-wallets (varies by region)"
+    ],
+    "pros": [
+      "Often selected by active traders who care about pricing and execution (account dependent).",
+      "Common platform options for active workflows (MT4/MT5/cTrader where available).",
+      "Works well for traders who want to compare pricing across account types."
+    ],
+    "cons": [
+      "Conditions vary by entity and region.",
+      "Non-trading fees can apply depending on method and currency conversion.",
+      "Always confirm instruments, leverage, and account requirements for your entity."
+    ],
+    "comparison_fees": "Raw accounts typically add commission; include swaps/financing for holds",
+    "verdict": "IC Markets can be a good fit for active traders who prioritize cost and platform choice. Verify your entity, compare all-in cost, and test withdrawals before scaling.",
+    "faqs": [
+      {
+        "q": "Is IC Markets regulated?",
+        "a": "IC Markets operates under different entities. Verify the exact entity and license for your country on the regulator’s register."
+      },
+      {
+        "q": "What are the main IC Markets fees?",
+        "a": "Trading costs typically include spreads, commissions (on some accounts), and swaps/financing for overnight holds. Confirm per instrument and account type."
+      },
+      {
+        "q": "Which platforms are supported?",
+        "a": "IC Markets commonly supports MT4, MT5, and cTrader, but availability can vary by region/entity. Confirm during onboarding."
+      }
+    ]
+  }
+]
+

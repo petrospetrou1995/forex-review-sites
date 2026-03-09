@@ -1,15 +1,1 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const parallaxLayers = document.querySelectorAll('.parallax-layer');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        
-        parallaxLayers.forEach(layer => {
-            const speed = layer.getAttribute('data-speed');
-            const yPos = -(scrolled * speed);
-            layer.style.transform = `translateY(${yPos}px)`;
-        });
-    });
-});
-
-
+document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelectorAll(".parallax-layer");window.addEventListener("scroll",()=>{const t=window.pageYOffset;e.forEach(e=>{const n=e.getAttribute("data-speed"),a=-t*n;e.style.transform=`translateY(${a}px)`})})});

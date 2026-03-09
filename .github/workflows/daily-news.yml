@@ -30,6 +30,9 @@ jobs:
       - name: Update RSS headlines
         run: node scripts/update-rss-news.mjs
 
+      - name: Generate sitemap.xml
+        run: node scripts/generate-sitemaps.mjs
+
       - name: Commit and push changes
         run: |
           git status --porcelain
@@ -45,6 +48,7 @@ jobs:
             site1-dark-gradient/news/daily/index.html \
             site2-minimal-light/news/index.html \
             site2-minimal-light/news/daily/index.html
+          git add site1-dark-gradient/sitemap.xml site2-minimal-light/sitemap.xml
           git add site1-dark-gradient/news/daily site2-minimal-light/news/daily
           git add scripts/add-daily-news.mjs .github/workflows/daily-news.yml
           git commit -m "chore(news): add daily brief and refresh headlines"

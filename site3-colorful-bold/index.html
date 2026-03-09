@@ -21,7 +21,8 @@
       "inLanguage": ["en", "es"]
     }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.css"></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -519,7 +520,6 @@
         </div>
     </section>
 
-
     <section id="privacy" style="padding: 5rem 0; background: var(--bg-light);">
         <div class="container">
             <h2 class="section-heading" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</h2>
@@ -640,8 +640,8 @@
         </div>
     </footer>
 
-    <script src="translations.js"></script>
-    <script src="../shared/data-api.js"></script>
+    <script  src="translations.js" defer></script>
+    <script  src="../shared/data-api.js" defer></script>
 </body>
 </html>
 

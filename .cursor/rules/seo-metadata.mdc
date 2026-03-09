@@ -1,0 +1,27 @@
+---
+description: SEO metadata standards for all site HTML pages (current + future sites)
+alwaysApply: true
+---
+
+# SEO Metadata (All Sites)
+
+When adding or editing HTML pages in any `site*/` folder:
+
+- Every page must have a **unique** `<title>` of **50–60 characters** (counting rendered text, not HTML entities).
+- Every page must have a **meta description** of **140–160 characters**.
+- Every page must include:
+  - `rel="canonical"` (absolute URL)
+  - Open Graph: `og:title`, `og:description`, `og:image`, plus `og:url`, `og:site_name`, `og:type`
+  - Twitter: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+- Metadata should be **generated from page content** (use the page’s `<h1>` + lead/intro paragraph), not copied/pasted across pages.
+
+## Automation (preferred)
+
+Use the repo scripts to keep this consistent:
+
+- Update/generate metadata: `scripts/ensure-seo-meta.mjs`
+- Validate constraints: `scripts/check-seo-meta.mjs`
+
+If a new site folder is created, add a config entry in `scripts/ensure-seo-meta.mjs` (`SITE_CONFIGS`) with:
+`dir`, `siteName`, `baseUrl`, and `ogImage`.
+

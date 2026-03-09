@@ -1,0 +1,46 @@
+---
+description: Broker review page template requirements + JSON-LD Review schema (all sites)
+alwaysApply: true
+---
+
+# Broker Review Page Template (All Sites)
+
+Broker review pages must live at:
+
+`/brokers/{broker-name}-review/`
+
+and must include these sections (with meaningful content):
+
+1. Broker overview
+2. Broker rating score
+3. Pros and cons
+4. Regulation and safety
+5. Trading platforms
+6. Spreads and fees
+7. Deposit and withdrawal methods
+8. Minimum deposit
+9. Countries accepted
+10. FAQ section
+11. Final verdict
+
+## Structured data
+
+Every broker review page must include **JSON‑LD Review schema**:
+- `@type: "Review"`
+- `itemReviewed` with `name`, `url`, and `image`
+- `reviewRating` with `ratingValue` and `bestRating`
+- `author` as the site Organization
+- `datePublished`
+- `reviewBody`
+
+## Automation
+
+Preferred: generate broker review pages from a reusable template using:
+- `scripts/generate-broker-review-pages.mjs`
+- `scripts/brokers-data.mjs`
+
+After regenerating broker pages, run:
+- `scripts/ensure-seo-meta.mjs`
+- `scripts/check-seo-meta.mjs`
+- `scripts/generate-sitemaps.mjs`
+

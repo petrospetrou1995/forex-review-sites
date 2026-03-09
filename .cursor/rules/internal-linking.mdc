@@ -1,0 +1,24 @@
+---
+description: Automatic internal linking across broker, compare, and blog pages
+alwaysApply: true
+---
+
+# Automatic Internal Linking (SEO)
+
+## Required links
+- **Broker review pages**: add links to relevant comparison pages (`/compare/{a}-vs-{b}/`) using **keyword-rich anchor text**.
+- **Comparison pages**: always link back to both broker review pages with descriptive anchors.
+- **Blog articles (guides + news posts)**: include a “Related broker reviews” block that links to relevant broker pages (prefer brokers mentioned in the article; otherwise top-rated brokers for evergreen guides/news).
+- **Broker pages**: include a **“Related brokers”** section near the bottom (3 brokers max).
+
+## Anchor text rules
+- Prefer anchors like:
+  - “Compare {A} vs {B} (fees, platforms & safety)”
+  - “Read {Broker} review (fees, platforms & safety)”
+- Avoid generic anchors like “click here” or “read more”.
+
+## Implementation rules (static sites)
+- Internal links should be **pretty URLs** (folder routes ending with `/`), not `.html`.
+- Keep changes **idempotent** when injecting blocks (use HTML markers like `RELATED_BROKER_REVIEWS:START/END`).
+- When generating compare pages, create **one page per broker pair** for each site.
+

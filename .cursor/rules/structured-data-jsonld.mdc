@@ -1,0 +1,35 @@
+---
+description: JSON-LD structured data requirements (Organization, Review, FAQ, Article) for all sites
+alwaysApply: true
+---
+
+# Structured Data (JSON‑LD) — All Sites
+
+Use **schema.org JSON‑LD** and keep it valid JSON (no trailing commas).
+
+## Required schemas
+
+- **Organization**: present sitewide (name, url, logo/image, stable `@id`)
+- **WebSite**: present sitewide (publisher references the Organization `@id`)
+- **Review**: on broker review pages (`/brokers/*-review/`)
+  - `itemReviewed` as `Product` (name, url, image)
+  - `reviewRating` (ratingValue, bestRating)
+  - `author`/`publisher` (Organization)
+  - `datePublished`
+  - `reviewBody`
+- **FAQPage**: on pages that have an FAQ section (questions + acceptedAnswer)
+- **Article / BlogPosting**: on blog-style pages (guides, daily/weekly briefs)
+  - `headline`, `description`, `datePublished`, `dateModified`
+  - `author`/`publisher` as Organization
+  - `mainEntityOfPage` as canonical URL
+
+## Automation
+
+Preferred: keep structured data consistent with:
+- `scripts/ensure-structured-data.mjs`
+
+Run after large content/routing changes:
+- `scripts/ensure-structured-data.mjs`
+- `scripts/ensure-seo-meta.mjs`
+- `scripts/generate-sitemaps.mjs`
+

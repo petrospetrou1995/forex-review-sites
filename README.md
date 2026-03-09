@@ -17,6 +17,22 @@ A collection of 10 unique, professionally designed forex broker review websites,
 
 ## Features
 
+### Broker Database → Auto-generated Review Pages
+- Broker “source of truth” lives in `data/brokers-db.json`
+- Broker review pages are generated from this database via `scripts/generate-broker-review-pages.mjs`
+
+**Required fields per broker:**
+- `broker_name`
+- `rating`
+- `regulation`
+- `spreads`
+- `minimum_deposit`
+- `trading_platforms`
+- `deposit_methods`
+- `withdrawal_methods`
+- `pros`
+- `cons`
+
 ### Translation Support
 - All websites support English (EN) and Spanish (ES) translations
 - Language preference is saved in localStorage
