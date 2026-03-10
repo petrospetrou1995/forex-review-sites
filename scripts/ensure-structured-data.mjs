@@ -97,7 +97,14 @@ function upsertBetween(html, start, end, nextInner) {
   const a = s.indexOf(start);
   const b = s.indexOf(end);
   if (a !== -1 && b !== -1 && b > a) {
-    return s.slice(0, a + start.length) + `\n${nextInner.trim()}\n` + s.slice(b);
+    const before = s.slice(0, a + start.length);
+    const inner = s.slice(a + start.length, b);
+    const after = s.slice(b);
+    const next = nextInner.trim();
+    const current = inner.trim();
+    if (!current) return `${before}\n${next}\n${after}`;
+    if (current.includes(next)) return s;
+    return `${before}\n${current}\n${next}\n${after}`;
   }
   // Insert before </body> if possible.
   const bodyClose = s.toLowerCase().lastIndexOf('</body>');
@@ -391,10 +398,17 @@ function ensureStructuredDataForFile({ site, absPath, relPath }) {
         picked.sort((a, b) => Number(b.ratingValue || 0) - Number(a.ratingValue || 0));
       } else if (bestSlug === 'brokers-for-beginners') {
         picked.sort((a, b) => (minNum(a) - minNum(b)) || (Number(b.ratingValue || 0) - Number(a.ratingValue || 0)));
-      } else if (bestSlug === 'low-spread-brokers') {
+      } else if (bestSlug === 'low-spread-brokers' || bestSlug === 'low-spreads') {
         picked.sort((a, b) => (spreadNum(a) - spreadNum(b)) || (Number(b.ratingValue || 0) - Number(a.ratingValue || 0)));
       } else if (bestSlug === 'crypto-brokers') {
         picked.sort((a, b) => (mentionsCrypto(b) - mentionsCrypto(a)) || (Number(b.ratingValue || 0) - Number(a.ratingValue || 0)));
+      } else if (bestSlug === 'mt4-mt5') {
+        const mtScore = (b) => {
+          const plats = (b.platforms || []).map((x) => String(x).toLowerCase());
+          const set = new Set(plats);
+          return (set.has('mt4') ? 1 : 0) + (set.has('mt5') ? 1 : 0);
+        };
+        picked.sort((a, b) => (mtScore(b) - mtScore(a)) || (Number(b.ratingValue || 0) - Number(a.ratingValue || 0)));
       } else {
         picked.sort((a, b) => Number(b.ratingValue || 0) - Number(a.ratingValue || 0));
       }
