@@ -411,8 +411,8 @@ ${commonHead(site, title, description, canon, 'article')}
     </div>
   </footer>
 
-  <script src="../../translations.js"></script>
-  <script src="../../app.js"></script>
+  <script src="../../translations.js" defer></script>
+  <script src="../../app.js" defer></script>
 
   <script type="application/ld+json">
 ${jsonLd(breadcrumb)}
@@ -632,8 +632,8 @@ ${commonHead(site, title, description, canon, 'article')}
     </div>
   </footer>
 
-  <script src="../../translations.js"></script>
-  <script src="../../app.js"></script>
+  <script src="../../translations.js" defer></script>
+  <script src="../../app.js" defer></script>
 
   <script type="application/ld+json">
 ${jsonLd(breadcrumb)}
