@@ -38,16 +38,26 @@
 <!-- SEO:TWITTER:END -->
 </head>
 <body>
-    <header class="header guide-header">
-        <nav class="nav guide-nav">
+    <header class="header">
+        <nav class="nav">
             <div class="container">
                 <div class="nav-content">
-                    <a class="logo" href="../" aria-label="BrokerProReviews home">
+                    <div class="logo">
                         <span class="logo-icon">📊</span>
                         <span class="logo-text">BrokerProReviews</span>
-                    </a>
+                    </div>
+                    <ul class="nav-menu" id="primaryNav">
+                        <li><a href="../../#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                        <li><a href="../../#comparison" data-en="Compare" data-es="Comparar">Compare</a></li>
+                        <li><a href="../../guides/" data-en="Guides" data-es="Guías">Guides</a></li>
+                        <li><a href="../../#latam" data-en="LATAM" data-es="LATAM">LATAM</a></li>
+                        <li><a href="../../strategies/" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                        <li><a href="../../#news" data-en="News" data-es="Noticias">News</a></li>
+                        <li><a href="../../education/" data-en="Education" data-es="Educación">Education</a></li>
+                        <li><a href="../../#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                    </ul>
                     <div class="nav-actions">
-                        <a class="guide-back link-cta" href="../education/" data-en="← Back to Education" data-es="← Volver a Educación">← Back to Education</a>
+                        <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
                         <button class="lang-toggle" id="langToggle" type="button">ES</button>
                     </div>
                 </div>
@@ -126,10 +136,10 @@
                 <section class="card-panel guide-related">
                     <h2 class="subheading-card" data-en="Related guides" data-es="Guías relacionadas">Related guides</h2>
                     <ul class="guide-related-list">
-                        <li><a class="link-cta" href="fundamental-analysis.html" data-en="Fundamental Analysis" data-es="Análisis Fundamental">Fundamental Analysis</a></li>
-                        <li><a class="link-cta" href="technical-analysis.html" data-en="Technical Analysis Basics" data-es="Conceptos Básicos de Análisis Técnico">Technical Analysis Basics</a></li>
-                        <li><a class="link-cta" href="risk-management.html" data-en="Risk Management Strategies" data-es="Estrategias de Gestión de Riesgos">Risk Management Strategies</a></li>
-                        <li><a class="link-cta" href="../latam/" data-en="LATAM broker checklist" data-es="Checklist de brokers LATAM">LATAM broker checklist</a></li>
+                        <li><a class="link-cta" href="../fundamental-analysis/" data-en="Fundamental Analysis" data-es="Análisis Fundamental">Fundamental Analysis</a></li>
+                        <li><a class="link-cta" href="../technical-analysis/" data-en="Technical Analysis Basics" data-es="Conceptos Básicos de Análisis Técnico">Technical Analysis Basics</a></li>
+                        <li><a class="link-cta" href="../risk-management/" data-en="Risk Management Strategies" data-es="Estrategias de Gestión de Riesgos">Risk Management Strategies</a></li>
+                        <li><a class="link-cta" href="../../latam/" data-en="LATAM broker checklist" data-es="Checklist de brokers LATAM">LATAM broker checklist</a></li>
                         <li><a class="link-cta" href="../#reviews" data-en="Read forex broker reviews (top picks)" data-es="Leer reseñas (selecciones)">Read forex broker reviews (top picks)</a></li>
                     </ul>
                 </section>
@@ -185,8 +195,8 @@
     }
     </script>
 
-    <script  src="../../translations.js" defer></script>
-    <script  src="../navigation.js" defer></script>
+    <script src="../../translations.js" defer></script>
+    <script src="../../navigation.js" defer></script>
 
 <!-- JSONLD:GLOBAL:START -->
 <script type="application/ld+json">

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BROKERS } from './brokers-data.mjs';
 import { runAll as runSitemaps } from './generate-sitemaps.mjs';
+import { runAll as runNav } from './ensure-consistent-nav.mjs';
 import { ensureBrokerFaqs } from './broker-faqs.mjs';
 
 const ROOT = process.cwd();
@@ -671,6 +672,7 @@ function run() {
   // eslint-disable-next-line no-console
   results.forEach((r) => console.log(`[broker-template] ${r.site}: generated ${r.generated}`));
   runSitemaps();
+  runNav();
 }
 
 run();

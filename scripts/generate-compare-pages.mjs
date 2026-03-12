@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BROKERS } from './brokers-data.mjs';
 import { runAll as runSitemaps } from './generate-sitemaps.mjs';
+import { runAll as runNav } from './ensure-consistent-nav.mjs';
 
 const ROOT = process.cwd();
 
@@ -359,6 +360,7 @@ function run() {
     console.log(`[compare] ${s.key}: generated ${n} pages`);
   }
   runSitemaps();
+  runNav();
 }
 
 run();

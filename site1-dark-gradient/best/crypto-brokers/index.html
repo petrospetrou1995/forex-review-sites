@@ -32,22 +32,32 @@
 <!-- SEO:TWITTER:END -->
 </head>
 <body>
-  <header class="header guide-header">
-    <nav class="nav guide-nav">
-      <div class="container">
-        <div class="nav-content">
-          <a class="logo" href="../../index.html" aria-label="BrokerProReviews home">
-            <span class="logo-icon">📊</span>
-            <span class="logo-text">BrokerProReviews</span>
-          </a>
-          <div class="nav-actions">
-            <a class="guide-back link-cta" href="../" data-en="← Back to categories" data-es="← Volver a categorías">← Back to categories</a>
-            <button class="lang-toggle" id="langToggle" type="button">ES</button>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">
+                        <span class="logo-icon">📊</span>
+                        <span class="logo-text">BrokerProReviews</span>
+                    </div>
+                    <ul class="nav-menu" id="primaryNav">
+                        <li><a href="../../#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                        <li><a href="../../#comparison" data-en="Compare" data-es="Comparar">Compare</a></li>
+                        <li><a href="../../guides/" data-en="Guides" data-es="Guías">Guides</a></li>
+                        <li><a href="../../#latam" data-en="LATAM" data-es="LATAM">LATAM</a></li>
+                        <li><a href="../../strategies/" data-en="Strategies" data-es="Estrategias">Strategies</a></li>
+                        <li><a href="../../#news" data-en="News" data-es="Noticias">News</a></li>
+                        <li><a href="../../education/" data-en="Education" data-es="Educación">Education</a></li>
+                        <li><a href="../../#tools" data-en="Tools" data-es="Herramientas">Tools</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <button class="menu-btn" id="menuToggle" type="button" aria-controls="primaryNav" aria-expanded="false" data-en="Menu" data-es="Menú">Menu</button>
+                        <button class="lang-toggle" id="langToggle" type="button">ES</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
   <main class="section-pad section-pad-dark">
     <div class="container">
@@ -372,5 +382,7 @@
 ]
 </script>
 <!-- JSONLD:GLOBAL:END -->
+
+<script src="../../navigation.js" defer></script>
 </body>
 </html>
