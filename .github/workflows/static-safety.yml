@@ -24,5 +24,7 @@ jobs:
           done < <(find scripts shared site*-* -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
       - name: Run broker API unit tests
         run: node --test tests/*.test.mjs
+      - name: Verify homepage structure
+        run: node --test tests/homepage-structure.test.mjs
       - name: Verify dashboard HTML handling
         run: node scripts/check-dashboard-safety.mjs
