@@ -12,7 +12,7 @@ export async function verifyAccess(request,env) {
     const payload=JSON.parse(new TextDecoder().decode(decode(segments[1])));
     const issuer=team.replace(/\/$/,'');
     const now=Math.floor(Date.now()/1000);
-    if(header.alg!=='RS256'||typeof header.kid!=='string'||payload.iss!==issuer||!Array.isArray(payload.aud)||!payload.aud.includes(audience)||!Number.isFinite(payload.exp)||payload.exp<=now||!Number.isFinite(payload.iat)||payload.iat>now+60) return false;
+    if(header.alg!=='RS256'||typeof header.kid!=='string'||payload.iss!==issuer||!Array.isArray(payload.aud)||!payload.aud.includes(audience)||!Number.isFinite(payload.exp)||payload.exp<=now||!Number.isFinite(payload.iat)||payload.iat>now+60||(payload.nbf!==undefined&&(!Number.isFinite(payload.nbf)||payload.nbf>now))||typeof payload.sub!=='string'||!payload.sub) return false;
     const response=await fetch(issuer+'/cdn-cgi/access/certs');
     if(!response.ok) return false;
     const jwks=await response.json();
