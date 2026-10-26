@@ -28,3 +28,7 @@ This branch contains multiple security, backend, design and SEO changes. **Do no
 3. Run CI and integration/browser checks. Fix identified failures on this branch.
 4. Merge only after explicit sign-off and production backup/rollback plan.
 5. Monitor Cloudflare errors, organic search indexing and analytics after publishing.
+
+## Automated preview smoke test
+
+Run the GitHub Action **Read-only preview smoke test** manually from the branch and enter the full HTTPS URL of a protected Cloudflare preview. This check only performs GET requests; it verifies homepage and robots availability, canonical presence, expected admin access denial/redirect, and public broker API response. It never mutates production broker data. It does **not** replace authenticated browser testing, Cloudflare Access configuration or D1 migrations.
