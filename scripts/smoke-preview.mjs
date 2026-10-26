@@ -3,7 +3,7 @@ import { strict as assert } from 'node:assert';
 const origin=process.env.PREVIEW_ORIGIN;
 if(!origin) throw new Error('Set PREVIEW_ORIGIN to a Cloudflare Pages preview URL');
 const base=new URL(origin);
-if(base.protocol!=='https:'||base.username||base.password||base.search||base.hash) throw new Error('HTTPS origin required');
+if(base.protocol!=='https:'||base.username||base.password||base.search||base.hash||base.pathname!=='/'||!base.hostname.endsWith('.pages.dev')) throw new Error('A non-production HTTPS *.pages.dev preview origin is required');
 async function check(path){
  const url=new URL(path,base);
  assert.equal(url.origin,base.origin);
