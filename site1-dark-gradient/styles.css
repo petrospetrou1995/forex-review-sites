@@ -17,3 +17,18 @@
 #find-broker,#comparison,#reviews{scroll-margin-top:96px}
 @media(max-width:800px){.finder-layout{grid-template-columns:1fr}.broker-finder{padding-block:3rem}.finder-copy h2{max-width:22ch}}
 @media(prefers-reduced-motion:reduce){.finder-actions a{transition:none}html{scroll-behavior:auto}}
+
+
+/* Broker review and comparison decision panels */
+.review-enhanced{max-width:1020px}
+.review-decision-panel{background:linear-gradient(125deg,#17314a,#122237);border:1px solid #47718b;border-radius:15px;padding:clamp(20px,3vw,30px);margin:0 0 30px;box-shadow:0 16px 32px #0002}
+.review-decision-label{display:block;font-size:.78rem;color:#80e5f3;letter-spacing:.12em;font-weight:800;margin-bottom:9px}
+.review-decision-panel p{color:#e0e9f3;line-height:1.7;font-size:1rem}
+.review-decision-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}
+.review-decision-links a{display:inline-flex;align-items:center;justify-content:center;border:1px solid #6b91ad;padding:10px 15px;border-radius:8px;color:#eefaff;text-decoration:none;font-weight:650;min-height:44px}
+.review-decision-links a:first-child{background:#69e6f5;color:#061927;border-color:#69e6f5}
+.review-decision-links a:hover{filter:brightness(1.12)}
+.review-decision-links a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.review-enhanced .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.review-enhanced .table-basic{min-width:560px}
+@media(max-width:640px){.review-decision-links a{width:100%}.review-enhanced .guide-title{font-size:clamp(1.9rem,8vw,2.6rem)}.review-enhanced .card-panel{padding:1.25rem}}
