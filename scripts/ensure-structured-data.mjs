@@ -268,16 +268,6 @@ function bestListSchema({ site, canonicalUrl, headline, description, brokers }) 
         name: b.name,
         url: `${site.baseUrl}/brokers/${b.slug}-review/`,
         image: site.logoUrl,
-        ...(ratingValue
-          ? {
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue,
-                bestRating: '5',
-                ratingCount: 1,
-              },
-            }
-          : {}),
       },
     };
   });
