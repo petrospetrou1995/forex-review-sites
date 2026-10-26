@@ -22,5 +22,7 @@ jobs:
           while IFS= read -r -d '' file; do
             node --check "$file"
           done < <(find scripts shared site*-* -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
+      - name: Run broker API unit tests
+        run: node --test tests/*.test.mjs
       - name: Verify dashboard HTML handling
         run: node scripts/check-dashboard-safety.mjs
