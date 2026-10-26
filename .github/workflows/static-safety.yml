@@ -1,0 +1,26 @@
+name: Static safety checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax check JavaScript and Node scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find scripts shared site*-* -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
+      - name: Verify dashboard HTML handling
+        run: node scripts/check-dashboard-safety.mjs
