@@ -23,3 +23,15 @@ The API is implemented under `site1-dark-gradient/functions/api` for Cloudflare 
 - The event log records previous values, time, operation, and generic API actor, not a human identity. A future identity provider is needed for accountable per-user audit.
 - D1 and Pages rate limits, API abuse monitoring, retention/backup, data recovery, credential rotation and deployment verification are required before production use.
 - Never deploy the root `api-example.js`: it is insecure educational sample code.
+
+## Admin UI (experimental; keep staging-only until access checks and integration tests pass)
+A simple `/admin/` editor and `/api/admin/*` functions have been added. Admin requests must pass cryptographic Cloudflare Access JWT checks and will **fail closed** until configuration is supplied.
+
+1. Create a Cloudflare Zero Trust Access application protecting **both** `/admin/*` and `/api/admin/*` routes on the real hostname. Restrict the application policy to approved administrators. Avoid leaving API routes outside the policy.
+2. Set the Pages environment variables `ACCESS_TEAM_DOMAIN` (e.g. `https://your-team.cloudflareaccess.com`) and `ACCESS_AUD` (the application's exact Audience Tag). Treat the domain and audience as deployment configuration, never invent values.
+3. Keep `BROKER_ADMIN_API_KEY` encrypted server-side for the API write path; never send it to a browser.
+4. Confirm unauthorized and expired tokens return 401 for **both** admin UI and APIs, and verify authenticated edit and history workflows in preview before production.
+5. Add stronger rate limiting, D1 migrations/backups, monitored errors, and human identity in audit records. The current log records a generic API actor, not a unique authenticated admin.
+6. The UI intentionally limits editing to broker ID, name and rating. This is a baseline editor, **not** a complete content moderation and publishing console.
+
+⚠️ Because this change adds Cloudflare Functions routes, it may affect preview routing depending on your Pages project root. Verify production and preview deployments before merging.
