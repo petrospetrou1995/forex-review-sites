@@ -1,0 +1,13 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const html=fs.readFileSync('site1-dark-gradient/index.html','utf8');
+const css=fs.readFileSync('site1-dark-gradient/styles.css','utf8');
+assert.match(html, /id="find-broker"/);
+assert.match(html, /id="finder-title"/);
+assert.match(html, /href="#comparison"[^>]*data-en="Compare broker costs"/);
+assert.match(html, /href="\/methodology\/"/);
+assert.match(html, /class="skip-link" href="#main-content"/);
+assert.match(html, /<main id="main-content">/);
+assert.match(html, /<link rel="canonical" href="https:\/\/brokerproreviews\.com\/"/);
+assert.match(css, /\.finder-layout\{display:grid/);
+assert.match(css, /@media\(max-width:800px\)/);
+console.log('Comparison-first homepage checks passed');
