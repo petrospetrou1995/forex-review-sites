@@ -6,6 +6,10 @@ on:
     # Every hour (UTC)
     - cron: "10 * * * *"
 
+concurrency:
+  group: forex-review-sites-publishing
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
