@@ -32,3 +32,10 @@ This branch contains multiple security, backend, design and SEO changes. **Do no
 ## Automated preview smoke test
 
 Run the GitHub Action **Read-only preview smoke test** manually from the branch and enter the full HTTPS URL of a protected Cloudflare preview. This check only performs GET requests; it verifies homepage and robots availability, canonical presence, expected admin access denial/redirect, and public broker API response. It never mutates production broker data. It does **not** replace authenticated browser testing, Cloudflare Access configuration or D1 migrations.
+
+### Preview access findings (2026-10-26)
+- Latest pre-change GitHub validation and both Cloudflare Pages checks succeeded.
+- Public homepage remains the old live design, as expected because PR #1 is unmerged.
+- `/admin/`, `/api/admin/brokers`, and `/api/brokers` on the public production hostname were not accessible from the external page inspection tool; this is **not** a verified HTTP status or authorization test.
+- Preview smoke checks now accept only a full HTTPS **deployment or branch** `*.pages.dev` hostname containing a preview prefix (e.g. `branch.project.pages.dev`). They reject bare project/production domains.
+- Obtain the exact Cloudflare preview URL from the deployment detail for the PR commit and run the manually triggered GitHub `Read-only preview smoke test` workflow. Protected preview origins may require configuring CI access; never insert a Cloudflare Access token into a public workflow input.
