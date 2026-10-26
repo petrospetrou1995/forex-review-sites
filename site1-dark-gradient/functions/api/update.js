@@ -13,7 +13,7 @@ export async function onRequestPost({request,env}) {
       id=body.payload?.id;
       if(typeof id!=='string'||!/^[a-z0-9_-]{1,80}$/.test(id)) throw new Error('Invalid broker id');
       payload={id};
-    } else {if(!body.payload||typeof body.payload!=='object'||Array.isArray(body.payload)) throw new Error('Invalid payload');payload=body.payload;id=payload.id;if(typeof id!=='string'||!/^[a-z0-9_-]{1,80}$/.test(id)) throw new Error('Invalid broker id');if(body.type==='new_broker') validateBroker(payload);}
+    } else {if(!body.payload||typeof body.payload!=='object'||Array.isArray(body.payload)) throw new Error('Invalid payload');payload=body.payload;id=payload.id;if(typeof id!=='string'||!/^[a-z0-9_-]{1,80}$/.test(id)) throw new Error('Invalid broker id');if(body.type==='new_broker') validateBroker(payload);else if(Object.keys(payload).some(k=>!['id','name','rating','minDeposit','spreads','platforms','regulation','leverage','commission','currency'].includes(k)))throw new Error('Unknown broker field');}
   }catch(error){return reply({error:error.message},400)}
   try {
     const prior=await db.prepare('SELECT data FROM brokers WHERE id=?').bind(id).first();
@@ -29,5 +29,5 @@ export async function onRequestPost({request,env}) {
     ];
     await db.batch(statements);
     return reply({success:true,type:body.type,payload:next??payload,timestamp:now});
-  }catch{return reply({error:'Update failed'},500)}
+  }catch(error){if(error?.message?.startsWith('Invalid ')||error?.message==='Unknown broker field')return reply({error:error.message},400);return reply({error:'Update failed'},500)}
 }
