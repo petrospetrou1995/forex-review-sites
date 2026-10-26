@@ -5,6 +5,7 @@ import { runAll as runSitemaps } from './generate-sitemaps.mjs';
 import { runAll as runNav } from './ensure-consistent-nav.mjs';
 
 const ROOT = process.cwd();
+const TRUST_PANEL = "<aside class=\"review-decision-panel\" aria-label=\"Comparison context\"><span class=\"review-decision-label\" data-en=\"COMPARE RESPONSIBLY\" data-es=\"COMPARA CON CUIDADO\">COMPARE RESPONSIBLY</span><p data-en=\"These are editorial comparisons, not investment advice. Costs, leverage and protections depend on the legal entity and your country. Verify details with official sources before opening an account.\" data-es=\"Estas comparaciones son editoriales, no asesoramiento financiero. Los costos, el apalancamiento y las protecciones dependen de la entidad legal y de tu país. Verifica los detalles en fuentes oficiales.\">These are editorial comparisons, not investment advice. Costs, leverage and protections depend on the legal entity and your country. Verify details with official sources before opening an account.</p><div class=\"review-decision-links\"><a href=\"../../methodology/\" data-en=\"How we compare\" data-es=\"Cómo comparamos\">How we compare</a><a href=\"../../index.html#reviews\" data-en=\"Read full reviews\" data-es=\"Leer reseñas\">Read full reviews</a></div></aside>";
 
 const SITES = [
   {
@@ -172,7 +173,7 @@ ${head(site, title, description, canon)}
 
   <main class="section-pad section-pad-dark">
     <div class="container">
-      <article class="guide-article">
+      <article class="guide-article${site.key === 'site1' ? ' review-enhanced' : ''}">\n      ${site.key === 'site1' ? TRUST_PANEL : ''}
         <h1 class="guide-title">${escapeHtml(a.name)} vs ${escapeHtml(b.name)} (2026)</h1>
         <p class="guide-lead">
           Compare ${escapeHtml(a.name)} vs ${escapeHtml(b.name)} using a simple, risk-first checklist: entity/regulation, all-in costs, platforms, and withdrawals.
