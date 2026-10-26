@@ -26,6 +26,8 @@ jobs:
         run: node --test tests/*.test.mjs
       - name: Verify broker review and comparison templates
         run: node --test tests/review-design.test.mjs
+      - name: Validate review schema and SEO configuration
+        run: node --test tests/seo-integrity.test.mjs
       - name: Verify homepage structure
         run: node --test tests/homepage-structure.test.mjs
       - name: Verify dashboard HTML handling
