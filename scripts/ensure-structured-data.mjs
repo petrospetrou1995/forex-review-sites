@@ -227,8 +227,7 @@ function blogPostingSchema({ site, canonicalUrl, headline, description, datePubl
 function comparisonSchema({ site, canonicalUrl, headline, description, brokers }) {
   const orgId = `${site.baseUrl}/#organization`;
   const items = (brokers || []).slice(0, 2).map((b, idx) => {
-    const rating = Number(b.ratingValue);
-    const ratingValue = Number.isFinite(rating) ? String(rating.toFixed(1)) : undefined;
+    
     return {
       '@type': 'ListItem',
       position: idx + 1,
@@ -237,15 +236,6 @@ function comparisonSchema({ site, canonicalUrl, headline, description, brokers }
         name: b.name,
         url: `${site.baseUrl}/brokers/${b.slug}-review/`,
         image: site.logoUrl,
-        ...(ratingValue
-          ? {
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue,
-                bestRating: '5',
-              },
-            }
-          : {}),
       },
     };
   });
@@ -269,8 +259,7 @@ function comparisonSchema({ site, canonicalUrl, headline, description, brokers }
 function bestListSchema({ site, canonicalUrl, headline, description, brokers }) {
   const orgId = `${site.baseUrl}/#organization`;
   const items = (brokers || []).slice(0, 10).map((b, idx) => {
-    const rating = Number(b.ratingValue);
-    const ratingValue = Number.isFinite(rating) ? String(rating.toFixed(1)) : undefined;
+    
     return {
       '@type': 'ListItem',
       position: idx + 1,
@@ -279,16 +268,6 @@ function bestListSchema({ site, canonicalUrl, headline, description, brokers }) 
         name: b.name,
         url: `${site.baseUrl}/brokers/${b.slug}-review/`,
         image: site.logoUrl,
-        ...(ratingValue
-          ? {
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue,
-                bestRating: '5',
-                ratingCount: 1,
-              },
-            }
-          : {}),
       },
     };
   });

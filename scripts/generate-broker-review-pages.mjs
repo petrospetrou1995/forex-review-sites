@@ -6,6 +6,7 @@ import { runAll as runNav } from './ensure-consistent-nav.mjs';
 import { ensureBrokerFaqs } from './broker-faqs.mjs';
 
 const ROOT = process.cwd();
+const TRUST_PANEL = "<aside class=\"review-decision-panel\" aria-label=\"How to use this broker review\"><span class=\"review-decision-label\" data-en=\"BEFORE YOU CHOOSE\" data-es=\"ANTES DE ELEGIR\">BEFORE YOU CHOOSE</span><p data-en=\"Confirm the broker’s legal entity in your country, check official trading costs, and review withdrawal conditions. Ratings are editorial opinions—not verified customer averages.\" data-es=\"Confirma la entidad legal del broker en tu país, consulta los costos oficiales y revisa las condiciones de retiro. Las puntuaciones son opiniones editoriales, no promedios verificados de clientes.\">Confirm the broker’s legal entity in your country, check official trading costs, and review withdrawal conditions. Ratings are editorial opinions—not verified customer averages.</p><div class=\"review-decision-links\"><a href=\"../../methodology/\" data-en=\"Review methodology\" data-es=\"Metodología\">Review methodology</a><a href=\"../../index.html#comparison\" data-en=\"Compare brokers\" data-es=\"Comparar brokers\">Compare brokers</a></div></aside>";
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const SITES = [
@@ -392,7 +393,7 @@ ${commonHead(site, title, description, canon, 'article')}
 
   <main class="section-pad section-pad-dark">
     <div class="container">
-      <article class="guide-article">
+      <article class="guide-article${site.key === 'site1' ? ' review-enhanced' : ''}">\n      ${site.key === 'site1' ? TRUST_PANEL : ''}
         <h1 class="guide-title" data-en="${escapeAttr(broker.name)} review (2026)" data-es="Reseña de ${escapeAttr(broker.name)} (2026)">${escapeHtml(broker.name)} review (2026)</h1>
         <p class="guide-lead" data-en="Practical review sections: rating, pros/cons, regulation, platforms, fees, and LATAM deposits/withdrawals. Always verify the entity for your country." data-es="Secciones prácticas: puntuación, pros/contras, regulación, plataformas, comisiones y pagos en LATAM. Verifica la entidad para tu país.">
           Practical review sections: rating, pros/cons, regulation, platforms, fees, and LATAM deposits/withdrawals. Always verify the entity for your country.
