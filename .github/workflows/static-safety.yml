@@ -1,0 +1,36 @@
+name: Static safety checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax check JavaScript and Node scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find scripts shared site*-* -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
+      - name: Run broker API unit tests
+        run: node --test tests/*.test.mjs
+      - name: Verify broker review and comparison templates
+        run: node --test tests/review-design.test.mjs
+      - name: Validate review schema and SEO configuration
+        run: node --test tests/seo-integrity.test.mjs
+      - name: Validate exact admin API routing
+        run: node --test tests/admin-route.test.mjs
+      - name: Verify homepage structure
+        run: node --test tests/homepage-structure.test.mjs
+      - name: Verify dashboard HTML handling
+        run: node scripts/check-dashboard-safety.mjs

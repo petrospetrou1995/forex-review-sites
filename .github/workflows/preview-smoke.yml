@@ -1,0 +1,22 @@
+name: Read-only preview smoke test
+on:
+  workflow_dispatch:
+    inputs:
+      preview_origin:
+        description: Full HTTPS Cloudflare preview origin (not production)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run read-only preview smoke checks
+        env:
+          PREVIEW_ORIGIN: ${{ inputs.preview_origin }}
+        run: node scripts/smoke-preview.mjs

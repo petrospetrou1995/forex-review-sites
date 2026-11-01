@@ -8,6 +8,10 @@ on:
       - "site2-minimal-light/index.html"
       - "site2-minimal-light/news/index.html"
 
+concurrency:
+  group: forex-review-sites-publishing
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
