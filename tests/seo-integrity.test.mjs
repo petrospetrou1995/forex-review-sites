@@ -25,3 +25,22 @@ test('broker editorial structured data cannot claim merchant product offers',()=
  assert.doesNotMatch(generator,/'@type': 'Product'/);
  assert.doesNotMatch(generator,/'@type': 'Offer'/);
 });
+
+
+test('flagship review and comparison JSON-LD contains no merchant types',()=>{
+  for(const section of ['brokers','compare']){
+    const root='site1-dark-gradient/'+section;
+    for(const dir of fs.readdirSync(root,{withFileTypes:true})){
+      if(!dir.isDirectory())continue;
+      const path=root+'/'+dir.name+'/index.html';
+      if(!fs.existsSync(path))continue;
+      const html=fs.readFileSync(path,'utf8');
+      for(const [,json] of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)){
+        const nodes=[];
+        const walk=x=>{if(!x||typeof x!=='object')return;nodes.push(x);Object.values(x).forEach(walk)};
+        walk(JSON.parse(json));
+        assert.equal(nodes.some(x=>['Product','Offer'].includes(x['@type'])),false,path);
+      }
+    }
+  }
+});
