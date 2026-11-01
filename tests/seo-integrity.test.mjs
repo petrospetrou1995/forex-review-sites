@@ -16,7 +16,7 @@ test('SEO landing page is canonical and discoverable',()=>{
 test('broker editorial structured data cannot claim merchant product offers',()=>{
  const home=fs.readFileSync('site1-dark-gradient/index.html','utf8');
  const generator=fs.readFileSync('scripts/ensure-structured-data.mjs','utf8');
- const blocks=[...home.matchAll(/<script\\s+type="application\\/ld\\+json"\\s*>([\\s\\S]*?)<\\/script>/g)];
+ const blocks=[...home.matchAll(/<script\s+type="application\/ld\+json"\s*>([\s\S]*?)<\/script>/g)];
  for(const [,body] of blocks) {
    const data=JSON.parse(body);
    const nodes=[];const walk=v=>{if(!v||typeof v!=='object')return;nodes.push(v);Object.values(v).forEach(walk)};walk(data);
