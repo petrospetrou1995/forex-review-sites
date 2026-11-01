@@ -99,28 +99,16 @@ function pickRelated(broker, siteBrokers, max = 3) {
 function reviewJsonLd(site, broker, relPretty, ratingValue, reviewBody) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Review',
-    itemReviewed: {
-      '@type': 'Product',
+    '@type': 'Article',
+    headline: `${broker.name} broker review`,
+    description: reviewBody,
+    about: {
+      '@type': 'Organization',
       name: broker.name,
-      image: site.ogImage,
       url: canonical(site, relPretty),
     },
-    author: {
-      '@type': 'Organization',
-      name: site.siteName,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: site.siteName,
-    },
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: String(ratingValue),
-      bestRating: '5',
-    },
-    datePublished: TODAY,
-    reviewBody,
+    author: { '@type': 'Organization', name: site.siteName },
+    publisher: { '@type': 'Organization', name: site.siteName },
     mainEntityOfPage: canonical(site, relPretty),
   };
 }
