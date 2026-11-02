@@ -171,6 +171,20 @@ function commonHead(site, title, description, canonicalUrl, ogType = 'article') 
 
 const LIBERTEX_RESEARCH_PANEL = "<section class=\"card-panel\" aria-labelledby=\"libertex-verified-context\" style=\"margin:1.5rem 0;padding:1.5rem\">\n<h2 id=\"libertex-verified-context\">Libertex: regulation, costs and verification</h2>\n<p><strong>Entity matters:</strong> The CySEC register identifies <strong>Indication Investments Ltd</strong> (licence <strong>164/12</strong>) and lists <strong>libertex.com</strong> as an approved domain. This does not establish that all Libertex-branded sites, accounts or customers fall under that CySEC-regulated entity.</p>\n<p><strong>Fees are account-specific:</strong> Libertex.com publishes its own fee information, including variable spreads and potential swaps, inactivity and withdrawal charges. Compare the current schedule for your instrument, legal entity and country before depositing funds. A stated minimum deposit is not a total trading-cost estimate.</p>\n<p><strong>Check the primary sources:</strong> <a href=\"https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/37658\" target=\"_blank\" rel=\"noopener noreferrer\">CySEC entity register</a> · <a href=\"https://libertex.com/terms-fees\" target=\"_blank\" rel=\"noopener noreferrer\">Libertex.com terms and fees</a> · <a href=\"../../methodology/\">Our review methodology</a>.</p>\n<p><strong>Compare alternatives:</strong> <a href=\"../../compare/libertex-vs-exness/\">Libertex vs Exness</a> · <a href=\"../../compare/libertex-vs-ic-markets/\">Libertex vs IC Markets</a> · <a href=\"../../compare/libertex-vs-pepperstone/\">Libertex vs Pepperstone</a> · <a href=\"../../compare/libertex-vs-xm-group/\">Libertex vs XM Group</a>.</p>\n\n</section>";
 
+function reviewDiscoveryPanel(slug) {
+  const comparisons = {
+    libertex: ['libertex-vs-exness','libertex-vs-pepperstone'],
+    exness: ['exness-vs-ic-markets','exness-vs-pepperstone'],
+    pepperstone: ['pepperstone-vs-ic-markets','xm-group-vs-pepperstone'],
+    'xm-group': ['xm-group-vs-exness','xm-group-vs-pepperstone'],
+    'ic-markets': ['exness-vs-ic-markets','pepperstone-vs-ic-markets'],
+  };
+  const links = comparisons[slug];
+  if (!links) return '';
+  const items = links.map(v => `<li><a href="../../compare/${v}/">${v.split('-vs-').join(' vs ').replace(/-/g,' ')}</a></li>`).join('');
+  return `<section class="card-panel" aria-label="Related broker comparisons and country guides" style="margin:1.5rem 0;padding:1.25rem"><h2>Related comparisons and regional guides</h2><p>Explore alternative brokers and country-specific funding considerations before choosing an account.</p><ul>${items}<li><a href="../../latam/mexico/">Forex broker checklist for Mexico</a></li><li><a href="../../latam/colombia/">Forex broker checklist for Colombia</a></li></ul></section>`;
+}
+
 function site1Page(site, broker) {
   const siteBrokers = BROKERS.filter((b) => fs.existsSync(path.join(ROOT, site.dir, 'brokers', `${b.slug}-review`, 'index.html')));
   const related = pickRelated(broker, siteBrokers, 3);
@@ -390,6 +404,7 @@ ${commonHead(site, title, description, canon, 'article')}
 
         ${sections}
         ${broker.slug === 'libertex' ? LIBERTEX_RESEARCH_PANEL : ''}
+        ${reviewDiscoveryPanel(broker.slug)}
       </article>
     </div>
   </main>
