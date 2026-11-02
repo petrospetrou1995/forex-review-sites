@@ -227,25 +227,15 @@ function blogPostingSchema({ site, canonicalUrl, headline, description, datePubl
 function comparisonSchema({ site, canonicalUrl, headline, description, brokers }) {
   const orgId = `${site.baseUrl}/#organization`;
   const items = (brokers || []).slice(0, 2).map((b, idx) => {
-    const rating = Number(b.ratingValue);
-    const ratingValue = Number.isFinite(rating) ? String(rating.toFixed(1)) : undefined;
+    
     return {
       '@type': 'ListItem',
       position: idx + 1,
       item: {
-        '@type': 'Product',
+        '@type': 'Organization',
         name: b.name,
         url: `${site.baseUrl}/brokers/${b.slug}-review/`,
         image: site.logoUrl,
-        ...(ratingValue
-          ? {
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue,
-                bestRating: '5',
-              },
-            }
-          : {}),
       },
     };
   });
@@ -269,26 +259,15 @@ function comparisonSchema({ site, canonicalUrl, headline, description, brokers }
 function bestListSchema({ site, canonicalUrl, headline, description, brokers }) {
   const orgId = `${site.baseUrl}/#organization`;
   const items = (brokers || []).slice(0, 10).map((b, idx) => {
-    const rating = Number(b.ratingValue);
-    const ratingValue = Number.isFinite(rating) ? String(rating.toFixed(1)) : undefined;
+    
     return {
       '@type': 'ListItem',
       position: idx + 1,
       item: {
-        '@type': 'Product',
+        '@type': 'Organization',
         name: b.name,
         url: `${site.baseUrl}/brokers/${b.slug}-review/`,
         image: site.logoUrl,
-        ...(ratingValue
-          ? {
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue,
-                bestRating: '5',
-                ratingCount: 1,
-              },
-            }
-          : {}),
       },
     };
   });
@@ -313,27 +292,15 @@ function bestListSchema({ site, canonicalUrl, headline, description, brokers }) 
 
 function reviewSchema({ site, broker, canonicalUrl }) {
   const orgId = `${site.baseUrl}/#organization`;
-  const rating = Number(broker.ratingValue);
-  const ratingValue = Number.isFinite(rating) ? String(rating.toFixed(1)) : '4.5';
   return {
     '@context': 'https://schema.org',
-    '@type': 'Review',
-    itemReviewed: {
-      '@type': 'Product',
-      name: broker.name,
-      image: site.logoUrl,
-      url: canonicalUrl,
-    },
+    '@type': 'Article',
+    headline: `${broker.name} broker review`,
+    description: broker.verdict,
+    mainEntityOfPage: canonicalUrl,
+    about: { '@type': 'Organization', name: broker.name, url: canonicalUrl },
     author: { '@id': orgId },
     publisher: { '@id': orgId },
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue,
-      bestRating: '5',
-    },
-    datePublished: TODAY,
-    reviewBody: broker.verdict,
-    mainEntityOfPage: canonicalUrl,
   };
 }
 
