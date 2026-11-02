@@ -1,0 +1,25 @@
+name: Broker claim evidence report
+on:
+  pull_request:
+    paths:
+      - 'data/brokers-db.json'
+      - 'data/broker-research-evidence.json'
+      - 'scripts/audit-broker-claims.mjs'
+      - '.github/workflows/broker-claim-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node --check scripts/audit-broker-claims.mjs
+      - run: node scripts/audit-broker-claims.mjs > broker-claim-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: broker-claim-report
+          path: broker-claim-report.json
