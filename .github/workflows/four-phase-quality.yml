@@ -1,0 +1,22 @@
+name: Four-phase quality gate
+on:
+  pull_request:
+    paths:
+      - 'data/broker-brand-assets.json'
+      - 'site1-dark-gradient/index.html'
+      - 'site1-dark-gradient/brokers/**'
+      - 'scripts/check-four-phase-quality.mjs'
+      - '.github/workflows/four-phase-quality.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/check-four-phase-quality.mjs
+      - run: node scripts/monitor-public-seo.mjs

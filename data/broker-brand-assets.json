@@ -42,7 +42,10 @@
       "siteAsset": null,
       "status": "text-fallback",
       "officialSource": "https://www.ic.com/blog/ic-showcases-next-chapter-of-its-brand-evolutionat-money-expo-abu-dhabi-2026/",
-      "notes": "Global IC brand refresh in 2026; EU IC Markets entity has separate branding context. Avoid using wrong entity logo."
+      "notes": "Global IC brand refresh in 2026; EU IC Markets entity has separate branding context. Avoid using wrong entity logo.",
+      "euRegulatorSource": "https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/80418/",
+      "euLicensedEntity": "IC Markets (EU) Ltd",
+      "euLicence": "362/18"
     }
   ],
   "reviewPolicy": {
@@ -53,5 +56,6 @@
     "exnessSource": "https://www.exness.com/cdn/media/mediakit/exness-media-kit-ebrochure.pdf",
     "icMarketsEURegulatoryReference": "https://www.icmarkets.eu/en/company/regulation",
     "limitations": "Automated markup checks do not establish legal approval or visual correctness; verify actual official image files and permission before deployment."
-  }
+  },
+  "brandAuditOutcome": "Official artwork should only be deployed after confirming rights and jurisdiction. Unverified initials intentionally remain replaced by accessible text, not counterfeit logos."
 }
