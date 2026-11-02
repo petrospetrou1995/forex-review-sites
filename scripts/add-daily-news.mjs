@@ -545,13 +545,20 @@ function renderSourceListSite2(items) {
 
 function buildSite1DailyPageHtml({ key, datetime, brokers, forex, crypto }) {
   const canonical = `https://brokerproreviews.com/news/daily/${key}/`;
+  // Derive search snippets from the day's actual source headlines, never fabricate news.
+  const lead = [brokers, forex, crypto].flat().find((item) => item?.title);
+  const leadTitle = lead ? truncate(String(lead.title).replace(/<[^>]*>/g, ' ').replace(/[&<>"']/g, ' ').replace(/\s+/g, ' '), 85) : '';
+  const dailyDescription = leadTitle
+    ? `LATAM forex and broker news for ${key}: ${leadTitle}. Read linked primary sources and verify local rules.`
+    : `LATAM forex and broker source roundup for ${key}. Review original sources, trading costs, and local regulations.`;
+  const safeDescription = truncate(dailyDescription, 155).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Brief (LATAM) — ${key} | BrokerProReviews</title>
-  <meta name="description" content="Daily LATAM brief: broker updates, forex headlines, and crypto news. Original summaries with links to primary sources.">
+  <meta name="description" content="${safeDescription}">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="${canonical}">
   <link rel="icon" href="/favicon.ico">

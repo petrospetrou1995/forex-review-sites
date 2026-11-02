@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "disclaimer": "Research status only. Missing evidence is not a zero rating. No numerical scoring is published until corroborated.",
+  "criteria": [
+    {
+      "id": "regulation",
+      "weight": 30,
+      "description": "Entity and authorization verification"
+    },
+    {
+      "id": "costs",
+      "weight": 25,
+      "description": "Representative spreads, commissions and swaps"
+    },
+    {
+      "id": "execution",
+      "weight": 15,
+      "description": "Documented execution and platform evidence"
+    },
+    {
+      "id": "funding",
+      "weight": 15,
+      "description": "Deposits, withdrawals and related fees"
+    },
+    {
+      "id": "support",
+      "weight": 10,
+      "description": "Evidence of service and support quality"
+    },
+    {
+      "id": "transparency",
+      "weight": 5,
+      "description": "Disclosure quality and conflicts"
+    }
+  ],
+  "brokers": [
+    {
+      "slug": "libertex",
+      "evidenceStatus": "partial",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": "Indication Investments Ltd (Libertex.com; Cyprus/EEA context only; verify client onboarding entity)",
+      "sources": [
+        {
+          "url": "https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/37658",
+          "claim": "Indication Investments Ltd CySEC licence 164/12, with libertex.com listed as approved domain.",
+          "checkedAt": "2026-11-02"
+        },
+        {
+          "url": "https://libertex.com/terms-fees",
+          "claim": "Libertex.com lists variable CFD spreads, swaps, account inactivity fees, 100 EUR first deposit and withdrawal charges; amounts and applicability require current account-specific confirmation.",
+          "checkedAt": "2026-11-02"
+        },
+        {
+          "url": "https://cs.libertex.org/en/articles/16658847-what-is-the-difference-between-standard-and-raw-spread-accounts",
+          "claim": "Libertex.org support describes Standard versus Raw Spread accounts (a distinct website/entity context, not automatically applicable to libertex.com).",
+          "checkedAt": "2026-11-02"
+        },
+        {
+          "url": "https://libertex.org/about-us/license-regulation",
+          "claim": "Libertex.org describes distinct operating entities and location-dependent onboarding; not equivalent to CySEC authorization for every account.",
+          "checkedAt": "2026-11-02"
+        }
+      ],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "xm-group",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "exness",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "pepperstone",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "ic-markets",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    }
+  ]
+}

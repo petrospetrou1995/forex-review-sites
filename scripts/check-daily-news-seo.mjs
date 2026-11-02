@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
+const generator=fs.readFileSync('scripts/add-daily-news.mjs','utf8');
+assert.match(generator,/const leadTitle = lead \?/);
+assert.match(generator,/const safeDescription =/);
+assert.match(generator,/<meta name="description" content="\$\{safeDescription\}">/);
+assert.doesNotMatch(generator,/content="Daily LATAM brief: broker updates, forex headlines, and crypto news\./);
+execFileSync(process.execPath,['--check','scripts/add-daily-news.mjs'],{stdio:'inherit'});
+console.log('Daily news description generator guards passed');
