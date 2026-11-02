@@ -1,0 +1,33 @@
+name: Consolidated public SEO release checks
+on:
+  pull_request:
+    paths:
+      - 'site1-dark-gradient/**'
+      - 'scripts/**'
+      - 'data/broker-research-evidence.json'
+      - '.github/workflows/public-seo-release.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  release-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate all SEO release modules
+        run: |
+          node scripts/check-sitemap-quality.mjs
+          node scripts/check-daily-news-seo.mjs
+          node scripts/check-broker-review-evidence.mjs
+          node scripts/check-broker-research.mjs
+          node scripts/check-libertex-review.mjs
+          node scripts/check-libertex-comparisons.mjs
+      - name: Inspect news quality without modifying pages
+        run: node scripts/audit-news-quality.mjs > news-quality-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-news-audit
+          path: news-quality-report.json
