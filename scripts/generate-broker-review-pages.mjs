@@ -169,6 +169,8 @@ function commonHead(site, title, description, canonicalUrl, ogType = 'article') 
   `.trim();
 }
 
+const LIBERTEX_RESEARCH_PANEL = "<section class=\"card-panel\" aria-labelledby=\"libertex-verified-context\" style=\"margin:1.5rem 0;padding:1.5rem\">\n<h2 id=\"libertex-verified-context\">Libertex: regulation, costs and verification</h2>\n<p><strong>Entity matters:</strong> The CySEC register identifies <strong>Indication Investments Ltd</strong> (licence <strong>164/12</strong>) and lists <strong>libertex.com</strong> as an approved domain. This does not establish that all Libertex-branded sites, accounts or customers fall under that CySEC-regulated entity.</p>\n<p><strong>Fees are account-specific:</strong> Libertex.com publishes its own fee information, including variable spreads and potential swaps, inactivity and withdrawal charges. Compare the current schedule for your instrument, legal entity and country before depositing funds. A stated minimum deposit is not a total trading-cost estimate.</p>\n<p><strong>Check the primary sources:</strong> <a href=\"https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/37658\" target=\"_blank\" rel=\"noopener noreferrer\">CySEC entity register</a> · <a href=\"https://libertex.com/terms-fees\" target=\"_blank\" rel=\"noopener noreferrer\">Libertex.com terms and fees</a> · <a href=\"../../methodology/\">Our review methodology</a>.</p>\n<p><strong>Compare alternatives:</strong> <a href=\"../../compare/libertex-vs-exness/\">Libertex vs Exness</a> · <a href=\"../../compare/libertex-vs-ic-markets/\">Libertex vs IC Markets</a> · <a href=\"../../compare/libertex-vs-pepperstone/\">Libertex vs Pepperstone</a> · <a href=\"../../compare/libertex-vs-xm-group/\">Libertex vs XM Group</a>.</p>\n<p><small>Editorial priority: Libertex receives expanded research coverage on this site. Coverage priority does not establish superior performance or the highest objective score. Verify independently.</small></p>\n</section>";
+
 function site1Page(site, broker) {
   const siteBrokers = BROKERS.filter((b) => fs.existsSync(path.join(ROOT, site.dir, 'brokers', `${b.slug}-review`, 'index.html')));
   const related = pickRelated(broker, siteBrokers, 3);
@@ -387,6 +389,7 @@ ${commonHead(site, title, description, canon, 'article')}
         </p>
 
         ${sections}
+        ${broker.slug === 'libertex' ? LIBERTEX_RESEARCH_PANEL : ''}
       </article>
     </div>
   </main>
