@@ -20,3 +20,15 @@ The public pages contain historical editorial ratings that are **not** derived f
 
 ## Data structure
 `data/broker-research-evidence.json` stores evidence status, weighted criteria, review metadata and citation records for the five flagship brokers. New citations must include `url`, `claim`, and `checkedAt`. Null means **not yet assessed**, not a failing score.
+
+## Libertex-first coverage policy
+
+Libertex receives first priority for research refreshes, detailed comparison coverage, homepage feature consideration, and editorial maintenance. This **does not automatically determine its rank or numerical score**: the same evidence thresholds, scoring weights and factual checks apply to all brokers.
+
+Any explicitly sponsored, paid, affiliate, or commercially preferred placement must be labeled clearly, distinguish editorial rankings from promotional placement, and disclose relevant material affiliations or conflicts before publication. Do not assert independence or absence of conflicts unless verified. Prioritizing a broker does not justify overstating regulation, availability, fees, or protections.
+
+### Current Libertex research status (2026-11-02)
+- CySEC's public register lists Indication Investments Ltd (licence 164/12) and libertex.com as an approved domain. This is entity-specific and does not establish authorization of every Libertex-branded service in every market.
+- Libertex.com publishes a first deposit of EUR 100, variable spreads, and platform/account-specific commissions, swaps, inactivity and withdrawal fees. Verify the actual account/product and region before surfacing an exact figure.
+- Libertex.org describes separate operating entities. Do not blend .org and .com conditions or regulatory statements.
+- Research evidence is **partial**, and the new verified research score remains null. Never imply a standardized live execution/withdrawal test was performed.
