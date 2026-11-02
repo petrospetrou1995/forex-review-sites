@@ -16,9 +16,9 @@ for(const path of paths){
   const canonical=body.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i)?.[1];
   if(canonical!==expected)findings.push(path+': canonical '+(canonical||'missing')+' != '+expected);
   if(/<meta[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(body))findings.push(path+': unexpectedly noindex');
-  if(!/<h1\\b/i.test(body))findings.push(path+': missing H1');
+  if(!/<h1\b/i.test(body))findings.push(path+': missing H1');
  }catch(err){findings.push(path+': '+err.message)}
 }
 const report={testedAt:new Date().toISOString(),origin,results,findings};
 console.log(JSON.stringify(report,null,2));
-assert.equal(findings.length,0,findings.join('\\n'));
+assert.equal(findings.length,0,findings.join('\n'));
