@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
+const file='scripts/add-daily-news.mjs';
+const code=fs.readFileSync(file,'utf8');
+execFileSync(process.execPath,['--check',file],{stdio:'inherit'});
+assert.match(code,/const headlines = \[brokers\?\.\[0\]\?\.title/);
+assert.match(code,/<title>\$\{escapeText\(pageTitle\)\}<\/title>/);
+assert.match(code,/content="\$\{escapeAttr\(pageDescription\)\}"/);
+assert.doesNotMatch(code,/<meta name="description" content="Daily LATAM brief: broker updates/);
+console.log('Dynamic news metadata generator validated');
