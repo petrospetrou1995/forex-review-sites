@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "disclaimer": "Research status only. Missing evidence is not a zero rating. No numerical scoring is published until corroborated.",
+  "criteria": [
+    {
+      "id": "regulation",
+      "weight": 30,
+      "description": "Entity and authorization verification"
+    },
+    {
+      "id": "costs",
+      "weight": 25,
+      "description": "Representative spreads, commissions and swaps"
+    },
+    {
+      "id": "execution",
+      "weight": 15,
+      "description": "Documented execution and platform evidence"
+    },
+    {
+      "id": "funding",
+      "weight": 15,
+      "description": "Deposits, withdrawals and related fees"
+    },
+    {
+      "id": "support",
+      "weight": 10,
+      "description": "Evidence of service and support quality"
+    },
+    {
+      "id": "transparency",
+      "weight": 5,
+      "description": "Disclosure quality and conflicts"
+    }
+  ],
+  "brokers": [
+    {
+      "slug": "libertex",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "xm-group",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "exness",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "pepperstone",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    },
+    {
+      "slug": "ic-markets",
+      "evidenceStatus": "not_verified",
+      "numericalScore": null,
+      "reviewedAt": null,
+      "reviewer": null,
+      "entity": null,
+      "sources": [],
+      "criteria": {
+        "regulation": null,
+        "costs": null,
+        "execution": null,
+        "funding": null,
+        "support": null,
+        "transparency": null
+      }
+    }
+  ]
+}
