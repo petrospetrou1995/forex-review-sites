@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'scripts/audit-news-quality.mjs'
+      - 'scripts/add-daily-news.mjs'
+      - 'scripts/check-daily-news-seo.mjs'
       - '.github/workflows/news-quality-audit.yml'
   workflow_dispatch:
 permissions:
@@ -15,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - run: node scripts/check-daily-news-seo.mjs
       - name: Run non-destructive report
         run: node scripts/audit-news-quality.mjs > news-quality-report.json
       - uses: actions/upload-artifact@v4
