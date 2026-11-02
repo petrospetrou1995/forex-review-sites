@@ -47,13 +47,22 @@ function escapeXml(s) {
     .replace(/'/g, '&apos;');
 }
 
-function lastmodFromAbs(abs) {
-  try {
-    const st = fs.statSync(abs);
-    return new Date(st.mtimeMs).toISOString().slice(0, 10);
-  } catch {
-    return '';
+function contentLastmod(html) {
+  // Filesystem mtimes change on every CI checkout and are not content dates.
+  // Only emit a date when the page explicitly exposes a verified modification date.
+  const patterns = [
+    /<meta[^>]+(?:property|name)="article:modified_time"[^>]+content="([^"]+)"/i,
+    /<meta[^>]+(?:property|name)="dateModified"[^>]+content="([^"]+)"/i,
+  ];
+  for (const pattern of patterns) {
+    const raw = getFirst(html, pattern);
+    if (!raw) continue;
+    const date = raw.slice(0, 10);
+    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(date)) continue;
+    if (Number.isNaN(Date.parse(date)) || date > new Date().toISOString().slice(0, 10)) continue;
+    return date;
   }
+  return '';
 }
 
 function buildSitemap(entries) {
@@ -79,7 +88,8 @@ function runSite(site) {
 
     const canonical = getFirst(html, /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i).trim();
     if (!canonical) continue;
-    const lastmod = lastmodFromAbs(abs);
+    if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html)) continue;
+    const lastmod = contentLastmod(html);
     const prev = byLoc.get(canonical);
     if (!prev) {
       byLoc.set(canonical, { loc: canonical, lastmod });
