@@ -547,7 +547,7 @@ function buildSite1DailyPageHtml({ key, datetime, brokers, forex, crypto }) {
   const canonical = `https://brokerproreviews.com/news/daily/${key}/`;
   // Derive search snippets from the day's actual source headlines, never fabricate news.
   const lead = [brokers, forex, crypto].flat().find((item) => item?.title);
-  const leadTitle = lead ? truncate(stripTags(lead.title).replace(/[&<>"']/g, ' ').replace(/\\s+/g, ' '), 85) : '';
+  const leadTitle = lead ? truncate(String(lead.title).replace(/<[^>]*>/g, ' ').replace(/[&<>"']/g, ' ').replace(/\s+/g, ' '), 85) : '';
   const dailyDescription = leadTitle
     ? `LATAM forex and broker news for ${key}: ${leadTitle}. Read linked primary sources and verify local rules.`
     : `LATAM forex and broker source roundup for ${key}. Review original sources, trading costs, and local regulations.`;
