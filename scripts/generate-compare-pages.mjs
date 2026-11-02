@@ -144,8 +144,8 @@ function comparisonTableRows(a, b) {
 function site1ComparePage(site, a, b) {
   const relPretty = relPrettyCompare(a, b);
   const canon = canonical(site, relPretty);
-  const title = `${a.name} vs ${b.name} — fees & safety comparison | ${site.siteName}`;
-  const description = `Compare ${a.name} vs ${b.name}: regulation checks, platforms, minimum deposit, and cost considerations. Use a risk-first checklist before funding.`;
+  const title = `${a.name} vs ${b.name}: Spreads, Fees & Regulation | ${site.siteName}`;
+  const description = `${a.name} vs ${b.name}: compare spread and commission assumptions, regulation by entity, platform support and withdrawals. Learn which details to verify.`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -173,7 +173,7 @@ ${head(site, title, description, canon)}
   <main class="section-pad section-pad-dark">
     <div class="container">
       <article class="guide-article">
-        <h1 class="guide-title">${escapeHtml(a.name)} vs ${escapeHtml(b.name)} (2026)</h1>
+        <h1 class="guide-title">${escapeHtml(a.name)} vs ${escapeHtml(b.name)}: Fees, Regulation and Platforms</h1>
         <p class="guide-lead">
           Compare ${escapeHtml(a.name)} vs ${escapeHtml(b.name)} using a simple, risk-first checklist: entity/regulation, all-in costs, platforms, and withdrawals.
         </p>
