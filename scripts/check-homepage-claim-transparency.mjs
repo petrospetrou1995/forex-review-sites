@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const html=fs.readFileSync('site1-dark-gradient/index.html','utf8');
+assert.ok(html.includes('Broker research starting points'));
+assert.ok(html.includes('not independently validated scores'));
+assert.ok(html.includes('not verified live broker quotes'));
+assert.ok(html.includes('The table contains provisional research data'));
+assert.ok(html.includes('€100 first deposit'));
+assert.ok(html.includes('Varies by method'));
+console.log('Homepage financial claim transparency verified');
