@@ -6,3 +6,14 @@
 /* Consistent sharp site brand icon; replaces the generic chart emoji visually. */
 .logo-icon{display:inline-block!important;width:32px;height:32px;min-width:32px;line-height:0;font-size:0!important;overflow:hidden;background:url('/favicon.svg') center/contain no-repeat;vertical-align:middle}
 @media(max-width:480px){.broker-brand-wordmark{font-size:.95rem}.broker-logo-img{width:44px;height:44px}}
+
+/* Brand identifiers remain legible across screen sizes without logo stretching. */
+.broker-card .broker-header{min-width:0;gap:.75rem}
+.broker-card .broker-logo{min-width:0;max-width:100%;flex-wrap:wrap;overflow-wrap:anywhere}
+.broker-card .broker-brand-wordmark{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.broker-card .broker-logo-img{width:48px;height:48px;max-width:48px;flex:0 0 48px;object-fit:contain;object-position:center;background:transparent}
+@media(max-width:480px){
+  .broker-card .broker-logo{font-size:1.05rem;gap:.35rem}
+  .broker-card .broker-logo-img{width:40px;height:40px;max-width:40px;flex-basis:40px}
+  .broker-card .broker-brand-wordmark{font-size:.95rem}
+}
