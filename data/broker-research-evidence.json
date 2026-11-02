@@ -36,12 +36,33 @@
   "brokers": [
     {
       "slug": "libertex",
-      "evidenceStatus": "not_verified",
+      "evidenceStatus": "partial",
       "numericalScore": null,
       "reviewedAt": null,
       "reviewer": null,
-      "entity": null,
-      "sources": [],
+      "entity": "Indication Investments Ltd (Libertex.com; Cyprus/EEA context only; verify client onboarding entity)",
+      "sources": [
+        {
+          "url": "https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/37658",
+          "claim": "Indication Investments Ltd CySEC licence 164/12, with libertex.com listed as approved domain.",
+          "checkedAt": "2026-11-02"
+        },
+        {
+          "url": "https://libertex.com/terms-fees",
+          "claim": "Libertex.com lists variable CFD spreads, swaps, account inactivity fees, 100 EUR first deposit and withdrawal charges; amounts and applicability require current account-specific confirmation.",
+          "checkedAt": "2026-11-02"
+        },
+        {
+          "url": "https://cs.libertex.org/en/articles/16658847-what-is-the-difference-between-standard-and-raw-spread-accounts",
+          "claim": "Libertex.org support describes Standard versus Raw Spread accounts (a distinct website/entity context, not automatically applicable to libertex.com).",
+          "checkedAt": "2026-11-02"
+        },
+        {
+          "url": "https://libertex.org/about-us/license-regulation",
+          "claim": "Libertex.org describes distinct operating entities and location-dependent onboarding; not equivalent to CySEC authorization for every account.",
+          "checkedAt": "2026-11-02"
+        }
+      ],
       "criteria": {
         "regulation": null,
         "costs": null,
