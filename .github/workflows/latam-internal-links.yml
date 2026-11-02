@@ -1,0 +1,19 @@
+name: Country guide internal links
+on:
+  pull_request:
+    paths:
+      - 'site1-dark-gradient/latam/**'
+      - 'scripts/check-latam-internal-links.mjs'
+      - '.github/workflows/latam-internal-links.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/check-latam-internal-links.mjs
