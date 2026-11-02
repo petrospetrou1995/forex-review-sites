@@ -20,7 +20,11 @@ for(const folder of fs.readdirSync(ROOT,{withFileTypes:true})){
    .find(x=>x.title.length>=18&&!x.url.includes('brokerproreviews.com'));
  if(!source){outcomes.skipped.push({date:folder.name,reason:'no-credible-external-headline'});continue}
  const title=source.title.replace(/[\r\n\t]+/g,' ').slice(0,85).trim();
- const desc=escape(('LATAM forex and broker news '+folder.name+': '+title+'. Read original sources and check local trading rules.').slice(0,155));
+ const prefix='LATAM broker news '+folder.name+': ';
+ const suffix='. Sources and local trading rules.';
+ const limit=155-prefix.length-suffix.length;
+ const shortened=title.length<=limit?title:title.slice(0,limit).replace(/\s+\S*$/,'').trim();
+ const desc=escape(prefix+shortened+suffix);
  const next=html.replace(meta[0],meta[0].replace(meta[1],desc));
  outcomes.eligible++;
  if(outcomes.examples.length<10)outcomes.examples.push({date:folder.name,description:desc,source:source.url});
