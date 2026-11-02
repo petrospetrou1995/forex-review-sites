@@ -2,3 +2,7 @@
 /* Clear, non-imitation wordmarks for brokers without verified logo assets */
 .broker-brand-wordmark{display:inline-block;font-size:1rem;font-weight:750;letter-spacing:.01em;line-height:1.2;color:var(--text-primary);white-space:nowrap}
 .broker-logo-img{object-fit:contain;background:transparent}
+
+/* Consistent sharp site brand icon; replaces the generic chart emoji visually. */
+.logo-icon{display:inline-block!important;width:32px;height:32px;min-width:32px;line-height:0;font-size:0!important;overflow:hidden;background:url('/favicon.svg') center/contain no-repeat;vertical-align:middle}
+@media(max-width:480px){.broker-brand-wordmark{font-size:.95rem}.broker-logo-img{width:44px;height:44px}}
