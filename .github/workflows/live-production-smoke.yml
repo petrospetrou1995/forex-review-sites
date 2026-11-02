@@ -1,0 +1,35 @@
+name: Live production SEO smoke test
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1'
+  pull_request:
+    paths:
+      - 'scripts/check-live-production.mjs'
+      - '.github/workflows/live-production-smoke.yml'
+permissions:
+  contents: read
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check scripts/check-live-production.mjs
+  live-check:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-live-production.mjs > production-smoke-report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-production-smoke
+          path: production-smoke-report.json
+          if-no-files-found: ignore
