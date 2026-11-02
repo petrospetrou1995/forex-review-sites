@@ -1,0 +1,19 @@
+name: Daily news metadata
+on:
+  pull_request:
+    paths:
+      - 'scripts/add-daily-news.mjs'
+      - 'scripts/check-daily-news-meta.mjs'
+      - '.github/workflows/daily-news-metadata.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/check-daily-news-meta.mjs
