@@ -4,10 +4,17 @@
     "slug": "libertex",
     "website": "https://www.libertex.com",
     "rating": 4.9,
-    "regulation": ["CySEC"],
+    "regulation": [
+      "CySEC"
+    ],
     "spreads": "From 0.0 pips (example; instrument/account dependent)",
-    "minimum_deposit": "$100",
-    "trading_platforms": ["Web", "Mobile", "MT4", "MT5"],
+    "minimum_deposit": "€100 first deposit on Libertex.com; payment method and entity dependent",
+    "trading_platforms": [
+      "Web",
+      "Mobile",
+      "MT4",
+      "MT5"
+    ],
     "deposit_methods": [
       "Bank transfer (availability varies by entity/country)",
       "Cards (Visa/Mastercard where available)",
@@ -50,10 +57,16 @@
     "slug": "xm-group",
     "website": "https://www.xm.com",
     "rating": 4.8,
-    "regulation": ["CySEC", "ASIC"],
+    "regulation": [
+      "CySEC",
+      "ASIC"
+    ],
     "spreads": "0.6 pips (example; varies by account and market conditions)",
     "minimum_deposit": "$5",
-    "trading_platforms": ["MT4", "MT5"],
+    "trading_platforms": [
+      "MT4",
+      "MT5"
+    ],
     "deposit_methods": [
       "Bank transfer (availability varies by entity/country)",
       "Cards (Visa/Mastercard where available)",
@@ -96,10 +109,16 @@
     "slug": "exness",
     "website": "https://www.exness.com",
     "rating": 4.7,
-    "regulation": ["FCA", "CySEC"],
+    "regulation": [
+      "FCA",
+      "CySEC"
+    ],
     "spreads": "From 0.1 pips (example; account dependent)",
     "minimum_deposit": "$10",
-    "trading_platforms": ["MT4", "MT5"],
+    "trading_platforms": [
+      "MT4",
+      "MT5"
+    ],
     "deposit_methods": [
       "Bank transfer (availability varies by entity/country)",
       "Cards (Visa/Mastercard where available)",
@@ -142,10 +161,17 @@
     "slug": "pepperstone",
     "website": "https://pepperstone.com",
     "rating": 4.6,
-    "regulation": ["ASIC", "FCA"],
+    "regulation": [
+      "ASIC",
+      "FCA"
+    ],
     "spreads": "0.0 pips (example on raw pricing; varies by market conditions)",
-    "minimum_deposit": "$200",
-    "trading_platforms": ["MT4", "MT5", "cTrader"],
+    "minimum_deposit": "From $10 for many funding methods; bank transfer may have no minimum (region dependent)",
+    "trading_platforms": [
+      "MT4",
+      "MT5",
+      "cTrader"
+    ],
     "deposit_methods": [
       "Bank transfer (availability varies by entity/country)",
       "Cards (Visa/Mastercard where available)",
@@ -188,10 +214,17 @@
     "slug": "ic-markets",
     "website": "https://www.icmarkets.com",
     "rating": 4.5,
-    "regulation": ["ASIC", "CySEC"],
+    "regulation": [
+      "ASIC",
+      "CySEC"
+    ],
     "spreads": "0.0 pips (example on raw pricing; varies by market conditions)",
     "minimum_deposit": "$200",
-    "trading_platforms": ["MT4", "MT5", "cTrader"],
+    "trading_platforms": [
+      "MT4",
+      "MT5",
+      "cTrader"
+    ],
     "deposit_methods": [
       "Bank transfer (availability varies by entity/country)",
       "Cards (Visa/Mastercard where available)",
@@ -230,4 +263,3 @@
     ]
   }
 ]
-
