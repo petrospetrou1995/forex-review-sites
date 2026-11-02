@@ -1,0 +1,19 @@
+name: Sitemap quality
+on:
+  pull_request:
+    paths:
+      - 'scripts/generate-sitemaps.mjs'
+      - 'scripts/check-sitemap-quality.mjs'
+      - '.github/workflows/sitemap-quality.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/check-sitemap-quality.mjs
