@@ -1,0 +1,24 @@
+name: Public SEO hotfix validation
+on:
+  pull_request:
+    paths:
+      - 'site1-dark-gradient/**'
+      - 'scripts/**'
+      - '.github/workflows/public-seo-hotfix.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check merchant structured data
+        run: node scripts/check-merchant-schema.mjs
+      - name: Verify generator syntax
+        run: |
+          node --check scripts/ensure-structured-data.mjs
+          node --check scripts/generate-broker-review-pages.mjs
