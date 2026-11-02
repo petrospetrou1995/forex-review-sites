@@ -1,0 +1,27 @@
+name: Public SEO monitoring
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 7 * * 1'
+  pull_request:
+    paths:
+      - 'scripts/monitor-public-seo.mjs'
+      - '.github/workflows/public-seo-monitor.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check indexable URLs and canonicals
+        run: node scripts/monitor-public-seo.mjs > seo-monitor-report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seo-monitor-report
+          path: seo-monitor-report.json
+          if-no-files-found: ignore
