@@ -214,7 +214,22 @@ ${head(site, title, description, canon)}
         </div>
       </article>
     </div>
-  </main>
+  <section class="comparison-evidence" aria-label="Compare verified broker information" style="max-width:1100px;margin:2rem auto;padding:1.5rem;border:1px solid #8494a9;border-radius:12px">
+<h2>Compare the evidence, not just a headline score</h2>
+<p>Broker fees, leverage, protection and available products depend on the legal entity, jurisdiction, account type and date. No live fee quote or licence status is certified by this comparison.</p>
+<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><caption>Evidence checklist to complete using primary sources</caption><thead><tr><th scope="col">Verify</th><th scope="col">Broker A</th><th scope="col">Broker B</th><th scope="col">Evidence to collect</th></tr></thead><tbody>
+<tr><th scope="row">Regulated entity</th><td>Verify for your country</td><td>Verify for your country</td><td>Legal name, register number, permissions, current status</td></tr>
+<tr><th scope="row">EUR/USD trading cost</th><td>Not independently verified</td><td>Not independently verified</td><td>Typical spread, commission per lot/side, exact account and observation date</td></tr>
+<tr><th scope="row">Overnight cost</th><td>Not independently verified</td><td>Not independently verified</td><td>Long/short swap or financing schedule and currency conversion</td></tr>
+<tr><th scope="row">Withdrawals</th><td>Not independently tested</td><td>Not independently tested</td><td>Official payment methods, fees, limits and eligibility</td></tr>
+<tr><th scope="row">Platform and protections</th><td>Confirm account terms</td><td>Confirm account terms</td><td>Platforms, execution policy, negative-balance safeguards and local restrictions</td></tr>
+</tbody></table></div>
+<h3>Primary regulatory registers</h3>
+<p>Search by the precise company name and licence number; a brand can operate through multiple legal entities. These links are verification tools, not evidence that either broker is authorised in a particular location.</p>
+<ul><li><a href="https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/" rel="noopener noreferrer" target="_blank">CySEC — Cyprus investment firms</a></li><li><a href="https://www.fca.org.uk/firms/financial-services-register" rel="noopener noreferrer" target="_blank">FCA — Financial Services Register</a></li><li><a href="https://www.asic.gov.au/online-services/search-asic-registers/professional-registers-search" rel="noopener noreferrer" target="_blank">ASIC — Professional registers</a></li></ul>
+<p><strong>Method:</strong> To compare a round-trip FX trade, combine spread cost and both sides of commission at the same lot size, then add applicable swaps, conversions and other fees. Do not assume a minimum spread is typical. See our <a href="../../methodology/">methodology and sourcing policy</a>.</p>
+</section>
+</main>
 
   <footer class="footer">
     <div class="container">
