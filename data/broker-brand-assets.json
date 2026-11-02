@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "lastReviewed": "2026-11-02",
+  "policy": "Do not present invented initials as official broker logos. Do not apply entity-specific brand files to other entities. Only use sourced brand artwork consistent with applicable brand guidelines.",
+  "brokers": [
+    {
+      "slug": "libertex",
+      "display": "Libertex",
+      "siteAsset": null,
+      "status": "text-fallback",
+      "officialSource": "https://libertex.com/",
+      "notes": "No independently verified current vector asset incorporated. Brand name appears as readable text."
+    },
+    {
+      "slug": "exness",
+      "display": "Exness",
+      "siteAsset": null,
+      "status": "text-fallback",
+      "officialSource": "https://www.exness.com/exness-in-the-media/",
+      "guidelines": "https://www.exness.global/cdn/media/mediakit/exness-media-kit-ebrochure.pdf",
+      "notes": "Official media kit available. Do not redraw or recolor the protected logotype; acquire actual media asset before enabling."
+    },
+    {
+      "slug": "xm-group",
+      "display": "XM",
+      "siteAsset": null,
+      "status": "text-fallback",
+      "officialSource": "https://www.xm.com/",
+      "notes": "Do not substitute unrelated MX brand assets or fabricate an icon."
+    },
+    {
+      "slug": "pepperstone",
+      "display": "Pepperstone",
+      "siteAsset": "assets/brokers/pepperstone.svg",
+      "status": "existing-vector-needs-rights-review",
+      "officialSource": "https://pepperstone.com/en/about-us/press",
+      "notes": "Vector is already in repository; require rights/visual sign-off before labeling approved official logo."
+    },
+    {
+      "slug": "ic-markets",
+      "display": "IC Markets",
+      "siteAsset": null,
+      "status": "text-fallback",
+      "officialSource": "https://www.ic.com/blog/ic-showcases-next-chapter-of-its-brand-evolutionat-money-expo-abu-dhabi-2026/",
+      "notes": "Global IC brand refresh in 2026; EU IC Markets entity has separate branding context. Avoid using wrong entity logo."
+    }
+  ]
+}
