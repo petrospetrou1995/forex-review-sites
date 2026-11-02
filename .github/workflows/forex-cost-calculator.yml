@@ -17,3 +17,4 @@ jobs:
         with:
           node-version: '20'
       - run: node --test tests/forex-cost-calculator.test.mjs
+      - run: node tests/comparison-calculator-links.test.mjs
