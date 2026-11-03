@@ -1,0 +1,51 @@
+name: Inter font origin performance preview test
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/inter-font-preview-test.yml'
+      - 'scripts/compare-local-inter-preview.mjs'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare matching-content font variants
+        shell: bash
+        run: |
+          set -euo pipefail
+          production='https://brokerproreviews.com/'
+          localFontPreview='https://1d69daaa.brokerproreviews.pages.dev/'
+          arms=(production localFontPreview localFontPreview production production localFontPreview)
+          a=0
+          b=0
+          for arm in "${arms[@]}"; do
+            if [ "$arm" = production ]; then
+              a=$((a+1)); n="$a"; url="$production"
+            else
+              b=$((b+1)); n="$b"; url="$localFontPreview"
+            fi
+            npx --yes lighthouse@12 "$url" \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json \
+              --output-path="./${arm}-${n}.json" \
+              --quiet
+          done
+      - run: node scripts/compare-local-inter-preview.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: local-inter-font-lighthouse-ab
+          path: |
+            production-*.json
+            localFontPreview-*.json
+          retention-days: 7
