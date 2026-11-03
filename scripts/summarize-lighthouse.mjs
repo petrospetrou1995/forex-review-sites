@@ -71,6 +71,39 @@ const failedAccessibility = (report.categories?.accessibility?.auditRefs || [])
   }));
 console.log('LIGHTHOUSE_ACCESSIBILITY_FINDINGS');
 console.log(JSON.stringify(failedAccessibility, null, 2));
+
+// Capture Lighthouse LCP candidates and failed Best Practices checks.
+const lcpDetails = {};
+for(const id of ['largest-contentful-paint-element','lcp-breakdown-insight','lcp-discovery-insight','network-dependency-tree-insight','font-display-insight']){
+  const audit=report.audits?.[id];
+  if(!audit)continue;
+  lcpDetails[id]={
+    score:audit.score,
+    displayValue:audit.displayValue || '',
+    details:(audit.details?.items || []).slice(0,6).map(item=>({
+      url:item.url || '',
+      node:item.node?.selector || item.node?.snippet || '',
+      timing:item.timing || item.lcpBreakdown || item.duration || item.total || null,
+      phase:item.phase || '',
+      wastedMs:item.wastedMs ?? null
+    }))
+  };
+}
+console.log('LIGHTHOUSE_LCP_DETAILS');
+console.log(JSON.stringify(lcpDetails,null,2));
+const failedBestPractices=(report.categories?.['best-practices']?.auditRefs || [])
+  .filter(ref=>(ref.weight||0)>0)
+  .map(ref=>({id:ref.id, audit:report.audits?.[ref.id]}))
+  .filter(({audit})=>audit&&typeof audit.score==='number'&&audit.score<1)
+  .map(({id,audit})=>({
+    id,title:audit.title,score:audit.score,description:audit.description,
+    items:(audit.details?.items||[]).slice(0,6).map(item=>({
+      url:item.url||'',node:item.node?.selector||item.node?.snippet||'',
+      description:item.description || item.explanation || ''
+    }))
+  }));
+console.log('LIGHTHOUSE_BEST_PRACTICES_FINDINGS');
+console.log(JSON.stringify(failedBestPractices,null,2));
 console.log('LIGHTHOUSE_MOBILE_SUMMARY');
 console.log(JSON.stringify(output, null, 2));
 if (report.runtimeError) {
