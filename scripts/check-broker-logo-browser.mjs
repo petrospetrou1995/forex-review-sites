@@ -20,6 +20,11 @@ for(const size of sizes){
      await new Promise(resolve=>{el.addEventListener('load',resolve,{once:true});el.addEventListener('error',resolve,{once:true});setTimeout(resolve,10000);});
    });
  }
+ const tracker=await page.evaluate(()=>{
+   const el=document.querySelector('script[src*="www.googletagmanager.com/gtag/js"]');
+   return {present:!!el,async:!!el?.async,priority:el?.getAttribute('fetchpriority'),gtag:typeof window.gtag==='function'};
+ });
+ if(!tracker.present || !tracker.async || tracker.priority!=='low' || !tracker.gtag)errors.push(size.name+': Google Analytics integration/priority regression');
  const result=await page.evaluate(()=>{
    const cards=[...document.querySelectorAll('.featured-brokers .brokers-grid > .broker-card')];
    const grid=document.querySelector('.featured-brokers .brokers-grid');
