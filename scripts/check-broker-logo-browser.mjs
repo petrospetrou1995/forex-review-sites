@@ -39,6 +39,14 @@ for(const size of sizes){
  if(result.documentWidth>result.viewportWidth+2)errors.push(size.name+': horizontal page overflow');
  fs.mkdirSync('broker-logo-screenshots',{recursive:true});
  await page.locator('.featured-brokers .brokers-grid').screenshot({path:'broker-logo-screenshots/'+size.name+'.png'});
+ if(size.name==='mobile'){
+   await page.locator('#langToggle').click();
+   const spanish=await page.evaluate(()=>({lang:document.documentElement.lang,heading:document.querySelector('.hero-title')?.textContent?.trim(),toggle:document.querySelector('#langToggle')?.textContent?.trim()}));
+   if(spanish.lang!=='es'||!spanish.heading?.includes('Reseñas Confiables')||spanish.toggle!=='EN')errors.push('Spanish translation toggle did not update heading and language');
+   await page.locator('#langToggle').click();
+   const english=await page.evaluate(()=>({lang:document.documentElement.lang,heading:document.querySelector('.hero-title')?.textContent?.trim(),toggle:document.querySelector('#langToggle')?.textContent?.trim()}));
+   if(english.lang!=='en'||!english.heading?.includes('Trusted Forex')||english.toggle!=='ES')errors.push('English translation toggle did not restore heading and language');
+ }
  await page.close();
 }
 await browser.close();

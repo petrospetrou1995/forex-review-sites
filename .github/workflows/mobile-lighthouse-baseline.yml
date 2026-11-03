@@ -4,10 +4,14 @@ on:
     paths:
       - '.github/workflows/mobile-lighthouse-baseline.yml'
       - 'scripts/summarize-lighthouse.mjs'
+      - 'scripts/median-lighthouse.mjs'
+      - 'site1-dark-gradient/translations.js'
   push:
     branches: [main]
     paths:
       - 'site1-dark-gradient/index.html'
+      - 'site1-dark-gradient/translations.js'
+      - 'site1-dark-gradient/styles.css'
       - '.github/workflows/mobile-lighthouse-baseline.yml'
   workflow_dispatch:
   schedule:
@@ -26,22 +30,25 @@ jobs:
       - name: Allow Pages deployment to complete after a main push
         if: github.event_name == 'push'
         run: sleep 90
-      - name: Measure live production mobile performance
+      - name: Measure live production mobile performance (three runs)
         run: |
-          npx --yes lighthouse@12 https://brokerproreviews.com/ \
-            --form-factor=mobile \
-            --screenEmulation.mobile=true \
-            --throttling-method=simulate \
-            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
-            --output=json \
-            --output-path=./lighthouse-mobile.json \
-            --quiet
-      - name: Summarize scores and Core Web Vitals lab metrics
-        run: node scripts/summarize-lighthouse.mjs lighthouse-mobile.json
+          for i in 1 2 3; do
+            npx --yes lighthouse@12 https://brokerproreviews.com/ \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --output=json \
+              --output-path="./lighthouse-mobile-$i.json" \
+              --quiet
+            node scripts/summarize-lighthouse.mjs "./lighthouse-mobile-$i.json"
+          done
+      - name: Summarize three-run median
+        run: node scripts/median-lighthouse.mjs lighthouse-mobile-1.json lighthouse-mobile-2.json lighthouse-mobile-3.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: brokerproreviews-mobile-lighthouse
-          path: lighthouse-mobile.json
+          path: lighthouse-mobile-*.json
           if-no-files-found: ignore
           retention-days: 14
