@@ -32,8 +32,8 @@ for(const size of [{name:'desktop',width:1440,height:900,cols:4},{name:'tablet',
    const analytics=document.querySelector('script[src*="googletagmanager.com/gtag/js"]');
    return {
      localFont:resources.some(s=>s.includes('/assets/fonts/inter-latin-variable.woff2')),
-     remoteFonts:resources.filter(s=>/fonts\\.(googleapis|gstatic)\\.com/.test(s)),
-     columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(/\\s+/).length:null,
+     remoteFonts:resources.filter(s=>/fonts\.(googleapis|gstatic)\.com/.test(s)),
+     columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).length:null,
      logos:logoResults,overflow:document.documentElement.scrollWidth>innerWidth+2,
      analyticsPresent:!!analytics&&analytics.async&&typeof window.gtag==='function'
    };
