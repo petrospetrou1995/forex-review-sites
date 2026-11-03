@@ -131,3 +131,45 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{
   outline-offset:2px;
 }
 #main-content:focus{outline:none}
+
+
+/* Display genuine broker brand assets in the featured cards, with text fallback if loading fails. */
+.featured-brokers .broker-card .broker-logo{
+  min-height:3.25rem;
+  overflow:visible;
+}
+.featured-brokers .featured-broker-logo{
+  display:block;
+  width:110px;
+  height:48px;
+  max-width:100%;
+  flex:0 1 110px;
+  object-fit:contain;
+  object-position:left center;
+  border-radius:4px;
+}
+.featured-brokers .featured-broker-logo--light{
+  background:#fff;
+  padding:3px 5px;
+}
+.featured-brokers .featured-broker-logo--icon{
+  width:44px;
+  height:44px;
+  max-width:44px;
+  flex:0 0 44px;
+  background:transparent;
+  padding:0;
+}
+.featured-brokers .featured-broker-logo[hidden]{
+  display:none!important;
+}
+/* The wordmark becomes visible automatically when the asset fails to load. */
+.featured-brokers .featured-broker-logo:not([hidden]) + .broker-logo-fallback{
+  display:none;
+}
+@media(max-width:619px){
+  .featured-brokers .featured-broker-logo{
+    width:126px;
+    flex-basis:126px;
+  }
+}
