@@ -1,0 +1,29 @@
+name: Real-user Core Web Vitals snapshot
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 8 * * 3'
+  pull_request:
+    paths:
+      - 'scripts/monitor-crux.mjs'
+      - '.github/workflows/real-user-web-vitals.yml'
+permissions:
+  contents: read
+jobs:
+  crux-phone:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Query public 28-day field metrics
+        run: node scripts/monitor-crux.mjs
+        env:
+          CRUX_API_KEY: ${{ secrets.CRUX_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: brokerproreviews-crux-phone
+          path: crux-field-data.json
+          retention-days: 30
