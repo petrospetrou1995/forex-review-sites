@@ -25,13 +25,13 @@ jobs:
           dir=site1-dark-gradient/assets/brokers
           mkdir -p "$dir"
           if [ ! -f "$dir/libertex-press-logo.jpg" ]; then
-            curl --fail --location --retry 3 --max-time 55 \
+            curl --http1.1 --fail --location --retry 3 --retry-all-errors --max-time 55 \
               --user-agent 'BrokerProReviews/1.0 (editorial press image)' \
               'https://mms.businesswire.com/media/20240328235325/en/2083363/22/Libertex_-_Logo_White.jpg' \
               --output "$dir/libertex-press-logo.jpg"
           fi
           if [ ! -f "$dir/exness-official-logo.svg" ]; then
-            curl --fail --location --retry 3 --max-time 55 \
+            curl --http1.1 --fail --location --retry 3 --retry-all-errors --max-time 55 \
               --user-agent 'BrokerProReviews/1.0 (editorial media logo)' \
               'https://d33vw3iu5hs0zi.cloudfront.net/media/exness_logo_76096879aa.svg' \
               --output "$dir/exness-official-logo.svg"
