@@ -1,0 +1,67 @@
+name: Vendor official broker logo assets
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/vendor-broker-logos.yml'
+      - 'site1-dark-gradient/index.html'
+      - 'site1-dark-gradient/assets/brokers/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  vendor:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
+          persist-credentials: true
+      - name: Fetch pinned official press and media assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=site1-dark-gradient/assets/brokers
+          mkdir -p "$dir"
+          if [ ! -f "$dir/libertex-press-logo.jpg" ]; then
+            curl --fail --location --retry 3 --max-time 55 \
+              --user-agent 'BrokerProReviews/1.0 (editorial press image)' \
+              'https://mms.businesswire.com/media/20240328235325/en/2083363/22/Libertex_-_Logo_White.jpg' \
+              --output "$dir/libertex-press-logo.jpg"
+          fi
+          if [ ! -f "$dir/exness-official-logo.svg" ]; then
+            curl --fail --location --retry 3 --max-time 55 \
+              --user-agent 'BrokerProReviews/1.0 (editorial media logo)' \
+              'https://d33vw3iu5hs0zi.cloudfront.net/media/exness_logo_76096879aa.svg' \
+              --output "$dir/exness-official-logo.svg"
+          fi
+          file "$dir/libertex-press-logo.jpg" "$dir/exness-official-logo.svg"
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          jpg=Path('site1-dark-gradient/assets/brokers/libertex-press-logo.jpg')
+          svg=Path('site1-dark-gradient/assets/brokers/exness-official-logo.svg')
+          assert jpg.read_bytes().startswith(bytes.fromhex('ffd8ff')), 'Not a JPEG'
+          assert 500 < jpg.stat().st_size < 500000, 'Unexpected JPEG size'
+          raw=svg.read_bytes()
+          assert 100 < len(raw) < 100000, 'Unexpected SVG size'
+          root=ET.fromstring(raw)
+          assert root.tag == '{http://www.w3.org/2000/svg}svg', 'Not an SVG root'
+          banned={'script','foreignObject','iframe','image','use','animate','set'}
+          for element in root.iter():
+            assert element.tag.split('}')[-1] not in banned, 'Potentially unsafe SVG element'
+            for name,value in element.attrib.items():
+              short=name.split('}')[-1].lower()
+              assert not short.startswith('on'), 'Inline event handler'
+              assert not (short in {'href','src'} and (':' in value or value.startswith('//'))), 'External SVG reference'
+          print('Validated media assets, bytes',jpg.stat().st_size,svg.stat().st_size)
+          PY
+      - name: Commit only validated media assets
+        run: |
+          set -euo pipefail
+          git add site1-dark-gradient/assets/brokers/libertex-press-logo.jpg site1-dark-gradient/assets/brokers/exness-official-logo.svg
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m 'Vendor publisher-supplied Libertex and Exness media logos'
+          git push origin "HEAD:${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}"
