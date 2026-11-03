@@ -17,3 +17,27 @@
   .broker-card .broker-logo-img{width:40px;height:40px;max-width:40px;flex-basis:40px}
   .broker-card .broker-brand-wordmark{font-size:.95rem}
 }
+
+
+/* Mobile broker facts: keep longer localized values inside cards. */
+.broker-card .info-item{min-width:0;gap:.75rem;align-items:flex-start}
+.broker-card .info-label{flex:0 1 45%;min-width:0}
+.broker-card .info-value{flex:1 1 55%;min-width:0;text-align:right;overflow-wrap:anywhere}
+@media(max-width:480px){
+  .broker-card .info-item{gap:.5rem}
+  .broker-card .info-label,.broker-card .info-value{font-size:.875rem}
+}
+/* Visible keyboard focus, including comparison and broker actions. */
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{
+  outline:3px solid #67e8f9;
+  outline-offset:3px;
+}
+/* Preserve accessibility for users requesting fewer animations. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
