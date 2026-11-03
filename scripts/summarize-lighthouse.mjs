@@ -53,6 +53,24 @@ for (const name of ['layout-shifts', 'layout-shift-elements', 'mainthread-work-b
 }
 console.log('LIGHTHOUSE_DIAGNOSTICS');
 console.log(JSON.stringify(diagnostics, null, 2));
+
+// Report actionable accessibility audits, not just the category score.
+const failedAccessibility = (report.categories?.accessibility?.auditRefs || [])
+  .filter(ref => (ref.weight || 0) > 0)
+  .map(ref => ({ id: ref.id, audit: report.audits?.[ref.id] }))
+  .filter(({ audit }) => audit && typeof audit.score === 'number' && audit.score < 1)
+  .map(({ id, audit }) => ({
+    id,
+    title: audit.title,
+    score: audit.score,
+    nodes: (audit.details?.items || []).slice(0, 6).map(item => ({
+      selector: item.node?.selector || '',
+      snippet: item.node?.snippet || '',
+      explanation: item.node?.explanation || '',
+    })),
+  }));
+console.log('LIGHTHOUSE_ACCESSIBILITY_FINDINGS');
+console.log(JSON.stringify(failedAccessibility, null, 2));
 console.log('LIGHTHOUSE_MOBILE_SUMMARY');
 console.log(JSON.stringify(output, null, 2));
 if (report.runtimeError) {
