@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 
 const html = fs.readFileSync('site1-dark-gradient/index.html','utf8');
-const entries = [...html.matchAll(/<div class="broker-card" data-broker-id="([^"]+)">([\s\S]*?)(?=<div class="broker-card" data-broker-id=|<\/div>\s*<\/div>\s*<p class="rating-small")/g)];
-assert.equal(entries.length,4,'Expect four featured broker cards');
-for(const [,id,card] of entries){
+const starts = [...html.matchAll(/<div class="broker-card" data-broker-id="([^"]+)">/g)];
+assert.equal(starts.length,4,'Expect four featured broker cards');
+const entries = starts.map((m,i)=>[m[1],html.slice(m.index,starts[i+1]?.index ?? html.indexOf('<!-- DAILY_NEWS_START -->',m.index))]);
+for(const [id,card] of entries){
  const m=card.match(/<img[^>]+class="[^"]*featured-broker-logo[^"]*"[^>]+src="([^"]+)"/);
  assert(m, id+' has no logo img');
  const url=m[1];
