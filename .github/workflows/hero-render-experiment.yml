@@ -1,0 +1,64 @@
+name: Hero rendering cost experiment
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/hero-render-experiment.yml'
+      - 'scripts/compare-hero-render.mjs'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare matched hero pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a site1-dark-gradient baseline
+          cp -a site1-dark-gradient no-blur
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('no-blur/styles.css')
+          s=p.read_text()
+          assert 'backdrop-filter:blur(10px)' in s
+          p.write_text(s.replace('backdrop-filter:blur(10px)','backdrop-filter:none'))
+          PY
+          python3 -m http.server 8123 --bind 127.0.0.1 --directory baseline > /tmp/baseline.log 2>&1 &
+          python3 -m http.server 8124 --bind 127.0.0.1 --directory no-blur > /tmp/noblur.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:8123/ -o /dev/null
+          curl --fail http://127.0.0.1:8124/ -o /dev/null
+      - name: Run interleaved mobile Lighthouse samples
+        shell: bash
+        run: |
+          set -euo pipefail
+          arms=(baseline no-blur no-blur baseline baseline no-blur)
+          a=0
+          b=0
+          for arm in "${arms[@]}"; do
+            if [ "$arm" = baseline ]; then a=$((a+1)); n="$a"; url='http://127.0.0.1:8123/'
+            else b=$((b+1)); n="$b"; url='http://127.0.0.1:8124/'; fi
+            npx --yes lighthouse@12 "$url" \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json \
+              --output-path="./${arm}-${n}.json" \
+              --quiet
+          done
+      - run: node scripts/compare-hero-render.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hero-render-experiment
+          path: |
+            baseline-*.json
+            no-blur-*.json
+          retention-days: 7
