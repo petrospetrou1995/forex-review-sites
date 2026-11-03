@@ -173,3 +173,13 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{
     flex-basis:126px;
   }
 }
+
+/* Maintain accessible link contrast even on pages that rely on browser defaults. */
+.skip-link,.skip-link:visited{color:#fff!important}
+.broker-logo-credit a,.broker-logo-credit a:visited,
+.guide-related-list a,.guide-related-list a:visited{
+  color:#67e8f9;
+  text-decoration:underline;
+  text-underline-offset:.15em;
+}
+.footer-section h3{margin-bottom:1rem;color:var(--text-primary)}

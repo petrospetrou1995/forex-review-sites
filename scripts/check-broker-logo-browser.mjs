@@ -11,7 +11,15 @@ const sizes = [
 for(const size of sizes){
  const page=await browser.newPage({viewport:{width:size.width,height:size.height}, deviceScaleFactor:1});
  await page.goto('http://127.0.0.1:8123/',{waitUntil:'networkidle',timeout:45000});
- await page.locator('.featured-brokers .broker-card').first().scrollIntoViewIfNeeded();
+ const cards=page.locator('.featured-brokers .broker-card');
+ for(let i=0;i<await cards.count();i++){
+   const img=cards.nth(i).locator('img.featured-broker-logo');
+   await img.scrollIntoViewIfNeeded();
+   await img.evaluate(async el=>{
+     if(el.complete) return;
+     await new Promise(resolve=>{el.addEventListener('load',resolve,{once:true});el.addEventListener('error',resolve,{once:true});setTimeout(resolve,10000);});
+   });
+ }
  const result=await page.evaluate(()=>{
    const cards=[...document.querySelectorAll('.featured-brokers .brokers-grid > .broker-card')];
    const grid=document.querySelector('.featured-brokers .brokers-grid');
