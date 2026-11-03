@@ -1,0 +1,48 @@
+name: Vendor licensed Inter variable font
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/vendor-inter-font.yml'
+      - 'site1-dark-gradient/assets/fonts/**'
+      - 'site1-dark-gradient/index.html'
+permissions:
+  contents: write
+jobs:
+  vendor:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Download pinned Google Fonts Inter Latin variable WOFF2
+        shell: bash
+        run: |
+          set -euo pipefail
+          target='site1-dark-gradient/assets/fonts/inter-latin-variable.woff2'
+          test -s site1-dark-gradient/assets/fonts/OFL-Inter.txt
+          mkdir -p "$(dirname "$target")"
+          if [ ! -f "$target" ]; then
+            curl --http1.1 --fail --location --retry 2 --retry-all-errors --connect-timeout 10 --max-time 50 \
+              --user-agent 'Mozilla/5.0' \
+              'https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2' \
+              --output "$target"
+          fi
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('site1-dark-gradient/assets/fonts/inter-latin-variable.woff2')
+          data=p.read_bytes()
+          assert data[:4]==b'wOF2', 'WOFF2 font signature missing'
+          assert 10000 < len(data) < 120000, 'Unexpected WOFF2 font size'
+          print('Pinned Inter WOFF2 is valid; bytes:',len(data))
+          PY
+      - name: Commit validated font binary
+        run: |
+          set -euo pipefail
+          git add site1-dark-gradient/assets/fonts/inter-latin-variable.woff2
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m 'Vendor OFL licensed Inter Latin variable WOFF2'
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
