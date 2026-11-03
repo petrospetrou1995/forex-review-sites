@@ -1,0 +1,43 @@
+name: Diagnose slow Lighthouse mobile runs
+on:
+  pull_request:
+    paths:
+      - 'scripts/diagnose-lighthouse-slow-runs.mjs'
+      - '.github/workflows/diagnose-mobile-slow-runs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Capture three comparable live mobile reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in 1 2 3; do
+            npx --yes lighthouse@12 https://brokerproreviews.com/ \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json \
+              --output-path="./diagnostic-mobile-$i.json" \
+              --quiet
+          done
+      - name: Compare slow and fast network and paint timing
+        run: node scripts/diagnose-lighthouse-slow-runs.mjs diagnostic-mobile-1.json diagnostic-mobile-2.json diagnostic-mobile-3.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-slow-run-diagnostics
+          path: |
+            diagnostic-mobile-*.json
+            lighthouse-slow-fast-diagnostics.json
+          retention-days: 7
