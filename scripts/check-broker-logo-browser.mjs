@@ -35,6 +35,7 @@ for(const size of sizes){
  if(result.columns!==size.columns)errors.push(size.name+': '+result.columns+' columns, expected '+size.columns);
  for(const logo of result.logos){
    if(!logo.loaded || !logo.visible) errors.push(size.name+': '+logo.id+' logo not loaded or invisible');
+   if(!logo.src?.startsWith('http://127.0.0.1:8123/assets/brokers/')) errors.push(size.name+': '+logo.id+' still depends on external image origin');
  }
  if(result.documentWidth>result.viewportWidth+2)errors.push(size.name+': horizontal page overflow');
  fs.mkdirSync('broker-logo-screenshots',{recursive:true});
