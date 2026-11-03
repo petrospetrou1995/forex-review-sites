@@ -183,3 +183,6 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{
   text-underline-offset:.15em;
 }
 .footer-section h3{margin-bottom:1rem;color:var(--text-primary)}
+
+/* The Libertex JPEG includes generous white margins; crop only canvas whitespace in its card. */
+.featured-brokers .featured-broker-logo--libertex{object-fit:cover;object-position:center;}
