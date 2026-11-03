@@ -1,0 +1,47 @@
+name: Vendor licensed XM logo
+on:
+  pull_request:
+    paths:
+      - 'site1-dark-gradient/index.html'
+      - '.github/workflows/vendor-xm-logo.yml'
+permissions:
+  contents: write
+jobs:
+  vendor:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Download licensed logo from Wikimedia Commons
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="site1-dark-gradient/assets/brokers/xm-logo-2024.jpg"
+          if [ -f "$target" ]; then
+            echo "XM logo is already vendored"
+            exit 0
+          fi
+          mkdir -p "$(dirname "$target")"
+          curl --fail --location --retry 3 --max-time 30 \
+            --user-agent "BrokerProReviews/1.0 (editorial logo asset)" \
+            "https://commons.wikimedia.org/wiki/Special:FilePath/XM-logo-2024.jpg?width=320" \
+            --output "$target"
+          test "$(file --brief --mime-type "$target")" = "image/jpeg"
+          size=$(wc -c < "$target")
+          test "$size" -gt 1000 && test "$size" -lt 120000
+          echo "Downloaded valid JPEG ($size bytes)"
+      - name: Commit logo binary to PR branch
+        run: |
+          set -euo pipefail
+          git add site1-dark-gradient/assets/brokers/xm-logo-2024.jpg
+          if git diff --cached --quiet; then
+            echo "No new asset to commit"
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Vendor CC BY-SA 4.0 XM logo for same-origin delivery"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
