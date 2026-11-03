@@ -25,6 +25,15 @@ for(const size of sizes){
    return {present:!!el,async:!!el?.async,priority:el?.getAttribute('fetchpriority'),gtag:typeof window.gtag==='function'};
  });
  if(!tracker.present || !tracker.async || tracker.priority!=='low' || !tracker.gtag)errors.push(size.name+': Google Analytics integration/priority regression');
+ const fontStatus=await page.evaluate(async()=>{
+   const loaded=await document.fonts.load('400 16px Inter');
+   const fetched=performance.getEntriesByType('resource').map(x=>x.name);
+   return {loaded:loaded.length>0,external:fetched.filter(url=>/fonts\\.(googleapis|gstatic)\\.com/.test(url)),
+     local:fetched.some(url=>url.includes('/assets/fonts/inter-latin-variable.woff2'))};
+ });
+ if(!fontStatus.loaded || !fontStatus.local || fontStatus.external.length) {
+   errors.push(size.name+': local Inter font failed or Google Fonts external request detected '+JSON.stringify(fontStatus));
+ }
  const result=await page.evaluate(()=>{
    const cards=[...document.querySelectorAll('.featured-brokers .brokers-grid > .broker-card')];
    const grid=document.querySelector('.featured-brokers .brokers-grid');
