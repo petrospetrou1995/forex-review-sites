@@ -4,6 +4,8 @@ on:
     paths:
       - 'site1-dark-gradient/index.html'
       - 'scripts/check-homepage-claim-transparency.mjs'
+      - 'scripts/audit-homepage-brokers.mjs'
+      - 'data/brokers-db.json'
       - '.github/workflows/homepage-claim-transparency.yml'
   workflow_dispatch:
 permissions:
@@ -16,4 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node scripts/check-homepage-claim-transparency.mjs
+      - name: Validate transparency and labels
+        run: node scripts/check-homepage-claim-transparency.mjs
+      - name: Audit broker cards and local images
+        run: node scripts/audit-homepage-brokers.mjs
