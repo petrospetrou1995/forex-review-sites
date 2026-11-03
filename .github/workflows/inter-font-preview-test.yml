@@ -1,4 +1,4 @@
-name: Inter font origin performance preview test
+name: Inter font matched-content mobile comparison
 on:
   pull_request:
     paths:
@@ -15,20 +15,47 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Compare matching-content font variants
+      - name: Prepare identical pages with external vs local Inter
         shell: bash
         run: |
           set -euo pipefail
-          production='https://brokerproreviews.com/'
-          localFontPreview='https://1d69daaa.brokerproreviews.pages.dev/'
-          arms=(production localFontPreview localFontPreview production production localFontPreview)
+          test -s site1-dark-gradient/assets/fonts/inter-latin-variable.woff2
+          cp -a site1-dark-gradient site-with-local-font
+          cp -a site1-dark-gradient site-with-external-font
+          python3 - <<'PY'
+          from pathlib import Path
+          page=Path('site-with-external-font/index.html')
+          html=page.read_text()
+          local='<link rel="preload" href="./assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>'
+          external='''<link rel="preconnect" href="https://fonts.googleapis.com">
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+              <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+              <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>'''
+          assert html.count(local)==1
+          page.write_text(html.replace(local,external))
+          css=Path('site-with-external-font/styles.css')
+          text=css.read_text()
+          marker="/* Bundled OFL-1.1 Inter Latin variable font, copyright Inter Project Authors. */"
+          assert text.startswith(marker)
+          css.write_text(text[text.index('\n',text.index('@font-face'))+1:])
+          PY
+          python3 -m http.server 8123 --bind 127.0.0.1 --directory site-with-external-font > /tmp/ext-font.log 2>&1 &
+          python3 -m http.server 8124 --bind 127.0.0.1 --directory site-with-local-font > /tmp/local-font.log 2>&1 &
+          sleep 3
+          curl --fail http://127.0.0.1:8123/ -o /dev/null
+          curl --fail http://127.0.0.1:8124/assets/fonts/inter-latin-variable.woff2 -o /dev/null
+      - name: Run six interleaved simulated mobile Lighthouse samples
+        shell: bash
+        run: |
+          set -euo pipefail
+          arms=(external local local external external local)
           a=0
           b=0
           for arm in "${arms[@]}"; do
-            if [ "$arm" = production ]; then
-              a=$((a+1)); n="$a"; url="$production"
+            if [ "$arm" = external ]; then
+              a=$((a+1)); n="$a"; url='http://127.0.0.1:8123/'
             else
-              b=$((b+1)); n="$b"; url="$localFontPreview"
+              b=$((b+1)); n="$b"; url='http://127.0.0.1:8124/'
             fi
             npx --yes lighthouse@12 "$url" \
               --form-factor=mobile \
@@ -46,6 +73,6 @@ jobs:
         with:
           name: local-inter-font-lighthouse-ab
           path: |
-            production-*.json
-            localFontPreview-*.json
+            external-*.json
+            local-*.json
           retention-days: 7
