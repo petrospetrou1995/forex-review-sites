@@ -1,51 +1,56 @@
 /**
- * Editorial audit for displayed homepage broker facts and logo assets.
- * Run: node scripts/audit-homepage-brokers.mjs
- * Audit only: this intentionally does not rewrite financial claims.
+ * Read-only audit of editorial consistency and image references on the main site.
+ * Run from repository root: node scripts/audit-homepage-brokers.mjs
+ * Run after site generation. Does not make or replace regulated financial claims.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const htmlFile = path.join(root, 'site1-dark-gradient/index.html');
-const dbFile = path.join(root, 'data/brokers-db.json');
-const html = fs.readFileSync(htmlFile, 'utf8');
-const brokers = JSON.parse(fs.readFileSync(dbFile, 'utf8'));
+const siteDir = path.join(root, 'site1-dark-gradient');
+const homepage = fs.readFileSync(path.join(siteDir, 'index.html'), 'utf8');
+const brokers = JSON.parse(fs.readFileSync(path.join(root, 'data/brokers-db.json'), 'utf8'));
 const findings = [];
+const byName = new Map(brokers.map(b => [b.slug, b]));
+const cards = [...homepage.matchAll(/<div class="broker-card" data-broker-id="([^"]+)">([\s\S]*?)(?=<div class="broker-card" data-broker-id=|<\/div>\s*<\/div>\s*<p class="rating-small")/g)];
 
-function textValue(s) {
-  return s.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+function money(value) {
+  const match = String(value || '').match(/[$€£]\s*[\d,.]+/);
+  return match ? match[0].replace(/\s/g, '') : null;
 }
-function firstMoney(s) {
-  const m = String(s).match(/(?:[$€£])\s*[\d,.]+/);
-  return m?.[0]?.replace(/\s+/g, '') ?? null;
-}
-for (const broker of brokers) {
-  const index = html.indexOf(`brokers/${broker.slug}-review/`);
-  if (index < 0) {
-    findings.push({ broker: broker.broker_name, type: 'review-link', issue: 'Review link not found on homepage' });
-    continue;
+function report(type, detail) { findings.push({ type, ...detail }); }
+
+for (const [, id, html] of cards) {
+  const slug = id === 'xm' ? 'xm-group' : id;
+  const broker = byName.get(slug);
+  if (!broker) { report('unknown-broker', { id }); continue; }
+  if (!html.includes(`brokers/${broker.slug}-review/`)) {
+    report('missing-review-link', { broker: broker.broker_name });
   }
-  const vicinity = html.slice(Math.max(0, index - 3000), index + 500);
-  const name = broker.broker_name === 'XM Group' ? 'XM' : broker.broker_name;
-  const cardStart = vicinity.lastIndexOf('class="broker-card');
-  const card = cardStart >= 0 ? vicinity.slice(cardStart) : vicinity;
-  const cardText = textValue(card);
-  const amount = firstMoney(broker.minimum_deposit);
-  if (amount && !cardText.includes(amount)) {
-    findings.push({ broker: name, type: 'minimum-deposit', issue: 'Homepage and broker database may disagree', database: broker.minimum_deposit, cardExcerpt: cardText.slice(-450) });
+  const displayed = html.match(/<span class="info-label"[^>]*>Min Deposit<\/span>\s*<span class="info-value">([^<]*)<\/span>/);
+  const expected = money(broker.minimum_deposit);
+  const actual = displayed && money(displayed[1]);
+  // Only flag mismatches when both sides explicitly state a monetary figure.
+  if (expected && actual && expected !== actual) {
+    report('minimum-deposit-mismatch', {
+      broker: broker.broker_name, homepage: displayed[1], database: broker.minimum_deposit,
+    });
   }
-}
-const imgTag = /<img\b[^>]*>/gi;
-for (const match of html.matchAll(imgTag)) {
-  const tag = match[0];
-  const src = tag.match(/\bsrc=["']([^"']+)["']/i)?.[1];
-  if (!src || /^(?:https?:|data:|\/\/)/i.test(src)) continue;
-  const file = path.resolve(path.dirname(htmlFile), src.split(/[?#]/)[0].replace(/^\//, ''));
-  if (!file.startsWith(root + path.sep) || !fs.existsSync(file)) {
-    findings.push({ type: 'logo-or-image', issue: 'Referenced local image missing or requires deployment-root check', src });
+  if (/Up to 1:(?:888|2000|500)/.test(html)) {
+    report('unqualified-leverage', { broker: broker.broker_name });
   }
 }
-console.log(JSON.stringify({ checkedBrokers: brokers.length, findings }, null, 2));
-console.log('\nEditorial follow-up: verify entity-specific leverage, spreads, commissions, deposits and rating methodology against dated primary sources; confirm logo usage rights and visual quality manually.');
-// Informational report, not a deployment blocker, until data and jurisdiction are verified.
+
+// Local images can be relative to the page or absolute to the deployed site root.
+for (const match of homepage.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi)) {
+  const src = match[1].split(/[?#]/)[0];
+  if (/^(?:https?:|data:|\/\/)/i.test(src)) continue;
+  const candidate = src.startsWith('/') ? path.join(siteDir, src.slice(1)) : path.join(siteDir, src);
+  if (!fs.existsSync(candidate)) report('missing-local-image', { src });
+}
+
+const result = { checkedCards: cards.length, databaseBrokers: brokers.length, findings };
+console.log(JSON.stringify(result, null, 2));
+if (cards.length === 0) process.exitCode = 1;
+if (findings.some(f => ['missing-review-link', 'missing-local-image', 'unknown-broker'].includes(f.type))) process.exitCode = 1;
+console.log('Reminder: visually verify official logo usage and check jurisdiction-specific claims at primary sources.');
