@@ -1,0 +1,39 @@
+name: Mobile Lighthouse baseline
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/mobile-lighthouse-baseline.yml'
+      - 'scripts/summarize-lighthouse.mjs'
+  workflow_dispatch:
+  schedule:
+    - cron: '40 7 * * 2'
+permissions:
+  contents: read
+jobs:
+  mobile-lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Measure live production mobile performance
+        run: |
+          npx --yes lighthouse@12 https://brokerproreviews.com/ \
+            --form-factor=mobile \
+            --screenEmulation.mobile=true \
+            --throttling-method=simulate \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=json \
+            --output-path=./lighthouse-mobile.json \
+            --quiet
+      - name: Summarize scores and Core Web Vitals lab metrics
+        run: node scripts/summarize-lighthouse.mjs lighthouse-mobile.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: brokerproreviews-mobile-lighthouse
+          path: lighthouse-mobile.json
+          if-no-files-found: ignore
+          retention-days: 14
