@@ -30,6 +30,29 @@ const output = {
     speedIndex: metric('speed-index'),
   },
 };
+// Lighthouse audit details help identify layout shifts and heavy main-thread tasks.
+const describeNode = item => {
+  const node = item?.node || item?.element || {};
+  return {
+    selector: node.selector || node.snippet || node.nodeLabel || '',
+    score: item?.score ?? item?.total ?? item?.wastedMs ?? null,
+  };
+};
+const diagnostics = {};
+for (const name of ['layout-shifts', 'layout-shift-elements', 'mainthread-work-breakdown', 'long-tasks', 'render-blocking-resources']) {
+  const audit = report.audits?.[name];
+  if (!audit) continue;
+  diagnostics[name] = {
+    displayValue: audit.displayValue || '',
+    items: (audit.details?.items || []).slice(0, 8).map(item => ({
+      ...describeNode(item),
+      duration: item.duration ?? item.total ?? item.wastedMs ?? null,
+      name: item.groupLabel || item.url || item.subItems?.items?.[0]?.node?.selector || '',
+    })),
+  };
+}
+console.log('LIGHTHOUSE_DIAGNOSTICS');
+console.log(JSON.stringify(diagnostics, null, 2));
 console.log('LIGHTHOUSE_MOBILE_SUMMARY');
 console.log(JSON.stringify(output, null, 2));
 if (report.runtimeError) {
