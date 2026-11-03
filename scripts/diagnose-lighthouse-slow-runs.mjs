@@ -22,15 +22,17 @@ const rows = reports.map(({path, report:r}) => {
       origin: origin(items[0]?.url),
       count: items.length,
       transferKB:round(items.reduce((n,x) => n + (x.transferSize || 0), 0) / 1024),
-      latestEndMs:round(Math.max(...items.map(x => x.endTime || 0))),
+      latestEndMs:round(Math.max(...items.map(x => x.networkEndTime || 0))),
     })).sort((a,b) => (b.latestEndMs || 0) - (a.latestEndMs || 0)).slice(0, 12);
   const slowRequests = reqs
     .map(q => ({url:q.url || '', type:q.resourceType || '', status:q.statusCode ?? null,
-      durationMs:round((q.endTime ?? NaN) - (q.startTime ?? NaN)),
-      startMs:round(q.startTime), endMs:round(q.endTime),
+      durationMs:round((q.networkEndTime ?? NaN) - (q.networkRequestTime ?? NaN)),
+      startMs:round(q.networkRequestTime), endMs:round(q.networkEndTime),
       transferKB:round((q.transferSize || 0)/1024)}))
     .sort((a,b) => (b.durationMs || 0) - (a.durationMs || 0)).slice(0, 12);
   const element = r.audits?.['largest-contentful-paint-element'];
+  const mainthread=(r.audits?.['mainthread-work-breakdown']?.details?.items||[]).map(x=>({group:x.groupLabel,durationMs:round(x.duration)}));
+  const longTasks=(r.audits?.['long-tasks']?.details?.items||[]).slice(0,8).map(x=>({url:x.url || '',durationMs:round(x.duration)}));
   return {
     path, score:round((r.categories?.performance?.score ?? 0) * 100),
     LCPms:round(auditNumber(r,'largest-contentful-paint')),
@@ -40,11 +42,11 @@ const rows = reports.map(({path, report:r}) => {
     CLS:pct(auditNumber(r,'cumulative-layout-shift')),
     totalNetworkRequests:reqs.length,
     lcpElement:(element?.details?.items || []).slice(0,3).map(i => ({
-      selector:i.node?.selector || i.node?.snippet || i.node?.nodeLabel || '',
+      selector:i.node?.selector || i.items?.[0]?.node?.selector || i.node?.snippet || i.node?.nodeLabel || '',
       url:i.url || '',
-      outerHTML:i.node?.snippet?.slice(0,220) || ''
+      outerHTML:i.node?.snippet?.slice(0,220) || i.items?.[0]?.node?.snippet?.slice(0,220) || ''
     })),
-    slowRequests, byOrigin
+    slowRequests, byOrigin, mainthread, longTasks
   };
 });
 rows.sort((a,b) => b.LCPms - a.LCPms);
