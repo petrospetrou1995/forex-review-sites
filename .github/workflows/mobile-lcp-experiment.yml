@@ -1,0 +1,57 @@
+name: Mobile LCP variance root-cause experiment
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/mobile-lcp-experiment.yml'
+      - 'scripts/compare-lighthouse-variants.mjs'
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run interleaved Lighthouse variants
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Interleaved and reversed order reduces, but cannot eliminate, temporal confounding.
+          variants=(baseline without-analytics without-google-fonts without-google-fonts without-analytics baseline)
+          for index in "${!variants[@]}"; do
+            variant="${variants[$index]}"
+            if [ "$index" -lt 3 ]; then sample=1; else sample=2; fi
+            args=()
+            if [ "$variant" = without-analytics ]; then
+              args+=(--blocked-url-patterns='*googletagmanager.com*')
+              args+=(--blocked-url-patterns='*google-analytics.com*')
+            elif [ "$variant" = without-google-fonts ]; then
+              args+=(--blocked-url-patterns='*fonts.googleapis.com*')
+              args+=(--blocked-url-patterns='*fonts.gstatic.com*')
+            fi
+            npx --yes lighthouse@12 https://brokerproreviews.com/ \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              "${args[@]}" \
+              --output=json \
+              --output-path="./${variant}-${sample}.json" \
+              --quiet
+          done
+      - name: Compare samples
+        run: node scripts/compare-lighthouse-variants.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-lcp-variant-reports
+          path: |
+            baseline-*.json
+            without-analytics-*.json
+            without-google-fonts-*.json
+          retention-days: 7
