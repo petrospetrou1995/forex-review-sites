@@ -1,0 +1,19 @@
+name: Homepage HTML payload budget
+on:
+  pull_request:
+    paths:
+      - 'site1-dark-gradient/index.html'
+      - 'scripts/check-homepage-payload.mjs'
+      - '.github/workflows/homepage-payload-budget.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/check-homepage-payload.mjs
