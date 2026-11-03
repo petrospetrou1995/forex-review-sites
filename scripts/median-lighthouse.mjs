@@ -18,6 +18,12 @@ const result = {
   medianScores:{ performance:score('performance'),accessibility:score('accessibility'),bestPractices:score('best-practices'),seo:score('seo') },
   medianLabMetrics:{ LCPms:ms('largest-contentful-paint'),TBTms:ms('total-blocking-time'),CLS:ms('cumulative-layout-shift'),FCPms:ms('first-contentful-paint') },
   individualPerformanceScores:reports.map(r=>Math.round((r.categories?.performance?.score??0)*100)),
+  performanceScoreRange:null,
+  consistency:null,
 };
+const sampleScores=result.individualPerformanceScores;
+const scoreRange=Math.max(...sampleScores)-Math.min(...sampleScores);
+result.performanceScoreRange=scoreRange;
+result.consistency=scoreRange>20?'high-variance: investigate network, main-thread or third-party timing':'within 20-point three-run spread';
 console.log('LIGHTHOUSE_THREE_RUN_MEDIAN');
 console.log(JSON.stringify(result,null,2));
