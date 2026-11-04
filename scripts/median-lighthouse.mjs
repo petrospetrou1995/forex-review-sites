@@ -80,11 +80,15 @@ const extractMainThread=r=>{
 };
 const mainThreadByRun=reports.map((r,i)=>({run:i+1,...extractMainThread(r)}));
 const bestLcp=samples.slice().sort((a,b)=>a.lcpMs-b.lcpMs)[0];
+const worstBlocking=samples.slice().sort((a,b)=>b.tbtMs-a.tbtMs)[0];
 const mainThreadComparison={
   slowestLcpRun:slowest.run,
   fastestLcpRun:bestLcp.run,
-  slowest:mainThreadByRun[slowest.run-1],
-  fastest:mainThreadByRun[bestLcp.run-1]
+  worstBlockingRun:worstBlocking.run,
+  slowestLcp:mainThreadByRun[slowest.run-1],
+  fastestLcp:mainThreadByRun[bestLcp.run-1],
+  worstBlocking:mainThreadByRun[worstBlocking.run-1],
+  note:'Lighthouse main-thread totals cover the audit window and need not overlap with the heading LCP. High TBT and delayed LCP are distinct symptoms.'
 };
 const detail={
   sampledAt:new Date().toISOString(),
@@ -92,6 +96,7 @@ const detail={
   samples,
   medianScore:result.medianScores.performance,
   scoreRange,
+  lcpToFcpGapMsByRun:samples.map(x=>({run:x.run,gapMs:x.lcpMs-x.fcpMs})),
   slowest,
   worstScore,
   thresholdBreaches,
