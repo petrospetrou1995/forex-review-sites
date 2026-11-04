@@ -52,15 +52,40 @@ const thresholdBreaches={
 };
 const relevant=reports[slowest.run-1];
 const reqs=relevant.audits?.['network-requests']?.details?.items||[];
+// Exclude URL query strings and fragments: analytics URLs can contain client/session identifiers.
+const publicUrl=value=>{try{const u=new URL(value);return u.origin+u.pathname;}catch{return '';}};
 const requestOrigin=url=>{try{return new URL(url).origin;}catch{return 'unknown';}};
 const topSlowRequests=reqs.map(x=>({
   origin:requestOrigin(x.url||''),
-  url:x.url||'',
+  url:publicUrl(x.url),
   resourceType:x.resourceType||'',
   durationMs:Math.round((x.networkEndTime??NaN)-(x.networkRequestTime??NaN)),
   transferBytes:x.transferSize??null
 })).filter(x=>Number.isFinite(x.durationMs)).sort((a,b)=>b.durationMs-a.durationMs).slice(0,8);
 const lcpDetail=relevant.audits?.['largest-contentful-paint-element']?.details?.items?.[0];
+
+// Extract JavaScript activity from the *same* Lighthouse reports; avoid unstable raw traces.
+const finite=n=>Number.isFinite(n)?Math.round(n):null;
+const extractMainThread=r=>{
+  const groups=(r.audits?.['mainthread-work-breakdown']?.details?.items||[])
+    .map(x=>({group:x.groupLabel||x.group||'other',durationMs:finite(x.duration)}))
+    .filter(x=>x.durationMs!==null).sort((a,b)=>b.durationMs-a.durationMs);
+  const boot=(r.audits?.['bootup-time']?.details?.items||[])
+    .map(x=>({script:publicUrl(x.url),totalMs:finite(x.total),scriptingMs:finite(x.scripting),parseMs:finite(x.scriptParseCompile)}))
+    .filter(x=>x.script && x.totalMs!==null).sort((a,b)=>b.totalMs-a.totalMs).slice(0,10);
+  const tasks=(r.audits?.['long-tasks']?.details?.items||[])
+    .map(x=>({script:publicUrl(x.url),durationMs:finite(x.duration),startMs:finite(x.startTime)}))
+    .filter(x=>x.durationMs!==null).sort((a,b)=>b.durationMs-a.durationMs).slice(0,8);
+  return {mainThreadGroups:groups,scriptExecution:boot,longTasks:tasks};
+};
+const mainThreadByRun=reports.map((r,i)=>({run:i+1,...extractMainThread(r)}));
+const bestLcp=samples.slice().sort((a,b)=>a.lcpMs-b.lcpMs)[0];
+const mainThreadComparison={
+  slowestLcpRun:slowest.run,
+  fastestLcpRun:bestLcp.run,
+  slowest:mainThreadByRun[slowest.run-1],
+  fastest:mainThreadByRun[bestLcp.run-1]
+};
 const detail={
   sampledAt:new Date().toISOString(),
   testUrl:relevant.finalUrl,
@@ -71,7 +96,8 @@ const detail={
   worstScore,
   thresholdBreaches,
   slowestLcpElement:lcpDetail?.node?.selector||lcpDetail?.items?.[0]?.node?.selector||null,
-  slowestNetworkRequests:topSlowRequests
+  slowestNetworkRequests:topSlowRequests,
+  mainThreadComparison
 };
 fs.writeFileSync('mobile-outlier-diagnostics.json',JSON.stringify(detail,null,2)+'\n');
 console.log('LIGHTHOUSE_OUTLIER_DIAGNOSTICS');
@@ -81,6 +107,6 @@ if(process.env.GITHUB_STEP_SUMMARY){
  const table=['| Run | Performance | LCP (ms) | TBT (ms) |','|---|---:|---:|---:|',
    ...samples.map(x=>`| ${x.run} | ${x.performance} | ${x.lcpMs} | ${x.tbtMs} |`)].join('\n');
  fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
- `## BrokerProReviews mobile Lighthouse monitoring\n\n**${status}** — median ${detail.medianScore}, worst ${worstScore.performance}, spread ${scoreRange} points.\n\n${table}\n\nFlags: ${Object.entries(thresholdBreaches).filter(([,v])=>v).map(([k])=>k).join(', ')||'none'}.\n\nThis is synthetic lab sampling, not real-user CrUX. The JSON artifact includes slowest-run requests.\n`);
+ `## BrokerProReviews mobile Lighthouse monitoring\n\n**${status}** — median ${detail.medianScore}, worst ${worstScore.performance}, spread ${scoreRange} points.\n\n${table}\n\nFlags: ${Object.entries(thresholdBreaches).filter(([,v])=>v).map(([k])=>k).join(', ')||'none'}.\n\nThis is synthetic lab sampling, not real-user CrUX. The JSON artifact includes redacted network paths and JavaScript main-thread attribution.\n`);
  if(Object.values(thresholdBreaches).some(Boolean))console.log('::warning::Mobile Lighthouse outlier threshold breached. Inspect mobile-outlier-diagnostics.json artifact.');
 }
