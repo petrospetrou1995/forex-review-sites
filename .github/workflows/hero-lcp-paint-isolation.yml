@@ -35,6 +35,7 @@ jobs:
           sleep 2
           curl --fail http://127.0.0.1:8123/ -o /dev/null
           curl --fail http://127.0.0.1:8124/ -o /dev/null
+      # Warm both variants before collecting reversed-order measurements.
       - name: Warm Chromium, font and Lighthouse caches for both variants
         shell: bash
         run: |
