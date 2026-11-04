@@ -11,6 +11,13 @@ const sizes = [
 for(const size of sizes){
  const page=await browser.newPage({viewport:{width:size.width,height:size.height}, deviceScaleFactor:1});
  await page.goto('http://127.0.0.1:8123/',{waitUntil:'networkidle',timeout:45000});
+ // Below-fold initialization is intentionally idle-delayed; assert it completes.
+ await page.waitForFunction(() => {
+   const review=document.querySelector('#reviews .card-panel .review-count');
+   const news=document.querySelector('#news');
+   const logo=document.querySelector('.hero-title');
+   return !!logo && (!review || /review|reseña/.test(review.textContent||'')) && !!news;
+ }, {timeout:6000});
  const cards=page.locator('.featured-brokers .broker-card');
  for(let i=0;i<await cards.count();i++){
    const img=cards.nth(i).locator('img.featured-broker-logo');
@@ -55,6 +62,17 @@ for(const size of sizes){
  fs.mkdirSync('broker-logo-screenshots',{recursive:true});
  await page.locator('.featured-brokers .brokers-grid').screenshot({path:'broker-logo-screenshots/'+size.name+'.png'});
  if(size.name==='mobile'){
+   // Verify that the delayed review controls are ready and function correctly.
+   const toggle=page.locator('#reviews button[data-review-toggle]').first();
+   if(await toggle.count()){
+     const isVisible=await toggle.isVisible();
+     if(isVisible){
+       const before=await toggle.getAttribute('aria-expanded');
+       await toggle.click();
+       const after=await toggle.getAttribute('aria-expanded');
+       if(before===after)errors.push('Review expander did not change state after idle initialization');
+     }
+   }
    await page.locator('#langToggle').click();
    const spanish=await page.evaluate(()=>({lang:document.documentElement.lang,heading:document.querySelector('.hero-title')?.textContent?.trim(),toggle:document.querySelector('#langToggle')?.textContent?.trim()}));
    if(spanish.lang!=='es'||!spanish.heading?.includes('Reseñas Confiables')||spanish.toggle!=='EN')errors.push('Spanish translation toggle did not update heading and language');
