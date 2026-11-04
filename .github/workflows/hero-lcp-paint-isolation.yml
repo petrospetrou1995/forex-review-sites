@@ -1,0 +1,67 @@
+name: Hero heading LCP paint isolation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/hero-lcp-paint-isolation.yml'
+      - 'scripts/compare-hero-lcp-paint.mjs'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare matched baseline and flat heading pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a site1-dark-gradient baseline
+          cp -a site1-dark-gradient flat-heading
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('flat-heading/styles.css')
+          s=p.read_text()
+          key='.hero-title{font-size:3.5rem;font-weight:800;margin-bottom:1.5rem;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}'
+          alternative='.hero-title{font-size:3.5rem;font-weight:800;margin-bottom:1.5rem;color:var(--primary-color);line-height:1.2}'
+          assert s.count(key)==1
+          p.write_text(s.replace(key,alternative))
+          PY
+          python3 -m http.server 8123 --bind 127.0.0.1 --directory baseline > /tmp/lcp-baseline.log 2>&1 &
+          python3 -m http.server 8124 --bind 127.0.0.1 --directory flat-heading > /tmp/lcp-flat.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:8123/ -o /dev/null
+          curl --fail http://127.0.0.1:8124/ -o /dev/null
+      - name: Measure interleaved mobile render
+        shell: bash
+        run: |
+          set -euo pipefail
+          arms=(baseline flat flat baseline baseline flat)
+          a=0
+          b=0
+          for arm in "${arms[@]}"; do
+            if [ "$arm" = baseline ]; then a=$((a+1)); n="$a"; url='http://127.0.0.1:8123/'
+            else b=$((b+1)); n="$b"; url='http://127.0.0.1:8124/'; fi
+            npx --yes lighthouse@12 "$url" \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json \
+              --output-path="./${arm}-${n}.json" \
+              --quiet
+          done
+      - name: Compare first and largest paint
+        run: node scripts/compare-hero-lcp-paint.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hero-lcp-paint-comparison
+          path: |
+            baseline-*.json
+            flat-*.json
+          retention-days: 7
