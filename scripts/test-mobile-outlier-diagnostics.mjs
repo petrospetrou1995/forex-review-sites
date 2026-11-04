@@ -30,6 +30,12 @@ try{
  assert(!out.includes('PRIVATE-CID')&&!out.includes('TRACKING-SECRET')&&!out.includes('token=SECRET'),'Query parameter leaked to artifact');
  const json=JSON.parse(out);
  assert.equal(json.slowest.lcpMs,5000);
+ assert.equal(json.firstRunComparison.firstRunLcpOutlier,true);
+ assert.equal(json.firstRunComparison.firstRunTbtOutlier,false);
+ assert.equal(json.firstRunComparison.firstLcpMs,5000);
+ assert.equal(json.firstRunComparison.subsequentMedianLcpMs,2150);
+ assert.equal(json.firstRunComparison.lcpDeltaMs,2850);
+
  assert.equal(json.mainThreadComparison.worstBlockingRun,3);
  assert.equal(json.lcpToFcpGapMsByRun[0].gapMs,3200);
  assert.equal(json.mainThreadComparison.slowestLcp.mainThreadGroups[0].group,'Script Evaluation');

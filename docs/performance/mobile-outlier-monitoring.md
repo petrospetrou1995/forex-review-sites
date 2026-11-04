@@ -28,3 +28,9 @@ Each 3-run capture also compares the slowest and fastest LCP samples for script 
 Network and JavaScript URLs in generated diagnostics contain **origin and pathname only**. Query strings and fragments are removed to avoid saving analytics client/session identifiers or access tokens in public GitHub Actions logs and artifacts. The full Lighthouse JSON artifacts can contain request metadata: restrict artifact access and retention as appropriate to repository privacy, and avoid sharing raw reports externally without review.
 
 The workflow runs a synthetic redaction regression test before measuring production.
+
+## First-run versus subsequent samples
+
+The scheduled three-run monitor now stores `firstRunComparison` in `mobile-outlier-diagnostics.json`, including the first-versus-later-median differences for LCP and total blocking time. Heuristic flags mark a first-run LCP above 2,500 ms and over 1,000 ms slower than the subsequent median, or first-run blocking above 200 ms and over 150 ms higher. These flags do **not** remove the slow run from median or worst-run reports and do not fail CI.
+
+Each Lighthouse CLI run launches a fresh Chrome process: the comparison must not be presented as a browser-cache warmup test or a real-user regression. Treat repeated patterns as an investigation cue, inspect script execution and network attribution, and consult CrUX field data when available before changing production behavior.

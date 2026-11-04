@@ -50,6 +50,22 @@ const thresholdBreaches={
   twoOrMoreLcpOver2500ms:samples.filter(x=>x.lcpMs>2500).length>=2,
   highScoreVariance:scoreRange>20
 };
+// Compare the first run with subsequent samples without discarding outliers.
+// Synthetic sequential CLI invocations start separate Chrome instances: this
+// is not evidence of warm browser cache or real-user cold-navigation behavior.
+const later=samples.slice(1);
+const laterMedian=(key)=>median(later.map(x=>x[key]));
+const firstRunComparison={
+  firstLcpMs:samples[0].lcpMs,
+  subsequentMedianLcpMs:laterMedian('lcpMs'),
+  lcpDeltaMs:samples[0].lcpMs-laterMedian('lcpMs'),
+  firstTbtMs:samples[0].tbtMs,
+  subsequentMedianTbtMs:laterMedian('tbtMs'),
+  tbtDeltaMs:samples[0].tbtMs-laterMedian('tbtMs'),
+  firstRunLcpOutlier:samples[0].lcpMs>2500 && samples[0].lcpMs-laterMedian('lcpMs')>1000,
+  firstRunTbtOutlier:samples[0].tbtMs>200 && samples[0].tbtMs-laterMedian('tbtMs')>150,
+  limitation:'Heuristic lab-only comparison across fresh Chrome processes, not evidence of browser cache warming or a real-user regression.'
+};
 const relevant=reports[slowest.run-1];
 const reqs=relevant.audits?.['network-requests']?.details?.items||[];
 // Exclude URL query strings and fragments: analytics URLs can contain client/session identifiers.
@@ -100,6 +116,7 @@ const detail={
   slowest,
   worstScore,
   thresholdBreaches,
+  firstRunComparison,
   slowestLcpElement:lcpDetail?.node?.selector||lcpDetail?.items?.[0]?.node?.selector||null,
   slowestNetworkRequests:topSlowRequests,
   mainThreadComparison
