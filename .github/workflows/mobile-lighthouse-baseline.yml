@@ -15,7 +15,7 @@ on:
       - '.github/workflows/mobile-lighthouse-baseline.yml'
   workflow_dispatch:
   schedule:
-    - cron: '40 7 * * 2'
+    - cron: '40 7 * * 2,5'
 permissions:
   contents: read
 jobs:
@@ -49,6 +49,8 @@ jobs:
         if: always()
         with:
           name: brokerproreviews-mobile-lighthouse
-          path: lighthouse-mobile-*.json
+          path: |
+            lighthouse-mobile-*.json
+            mobile-outlier-diagnostics.json
           if-no-files-found: ignore
           retention-days: 14
