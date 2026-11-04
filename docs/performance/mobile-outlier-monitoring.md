@@ -20,3 +20,11 @@ For actual 28-day Chrome field data, use the separate `Real-user Core Web Vitals
 Actions: https://github.com/petrospetrou1995/forex-review-sites/actions/workflows/mobile-lighthouse-baseline.yml
 
 Site: https://brokerproreviews.com
+
+## Main-thread breakdown and data minimization
+
+Each 3-run capture also compares the slowest and fastest LCP samples for script evaluation groups, per-script bootup time and long tasks. These are Lighthouse-attributed synthetic measurements, not conclusive proof of root cause or real-user experience. Look for repeated differences across runs before applying changes.
+
+Network and JavaScript URLs in generated diagnostics contain **origin and pathname only**. Query strings and fragments are removed to avoid saving analytics client/session identifiers or access tokens in public GitHub Actions logs and artifacts. The full Lighthouse JSON artifacts can contain request metadata: restrict artifact access and retention as appropriate to repository privacy, and avoid sharing raw reports externally without review.
+
+The workflow runs a synthetic redaction regression test before measuring production.
