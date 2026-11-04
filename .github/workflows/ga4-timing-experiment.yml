@@ -1,0 +1,76 @@
+name: GA4 loading timing experiment (no site changes)
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ga4-timing-experiment.yml'
+      - 'scripts/compare-ga4-timing.mjs'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare matched baseline and delayed-GA pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a site1-dark-gradient baseline
+          cp -a site1-dark-gradient delayed-ga
+          python3 - <<'PY'
+          from pathlib import Path
+          page=Path('delayed-ga/index.html')
+          html=page.read_text()
+          baseline='<script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-SX1P4XJ6NM"></script>'
+          delayed='''<script>
+              // EXPERIMENT ONLY: changing load timing can miss early pageviews.
+              window.addEventListener('load', function () {
+                const script=document.createElement('script');
+                script.async=true;
+                script.src='https://www.googletagmanager.com/gtag/js?id=G-SX1P4XJ6NM';
+                document.head.appendChild(script);
+              }, {once:true});
+            </script>'''
+          assert html.count(baseline)==1,'Expected GA script exactly once'
+          page.write_text(html.replace(baseline,delayed))
+          PY
+          python3 -m http.server 8123 --bind 127.0.0.1 --directory baseline > /tmp/ga-baseline.log 2>&1 &
+          python3 -m http.server 8124 --bind 127.0.0.1 --directory delayed-ga > /tmp/ga-delayed.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:8123/ -o /dev/null
+          curl --fail http://127.0.0.1:8124/ -o /dev/null
+      - name: Compare synthetic mobile Lighthouse (same content, interleaved)
+        shell: bash
+        run: |
+          set -euo pipefail
+          arms=(baseline delayed delayed baseline baseline delayed)
+          a=0
+          b=0
+          for arm in "${arms[@]}"; do
+            if [ "$arm" = baseline ]; then a=$((a+1)); n="$a"; url='http://127.0.0.1:8123/'
+            else b=$((b+1)); n="$b"; url='http://127.0.0.1:8124/'; fi
+            npx --yes lighthouse@12 "$url" \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --blocked-url-patterns='*google-analytics.com/g/collect*' \
+              --output=json \
+              --output-path="./${arm}-${n}.json" \
+              --quiet
+          done
+      - name: Compare medians, long tasks and network timing
+        run: node scripts/compare-ga4-timing.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ga4-timing-lighthouse-reports
+          path: |
+            baseline-*.json
+            delayed-*.json
+          retention-days: 7
