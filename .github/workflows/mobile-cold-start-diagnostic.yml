@@ -1,0 +1,43 @@
+name: Cold-start versus subsequent mobile Lighthouse runs
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/mobile-cold-start-diagnostic.yml'
+      - 'scripts/compare-cold-start-lighthouse.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cold-start-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Four sequential Lighthouse samples on production
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in 1 2 3 4; do
+            npx --yes lighthouse@12 https://brokerproreviews.com/ \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json \
+              --output-path="./mobile-sequence-$i.json" \
+              --quiet
+          done
+      - name: Compare first and following samples
+        run: node scripts/compare-cold-start-lighthouse.mjs mobile-sequence-1.json mobile-sequence-2.json mobile-sequence-3.json mobile-sequence-4.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cold-start-mobile-lcp-reports
+          path: |
+            mobile-sequence-*.json
+            mobile-cold-start-summary.json
+          retention-days: 7
