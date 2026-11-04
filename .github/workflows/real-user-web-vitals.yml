@@ -6,6 +6,8 @@ on:
   pull_request:
     paths:
       - 'scripts/monitor-crux.mjs'
+      - 'scripts/crux-metrics.mjs'
+      - 'scripts/test-crux-metrics.mjs'
       - '.github/workflows/real-user-web-vitals.yml'
 permissions:
   contents: read
@@ -18,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Test CrUX metric normalization and missing data
+        run: node scripts/test-crux-metrics.mjs
       - name: Query public 28-day field metrics
         run: node scripts/monitor-crux.mjs
         env:
