@@ -5,6 +5,7 @@ on:
       - '.github/workflows/mobile-lighthouse-baseline.yml'
       - 'scripts/summarize-lighthouse.mjs'
       - 'scripts/median-lighthouse.mjs'
+      - 'scripts/test-mobile-outlier-diagnostics.mjs'
       - 'site1-dark-gradient/translations.js'
   push:
     branches: [main]
@@ -27,6 +28,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate diagnostic privacy and attribution
+        run: node scripts/test-mobile-outlier-diagnostics.mjs
       - name: Allow Pages deployment to complete after a main push
         if: github.event_name == 'push'
         run: sleep 90
