@@ -30,9 +30,11 @@ try{
  assert(!out.includes('PRIVATE-CID')&&!out.includes('TRACKING-SECRET')&&!out.includes('token=SECRET'),'Query parameter leaked to artifact');
  const json=JSON.parse(out);
  assert.equal(json.slowest.lcpMs,5000);
- assert.equal(json.mainThreadComparison.slowest.mainThreadGroups[0].group,'Script Evaluation');
- assert.equal(json.mainThreadComparison.slowest.scriptExecution[0].script,'https://www.googletagmanager.com/gtag/js');
- assert.equal(json.mainThreadComparison.slowest.longTasks[0].script,'https://brokerproreviews.com/translations.js');
+ assert.equal(json.mainThreadComparison.worstBlockingRun,3);
+ assert.equal(json.lcpToFcpGapMsByRun[0].gapMs,3200);
+ assert.equal(json.mainThreadComparison.slowestLcp.mainThreadGroups[0].group,'Script Evaluation');
+ assert.equal(json.mainThreadComparison.slowestLcp.scriptExecution[0].script,'https://www.googletagmanager.com/gtag/js');
+ assert.equal(json.mainThreadComparison.slowestLcp.longTasks[0].script,'https://brokerproreviews.com/translations.js');
  assert.equal(json.slowestNetworkRequests[0].url,'https://www.google-analytics.com/g/collect');
  console.log('Mobile outlier main-thread comparison and URL redaction test passed');
 } finally {
