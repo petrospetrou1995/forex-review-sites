@@ -5,18 +5,11 @@
  * Report missing data honestly, without treating missing samples as passing.
  */
 import fs from 'node:fs';
+import {classifyFieldMetrics} from './crux-metrics.mjs';
 
 const origin = 'https://brokerproreviews.com';
 const key = process.env.CRUX_API_KEY?.trim();
 const timeoutMs = 25000;
-const medianThresholds = {
-  lcp: { good: 2500, poor: 4000, unit: 'ms' },
-  inp: { good: 200, poor: 500, unit: 'ms' },
-  cls: { good: 0.1, poor: 0.25, unit: '' },
-};
-const rating = (value, k) =>
-  value <= medianThresholds[k].good ? 'good' :
-  value > medianThresholds[k].poor ? 'poor' : 'needs-improvement';
 const request = async (url, options={}) => {
   const response = await fetch(url,{...options,signal:AbortSignal.timeout(timeoutMs)});
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -66,12 +59,13 @@ try {
   };
 }
 if (!result.unavailable) {
-  const present=Object.entries(result.p75).filter(([,v])=>typeof v==='number'&&Number.isFinite(v));
-  if(!present.length){
+  const classification=classifyFieldMetrics(result.p75);
+  Object.assign(result,classification);
+  if (classification.fieldDataStatus==='unavailable') {
     result.unavailable=true;
     result.reason='No eligible public phone field-data metrics returned (possibly insufficient traffic).';
-  }else{
-    result.ratings=Object.fromEntries(present.map(([k,v])=>[k,rating(v,k)]));
+  } else if (classification.fieldDataStatus==='partial') {
+    result.note=[result.note,'Only some phone metrics are available; missing values are unknown, not passing.'].filter(Boolean).join(' ');
   }
 }
 const output=JSON.stringify(result,null,2);
@@ -79,11 +73,11 @@ console.log('REAL_USER_CORE_WEB_VITALS');
 console.log(output);
 fs.writeFileSync('crux-field-data.json',output+'\n');
 if (process.env.GITHUB_STEP_SUMMARY) {
-  const val=k=>typeof result.p75?.[k]==='number'?`${result.p75[k]} (${result.ratings?.[k]})`:'not available';
+  const val=k=>result.p75?.[k]!==null && result.p75?.[k]!==undefined?`${result.p75[k]} (${result.ratings?.[k]})`:'not available';
   const body=[
     '## BrokerProReviews — real-user Core Web Vitals',
     `Source: ${result.source}; checked: ${result.sampledAt}`,
-    `Status: ${result.unavailable?'Field data unavailable':'Public field data returned'}`,
+    `Status: ${result.unavailable?'Field data unavailable':result.fieldDataStatus==='partial'?'Partial public field data':'Complete public field data'}`,
     `- Mobile LCP p75: ${val('lcp')}`,
     `- Mobile INP p75: ${val('inp')}`,
     `- Mobile CLS p75: ${val('cls')}`,

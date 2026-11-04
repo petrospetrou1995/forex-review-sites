@@ -17,3 +17,7 @@ Use alongside the 3-run Lighthouse workflow: Lighthouse is reproducible lab simu
 References:
 - https://developer.chrome.com/docs/crux/api
 - https://developers.google.com/speed/docs/insights/v5/get-started
+
+## Normalization and incomplete records
+
+The direct CrUX API encodes CLS percentile values as numeric strings. The monitor converts valid non-negative finite strings to numbers before rating metrics; the same validation also applies to LCP and INP. Empty, malformed, negative, missing, or non-finite values are reported as unavailable, **never as good**. Results distinguish `complete` (LCP, INP and CLS present), `partial` (only some present), and `unavailable` (none present). Field-data status and missing metric names are included in the JSON artifact. A deterministic test runs before API access to prevent silently dropping CLS or treating incomplete data as a passing set.
