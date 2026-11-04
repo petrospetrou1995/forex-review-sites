@@ -40,14 +40,14 @@ jobs:
         run: |
           set -euo pipefail
           for port in 8123 8124; do
-            npx --yes lighthouse@12 "http://127.0.0.1:$port/" \\
-              --form-factor=mobile \\
-              --screenEmulation.mobile=true \\
-              --throttling-method=simulate \\
-              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \\
-              --only-categories=performance \\
-              --output=json \\
-              --output-path="./warmup-$port.json" \\
+            npx --yes lighthouse@12 "http://127.0.0.1:$port/" \
+              --form-factor=mobile \
+              --screenEmulation.mobile=true \
+              --throttling-method=simulate \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --only-categories=performance \
+              --output=json \
+              --output-path="./warmup-$port.json" \
               --quiet
           done
       - name: Measure interleaved mobile render
