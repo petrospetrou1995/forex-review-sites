@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/mobile-cold-start-diagnostic.yml'
       - 'scripts/compare-cold-start-lighthouse.mjs'
+      - 'scripts/test-cold-start-classification.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -16,6 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate synthetic cold-start classification
+        run: node scripts/test-cold-start-classification.mjs
       - name: Four sequential Lighthouse samples on production
         shell: bash
         run: |

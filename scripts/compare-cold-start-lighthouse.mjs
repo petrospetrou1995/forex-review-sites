@@ -37,6 +37,12 @@ const summary={
     laterMedianTbtMs:median(later.map(x=>x.tbtMs)),
     laterLcpRangeMs:Math.max(...later.map(x=>x.lcpMs))-Math.min(...later.map(x=>x.lcpMs))
   },
+  flags:{
+    firstRunSlowLcp:samples[0].lcpMs>2500 && samples[0].lcpMs-median(later.map(x=>x.lcpMs))>1000,
+    firstRunHighBlocking:samples[0].tbtMs>200 && samples[0].tbtMs-median(later.map(x=>x.tbtMs))>150,
+    firstRunTtfbSimilarToLater:Number.isFinite(samples[0].ttfbMs) && later.every(x=>Number.isFinite(x.ttfbMs)) && Math.abs(samples[0].ttfbMs-median(later.map(x=>x.ttfbMs)))<=200,
+    interpretation:'Heuristic signals only: no proven cause, browser-cache effect, user-facing regression or live metric from four synthetic samples.'
+  },
   importantLimitations:'Each invocation launches a fresh Chrome; this tests sequential CI runner/tool startup and possible CDN or scheduling effects, not browser cache warming or real-user cold navigations. Four Lighthouse lab samples cannot establish causation.'
 };
 fs.writeFileSync('mobile-cold-start-summary.json',JSON.stringify(summary,null,2)+'\n');
