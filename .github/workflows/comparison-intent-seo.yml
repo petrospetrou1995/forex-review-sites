@@ -1,0 +1,19 @@
+name: Comparison SEO intent
+on:
+  pull_request:
+    paths:
+      - 'site1-dark-gradient/compare/**'
+      - 'scripts/generate-compare-pages.mjs'
+      - 'tests/comparison-intent-seo.test.mjs'
+      - '.github/workflows/comparison-intent-seo.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tests/comparison-intent-seo.test.mjs
