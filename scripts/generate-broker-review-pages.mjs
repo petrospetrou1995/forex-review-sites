@@ -407,7 +407,20 @@ ${commonHead(site, title, description, canon, 'article')}
         ${reviewDiscoveryPanel(broker.slug)}
       </article>
     </div>
-  </main>
+  
+  <section class="review-evidence-checklist" aria-label="How to verify this broker" style="margin:2rem auto;padding:1.5rem;border:1px solid #74849a;border-radius:12px;max-width:1100px">
+    <h2>Check the evidence before you trade</h2>
+    <p>Broker terms vary by country, legal entity, account type and date. This editorial page is not evidence that we opened an account, executed trades or tested withdrawals. Any displayed score is an editorial assessment; consult our <a href="../../methodology/">methodology</a> and verify the underlying facts independently.</p>
+    <ul>
+      <li><strong>Regulatory registration:</strong> Confirm the exact legal entity and licence directly in the relevant regulator's public register.</li>
+      <li><strong>Total trading cost:</strong> Compare live spreads, commissions, overnight financing and conversion fees using the broker's current account-specific documentation.</li>
+      <li><strong>Client protections:</strong> Check the entity's negative-balance protection, segregation arrangements and eligibility for any compensation scheme in your jurisdiction.</li>
+      <li><strong>Deposits and withdrawals:</strong> Verify supported payment methods, processing times, charges and restrictions for your country.</li>
+      <li><strong>Platform and execution:</strong> Confirm product availability, execution terms and platform support before funding an account.</li>
+    </ul>
+    <p><strong>Editorial transparency:</strong> We have not published an independently verified transaction-level testing record for this review. Do not interpret a numerical rating as a guarantee of safety or performance.</p>
+  </section>
+</main>
 
   <footer class="footer">
     <div class="container">
