@@ -1,0 +1,23 @@
+name: Broker review trust audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-broker-reviews.mjs'
+      - '.github/workflows/broker-review-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node --check scripts/audit-broker-reviews.mjs
+      - run: node scripts/audit-broker-reviews.mjs --strict > broker-review-audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: broker-review-audit
+          path: broker-review-audit.json
